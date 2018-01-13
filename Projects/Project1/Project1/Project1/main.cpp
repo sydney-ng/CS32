@@ -14,26 +14,6 @@ using namespace std;
 class City;  // This is needed to let the compiler know that City is a
 // type name, since it's mentioned in the Flatulan declaration.
 
-class Flatulan
-{
-public:
-    // Constructor
-    Flatulan(City* cp, int r, int c);
-    
-    // Accessors
-    int  row() const;
-    int  col() const;
-    
-    // Mutators
-    void move();
-    bool possiblyGetConverted();
-    
-private:
-    City* m_city;
-    int   m_row;
-    int   m_col;
-};
-
 class Player
 {
 public:
@@ -112,58 +92,6 @@ private:
 ///////////////////////////////////////////////////////////////////////////
 
 int decodeDirection(char dir);
-
-///////////////////////////////////////////////////////////////////////////
-//  Flatulan implementation
-///////////////////////////////////////////////////////////////////////////
-
-Flatulan::Flatulan(City* cp, int r, int c)
-: m_city(cp), m_row(r), m_col(c)
-{
-    if (cp == nullptr)
-    {
-        cout << "***** A Flatulan must be created in some City!" << endl;
-        exit(1);
-    }
-    if (r < 1  ||  r > cp->rows()  ||  c < 1  ||  c > cp->cols())
-    {
-        cout << "***** Flatulan created with invalid coordinates (" << r << ","
-        << c << ")!" << endl;
-        exit(1);
-    }
-}
-
-int Flatulan::row() const
-{
-    return m_row;
-}
-
-int Flatulan::col() const
-{
-    return m_col;
-}
-
-void Flatulan::move()
-{
-    // Attempt to move in a random direction; if we can't move, don't move.
-    // If the player is there, don't move.
-    int dir = randInt(0, NUMDIRS-1);  // dir is now UP, DOWN, LEFT, or RIGHT
-    int r = m_row;
-    int c = m_col;
-    m_city->determineNewPosition(r, c, dir);
-    Player* p = m_city->player();
-    if (r != p->row()  ||  c != p->col())
-    {
-        m_row = r;
-        m_col = c;
-    }
-}
-
-bool Flatulan::possiblyGetConverted()  // return true if converted
-{
-    // Be converted with 2/3 probability
-    return randInt(0, 2) < 2;
-}
 
 ///////////////////////////////////////////////////////////////////////////
 //  Player implementations

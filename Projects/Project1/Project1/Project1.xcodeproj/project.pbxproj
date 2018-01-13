@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0978AD0D20098C19006C92AE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD0C20098C19006C92AE /* main.cpp */; };
 		0978AD1520098CE0006C92AE /* utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD1420098CE0006C92AE /* utilities.cpp */; };
+		0978AD1820099360006C92AE /* Flatulan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD1620099360006C92AE /* Flatulan.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		0978AD0C20098C19006C92AE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0978AD1320098C6D006C92AE /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = globals.h; sourceTree = "<group>"; };
 		0978AD1420098CE0006C92AE /* utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utilities.cpp; sourceTree = "<group>"; };
+		0978AD1620099360006C92AE /* Flatulan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Flatulan.cpp; path = Project1/Flatulan.cpp; sourceTree = "<group>"; };
+		0978AD1720099360006C92AE /* Flatulan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flatulan.h; path = Project1/Flatulan.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 				0978AD0C20098C19006C92AE /* main.cpp */,
 				0978AD1420098CE0006C92AE /* utilities.cpp */,
 				0978AD1320098C6D006C92AE /* globals.h */,
+				0978AD1620099360006C92AE /* Flatulan.cpp */,
+				0978AD1720099360006C92AE /* Flatulan.h */,
 			);
 			path = Project1;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 			files = (
 				0978AD1520098CE0006C92AE /* utilities.cpp in Sources */,
 				0978AD0D20098C19006C92AE /* main.cpp in Sources */,
+				0978AD1820099360006C92AE /* Flatulan.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
