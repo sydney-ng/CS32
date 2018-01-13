@@ -1,0 +1,89 @@
+class Circle 
+{
+	… 
+	circle (double x, double y, double r);
+	… 
+	double m_x; 
+} 
+
+Circle::Circle (double x, double y, double r)
+: m_x (x), m_y (y), m_r (r)
+{
+	if (r <=0)
+	{
+	}
+} 
+
+class StickFigure
+{
+	… 
+	StickFigure (double bl, double headDiam, string nm, double hx, double hy); 
+	… 
+
+	double m_bodyLength;
+	string m_name;
+	Circle m_head; 
+} 
+
+class StickFigure :: StickFigure (double bl, double headDiam, string nm, double hx, double hy)
+	: m_bodyLength(bl), m_name(nm), m_head (hx, hy, headDiam/2)
+{	
+	//m_bodyLength = bl; 
+	//m_name = nm;
+	//m_head = ??;
+	if (bl <= 0)
+	…  
+} 
+
+// m_head is a class type but it will want to default construct it, but there is no default constructor for it 
+	//error: “There’s no Circle::Circle()” 
+
+use initialization list for:
+	1) m_head - you have to 
+	2) string - you want to for performance reasons 
+
+===================================================
+How an Object is Constructed: 
+1) - - - - -   
+2) Construct the data members, consulting the member initialization list: 
+	- if the member is listed, construct it as indicated there 
+	- if it isn’t listed, 	
+		- if it’s a built in type, leave it uninitialized 
+		- if it’s a class type, default construct it 
+3) Execute the body of the constructor 
+
+Circle c (-2, 5, 10); 
+
+default constructor 
+Employee:: Employee ()
+{
+}
+	- name is “”
+	- salaray/age is uninitialized 
+
+Employee:: Employee (string nm, double sal, int ag)
+{
+	m_name = nm; 
+	m_salary = sal; 
+	m_age = ag;
+} 
+//we will say haha actually I want stuff in the constructor; we tear down the old value to bring in the new value 
+//so for members of a class type, you should do the construction in step 2, don’t give wrong in step 2 and then right in step 3
+	- do all the work in step 2 
+	- so it should be: 
+
+	
+	Employee:: Employee (string nm, double sal, int ag)
+	: m_name (nm), m_salary (sal), m_age (ag) 
+	{
+	}
+ 
+struct Employee
+{
+	string name; 
+	double salary;
+	int age; 
+}
+
+Employee e (“Ricky”, 80000, 42); 
+StickFigure sf (5,4, “Fred”, -6, 5); 
