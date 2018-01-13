@@ -25,4 +25,8 @@ const int RIGHT   = 3;
 const int NUMDIRS = 4;
 
 
+// function declarations
+int randInt(int min, int max);
+void clearScreen();
+
 #endif /* globals_h */
