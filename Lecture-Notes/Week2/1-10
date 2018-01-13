@@ -1,0 +1,129 @@
+1. separate compilation 
+	source files						x  					x
+	object files						x  					x
+					linker
+	executable 										x
+
+	- will check if the object files are newer than the source file, if it is, it will only recompile that source file 
+
+** don't use using namespace std for header files
+** only include .h files, never .cpp files 
+===========
+// Circle.h 
+
+#include <string> 
+
+class Circle 
+	{
+		public: 
+			Circle (double x, double y, double r);
+			bool scale (double factor); 
+			double radius() const; //saying the circle will not be modified 
+			void draw () const;
+				//class invariant 
+				//m_r > 0 ??? 
+		private:
+			double m_x; 
+			double m_y; 
+			double m_r; 
+			std::string m_label; 
+	}; 
+
+double area(const Circle& x);
+
+===========
+// myapp.cpp 
+#include <iostream>
+#include "Circle.h"
+using namespacestd; 
+
+int main ()
+	{
+		Circle blah (6,-5,3); 
+		Circle c(-2,5,10);
+		c.scale(2); 
+		...
+	}
+
+===========
+// Circle.cpp 
+
+#include <iostream>
+#include "Circle.h"
+using namespace std; 
+Circle:: Circle (double x, double y, double r) 
+: m_x(x), m_y(y), m_r(r)
+{
+	...
+}
+
+bool Circle::scale (double factor)
+{
+	...
+}
+
+void Circle::draw() const
+{	
+	...
+}
+
+double Circle::radius() const
+{
+	... 
+}
+
+
+================================================================================================================================================
+
+//Point.h 
+
+#ifndef POINT_INCLUDED 										"include guards"
+#DEFINE POINT_INCLUDED
+
+class Point
+{
+	
+}; 
+
+#endif //POINT_INCLUDED <- this is only to catch your eye, not too necessary 
+
+--------------
+//Circle.h
+
+class Circle 
+{
+	double m_radius; 
+	Point m_center; 
+}
+--------------
+//myapp.cpp 
+
+//DONT DO THIS 
+#include "Point.h"
+#include "Circle.h"
+
+int main ()
+{
+	Circle c(); 
+	Point p(); 
+}
+
+---------------
+
+CAN'T DO THIS! EVEN IF THE IMPLEMENTATION ARE THE SAME 
+class A
+{
+	
+}
+
+class A
+{
+	
+}
+
+————— 
+FOR MULTIPLE FILES:
+- include everything it seems to need 
+- don’t assume that header files will include each other
+- if the same class is defined more than once, it will not compile 
+- make sure that the ifndef is the same as the define 
