@@ -13,6 +13,7 @@
 		0978AD1A2009BCF0006C92AE /* City.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD192009BCF0006C92AE /* City.cpp */; };
 		0978AD1D2009BE98006C92AE /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD1C2009BE98006C92AE /* Player.cpp */; };
 		0978AD20200C883D006C92AE /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD1F200C883D006C92AE /* Game.cpp */; };
+		0978AD24200C90B8006C92AE /* History.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0978AD23200C90B8006C92AE /* History.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,8 @@
 		0978AD1E2009BEA4006C92AE /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		0978AD1F200C883D006C92AE /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		0978AD21200C884C006C92AE /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		0978AD22200C90A7006C92AE /* History.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
+		0978AD23200C90B8006C92AE /* History.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = History.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +82,8 @@
 				0978AD1F200C883D006C92AE /* Game.cpp */,
 				0978AD1320098C6D006C92AE /* globals.h */,
 				0978AD21200C884C006C92AE /* Game.h */,
+				0978AD22200C90A7006C92AE /* History.h */,
+				0978AD23200C90B8006C92AE /* History.cpp */,
 				0978AD1620099360006C92AE /* Flatulan.cpp */,
 				0978AD1B2009BD12006C92AE /* City.h */,
 				0978AD192009BCF0006C92AE /* City.cpp */,
@@ -150,6 +155,7 @@
 				0978AD1A2009BCF0006C92AE /* City.cpp in Sources */,
 				0978AD1820099360006C92AE /* Flatulan.cpp in Sources */,
 				0978AD1D2009BE98006C92AE /* Player.cpp in Sources */,
+				0978AD24200C90B8006C92AE /* History.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
