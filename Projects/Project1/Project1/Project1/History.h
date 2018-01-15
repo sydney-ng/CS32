@@ -18,6 +18,8 @@ public:
     void display() const;
 private:
     City* m_CityObject;
+    int m_HistoryRows;
+    int m_HistoryCols; 
 };
 
 

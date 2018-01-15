@@ -115,6 +115,7 @@ int decodeDirection(char dir)
         case 'd':  return DOWN;
         case 'l':  return LEFT;
         case 'r':  return RIGHT;
+        case 'h':  return 100;
     }
     return -1;  // bad argument passed in!
 }

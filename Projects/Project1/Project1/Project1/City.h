@@ -11,7 +11,9 @@
 
 #include "Flatulan.h"
 #include "globals.h"
+#include "History.h"
 class Player;
+class History;
 
 class City
 {
@@ -28,7 +30,8 @@ public:
     int     nFlatulansAt(int r, int c) const;
     bool    determineNewPosition(int& r, int& c, int dir) const;
     void    display() const;
-    
+    History& history();
+
     // Mutators
     bool  addFlatulan(int r, int c);
     bool  addPlayer(int r, int c);
