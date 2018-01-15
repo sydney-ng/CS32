@@ -221,3 +221,14 @@ bool City::isInBounds(int r, int c) const
 {
     return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols);
 }
+
+History& City::history()
+{
+    //check if converted
+    if (m_player->)
+        //create a new history object
+        
+
+}
+
+//return the position it was at when preached to.

@@ -78,6 +78,9 @@ void Game::play()
         getline(cin,action);
         if (action.size() == 0)  // player preaches
             p->preach();
+        //check if converted
+            //yes-> save to history
+            //no -> nothing
         else
         {
             switch (action[0])
@@ -87,6 +90,8 @@ void Game::play()
                     continue;
                 case 'q':
                     return;
+                case 'h':
+                    m_city->history();
                 case 'u':
                 case 'd':
                 case 'l':
@@ -115,7 +120,6 @@ int decodeDirection(char dir)
         case 'd':  return DOWN;
         case 'l':  return LEFT;
         case 'r':  return RIGHT;
-        case 'h':  return 100;
     }
     return -1;  // bad argument passed in!
 }

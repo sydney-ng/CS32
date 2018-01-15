@@ -21,7 +21,7 @@ History::History(int nRows, int nCols)
     m_HistoryCols = m_CityObject->cols();
 };
 
-//returns if ita point is in bounds or not
+//returns if it a point is in bounds or not
 bool History::record(int r, int c)
 {
     return (r >= 1  &&  r <= m_HistoryRows  &&  c >= 1  &&  c <= m_HistoryCols);
