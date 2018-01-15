@@ -9,6 +9,8 @@
 #include "Flatulan.h"
 #include <iostream>
 #include "globals.h"
+#include "City.h"
+#include "Player.h"
 using namespace std;
 
 class Player;
