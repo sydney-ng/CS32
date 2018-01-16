@@ -43,7 +43,7 @@ bool History::record(int r, int c)
         {
             //if it hasn't been accounted for yet
 
-            cerr <<"cooliiooo";
+            
             //must also be smaller than Z
             if (m_HistoryArray[r][c] <= 'Z')
             {

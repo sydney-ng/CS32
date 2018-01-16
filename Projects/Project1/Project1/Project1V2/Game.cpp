@@ -91,7 +91,7 @@ void Game::play()
                 {
                     History HistoryPointer = m_city->history();
                     HistoryPointer.display();
-                    break;
+                    continue;
                 }   
                 case 'u':
                 case 'd':
