@@ -16,15 +16,65 @@ using namespace std;
 //constructor for history
 History::History(int nRows, int nCols)
 {
-    m_CityObject = new City(nRows, nCols);
-    m_HistoryRows = m_CityObject->rows();
-    m_HistoryCols = m_CityObject->cols();
+    m_HistoryRows = nRows;
+    m_HistoryCols = nCols;
+    for (int i = 0; i < m_HistoryRows; i++)
+    {
+        for (int j = 0; j < m_HistoryCols; j++)
+        {
+            m_HistoryArray[i][j] = '.';
+        }
+    }
 };
 
-//returns if it a point is in bounds or not
 bool History::record(int r, int c)
 {
-    return (r >= 1  &&  r <= m_HistoryRows  &&  c >= 1  &&  c <= m_HistoryCols);
+    //check if in bounds
+    if (r >=1 && c >=1 && r <= m_HistoryRows && c <= m_HistoryCols)
+    {
+        //check if it's already been accounted for
+        if (m_HistoryArray[r][c] == '.')
+        {
+            cerr << "this is the first one" << endl;
+            m_HistoryArray[r][c] = 'A';
+        }
+        
+        else if (m_HistoryArray[r][c] >= 'A')
+        {
+            //if it hasn't been accounted for yet
+
+            
+            //must also be smaller than Z
+            if (m_HistoryArray[r][c] <= 'Z')
+            {
+                m_HistoryArray[r][c]++;
+            }
+            
+            
+            //if not between A-Z
+            else
+            {
+                return false;
+            }
+        }
+
+        /*cerr <<"history board looks like:" << endl;
+        for (int i = 0; i < m_HistoryRows; i++)
+        {
+            for (int j = 0; j < m_HistoryCols; j++)
+            {
+                cerr << m_HistoryArray[i][j];
+            }
+            cerr << endl;
+        */
+        return true;
+    }
+    
+    //if not in bounds
+    else
+    {
+        return false;
+    }
 }
 
 void History::display() const
@@ -32,7 +82,16 @@ void History::display() const
     //clear the screen
     clearScreen();
 
-    //display the history grid
-    m_CityObject->display();
-    //write an empty line after the history grid
+    //iterate throug the nRows and nCols and show
+    for (int i = 0; i < m_HistoryRows; i++)
+    {
+        for (int j = 0; j < m_HistoryCols; j++)
+        {
+            cout << m_HistoryArray[i][j];
+        }
+        cout << endl;
+    }
+    cout << endl;
+    cout << "Press enter to continue.";
+    cin.ignore(10000,'\n');
 }

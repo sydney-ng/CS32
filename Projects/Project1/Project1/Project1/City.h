@@ -9,12 +9,12 @@
 #ifndef City_h
 #define City_h
 
+#include <iostream>
 #include "Flatulan.h"
-#include "globals.h"
 #include "History.h"
+#include "globals.h"
 class Player;
 class History;
-
 class City
 {
 public:
@@ -43,8 +43,8 @@ private:
     int       m_cols;
     Player*   m_player;
     Flatulan* m_flatulans[MAXFLATULANS];
+    History   m_HistoryObject;
     int       m_nFlatulans;
-    
     // Helper functions
     bool isInBounds(int r, int c) const;
 };

@@ -9,7 +9,8 @@
 #ifndef History_h
 #define History_h
 
-#include "City.h"
+//#include "City.h"
+#include "globals.h"
 class History
 {
 public:
@@ -17,9 +18,9 @@ public:
     bool record(int r, int c);
     void display() const;
 private:
-    City* m_CityObject;
     int m_HistoryRows;
-    int m_HistoryCols; 
+    int m_HistoryCols;
+    char m_HistoryArray[MAXROWS][MAXCOLS];
 };
 
 

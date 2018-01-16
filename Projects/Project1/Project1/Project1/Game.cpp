@@ -78,9 +78,6 @@ void Game::play()
         getline(cin,action);
         if (action.size() == 0)  // player preaches
             p->preach();
-        //check if converted
-            //yes-> save to history
-            //no -> nothing
         else
         {
             switch (action[0])
@@ -91,7 +88,11 @@ void Game::play()
                 case 'q':
                     return;
                 case 'h':
-                    m_city->history();
+                {
+                    History HistoryPointer = m_city->history();
+                    HistoryPointer.display();
+                    continue;
+                }   
                 case 'u':
                 case 'd':
                 case 'l':

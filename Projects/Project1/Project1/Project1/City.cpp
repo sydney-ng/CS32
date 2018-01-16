@@ -17,7 +17,7 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////////////
 
 City::City(int nRows, int nCols)
-: m_rows(nRows), m_cols(nCols), m_player(nullptr), m_nFlatulans(0)
+: m_rows(nRows), m_cols(nCols), m_player(nullptr), m_nFlatulans(0), m_HistoryObject(nRows, nCols)
 {
     if (nRows <= 0  ||  nCols <= 0  ||  nRows > MAXROWS  ||  nCols > MAXCOLS)
     {
@@ -176,6 +176,7 @@ bool City::addPlayer(int r, int c)
     return true;
 }
 
+//CALL HISTORY HERE IF THE PREACH DIDN'T WORK 
 void City::preachToFlatulansAroundPlayer()
 {
     // Preach to Flatulans orthogonally or diagonally adjacent to player.  If a
@@ -189,13 +190,19 @@ void City::preachToFlatulansAroundPlayer()
         int coldiff = fp->col() - m_player->col();
         
         // if orthogonally or diagonally adjacent and conversion succeeds
-        if (rowdiff >= -1  &&  rowdiff <= 1  &&
-            coldiff >= -1  &&  coldiff <= 1  &&
-            fp->possiblyGetConverted() )
+        if (rowdiff >= -1  &&  rowdiff <= 1  && coldiff >= -1  &&  coldiff <= 1)
         {
-            delete m_flatulans[k];
-            m_flatulans[k] = m_flatulans[m_nFlatulans-1];
-            m_nFlatulans--;
+            //if it's converted
+            if (fp->possiblyGetConverted() )
+            {
+                delete m_flatulans[k];
+                m_flatulans[k] = m_flatulans[m_nFlatulans-1];
+                m_nFlatulans--;
+            }
+            else
+            {
+                m_HistoryObject.record(m_player->row(), m_player->col());
+            }
         }
         else
             k++;
@@ -222,13 +229,8 @@ bool City::isInBounds(int r, int c) const
     return (r >= 1  &&  r <= m_rows  &&  c >= 1  &&  c <= m_cols);
 }
 
+//return history object
 History& City::history()
 {
-    //check if converted
-    if (m_player->)
-        //create a new history object
-        
-
+    return m_HistoryObject;
 }
-
-//return the position it was at when preached to.

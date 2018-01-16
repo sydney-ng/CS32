@@ -68,7 +68,7 @@ void Player::move(int dir)
     int r = m_row;
     int c = m_col;
     
-    else if (m_city->determineNewPosition(r, c, dir))
+    if (m_city->determineNewPosition(r, c, dir))
     {
         // If there are no Flatulans at the new position
         if (m_city->nFlatulansAt(r, c) == 0)
