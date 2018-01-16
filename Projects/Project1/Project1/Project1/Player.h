@@ -9,7 +9,9 @@
 #ifndef Player_h
 #define Player_h
 
-#include "City.h"
+//#include "City.h"
+class City;
+
 class Player
 {
 public:
