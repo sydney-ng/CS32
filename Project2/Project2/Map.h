@@ -10,10 +10,8 @@
 #define Map_h
 
 #include <iostream>
-using KeyType = int;
-using ValueType = std::string;
-//using KeyType = std::string;
-//using ValueType = double;
+using KeyType = std::string;
+using ValueType = int;
 const int DEFAULT_MAX_ITEMS = 250;
 
 class Map
