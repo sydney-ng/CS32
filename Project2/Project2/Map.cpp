@@ -28,36 +28,21 @@ int Map::size()
 
 bool Map::insert(const KeyType& key, const ValueType& value)
 {
-    bool match = false;
-    //check if there's a match
-    for (int i = 0; i <m_MapSize; i++)
+    //key isn't currently in map
+    if (contains(key) == false)
     {
-        //there is already this entry
-        if (key == m_MapArray[i].m_k)
-        {
-            match = true;
-            break;
-        }
-    }
-    
-    
-    //there is no matching entry in the array
-    if (match == false)
-    {
-        //check if dictionary is full
+        //check there's room in map
         if (m_MapSize != DEFAULT_MAX_ITEMS)
         {
-            //ADD TO THE MAP
+            //increase the size of array & addd to array
+            m_MapSize++;
+            m_MapArray[m_MapSize-1].m_k = key;
+            m_MapArray[m_MapSize-1].m_v = value;
             return true;
         }
-        //dictionary is full
-        else
-        {
-            return false;
-        }
+
     }
     
-    //match is equal to true, meaning it's already in dictionary
     return false;
 }
 
@@ -93,4 +78,75 @@ bool Map::insertOrUpdate(const KeyType& key, const ValueType& value)
     }
 }
 
+// If key is equal to a key currently in the map, remove the key/value
+// pair with that key from the map and return true.
+bool Map::erase(const KeyType& key)
+{
+    //check if key is equal to a current key in the map
+    for (int i = 0; i <m_MapSize; i++)
+    {
+        //there is already this entry
+        if (key == m_MapArray[i].m_k)
+        {
+            //shift everything to the right over one
+            for (int k = i; k < m_MapSize-2; k++)
+            {
+                m_MapArray[k] = m_MapArray[k+1];
+            }
+            m_MapSize = m_MapSize -1;
+            return true;
+        }
+    }
+    return false;
+}
+
+// Return true if key is equal to a key currently in the map, otherwise false
+bool Map::contains(const KeyType& key) const
+{
+    //check if there's a match
+    for (int i = 0; i <m_MapSize; i++)
+    {
+        //there is already this entry
+        if (key == m_MapArray[i].m_k)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//set value if there's a key match
+bool Map::get(const KeyType& key, ValueType& value)
+{
+    //check if there's a match
+    for (int i = 0; i <m_MapSize; i++)
+    {
+        //there is already this entry
+        if (key == m_MapArray[i].m_k)
+        {
+            value = m_MapArray[i].m_v;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Map::get(int i, KeyType& key, ValueType& value) const
+{
+    if (i < m_MapSize && i >= 0)
+    {
+        key = m_MapArray[i].m_k;
+        value = m_MapArray[i].m_v;
+        return true;
+    }
+    return false;
+}
+
+//switch contents of map w/ another one
+void Map::swap(Map& other)
+{
+    Map temp = other;
+    other = *this;
+    *this = other;
+}
 
