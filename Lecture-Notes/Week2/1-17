@@ -1,0 +1,154 @@
+
+class String 
+{
+	public:
+		String (char* value = “”); // you can only specify the default value in one place 
+		//pointer to a character (first letter of the word) that ends in null byte 
+		
+		//this is a default constructor 
+		//String ();
+		//have m_text point to NULL or a character array with just 1 null byte 
+		
+		
+	private:
+			//Class invariant: 
+				EITHER 
+				//m_text points to dynamically allocated array of m_len + 1 chars 
+				//m_len > 0 (NOTE NOT >=0) 
+				//you don’t need zero byte because m_len will tell you how long it is (it’s m_len not m_len + 1) 
+				//m_text[m_len] == ‘\0’
+				OR 
+				// m_text == nullptr
+				// m_len == 0
+
+
+			/// four cases:
+				- one empty other not (visa versa)
+				- both empty
+				- both not empty (use strcmp)
+
+			// WE ARE GOING WITH THE FIRST CLASS INVARIANT ONE 
+
+		// char m_text[100]; <— don’t do this too big/too small 
+
+		char* m_text;
+		int m_len;  		
+};
+
+
+String::String(const char* value) 
+{
+	//WRONG: 
+	/* 
+	char stuff […];
+	strcpy (stuff,value); 
+	m_len = strlen (value); 
+	m_text = value; 	
+	*/ 
+	
+	m_len = strlen (value);
+	m_text = new char[m_len+1]; //+1 for the null byte 
+		//this will be uninitialized 
+	strcpy(m_text, value);  	
+}; 
+
+//WHAT YOU CAN DO:
+
+String::String(const char* value) 
+{
+	m_len = strlen (value); 
+	m_text = new char [m_len+1] //(since m_len is going to be 0) 
+	strcpy (m_text, value); //c
+}; 
+
+
+//destructor will automatically get called 
+String::~String ()
+{
+	delete [] m_text;
+}
+
+String::String()
+{
+	m_len = strlen (“”); 
+	m_text = new char [m_len+1] //(since m_len is going to be 0) 
+	strcpy (m_text, “”); //copies everything up to and including null byte but it has nothing so it’s just a null byte 
+}
+
+
+int main()
+{
+	String x (“Wow!”); 
+	… verify that x is wow! … 
+	char buffer [1000]; 
+	cin.getline (buffer, 1000); 
+	String s(buffer); 
+	…verify that s is wow!… 
+	
+	//WRONG SOLUTION 
+
+	/*
+	cin.getline(buffer,1000); //suppose the user types in Ouch!
+		//you would expect that if you haven’t mentioned s at all, s should still be wow 
+	…verify that s is wow!…  <== fails check because if you change the buffer, the text of the string changed 
+	*/
+	
+	
+}
+
+void String:: cleanup()
+{
+	delete [] m_text; // DON’T DO IT THIS WAY -> WRONG 
+} 
+
+IDEA: 
+
+	m_text -> s 				s = H E L L O 
+
+example: 
+
+//pointer form of delete
+Blah *p; 
+p = new Blah; 
+..
+delete p; 
+
+
+//array form of delete 
+p = new Blah [n];
+delete [] p; 
+========
+void h()
+{
+	String s(“Hello”); 
+	if ()
+	{
+		return; //YOU FORGOT TO CLEANUP!!!! 
+	} 
+	s.cleanup();
+}
+
+int main()
+{
+	String t; //same as String t(“”); 
+	for ()
+	{
+		h(); 
+	}
+	
+
+}
+
+================================
+
+void f (int a, int b, int c = 42, char x = ‘?’); 
+f(x,y,67, ‘#’); 
+f(x,y,38); //calls f(x,y,42,’?’); 
+f(x,y); // this will be the same as f( x, y, 42, ‘?’); 
+
+//once you leave one thing off, everything has to be left off 
+//DONT DO THIS:
+f(x, y, , ‘#’); // <—— ERROR 
+void g (int a, int b, int c); // <—— ERROR 
+
+
