@@ -6,22 +6,23 @@
 //  Copyright © 2018 Sydney. All rights reserved.
 //
 
-#include <iostream>
 #include "Map.h"
 
-bool Map::empty()
+Map::Map()
 {
-    if (m_MapSize <=1)
+    m_MapSize = 0;
+}
+
+bool Map::empty () const
+{
+    if (m_MapSize <=0)
     {
         return true;
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
-int Map::size()
+int Map::size() const
 {
     return m_MapSize;
 }
@@ -62,7 +63,7 @@ bool Map::update(const KeyType& key, const ValueType& value)
     return false;
 }
 
-bool Map::insertOrUpdate(const KeyType& key, const ValueType& value)
+bool Map::insertOrUpdate(const KeyType& key, const ValueType& value) 
 {
     if (update(key, value) == true)
     {
@@ -149,4 +150,3 @@ void Map::swap(Map& other)
     other = *this;
     *this = other;
 }
-

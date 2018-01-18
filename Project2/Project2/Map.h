@@ -9,8 +9,11 @@
 #ifndef Map_h
 #define Map_h
 
-using KeyType = std::string;
-using ValueType = double;
+#include <iostream>
+using KeyType = int;
+using ValueType = std::string;
+//using KeyType = std::string;
+//using ValueType = double;
 const int DEFAULT_MAX_ITEMS = 250;
 
 class Map
@@ -18,9 +21,9 @@ class Map
 public:
     Map();         // Create an empty map (i.e., one with no key/value pairs)
     
-    bool empty();  // Return true if the map is empty, otherwise false.
+    bool empty() const;  // Return true if the map is empty, otherwise false.
     
-    int size();    // Return the number of key/value pairs in the map.
+    int size() const;    // Return the number of key/value pairs in the map.
     
     bool insert(const KeyType& key, const ValueType& value);
     // If key is not equal to any key currently in the map, and if the
@@ -70,7 +73,7 @@ public:
     // Exchange the contents of this map with the other one.
     
 private:
-    class MapType
+    struct MapType
     {
     public:
         KeyType m_k;
