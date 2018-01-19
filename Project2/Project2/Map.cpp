@@ -27,6 +27,13 @@ int Map::size() const
     return m_MapSize;
 }
 
+// If key is not equal to any key currently in the map, and if the
+// key/value pair can be added to the map, then do so and return true.
+// Otherwise, make no change to the map and return false (indicating
+// that either the key is already in the map, or the map has a fixed
+// capacity and is full).
+
+
 bool Map::insert(const KeyType& key, const ValueType& value)
 {
     //key isn't currently in map
@@ -45,6 +52,16 @@ bool Map::insert(const KeyType& key, const ValueType& value)
     }
     
     return false;
+}
+
+void Map::dump ()
+{
+    std::cerr << "m_MapSize is: " << m_MapSize <<  std::endl;
+     std::cerr << "m_MapArray is: " <<  std::endl;
+    for (int i = 0; i < m_MapSize; i ++)
+    {
+        std::cerr << "item #" << i << ", key: " << m_MapArray[i].m_k << ", value : " << m_MapArray[i].m_v <<  std::endl << std::endl;
+    }
 }
 
 bool Map::update(const KeyType& key, const ValueType& value)
@@ -90,7 +107,7 @@ bool Map::erase(const KeyType& key)
         if (key == m_MapArray[i].m_k)
         {
             //shift everything to the right over one
-            for (int k = i; k < m_MapSize-2; k++)
+            for (int k = i; k < m_MapSize-1; k++)
             {
                 m_MapArray[k] = m_MapArray[k+1];
             }
@@ -117,7 +134,7 @@ bool Map::contains(const KeyType& key) const
 }
 
 //set value if there's a key match
-bool Map::get(const KeyType& key, ValueType& value)
+bool Map::get(const KeyType& key, ValueType& value) const
 {
     //check if there's a match
     for (int i = 0; i <m_MapSize; i++)

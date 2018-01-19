@@ -11,12 +11,14 @@
 
 #include <iostream>
 using KeyType = std::string;
-using ValueType = int;
+using ValueType = double;
 const int DEFAULT_MAX_ITEMS = 250;
 
 class Map
 {
 public:
+    void dump();
+
     Map();         // Create an empty map (i.e., one with no key/value pairs)
     
     bool empty() const;  // Return true if the map is empty, otherwise false.
@@ -55,7 +57,7 @@ public:
     // Return true if key is equal to a key currently in the map, otherwise
     // false.
     
-    bool get(const KeyType& key, ValueType& value);
+    bool get(const KeyType& key, ValueType& value) const;
     // If key is equal to a key currently in the map, set value to the
     // value in the map that that key maps to, and return true.  Otherwise,
     // make no change to the value parameter of this function and return
@@ -79,7 +81,6 @@ private:
     };
     int m_MapSize;
     MapType m_MapArray[DEFAULT_MAX_ITEMS];
-    
     
 };
 #endif /* Map_h */
