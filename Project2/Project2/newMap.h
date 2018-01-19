@@ -1,13 +1,13 @@
 //
-//  Map.h
+//  newMap.h
 //  Project2
 //
 //  Created by Super on 1/17/18.
 //  Copyright © 2018 Sydney. All rights reserved.
 //
 
-#ifndef Map_h
-#define Map_h
+#ifndef newMap_h
+#define newMap_h
 
 #include <iostream>
 using KeyType = std::string;
@@ -18,7 +18,7 @@ class Map
 {
 public:
     void dump() const;
-
+    
     Map();         // Create an empty map (i.e., one with no key/value pairs)
     
     bool empty() const;  // Return true if the map is empty, otherwise false.
@@ -83,4 +83,4 @@ private:
     MapType m_MapArray[DEFAULT_MAX_ITEMS];
     
 };
-#endif /* Map_h */
+#endif /* newMap_h */

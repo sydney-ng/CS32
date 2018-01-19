@@ -1,5 +1,5 @@
 //
-//  map.cpp
+//  newMap.cpp
 //  Project2
 //
 //  Created by Super on 1/17/18.
@@ -48,7 +48,7 @@ bool Map::insert(const KeyType& key, const ValueType& value)
             m_MapArray[m_MapSize-1].m_v = value;
             return true;
         }
-
+        
     }
     
     return false;
@@ -57,7 +57,7 @@ bool Map::insert(const KeyType& key, const ValueType& value)
 void Map::dump () const
 {
     std::cerr << "m_MapSize is: " << m_MapSize <<  std::endl;
-     std::cerr << "m_MapArray is: " <<  std::endl;
+    std::cerr << "m_MapArray is: " <<  std::endl;
     for (int i = 0; i < m_MapSize; i ++)
     {
         std::cerr << std:: endl << "item #" << i << ", key: " << m_MapArray[i].m_k << ", value : " << m_MapArray[i].m_v <<  std::endl << std::endl;
@@ -80,7 +80,7 @@ bool Map::update(const KeyType& key, const ValueType& value)
     return false;
 }
 
-bool Map::insertOrUpdate(const KeyType& key, const ValueType& value) 
+bool Map::insertOrUpdate(const KeyType& key, const ValueType& value)
 {
     if (update(key, value) == true)
     {
