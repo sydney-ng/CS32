@@ -11,13 +11,13 @@
 
 #include <iostream>
 using KeyType = std::string;
-using ValueType = double;
+using ValueType = int;
 const int DEFAULT_MAX_ITEMS = 250;
 
 class Map
 {
 public:
-    void dump();
+    void dump() const;
 
     Map();         // Create an empty map (i.e., one with no key/value pairs)
     

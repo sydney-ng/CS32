@@ -54,7 +54,7 @@ bool Map::insert(const KeyType& key, const ValueType& value)
     return false;
 }
 
-void Map::dump ()
+void Map::dump () const
 {
     std::cerr << "m_MapSize is: " << m_MapSize <<  std::endl;
      std::cerr << "m_MapArray is: " <<  std::endl;
