@@ -60,7 +60,7 @@ void Map::dump ()
      std::cerr << "m_MapArray is: " <<  std::endl;
     for (int i = 0; i < m_MapSize; i ++)
     {
-        std::cerr << "item #" << i << ", key: " << m_MapArray[i].m_k << ", value : " << m_MapArray[i].m_v <<  std::endl << std::endl;
+        std::cerr << std:: endl << "item #" << i << ", key: " << m_MapArray[i].m_k << ", value : " << m_MapArray[i].m_v <<  std::endl << std::endl;
     }
 }
 
@@ -165,5 +165,5 @@ void Map::swap(Map& other)
 {
     Map temp = other;
     other = *this;
-    *this = other;
+    *this = temp;
 }
