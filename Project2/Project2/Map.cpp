@@ -40,7 +40,7 @@ bool Map::insert(const KeyType& key, const ValueType& value)
     if (contains(key) == false)
     {
         //check there's room in map
-        if (m_MapSize != DEFAULT_MAX_ITEMS)
+        if (m_MapSize < DEFAULT_MAX_ITEMS)
         {
             //increase the size of array & addd to array
             m_MapSize++;
@@ -50,7 +50,6 @@ bool Map::insert(const KeyType& key, const ValueType& value)
         }
 
     }
-    
     return false;
 }
 
