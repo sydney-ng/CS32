@@ -1,0 +1,74 @@
+1. int i; 
+
+class A
+{
+	public:
+	~A()
+	{
+		i = 10; 
+	} 
+}; 
+
+int foo ()
+{
+	i = 3; 
+	A obj;
+	return i; 
+}
+
+output = 3, because the object is destructed before it goes out of scope
+
+
+2. 
+
+static = shared among objects of the same class 
+static int count;
+
+destructors are created in reverse order of construction 
+
+constructor for ID 1,2,3 
+destructor for ID 3,2,1 
+static members are only destructed when all the objects of the class are destroyed 
+
+3. 
+copy constructor pass ref
+
+6. can’t set ‘this’ equal to another object 
+
+7. at compile time, the value inside the () of the initializer list must be known 
+
+OTHER: 
+if you have: 
+
+Class A 
+{
+	A()
+	~A()
+} 
+
+Class B 
+{
+	A obj; 
+	B (); 
+	~B (); 
+} 
+
+order goes: constructor A, constructor B, destructor B, destructor A 
+ 
+
+when you use initializer list, you don’t need to call the constructor
+
+Assignment operators
+- similar to copy constructor 
+- takes a const & data type 
+operator = 
+
+//copy constructor 
+
+A a; 
+A b = a; 
+
+//assigment operator 
+A a; 
+A b;
+a = b; 

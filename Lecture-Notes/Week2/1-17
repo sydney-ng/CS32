@@ -116,7 +116,14 @@ delete p;
 
 //array form of delete 
 p = new Blah [n];
-delete [] p; 
+delete [] p;
+
+p = [10003010, 10034, 134567]
+  
+10003010 => x 
+// will see that x is of type blah and deconstruct it and iterate through entire array & deconstruct it at the end 
+
+
 ========
 void h()
 {

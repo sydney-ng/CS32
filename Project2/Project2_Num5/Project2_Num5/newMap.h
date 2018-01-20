@@ -19,9 +19,13 @@ class Map
 public:
     void dump() const;
     
-    Map (const int& array_size) {m_MapSize = array_size; m_MapArray = new MapType[m_MapSize];};
+    Map (const int& array_size);
     
-    Map(){ m_MapSize = 0; m_MapArray = new MapType[DEFAULT_MAX_ITEMS];};         // Create an empty map (i.e., one with no key/value pairs)
+    Map();         // Create an empty map (i.e., one with no key/value pairs)
+    
+    ~Map();
+    
+    Map(const Map &p2);
     
     bool empty() const;  // Return true if the map is empty, otherwise false.
     
@@ -83,6 +87,6 @@ private:
     };
     int m_MapSize;
     MapType* m_MapArray;
-    
+    int m_MaxSize; 
 };
 #endif /* newMap_h */

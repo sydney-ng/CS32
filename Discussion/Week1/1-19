@@ -1,0 +1,57 @@
+1. Constructor
+	- public member function
+	- initializes variables (member variables)
+	- initializes automatically 
+		- don't use a method 
+	class A
+	{
+		public: 
+			int x; 
+			int y;
+			A();
+			x = x_val;
+			y = y_val; 
+	}
+2. Destructor 
+	- destroy data members 
+	- do it when you have al ot of memory and you're afraid that you'll run out 
+	- free resources that are no longer needed by the application 
+
+3. initializer list 
+	- better than doing it inside the constructor
+	- when you have class composition: 
+
+	Class A 
+	{
+		x; 
+	}
+
+	Class B
+	{
+		A.x = val; 
+	}
+
+	order: constructor B, constructor A, assignment operator to assign values, clear memory w/ destructor 
+
+	constructor list is more efficient because you don't have to go and construct A
+
+4. Copy Constructor 
+	A obj1 
+	A obj2 
+	obj2.x = 10; 
+	obj1 = obj2; //you can't do it, will give you an error 
+
+	when you want to copy data from one object to anther object, you 
+
+	A obj1, obj2;
+	A(const& o)
+	{
+
+	}
+
+	//const => you don't ant to change it
+
+5. shallow copy vs deep copy
+	- deep copy use it always 
+		- you're copying the members explicitly 
+	

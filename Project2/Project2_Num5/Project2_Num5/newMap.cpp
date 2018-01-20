@@ -8,13 +8,31 @@
 
 #include "newMap.h"
 
-/*Map::Map()
+Map::Map()
+ {
+     m_MaxSize = DEFAULT_MAX_ITEMS;
+     m_MapSize = 0;
+     m_MapArray = new MapType[DEFAULT_MAX_ITEMS];
+ }
+ 
+Map::Map (const int& array_size)
+ {
+     m_MapSize = 0;
+     m_MaxSize = array_size;
+     m_MapArray = new MapType[array_size];
+     
+ }
+
+Map::~Map()
 {
+    delete [] m_MapArray;
 }
 
-Map::Map (const int& array_size)
+Map::Map(const Map &p2)
 {
-}*/
+    
+}
+
 
 bool Map::empty () const
 {
@@ -43,7 +61,7 @@ bool Map::insert(const KeyType& key, const ValueType& value)
     if (contains(key) == false)
     {
         //check there's room in map
-        if (m_MapSize != DEFAULT_MAX_ITEMS)
+        if (m_MapSize < m_MaxSize)
         {
             //increase the size of array & addd to array
             m_MapSize++;
