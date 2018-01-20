@@ -25,8 +25,12 @@ public:
     
     ~Map();
     
+    //copy constructor
     Map(const Map &p2);
     
+    //assignment operator
+    Map& operator=(const Map& map_2);
+
     bool empty() const;  // Return true if the map is empty, otherwise false.
     
     int size() const;    // Return the number of key/value pairs in the map.

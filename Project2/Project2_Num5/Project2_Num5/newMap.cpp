@@ -28,11 +28,20 @@ Map::~Map()
     delete [] m_MapArray;
 }
 
-Map::Map(const Map &p2)
+Map::Map(const Map &map_2)
 {
-    
+    m_MapSize = map_2.m_MapSize;
+    m_MapArray = map_2.m_MapArray;
+    m_MaxSize = map_2.m_MaxSize;
 }
 
+Map& Map::operator=(const Map& map_2)
+{
+    m_MapSize = map_2.m_MapSize;
+    m_MapArray = map_2.m_MapArray;
+    m_MaxSize = map_2.m_MaxSize;
+    return *this;
+}
 
 bool Map::empty () const
 {
