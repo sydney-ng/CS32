@@ -20,19 +20,30 @@ Map::Map (const int& array_size)
      m_MapSize = 0;
      m_MaxSize = array_size;
      m_MapArray = new MapType[array_size];
-     
  }
 
 Map::~Map()
 {
+    
     delete [] m_MapArray;
 }
 
 Map::Map(const Map &map_2)
 {
-    m_MapSize = map_2.m_MapSize;
-    m_MapArray = map_2.m_MapArray;
-    m_MaxSize = map_2.m_MaxSize;
+    m_MapArray = new MapType[map_2.m_MaxSize];
+    
+    int temp_maxsize = map_2.m_MaxSize;
+    int temp_mapsize = map_2.m_MapSize;
+
+    //iterate through map2 and set it to temp
+    for (int i = 0; i < m_MapSize; i ++)
+    {
+        m_MapArray [i] = map_2.m_MapArray[i];
+    }
+    
+    //change other variables
+    m_MapSize = temp_mapsize;
+    m_MaxSize = temp_maxsize;
 }
 
 Map& Map::operator=(const Map& map_2)
