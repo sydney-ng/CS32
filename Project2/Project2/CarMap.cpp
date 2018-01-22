@@ -84,11 +84,12 @@ void CarMap::print() const
 {
     KeyType temp_key;
     ValueType temp_value;
-    int counter = fleetSize();
-    while (counter > 0)
+    int counter = fleetSize()-1;
+    while (counter >= 0)
     {
         m_CarObject.get(counter, temp_key, temp_value);
         std::cout << temp_key << " " << temp_value << std::endl;
+        counter --;
     }
 }
 
