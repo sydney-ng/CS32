@@ -7,9 +7,9 @@
 //
 
 #include <iostream>
+#include "Map.h"
+#include <cassert>
+int main ()
+{
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
 }
