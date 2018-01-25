@@ -53,15 +53,27 @@ Map& Map::operator=(const Map& rhs)
 
 bool Map::erase(const KeyType& key)
 {
-    int pos = find(key);
-    if (pos == -1)  // not found
+    
+    if (find(key) == nullptr)
+    {
         return false;
+    }
     
-    // Move last array item to replace the one to be erased
-    
-    m_size--;
-    m_data[pos] = m_data[m_size];
-    return true;
+    else
+    {
+        Node *ToDelete;
+        ToDelete = find(key);
+        
+        //set the "next" of the element before to the element to the right of ToDelete
+        ToDelete->previous->next = ToDelete->next;
+        
+        //set the "previous" of the element to the right to the "previous" of ToDelete
+        ToDelete->next->previous = ToDelete->previous;
+        
+        //delete ToDelete
+        delete ToDelete;
+        return true;
+    }
 }
 
 bool Map::get(const KeyType& key, ValueType& value) const
