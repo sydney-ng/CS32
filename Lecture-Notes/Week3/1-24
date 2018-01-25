@@ -1,0 +1,23 @@
+//INITIALIZATION != ASSIGNMENT
+
+String s1; // initialization (using default constructor)
+String s2("Hello"); //initialization (using constructor that takes const char *)
+String s3 (s2); // initialization (using copy constructor)
+String s4 = s3; //can't just be assignment (because then s4 must have already existed), can't just be only initialization
+				//possibility: call default constructor to build s4, then calls assignment operator to throw out that value and bring in a new one???? -> NO!!! it's waste of effort
+				//this is only actually initialization, using copy constructor because we are creating a brand new object 
+String s4(s3); //initialization using copy constructor 
+String s5 = "hello" //initialization (using the const char * constructor) [effectively]
+---
+
+s1=s2;
+
+int i; 
+int j =4; 
+int k = j; 
+int k(j); //same thing as the line above 
+
+i =k;
+j=k;
+//with ints & built in types, the bits get loaded & stomped on 
+//can't do this with class types 
