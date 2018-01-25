@@ -19,6 +19,12 @@ class Map
 public:
     Map();               // Create an empty map (i.e., one with no key/value pairs)
     
+    ~Map();             //Deconstructor
+    
+    Map& operator=(const Map& rhs); //assignment operator
+    
+    Map(const Map& other); //Copy Constructor
+    
     bool empty() const;  // Return true if the map is empty, otherwise false.
     
     int size() const;    // Return the number of key/value pairs in the map.
@@ -81,7 +87,18 @@ private:
         ValueType m_value;
     };
     
-    Pair m_data[DEFAULT_MAX_ITEMS];  // the pairs in the map
+    struct Node
+    {
+        Node *next;
+        Node *previous;
+        Pair MapValues;
+    };
+    
+    Node *tail;
+    Node *head;
+    
+    //No longer needed: using LL instead
+    //Pair m_data[DEFAULT_MAX_ITEMS];  // the pairs in the map
     int  m_size;                     // number of pairs in the map
     
     // At any time, the elements of m_data indexed from 0 to m_size-1

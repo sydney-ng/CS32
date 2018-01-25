@@ -2,9 +2,54 @@
 
 #include "Map.h"
 
+//do I initialize the MapValues????
 Map::Map()
-: m_size(0)
+: m_size(0), tail(nullptr), head (nullptr)
 {}
+
+Map::~Map()
+{
+    Node *p;
+    p = head;
+    while (p != nullptr)
+    {
+        Node *temp = p->next;
+        delete p;
+        p = temp;
+    }
+}
+
+//using POINTER_THIS RIGHT???
+Map::Map(const Map& other)
+{
+    Node *pointer_other;
+    Node *pointer_this;
+    //set head equal to the head of the other
+    pointer_other = other.head;
+    head = other.head;
+    
+    while (pointer_other != nullptr)
+    {
+        pointer_this->MapValues.m_key = pointer_other->MapValues.m_key;
+        pointer_this->MapValues.m_value = pointer_other->MapValues.m_value;
+        pointer_this->next = pointer_other->next;
+        pointer_this->previous = pointer_other->previous;
+        
+        pointer_other = pointer_other->next;
+        pointer_this = pointer_this->next;
+    }
+    tail = other.tail;
+}
+
+Map& Map::operator=(const Map& rhs)
+{
+    if (this != &rhs)
+    {
+        Map temp(rhs);
+        swap(temp);
+    }
+    return *this;
+}
 
 bool Map::erase(const KeyType& key)
 {
