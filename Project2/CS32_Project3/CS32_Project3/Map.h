@@ -126,7 +126,12 @@ int Map::size() const
 inline
 bool Map::empty() const
 {
-    return size() == 0;
+    //if head points to nullptr, you know it's empty
+    if (head->next == nullptr)
+    {
+        return true;
+    }
+    return false;
 }
 
 inline
