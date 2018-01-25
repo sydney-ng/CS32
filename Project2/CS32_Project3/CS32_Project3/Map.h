@@ -139,7 +139,23 @@ bool Map::empty() const
 inline
 bool Map::contains(const KeyType& key) const
 {
-    return find(key) != -1;
+    if (head->next == nullptr)
+    {
+        return false;
+    }
+    else
+    {
+        Node *p;
+        p = head;
+        while (p!= nullptr)
+        {
+            if (p->MapValues.m_key == key)
+            {
+                return true;
+            }
+            p = p->next;
+        }
+        return false;
 }
 
 inline
