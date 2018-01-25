@@ -136,7 +136,7 @@ Node* Map::find(const KeyType& key) const
     {
         Node *p;
         p = head;
-        while (p != nullptr)
+        while (p!= nullptr)
         {
             if (p->MapValues.m_key == key)
             {
@@ -155,7 +155,36 @@ Node* Map::find(const KeyType& key) const
 bool Map::doInsertOrUpdate(const KeyType& key, const ValueType& value,
                            bool mayInsert, bool mayUpdate)
 {
-    int pos = find(key);
+    //check if the key is in dictionary
+    if (find(key) != nullptr)
+    {
+        //yes, so: check if you can update it into the map
+        if (mayUpdate)
+        {
+            Node *UpdateThis;
+            UpdateThis = find(key);
+            UpdateThis->MapValues.m_value = value;
+        }
+        return mayUpdate;
+    }
+    
+    if (!mayInsert)  // not found, and not allowed to insert
+        return false;
+    
+    if (m_size == DEFAULT_MAX_ITEMS)  // no room to insert
+        return false;
+    
+    //does not meet any of the other conditions, insert into linked list
+    Node *frontNode;
+    frontNode->next = head;
+    frontNode->previous = nullptr; 
+    frontNode->MapValues.m_value = value;
+    frontNode->MapValues.m_key = key;
+    head = frontNode;
+    
+    return true;
+    
+    /*int pos = find(key);
     if (pos != -1)  // found
     {
         if (mayUpdate)
@@ -169,5 +198,5 @@ bool Map::doInsertOrUpdate(const KeyType& key, const ValueType& value,
     m_data[m_size].m_key = key;
     m_data[m_size].m_value = value;
     m_size++;
-    return true;
+    return true;*/
 }
