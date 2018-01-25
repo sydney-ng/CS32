@@ -112,14 +112,32 @@ void Map::swap(Map& other)
     other.m_size = t;
 }
 
-int Map::find(const KeyType& key) const
+Node* Map::find(const KeyType& key) const
 {
     // Do a linear search through the array.
     
-    for (int pos = 0; pos < m_size; pos++)
+    if (head->next == nullptr)
+    {
+        return nullptr;
+    }
+    else
+    {
+        Node *p;
+        p = head;
+        while (p != nullptr)
+        {
+            if (p->MapValues.m_key == key)
+            {
+                return p;
+            }
+            p = p->next;
+        }
+    }
+    return nullptr;
+    /*for (int pos = 0; pos < m_size; pos++)
         if (m_data[pos].m_key == key)
             return pos;
-    return -1;
+    return -1;*/
 }
 
 bool Map::doInsertOrUpdate(const KeyType& key, const ValueType& value,

@@ -104,9 +104,11 @@ private:
     // At any time, the elements of m_data indexed from 0 to m_size-1
     // are in use.
     
-    int find(const KeyType& key) const;
+    Node* find(const KeyType& key) const;
     // Return index of the pair in m_data whose m_key == key if there is
     // one, else -1
+    
+    //NEW IMPLEMENTATION: will return the address of the pair if it's found in the map 
     
     bool doInsertOrUpdate(const KeyType& key, const ValueType& value,
                           bool mayInsert, bool mayUpdate);
