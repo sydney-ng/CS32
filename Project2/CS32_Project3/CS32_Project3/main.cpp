@@ -28,9 +28,12 @@ int main ()
     A.insert(Key1, 1.2);
     A.insert(Key2, 3.4);
     A.insert(Key3, 4.5);
-    
+    Map B;
+    B.insert(Key1, 1.2);
+
+    //A.swap(B);
     //testGet1(A);
-    //A.dump ();
+    A.dump ();
 
    
     
@@ -39,7 +42,15 @@ int main ()
     //cerr << "val is: " << val << endl;
     //A.dump();
     //Map B = A;
-    cerr <<"done";
+    cerr <<"done" <<endl ;
+}
+
+void testUpdate(Map A)
+{
+    bool x = A.update("pigzs", 10.1);
+    cerr << "0: " << x;
+    bool y = A.update("pigzs", 10.1);
+    cerr << "1: " << y;
 }
 void testGet1(Map A)
 {

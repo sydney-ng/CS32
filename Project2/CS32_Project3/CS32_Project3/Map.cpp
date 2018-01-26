@@ -259,3 +259,19 @@ bool Map::insertOrUpdate(const KeyType& key, const ValueType& value)
     }
 }
 
+bool Map::update(const KeyType& key, const ValueType& value)
+{
+    Node *iterator = head;
+    int counter = 0;
+    while (counter < size())
+    {
+        if (iterator != nullptr && iterator->MapValues.m_key == key)
+        {
+            iterator->MapValues.m_value = value;
+            return true;
+        }
+        iterator = iterator->next;
+        counter ++;
+    }
+    return false;
+}

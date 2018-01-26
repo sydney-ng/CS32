@@ -162,10 +162,4 @@ bool Map::contains(const KeyType& key) const
         return false;
     }
 }
-inline
-bool Map::update(const KeyType& key, const ValueType& value)
-{
-    return doInsertOrUpdate(key, value, false /* no insert */, true /* update */);
-}
-
 #endif // MAP_INCLUDED
