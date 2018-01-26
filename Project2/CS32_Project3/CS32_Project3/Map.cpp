@@ -20,7 +20,7 @@ Map::~Map()
     }
 }
 
-Map::Map(const Map &other)
+Map::Map(const Map& other)
 {
     KeyType temp_key;
     ValueType temp_value;
@@ -36,7 +36,7 @@ Map::Map(const Map &other)
             {
                 other.get (i, temp_key, temp_value);
                 //
-                insert(temp_key, temp_value);
+                //insert(temp_key, temp_value);
                 m_size++;
             }
     }
@@ -54,16 +54,6 @@ Map& Map::operator=(const Map& rhs)
 }
 
 */
-
-/*
-bool Map::get(int i, KeyType& key, ValueType& value) const
-{
-    if (i < 0  ||  i >= m_size)
-        return false;
-    key = m_data[i].m_key;
-    value = m_data[i].m_value;
-    return true;
-} */
 
 /*
 void Map::swap(Map& other)
@@ -154,22 +144,27 @@ bool Map::erase(const KeyType& key)
 }
 
 
-bool Map::get(const KeyType& key, ValueType& value) const
+/*bool Map::get(const KeyType& key, ValueType& value) const
 {
     
-    Node *InterestingNode;
+    return true;
+    
+} */
+
+bool Map::get(int i, KeyType& key, ValueType& value) const
+{
     Node *iterator = head;
     for (int i = 0; i < m_size; i ++)
     {
         if (iterator->MapValues.m_key == key)
         {
-            InterestingNode = iterator;
             break;
         }
-        iterator = iterator->next;
+        else
+        {
+            iterator = iterator->next;
+        }
     }
-
-    value = InterestingNode->MapValues.m_value;
+    value = iterator->MapValues.m_value;
     return true;
-    
 }
