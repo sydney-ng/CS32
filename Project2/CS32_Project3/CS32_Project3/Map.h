@@ -168,10 +168,4 @@ bool Map::update(const KeyType& key, const ValueType& value)
     return doInsertOrUpdate(key, value, false /* no insert */, true /* update */);
 }
 
-inline
-bool Map::insertOrUpdate(const KeyType& key, const ValueType& value)
-{
-    return doInsertOrUpdate(key, value, true /* insert */, true /* update */);
-}
-
 #endif // MAP_INCLUDED

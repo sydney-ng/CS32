@@ -51,8 +51,6 @@ Map& Map::operator=(const Map& rhs)
     return *this;
 }
 
-
-
 void Map::swap(Map& other)
 {
     // Swap elements.  Since the only elements that matter are those up to
@@ -243,5 +241,21 @@ bool Map::get(int i, KeyType& key, ValueType& value) const
         counter ++;
     }
     return false;
+}
+
+bool Map::insertOrUpdate(const KeyType& key, const ValueType& value)
+{
+    if (update(key, value) == true)
+    {
+        return true;
+    }
+    else if (insert(key, value) == true)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
