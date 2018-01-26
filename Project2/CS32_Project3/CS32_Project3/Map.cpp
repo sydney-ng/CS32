@@ -1,6 +1,7 @@
 // Map.cpp
 
 #include "Map.h"
+//TAKE THIS OUT BEFORE TURNING IN
 
 //do I initialize the MapValues????
 Map::Map()
@@ -19,28 +20,29 @@ Map::~Map()
     }
 }
 
-//using POINTER_THIS RIGHT???
-Map::Map(const Map& other)
+Map::Map(const Map &other)
 {
-    Node *pointer_other;
-    Node *pointer_this;
-    //set head equal to the head of the other
-    pointer_other = other.head;
-    head = other.head;
+    KeyType temp_key;
+    ValueType temp_value;
+    m_size = 0;
+    head = nullptr;
+    tail = nullptr;
     
-    while (pointer_other != nullptr)
+    //make sure that it's not equal to itself
+    if (&other != this)
     {
-        pointer_this->MapValues.m_key = pointer_other->MapValues.m_key;
-        pointer_this->MapValues.m_value = pointer_other->MapValues.m_value;
-        pointer_this->next = pointer_other->next;
-        pointer_this->previous = pointer_other->previous;
-        
-        pointer_other = pointer_other->next;
-        pointer_this = pointer_this->next;
+        //use get function to get everything inside of it
+        for (int i =0; i < other.size(); i++)
+            {
+                other.get (i, temp_key, temp_value);
+                //
+                insert(temp_key, temp_value);
+                m_size++;
+            }
     }
-    tail = other.tail;
 }
 
+/*
 Map& Map::operator=(const Map& rhs)
 {
     if (this != &rhs)
@@ -51,40 +53,9 @@ Map& Map::operator=(const Map& rhs)
     return *this;
 }
 
-bool Map::erase(const KeyType& key)
-{
-    
-    if (find(key) == nullptr)
-    {
-        return false;
-    }
-    
-    else
-    {
-        Node *ToDelete;
-        ToDelete = find(key);
-        
-        //set the "next" of the element before to the element to the right of ToDelete
-        ToDelete->previous->next = ToDelete->next;
-        
-        //set the "previous" of the element to the right to the "previous" of ToDelete
-        ToDelete->next->previous = ToDelete->previous;
-        
-        //delete ToDelete
-        delete ToDelete;
-        return true;
-    }
-}
+*/
 
-bool Map::get(const KeyType& key, ValueType& value) const
-{
-    int pos = find(key);
-    if (pos == -1)  // not found
-        return false;
-    value = m_data[pos].m_value;
-    return true;
-}
-
+/*
 bool Map::get(int i, KeyType& key, ValueType& value) const
 {
     if (i < 0  ||  i >= m_size)
@@ -92,8 +63,9 @@ bool Map::get(int i, KeyType& key, ValueType& value) const
     key = m_data[i].m_key;
     value = m_data[i].m_value;
     return true;
-}
+} */
 
+/*
 void Map::swap(Map& other)
 {
     // Swap elements.  Since the only elements that matter are those up to
@@ -123,80 +95,81 @@ void Map::swap(Map& other)
     m_size = other.m_size;
     other.m_size = t;
 }
+*/
 
-Node* Map::find(const KeyType& key) const
+void Map::dump() const
 {
-    // Do a linear search through the array.
-    
-    if (head->next == nullptr)
+    cout << "head address:" << head << endl;
+    Node *p;
+    while (p != nullptr)
     {
-        return nullptr;
+        cout << "node is: " << p << endl;
+        cout << "key is: " << p->MapValues.m_key << endl;
+        cout << "value is: " << p->MapValues.m_value << endl;
+        cout << "next is: " << p->next << endl;
+        p = p->next;
     }
-    else
-    {
-        Node *p;
-        p = head;
-        while (p!= nullptr)
-        {
-            if (p->MapValues.m_key == key)
-            {
-                return p;
-            }
-            p = p->next;
-        }
-    }
-    return nullptr;
-    /*for (int pos = 0; pos < m_size; pos++)
-        if (m_data[pos].m_key == key)
-            return pos;
-    return -1;*/
 }
 
-bool Map::doInsertOrUpdate(const KeyType& key, const ValueType& value,
-                           bool mayInsert, bool mayUpdate)
+//insert to the beginning of linked list
+bool Map::insert(const KeyType& key, const ValueType& value)
 {
-    //check if the key is in dictionary
-    if (find(key) != nullptr)
+    Node *newNode = new Node;
+    newNode->MapValues.m_key = key;
+    newNode->MapValues.m_value = value;
+    newNode->next = head;
+    newNode->previous = nullptr; 
+    head = newNode;
+    m_size ++;
+    return true;
+}
+
+bool Map::erase(const KeyType& key)
+{
+    
+    //INSERT SOMETHING TO MAKE SURE IT'S IN DICTIONARY
+    Node *ToDelete;
+    Node *iterator = head;
+    for (int i = 0; i < m_size; i ++)
     {
-        //yes, so: check if you can update it into the map
-        if (mayUpdate)
+        if (iterator->MapValues.m_key == key)
         {
-            Node *UpdateThis;
-            UpdateThis = find(key);
-            UpdateThis->MapValues.m_value = value;
+            ToDelete = iterator;
+            break;
         }
-        return mayUpdate;
+        iterator = iterator->next;
     }
+        
+        //set the "next" of the element before to the element to the right of ToDelete
+        ToDelete->previous->next = ToDelete->next;
+        
+        //set the "previous" of the element to the right to the "previous" of ToDelete
+        ToDelete->next->previous = ToDelete->previous;
+        
+        //delete ToDelete
+        delete ToDelete;
+        m_size--;
+        return true;
     
-    if (!mayInsert)  // not found, and not allowed to insert
-        return false;
+}
+
+
+bool Map::get(const KeyType& key, ValueType& value) const
+{
     
-    if (m_size == DEFAULT_MAX_ITEMS)  // no room to insert
-        return false;
-    
-    //does not meet any of the other conditions, insert into linked list
-    Node *frontNode;
-    frontNode->next = head;
-    frontNode->previous = nullptr; 
-    frontNode->MapValues.m_value = value;
-    frontNode->MapValues.m_key = key;
-    head = frontNode;
-    
+    Node *InterestingNode;
+    Node *iterator = head;
+    for (int i = 0; i < m_size; i ++)
+    {
+        if (iterator->MapValues.m_key == key)
+        {
+            InterestingNode = iterator;
+            break;
+        }
+        iterator = iterator->next;
+    }
+
+    value = InterestingNode->MapValues.m_value;
     return true;
     
-    /*int pos = find(key);
-    if (pos != -1)  // found
-    {
-        if (mayUpdate)
-            m_data[pos].m_value = value;
-        return mayUpdate;
-    }
-    if (!mayInsert)  // not found, and not allowed to insert
-        return false;
-    if (m_size == DEFAULT_MAX_ITEMS)  // no room to insert
-        return false;
-    m_data[m_size].m_key = key;
-    m_data[m_size].m_value = value;
-    m_size++;
-    return true;*/
 }

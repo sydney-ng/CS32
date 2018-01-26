@@ -8,6 +8,9 @@
 // use type aliases.
 
 #include <string>
+//REMOVE THIS:
+#include <iostream>
+using namespace std;
 
 using KeyType = std::string;
 using ValueType = double;
@@ -20,6 +23,8 @@ public:
     Map();               // Create an empty map (i.e., one with no key/value pairs)
     
     ~Map();             //Deconstructor
+    
+    void dump() const;          //dump function 
     
     Map& operator=(const Map& rhs); //assignment operator
     
@@ -104,14 +109,13 @@ private:
     // At any time, the elements of m_data indexed from 0 to m_size-1
     // are in use.
     
-    Node* find(const KeyType& key) const;
+    Node * find(const KeyType& key) const;
     // Return index of the pair in m_data whose m_key == key if there is
     // one, else -1
     
     //NEW IMPLEMENTATION: will return the address of the pair if it's found in the map 
     
-    bool doInsertOrUpdate(const KeyType& key, const ValueType& value,
-                          bool mayInsert, bool mayUpdate);
+    bool doInsertOrUpdate(const KeyType& key, const ValueType& value, bool mayInsert, bool mayUpdate);
     // If the key is not present in the map and if mayInsert is true, insert
     // the pair if there is room.  If the key is present and mayUpdate is
     // true, update the pair with the given key.
@@ -156,14 +160,8 @@ bool Map::contains(const KeyType& key) const
             p = p->next;
         }
         return false;
+    }
 }
-
-inline
-bool Map::insert(const KeyType& key, const ValueType& value)
-{
-    return doInsertOrUpdate(key, value, true /* insert */, false /* no update */);
-}
-
 inline
 bool Map::update(const KeyType& key, const ValueType& value)
 {
