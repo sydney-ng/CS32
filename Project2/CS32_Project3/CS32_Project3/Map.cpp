@@ -5,7 +5,8 @@
 //do I initialize the MapValues????
 Map::Map()
 : m_size(0), tail(nullptr), head (nullptr)
-{}
+{
+}
 
 Map::~Map()
 {
@@ -274,4 +275,72 @@ bool Map::update(const KeyType& key, const ValueType& value)
         counter ++;
     }
     return false;
+}
+
+//if a key appears in exactly 1 of m1 and m2, give it to result
+//if a key is in both m1 and m2, result will have that pair
+bool combine(const Map& m1, const Map& m2, Map& result)
+{
+    bool flag = true;
+    //empty result
+    KeyType empty_result_key;
+    ValueType empty_result_val;
+    for (int result_iter1 = 0; result_iter1 < result.size(); result_iter1 ++)
+    {
+        result.get(result_iter1, empty_result_key, empty_result_val);
+        result.erase(empty_result_key);
+    }
+
+    KeyType my_key;
+    ValueType my_val;
+    
+    //loop through map 1
+    for (int map1_iter = 0; map1_iter < m1.size(); map1_iter ++)
+    {
+        //make sure that get returns true (aka there is something to return)
+        if (result.get(map1_iter, my_key, my_val))
+        {
+            //if it's not in m2
+            if (m2.contains(my_key) == false)
+            {
+                result.insert(my_key, my_val);
+            }
+            //it is also in m2
+            else
+            {
+                //check to make sure val in both is the same
+                ValueType temp_val;
+                m2.get(my_key, temp_val);
+                if (temp_val == my_val)
+                {
+                    result.insert(my_key, my_val);
+                }
+                //same key, different value
+                else
+                {
+                    flag = false;
+                }
+            }
+        }
+    }
+    
+    KeyType my_key2;
+    ValueType my_val2;
+    
+    //find unique entries in map2, you don't need to do the ones in both
+    //that was satisfied by first for loop
+    for (int map2_iter = 0; map2_iter < m2.size(); map2_iter ++)
+    {
+        //make sure that get returns true (aka there is something to return)
+        if (result.get(map2_iter, my_key2, my_val2))
+        {
+            //if it's not in m1
+            if (m1.contains(my_key2) == false)
+            {
+                result.insert(my_key2, my_val2);
+            }
+    
+        }
+    }
+    return flag;
 }
