@@ -97,7 +97,7 @@ bool Map::insert(const KeyType& key, const ValueType& value)
     Node *newNode = new Node;
 
     //this is our first time adding something to the linked list
-    if (head == nullptr)
+    if (empty() == true)
     {
         //set the "next" & "previous" values of the new node
         newNode->next = nullptr;
@@ -154,7 +154,7 @@ bool Map::erase(const KeyType& key)
 {
     Node *Killme = head;
     //make sure list isn't empty
-    if (head == nullptr)
+    if (empty() == true)
     {
         return false;
     }
