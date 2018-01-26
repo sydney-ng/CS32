@@ -27,8 +27,8 @@ Map::Map(const Map& other)
     newFirstNode->MapValues = other.head->MapValues;
     newFirstNode->previous = nullptr;
     newFirstNode->next = nullptr;
-    head = newFirstNode; 
-    Node *other_iterator = other.head;
+    head = newFirstNode;
+    Node *other_iterator = other.head->next;
     
     while (other_iterator != nullptr)
     {
@@ -46,6 +46,7 @@ Map::Map(const Map& other)
         
         newFirstNode = newFirstNode->next;
         other_iterator = other_iterator->next;
+        
     }
     
     tail = newFirstNode;
