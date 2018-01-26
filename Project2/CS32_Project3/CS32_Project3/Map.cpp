@@ -21,14 +21,45 @@ Map::~Map()
 
 Map::Map(const Map& other)
 {
+    Node *newFirstNode = new Node;
+    
+    //get first node in other
+    newFirstNode->MapValues = other.head->MapValues;
+    newFirstNode->previous = nullptr;
+    newFirstNode->next = nullptr;
+    head = newFirstNode; 
+    Node *other_iterator = other.head;
+    
+    while (other_iterator != nullptr)
+    {
+        //create a new node
+        Node *newNode = new Node;
+        
+        //give it the values of map
+        newNode->MapValues = other_iterator->MapValues;
+        //set previous/next
+        newNode->next = nullptr;
+        newNode->previous = newFirstNode;
+        
+        //set the next of the node before it
+        newNode->previous->next = newNode;
+        
+        newFirstNode = newFirstNode->next;
+        other_iterator = other_iterator->next;
+    }
+    
+    tail = newFirstNode;
+    m_size = other.size();
+    /*
     KeyType temp_key;
     ValueType temp_value;
-    m_size = 0;
-    head = nullptr;
-    tail = nullptr;
+    //CHECK
+    m_size = other.size();
+    head = other.head;
+    tail = other.tail; */
     
     //make sure that it's not equal to itself
-    if (&other != this)
+    /*if (&other != this)
     {
         //use get function to get everything inside of it
         for (int i =0; i < other.size(); i++)
@@ -38,7 +69,8 @@ Map::Map(const Map& other)
                 //insert(temp_key, temp_value);
                 m_size++;
             }
-    }
+        other = other->next;
+    }*/
 }
 
 
@@ -153,6 +185,8 @@ bool Map::insert(const KeyType& key, const ValueType& value)
 
 bool Map::erase(const KeyType& key)
 {
+    //CASE IF THERE'S ONLY ONE NODE
+    
     Node *Killme = head;
     //make sure list isn't empty
     if (empty() == true)
