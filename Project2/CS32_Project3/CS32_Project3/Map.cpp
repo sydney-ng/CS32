@@ -118,44 +118,47 @@ bool Map::insert(const KeyType& key, const ValueType& value)
         newNode->MapValues.m_key = key;
         newNode->MapValues.m_value = value;
         
-        //set the values of the previous/next one
-        
+        //set the values of the previous one
         head = newNode;
 
         m_size++;
         return true;
     }
     
-    //there's already stuff there
-    /*else
+    //there's already stuff there, append to end
+    else
     {
+        //set the values of the new node
         newNode->MapValues.m_key = key;
         newNode->MapValues.m_value = value;
-
-        newNode->previous = nullptr;
-        newNode->next = head;
         
-        head->previous = newNode;
-        //head->next should remain the same, we are only appending to the front
+        Node *iterator = head;
         
-        head = newNode;
-        m_size ++;
-    }
-    
-    */
-    //set tail
-    /*Node *iterator = head;
-    while (iterator != nullptr)
-    {
-        //found the last element
-        if (iterator->next == nullptr)
+        while (iterator != nullptr)
         {
-            tail = iterator->next;
-            break;
+            //this is how you know it's in the last index
+            if (iterator->next == nullptr)
+            {
+                break;
+            }
+            iterator = iterator->next;
         }
-        iterator = iterator->next;
-    }*/
-    return true;
+        
+        //set the "next" & "previous" values of the new node
+        newNode->next = nullptr;
+        newNode->previous = iterator;
+
+        //set the next of iterator to point to new node
+        iterator->next = newNode;
+        
+        m_size ++;
+        
+        //set tail equal to newNode
+        tail = newNode;
+        
+        return true;
+    }
+    return false;
 }
 
 bool Map::erase(const KeyType& key)
