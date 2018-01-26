@@ -344,3 +344,33 @@ bool combine(const Map& m1, const Map& m2, Map& result)
     }
     return flag;
 }
+
+//PREVENT ALIASING
+void subtract(const Map& m1, const Map& m2, Map& result)
+{
+    //empty result
+    KeyType empty_result_key;
+    ValueType empty_result_val;
+    for (int result_iter1 = 0; result_iter1 < result.size(); result_iter1 ++)
+    {
+        result.get(result_iter1, empty_result_key, empty_result_val);
+        result.erase(empty_result_key);
+    }
+    
+    KeyType my_key;
+    ValueType my_val;
+    
+    for (int map1_iter = 0; map1_iter < m1.size(); map1_iter ++)
+    {
+        //make sure that get returns true (aka there is something to return)
+        if (result.get(map1_iter, my_key, my_val))
+        {
+            //if it's not in m2
+            if (m2.contains(my_key) == false)
+            {
+                result.insert(my_key, my_val);
+            }
+
+        }
+    }
+}

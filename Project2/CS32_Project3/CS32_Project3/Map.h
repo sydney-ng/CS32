@@ -159,7 +159,7 @@ bool Map::contains(const KeyType& key) const
     }
 }
 
-
+void subtract(const Map& m1, const Map& m2, Map& result); 
 bool combine(const Map& m1, const Map& m2, Map& result);
 
 #endif // MAP_INCLUDED
