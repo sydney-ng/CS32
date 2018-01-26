@@ -1,5 +1,4 @@
-// Map.cpp
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        // Map.cpp
 #include "Map.h"
 //TAKE THIS OUT BEFORE TURNING IN
 
@@ -89,58 +88,125 @@ void Map::swap(Map& other)
 
 void Map::dump() const
 {
-    cout << "head address:" << head << endl;
-    Node *p;
+    cerr << "head address:" << head << endl;
+    cerr << "tail address:" << tail << endl;
+    Node *p = head;
     while (p != nullptr)
     {
-        cout << "node is: " << p << endl;
-        cout << "key is: " << p->MapValues.m_key << endl;
-        cout << "value is: " << p->MapValues.m_value << endl;
-        cout << "next is: " << p->next << endl;
+        cerr << "node is: " << p << endl;
+        cerr << "key is: " << p->MapValues.m_key << endl;
+        cerr << "value is: " << p->MapValues.m_value << endl;
+        cerr << "next is: " << p->next << endl;
         p = p->next;
     }
+    cerr << "finished" << endl;
 }
 
 //insert to the beginning of linked list
 bool Map::insert(const KeyType& key, const ValueType& value)
 {
     Node *newNode = new Node;
-    newNode->MapValues.m_key = key;
-    newNode->MapValues.m_value = value;
-    newNode->next = head;
-    newNode->previous = nullptr; 
-    head = newNode;
-    m_size ++;
+
+    //this is our first time adding something to the linked list
+    if (head == nullptr)
+    {
+        //set the "next" & "previous" values of the new node
+        newNode->next = nullptr;
+        newNode->previous = nullptr;
+        
+        //set the values of the new node
+        newNode->MapValues.m_key = key;
+        newNode->MapValues.m_value = value;
+        
+        //set the values of the previous/next one
+        
+        head = newNode;
+
+        m_size++;
+        return true;
+    }
+    
+    //there's already stuff there
+    /*else
+    {
+        newNode->MapValues.m_key = key;
+        newNode->MapValues.m_value = value;
+
+        newNode->previous = nullptr;
+        newNode->next = head;
+        
+        head->previous = newNode;
+        //head->next should remain the same, we are only appending to the front
+        
+        head = newNode;
+        m_size ++;
+    }
+    
+    */
+    //set tail
+    /*Node *iterator = head;
+    while (iterator != nullptr)
+    {
+        //found the last element
+        if (iterator->next == nullptr)
+        {
+            tail = iterator->next;
+            break;
+        }
+        iterator = iterator->next;
+    }*/
     return true;
 }
 
 bool Map::erase(const KeyType& key)
 {
-    
-    //INSERT SOMETHING TO MAKE SURE IT'S IN DICTIONARY
-    Node *ToDelete;
-    Node *iterator = head;
-    for (int i = 0; i < m_size; i ++)
+    Node *Killme = head;
+    //make sure list isn't empty
+    if (head == nullptr)
     {
-        if (iterator->MapValues.m_key == key)
-        {
-            ToDelete = iterator;
-            break;
-        }
-        iterator = iterator->next;
+        return false;
     }
-        
-        //set the "next" of the element before to the element to the right of ToDelete
-        ToDelete->previous->next = ToDelete->next;
-        
-        //set the "previous" of the element to the right to the "previous" of ToDelete
-        ToDelete->next->previous = ToDelete->previous;
-        
-        //delete ToDelete
-        delete ToDelete;
-        m_size--;
-        return true;
     
+    //check if item is in the front
+    else if (head->MapValues.m_key == key)
+    {
+        head = Killme->next;
+        head->previous = nullptr;
+        m_size--;
+        delete Killme;
+        return true;
+    }
+    
+    //check if item is the end
+    else if (tail->MapValues.m_key == key)
+    {
+        tail = Killme->previous;
+        tail->next = nullptr;
+        m_size--;
+        delete Killme;
+        return true;
+    }
+    
+    //item is somewhere in the middle
+    else
+    {
+        Node *iterator = head;
+        while (iterator != nullptr)
+        {
+            if (iterator->next->MapValues.m_key == key)
+            {
+                Killme = iterator->next;
+                iterator->next = Killme->next;
+                Killme->next->previous = iterator;
+                m_size--;
+                delete Killme;
+                return true;
+            }
+        }
+        
+    }
+    
+    return false;
 }
 
 
@@ -153,6 +219,8 @@ bool Map::erase(const KeyType& key)
 
 bool Map::get(int i, KeyType& key, ValueType& value) const
 {
+    //NEED TO WRITE THE CHECKING PART
+    
     Node *iterator = head;
     for (int i = 0; i < m_size; i ++)
     {
@@ -168,3 +236,4 @@ bool Map::get(int i, KeyType& key, ValueType& value) const
     value = iterator->MapValues.m_value;
     return true;
 }
+
