@@ -9,8 +9,7 @@ Map::Map()
 
 Map::~Map()
 {
-    Node *p;
-    p = head;
+    Node *p = head;
     while (p != nullptr)
     {
         Node *temp = p->next;
@@ -41,7 +40,7 @@ Map::Map(const Map& other)
     }
 }
 
-/*
+
 Map& Map::operator=(const Map& rhs)
 {
     if (this != &rhs)
@@ -52,39 +51,31 @@ Map& Map::operator=(const Map& rhs)
     return *this;
 }
 
-*/
 
-/*
+
 void Map::swap(Map& other)
 {
     // Swap elements.  Since the only elements that matter are those up to
     // m_size and other.m_size, only they have to be moved.
     
-    int minSize = (m_size < other.m_size ? m_size : other.m_size);
-    for (int k = 0; k < minSize; k++)
-    {
-        Pair tempPair = m_data[k];
-        m_data[k] = other.m_data[k];
-        other.m_data[k] = tempPair;
-    }
+    //exchange the sizes
+    int tempMapSize = other.m_size;
+    other.m_size = m_size;
+    m_size = tempMapSize;
     
-    // If the sizes are different, assign the remaining elements from
-    // the longer one to the shorter.
+    //tail/head for current map
+    Map tempMap;
+    tempMap.head = head;
+    tempMap.tail = tail;
     
-    if (m_size > minSize)
-        for (int k = minSize; k < m_size; k++)
-            other.m_data[k] = m_data[k];
-    else if (other.m_size > minSize)
-        for (int k = minSize; k < other.m_size; k++)
-            m_data[k] = other.m_data[k];
+    head = other.head;
+    tail = other.tail;
     
-    // Swap sizes
+    //tail/head for the other map
+    other.head = tempMap.head;
+    other.tail = tempMap.tail;
     
-    int t = m_size;
-    m_size = other.m_size;
-    other.m_size = t;
 }
-*/
 
 void Map::dump() const
 {
