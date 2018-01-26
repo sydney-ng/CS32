@@ -96,10 +96,10 @@ void Map::dump() const
         cerr << "node is: " << p << endl;
         cerr << "key is: " << p->MapValues.m_key << endl;
         cerr << "value is: " << p->MapValues.m_value << endl;
-        cerr << "next is: " << p->next << endl;
+        cerr << "next is: " << p->next << endl << endl;
         p = p->next;
     }
-    cerr << "finished" << endl;
+    cerr << "finished" << endl << endl << endl;
 }
 
 //insert to the beginning of linked list
@@ -223,20 +223,24 @@ bool Map::erase(const KeyType& key)
 bool Map::get(int i, KeyType& key, ValueType& value) const
 {
     //NEED TO WRITE THE CHECKING PART
+    //make sure that i is within range
+    if (i<0 || i >= size())
+    {
+        return false; 
+    }
     
     Node *iterator = head;
-    for (int i = 0; i < m_size; i ++)
+    int counter = 0;
+    while (counter < size())
     {
-        if (iterator->MapValues.m_key == key)
+        if (iterator != nullptr && iterator->MapValues.m_key == key)
         {
-            break;
+            value = iterator->MapValues.m_value;
+            return true;
         }
-        else
-        {
-            iterator = iterator->next;
-        }
+        iterator = iterator->next;
+        counter ++;
     }
-    value = iterator->MapValues.m_value;
-    return true;
+    return false;
 }
 
