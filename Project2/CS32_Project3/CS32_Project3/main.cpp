@@ -12,7 +12,7 @@
 #include <cassert>
 #include <string>
 using namespace std;
-
+void testGet1(Map A);
 void testGet2(Map A);
 
 int main ()
@@ -28,7 +28,8 @@ int main ()
     A.insert(Key1, 1.2);
     A.insert(Key2, 3.4);
     A.insert(Key3, 4.5);
-   
+    
+    //testGet1(A);
     //A.dump ();
 
    
@@ -40,7 +41,28 @@ int main ()
     //Map B = A;
     cerr <<"done";
 }
+void testGet1(Map A)
+{
+    A.dump();
+    ValueType val;
+    bool x= A.get("cats", val);
+    cerr << "x: " << x << endl;
+    cerr << "val: " << val << endl;
 
+    
+    x= A.get("pigs", val);
+    cerr << "x: " << x <<endl ;
+    cerr << "val: " << val << endl;
+
+    
+    x= A.get("dogs", val);
+    cerr << "x: " << x << endl;
+    cerr << "val: " << val << endl;
+
+    x= A.get("jim", val);
+    cerr << "x: " << x << endl;
+    cerr << "val: " << val << endl;
+}
 void testGet2(Map A)
 {
     KeyType Key1 = "cats";
