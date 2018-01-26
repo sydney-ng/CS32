@@ -213,12 +213,22 @@ bool Map::erase(const KeyType& key)
 }
 
 
-/*bool Map::get(const KeyType& key, ValueType& value) const
+bool Map::get(const KeyType& key, ValueType& value) const
 {
-    
-    return true;
-    
-} */
+    Node *iterator = head;
+    int counter = 0;
+    while (counter < size())
+    {
+        if (iterator != nullptr && iterator->MapValues.m_key == key)
+        {
+            value = iterator->MapValues.m_value;
+            return true;
+        }
+        iterator = iterator->next;
+        counter ++;
+    }
+    return false;
+}
 
 bool Map::get(int i, KeyType& key, ValueType& value) const
 {
