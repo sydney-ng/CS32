@@ -102,19 +102,12 @@ private:
     Node *tail;
     Node *head;
     
-    //No longer needed: using LL instead
-    //Pair m_data[DEFAULT_MAX_ITEMS];  // the pairs in the map
     int  m_size;                     // number of pairs in the map
     
     // At any time, the elements of m_data indexed from 0 to m_size-1
     // are in use.
     
-    //NEW IMPLEMENTATION: will return the address of the pair if it's found in the map 
     
-    bool doInsertOrUpdate(const KeyType& key, const ValueType& value, bool mayInsert, bool mayUpdate);
-    // If the key is not present in the map and if mayInsert is true, insert
-    // the pair if there is room.  If the key is present and mayUpdate is
-    // true, update the pair with the given key.
 };
 
 // Inline implementations

@@ -13,25 +13,22 @@
 #include <string>
 using namespace std;
 void testGet1(Map A);
+void testInsert(Map A);
 void testGet2(Map A);
 void testErase (Map A);
 void testSwap (Map A, Map B);
 void testCombine (Map A, Map B);
-
+void test_SizeEmptyContains(Map A);
 
 int main ()
 {
-    //declaring KeyTypes
-    ValueType val;
-    KeyType Key1 = "cats";
-    KeyType Key2 = "dogs";
-    KeyType Key3 = "pigs";
-    KeyType Key4 = "goat";
-    KeyType Key5 = "cheese";
     Map A;
+    test_SizeEmptyContains(A);
+    //testEmpty(A);
+    testInsert(A);
     
     //inserting values into the list
-    A.insert(Key1, 1.2);
+    /*A.insert(Key1, 1.2);
     A.insert(Key2, 3.4);
     A.insert(Key5, 3.4);
     A.insert(Key4, 8.9);
@@ -39,40 +36,152 @@ int main ()
     Map B;
     B.insert(Key1, 1.2);
     B.insert(Key2, 6.7);
-    B.insert(Key4, 7.8);
+    B.insert(Key4, 7.8); */
     
-    testErase(A);
-    //testGet2(A);
+    
+    //testGet2(A);;
     //testCombine(A,B);
     //A.erase(Key2);
     //A.get(1, Keys, val);
     //cerr << "val is: " << val << endl;
     //A.dump();
     //Map B = A;
-    cerr <<"done" <<endl ;
 }
+void testInsert (Map A)
+{
+    // If key is not equal to any key currently in the map, and if the
+    // key/value pair can be added to the map, then do so and return true.
+    // Otherwise, make no change to the map and return false (indicating
+    // that either the key is already in the map, or the map has a fixed
+    // capacity and is full.
+    KeyType Key1 = "a";
+    KeyType Key2 = "b";
+    KeyType Key3 = "a";
+    
+    //insert new key, new value -> true
+    //insert new key, same value -> false
+    //insert already key, new value -> false
+    //insert empty key, any value -> true
+
+    assert (A.size()==0);
+    assert (A.empty()==true);
+    
+    bool x = A.insert (Key1, 1.2);
+    assert (A.size()==1);
+    assert (A.empty()==false);
+    assert (x == true);
+    assert (A.contains(Key1));
+    
+    ValueType val;
+    bool y = A.insert (Key1, 1.2);
+    assert (A.size()==1);
+    assert (A.empty()==false);
+    assert (y == false);
+    assert (A.get(Key1, val) == true && val == 1.2);
+    
+    ValueType val2 = 1.0;
+    bool z = A.insert (Key3, 1.3);
+    assert (A.size()==1);
+    assert (A.empty()==false);
+    assert (z == false);
+    assert (A.get(Key1, val2) == true && val2 == 1.2);
+
+    
+    ValueType val3 = 10.1;
+    bool za = A.insert (Key2, 1.5);
+    assert (A.size()==2);
+    assert (A.empty()==false);
+    assert (za == true);
+    assert (A.get(Key2, val3) == true && val3 == 1.5);
+    cerr << "Insert() --> passed" << endl;
+
+}
+
+void test_SizeEmptyContains(Map A)
+{
+    //make sure Mapsize is 0 since empty
+    KeyType Key2 = "a";
+    KeyType Key3 = "b";
+    assert (A.contains(Key2)==false);
+    assert (A.contains(Key3)==false);
+    assert (A.size()==0);
+    assert (A.empty()==true);
+    
+    //after inserting 1 element
+    A.insert(Key2, 3.4);
+    assert (A.contains(Key2)==true);
+    assert (A.contains(Key3)==false);
+    A.insert(Key3, 2.4);
+    assert (A.empty()==false);
+    assert (A.size()== 2);
+    assert (A.contains(Key2)==true);
+    assert (A.contains(Key3)==true);
+    
+    A.erase(Key2);
+    assert (A.size()== 1);
+    assert (A.contains(Key2)==false);
+    assert (A.contains(Key3)==true);
+    A.update(Key3, 9.9);
+    assert (A.contains(Key3)==true);
+    assert (A.size()== 1);
+    assert (A.empty()==false);
+    cerr << "empty() --> passed" << endl;
+    cerr << "size() --> passed" << endl;
+    cerr << "contains() --> passed" << endl;
+
+
+    
+    //after deleting 1 element
+
+}
+
+
 
 void testErase (Map A)
 {
     /* 
-     cats, dogs, cheese, goat, pigs 
+     cats, dogs, cheese, goat, pigs
     */
-    //erase from beginning
     
-    /*A.erase("cats");
+    /* //erase from beginning
+    A.erase("cats");
     cerr << "finished removing cats " << endl;
 
     //erase from end
     A.erase("pigs");
     A.dump();
-    cerr << "finished removing pigs " << endl;*/
-
+    cerr << "finished removing pigs " << endl;
     
      //erase from middle
      A.erase("cheese");
      A.dump();
-     cerr << "finished removing cheese " << endl;
+     cerr << "finished removing cheese " << endl; */
+    
+    
+    //ERASE if it's there's only 1 node or if it's empty node
+    /*Map C;
+    
+    KeyType Key1 = "cats";
+    KeyType Key2 = "dogs";
 
+    C.insert(Key1, 7.8);
+    C.dump();
+    cout << endl;
+
+    C.erase(Key1);
+    C.dump(); */
+    
+    Map B;
+
+    KeyType Key3 = "cats";
+    KeyType Key4 = "dogs";
+    cerr << "b is: " << endl;
+    B.insert(Key3, 1023.2);
+    B.dump();
+
+    B.erase(Key4);
+    cerr << "----------------" << endl;
+    B.dump();
 }
 
 void testCombine (Map A, Map B)

@@ -6,6 +6,7 @@
 Map::Map()
 : m_size(0), tail(nullptr), head (nullptr)
 {
+    
 }
 
 Map::~Map()
@@ -21,36 +22,53 @@ Map::~Map()
 
 Map::Map(const Map& other)
 {
-    Node *newFirstNode = new Node;
+    m_size = 0;	//initialize
+    head = nullptr;
+    tail = nullptr;
     
-    //get first node in other
-    newFirstNode->MapValues = other.head->MapValues;
-    newFirstNode->previous = nullptr;
-    newFirstNode->next = nullptr;
-    head = newFirstNode;
-    Node *other_iterator = other.head->next;
-    
-    while (other_iterator != nullptr)
+    for (int i = 0; i < other.size(); i++)
     {
-        //create a new node
-        Node *newNode = new Node;
+        KeyType key;
+        ValueType val;
         
-        //give it the values of map
-        newNode->MapValues = other_iterator->MapValues;
-        //set previous/next
-        newNode->next = nullptr;
-        newNode->previous = newFirstNode;
-        
-        //set the next of the node before it
-        newNode->previous->next = newNode;
-        
-        newFirstNode = newFirstNode->next;
-        other_iterator = other_iterator->next;
-        
+        other.get(i, key, val);	//for each val get then insert
+        insert(key, val);
     }
     
-    tail = newFirstNode;
-    m_size = other.size();
+    /*cerr << other.size() << endl;
+    //check if other is empty
+    
+        Node *newFirstNode = new Node;
+        
+        //get first node in other
+        newFirstNode->MapValues = other.head->MapValues;
+        newFirstNode->previous = nullptr;
+        newFirstNode->next = nullptr;
+        head = newFirstNode;
+        Node *other_iterator = other.head->next;
+        
+        while (other_iterator != nullptr)
+        {
+            //create a new node
+            Node *newNode = new Node;
+            
+            //give it the values of map
+            newNode->MapValues = other_iterator->MapValues;
+            //set previous/next
+            newNode->next = nullptr;
+            newNode->previous = newFirstNode;
+            
+            //set the next of the node before it
+            newNode->previous->next = newNode;
+            
+            newFirstNode = newFirstNode->next;
+            other_iterator = other_iterator->next;
+            
+        }
+        
+        tail = newFirstNode;
+        m_size = other.size();
+   */
 }
 
 
@@ -108,6 +126,11 @@ void Map::dump() const
 //insert to the beginning of linked list
 bool Map::insert(const KeyType& key, const ValueType& value)
 {
+    //check if this value is already in the map
+    if (contains(key) == true)
+    {
+        return false;
+    }
     Node *newNode = new Node;
 
     //this is our first time adding something to the linked list
@@ -166,7 +189,11 @@ bool Map::insert(const KeyType& key, const ValueType& value)
 
 bool Map::erase(const KeyType& key)
 {
-    
+    //make sure it's in the map before iterating
+    if (contains(key) == false)
+    {
+        return false;
+    }
     Node *Killme = head;
     
     //make sure list isn't empty
@@ -176,8 +203,10 @@ bool Map::erase(const KeyType& key)
     }
     
     //it's the only node
-    if(Killme->next == nullptr)
+    if(head->next == nullptr && head->MapValues.m_key == key)
     {
+        cerr <<"ONLY NODE CASE" << endl;
+        Killme = head;
         head = nullptr;
         delete Killme; 
         m_size--;
