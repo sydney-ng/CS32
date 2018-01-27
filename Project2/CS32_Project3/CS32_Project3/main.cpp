@@ -14,6 +14,7 @@
 using namespace std;
 void testGet1(Map A);
 void testGet2(Map A);
+void testErase (Map A);
 void testSwap (Map A, Map B);
 void testCombine (Map A, Map B);
 
@@ -26,18 +27,22 @@ int main ()
     KeyType Key2 = "dogs";
     KeyType Key3 = "pigs";
     KeyType Key4 = "goat";
+    KeyType Key5 = "cheese";
     Map A;
     
     //inserting values into the list
     A.insert(Key1, 1.2);
     A.insert(Key2, 3.4);
+    A.insert(Key5, 3.4);
+    A.insert(Key4, 8.9);
     A.insert(Key3, 4.5);
     Map B;
     B.insert(Key1, 1.2);
     B.insert(Key2, 6.7);
     B.insert(Key4, 7.8);
     
-    testGet2(A);
+    testErase(A);
+    //testGet2(A);
     //testCombine(A,B);
     //A.erase(Key2);
     //A.get(1, Keys, val);
@@ -45,6 +50,29 @@ int main ()
     //A.dump();
     //Map B = A;
     cerr <<"done" <<endl ;
+}
+
+void testErase (Map A)
+{
+    /* 
+     cats, dogs, cheese, goat, pigs 
+    */
+    //erase from beginning
+    
+    /*A.erase("cats");
+    cerr << "finished removing cats " << endl;
+
+    //erase from end
+    A.erase("pigs");
+    A.dump();
+    cerr << "finished removing pigs " << endl;*/
+
+    
+     //erase from middle
+     A.erase("cheese");
+     A.dump();
+     cerr << "finished removing cheese " << endl;
+
 }
 
 void testCombine (Map A, Map B)

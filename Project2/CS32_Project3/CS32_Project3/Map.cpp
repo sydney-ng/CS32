@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        // Map.cpp
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // Map.cpp
 #include "Map.h"
 //TAKE THIS OUT BEFORE TURNING IN
 
@@ -166,15 +166,16 @@ bool Map::insert(const KeyType& key, const ValueType& value)
 
 bool Map::erase(const KeyType& key)
 {
-    //CASE IF THERE'S ONLY ONE NODE
     
     Node *Killme = head;
+    
     //make sure list isn't empty
     if (empty() == true)
     {
         return false;
     }
     
+    //it's the only node
     if(Killme->next == nullptr)
     {
         head = nullptr;
@@ -195,9 +196,8 @@ bool Map::erase(const KeyType& key)
     //check if item is the end
     else if (tail->MapValues.m_key == key)
     {
-        cout << "cool beans" << endl;
-        cerr << "made it here" << endl;
-        tail = Killme->previous;
+        Killme = tail;
+        tail = tail->previous;
         tail->next = nullptr;
         m_size--;
         delete Killme;
@@ -213,12 +213,13 @@ bool Map::erase(const KeyType& key)
             if (iterator->next->MapValues.m_key == key)
             {
                 Killme = iterator->next;
-                iterator->next = Killme->next;
-                Killme->next->previous = iterator;
+                iterator->next = iterator->next->next;
+                iterator->next->next->previous = iterator;
                 m_size--;
                 delete Killme;
                 return true;
             }
+            iterator=iterator->next;
         }
         
     }
@@ -323,9 +324,6 @@ bool combine(const Map& m1, const Map& m2, Map& result)
         }
     }
     
-    else{
-        cout << "it's empty" << endl;
-    }
    
     return true;
 
