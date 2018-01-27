@@ -9,5 +9,6 @@
 #ifndef testInsertUpdateFunctions_h
 #define testInsertUpdateFunctions_h
 
+#include "Map.h"
 
 #endif /* testInsertUpdateFunctions_h */

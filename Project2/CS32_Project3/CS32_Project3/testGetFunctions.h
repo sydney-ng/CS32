@@ -8,6 +8,6 @@
 
 #ifndef testGetFunctions_h
 #define testGetFunctions_h
-
+#include "Map.h"
 
 #endif /* testGetFunctions_h */

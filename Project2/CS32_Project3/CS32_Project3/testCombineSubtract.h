@@ -8,6 +8,6 @@
 
 #ifndef testCombineSubtract_h
 #define testCombineSubtract_h
-
+#include "Map.h"
 
 #endif /* testCombineSubtract_h */
