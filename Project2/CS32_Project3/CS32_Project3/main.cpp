@@ -21,14 +21,15 @@ void testCombine (Map A, Map B);
 void test_SizeEmptyContains(Map A);
 void testUpdate(Map A);
 void testInsertOrUpdate (Map A);
+
 int main ()
 {
     Map A;
     //test_SizeEmptyContains(A);
     //testInsert(A);
     //testUpdate(A);
-    testInsertOrUpdate ( A);
-
+    //testInsertOrUpdate ( A);
+    testGet1(A);
     //inserting values into the list
     /*A.insert(Key1, 1.2);
     A.insert(Key2, 3.4);
@@ -49,6 +50,38 @@ int main ()
     //A.dump();
     //Map B = A;
 }
+
+void testGet1(Map A)
+{
+    // If key is equal to a key currently in the map, set value to the
+    // value in the map that that key maps to and return true.  Otherwise,
+    // make no change to the value parameter of this function and return
+    // false.
+    assert (A.size()==0);
+    assert (A.empty()==true);
+    
+    KeyType Key1 = "a";
+    KeyType Key2 = "b";
+    
+    //key is in map, return true
+
+    ValueType val;
+    //updating an empty map, will not work
+    bool x = A.insertOrUpdate(Key1, 1.2);
+    assert (A.size()==1);
+    assert (A.empty()==false);
+    assert (x == true);
+    assert (A.contains(Key1) == true);
+    assert (A.get(Key1, val) == true && Key1 == "a" && val == 1.2);
+    
+    //key isn't in map, return false
+    assert (A.get(Key2, val) == false && Key2 == "b" && val == 1.2);
+    ValueType val2 = 0;
+    assert (A.get(Key2, val2) == false && Key2 == "b" && val2 == 0);
+
+   
+}
+
 
 void testInsertOrUpdate (Map A)
 {
@@ -88,7 +121,6 @@ void testInsertOrUpdate (Map A)
     assert (yz == true);
     assert (A.contains(Key1) == true);
     assert (A.get(Key1, val) == true && Key1 == "a" && val == 1.3);
-    
     
     
     //INSERT FUNCTIONS
@@ -337,28 +369,6 @@ void testCombine (Map A, Map B)
     result.dump();
 }
 
-void testGet1(Map A)
-{
-    A.dump();
-    ValueType val;
-    bool x= A.get("cats", val);
-    cerr << "x: " << x << endl;
-    cerr << "val: " << val << endl;
-
-    
-    x= A.get("pigs", val);
-    cerr << "x: " << x <<endl ;
-    cerr << "val: " << val << endl;
-
-    
-    x= A.get("dogs", val);
-    cerr << "x: " << x << endl;
-    cerr << "val: " << val << endl;
-
-    x= A.get("jim", val);
-    cerr << "x: " << x << endl;
-    cerr << "val: " << val << endl;
-}
 void testGet2(Map A)
 {
     KeyType Key1;
