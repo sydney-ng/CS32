@@ -27,6 +27,8 @@ int main ()
     //test_SizeEmptyContains(A);
     //testInsert(A);
     //testUpdate(A);
+    testInsertOrUpdate ( A);
+
     //inserting values into the list
     /*A.insert(Key1, 1.2);
     A.insert(Key2, 3.4);
@@ -50,31 +52,29 @@ int main ()
 
 void testInsertOrUpdate (Map A)
 {
+    
+    // If key is equal to a key currently in the map, then make that key no
+    // longer map to the value it currently maps to, but instead map to
+    // the value of the second parameter; return true in this case.
+    // Otherwise, make no change to the map and return false.
+    
     KeyType Key1 = "a";
     KeyType Key2 = "b";
     KeyType Key3 = "a";
 
-    
+    //UPDATE FUNCTIONS
+
     ValueType val = 0;
     //updating an empty map, will not work
-    A.insertOrUpdate(Key1, 1.2);
-    assert (A.size()==0);
-    assert (A.empty()==true);
-    assert (x == false);
-    assert (A.contains(Key1) == false);
-    assert (A.get(Key1, val) == false && Key1 == "a" && val == 0);
-    
-    
-    //add an item
-    bool z = A.insert(Key1,1.2);
+    bool x = A.insertOrUpdate(Key1, 1.2);
     assert (A.size()==1);
     assert (A.empty()==false);
-    assert (z == true);
+    assert (x == true);
     assert (A.contains(Key1) == true);
     assert (A.get(Key1, val) == true && Key1 == "a" && val == 1.2);
     
     //update it, exiting key w/ new value
-    bool y = A.update (Key1, 1.3);
+    bool y = A.insertOrUpdate (Key1, 1.3);
     assert (A.size()==1);
     assert (A.empty()==false);
     assert (y == true);
@@ -82,12 +82,43 @@ void testInsertOrUpdate (Map A)
     assert (A.get(Key1, val) == true && Key1 == "a" && val == 1.3);
     
     //update it, exiting key w/ new value
-    bool yz = A.update (Key1, 1.3);
+    bool yz = A.insertOrUpdate (Key1, 1.3);
     assert (A.size()==1);
     assert (A.empty()==false);
     assert (yz == true);
     assert (A.contains(Key1) == true);
     assert (A.get(Key1, val) == true && Key1 == "a" && val == 1.3);
+    
+    
+    
+    //INSERT FUNCTIONS
+    
+    ValueType val1 = 0;
+    bool xinsert = A.insertOrUpdate (Key2, 1.5);
+    assert (A.size()==2);
+    assert (A.empty()==false);
+    assert (xinsert == true);
+    assert (A.contains(Key1) == true);
+    assert (A.get(Key2, val1) == true && Key2 == "b" && val1 == 1.5);
+    
+    //basically just update
+    ValueType val2 = .998;
+    bool yza = A.insertOrUpdate (Key1, 1.009);
+    assert (A.size()==2);
+    assert (A.empty()==false);
+    assert (yza == true);
+    assert (A.get(Key1, val2) == true && val2 == 1.009);
+    
+    //insert empty string as key, new value -> false
+    ValueType valzz;
+    KeyType EmptyrStr = "";
+    bool yzab = A.insertOrUpdate (EmptyrStr, 99.9);
+    assert (A.size()==3);
+    assert (A.empty()==false);
+    assert (yzab == true);
+    assert (A.get(EmptyrStr, valzz) == true && valzz == 99.9);
+    
+    cerr << "InsertOrUpdate() --> passed" << endl;
 }
 void testUpdate (Map A)
 {
@@ -125,7 +156,7 @@ void testUpdate (Map A)
     assert (A.contains(Key1) == true);
     assert (A.get(Key1, val) == true && Key1 == "a" && val == 1.3);
     
-    //update it, exiting key w/ new value
+    //update it, exiting key w/ existing value
     bool yz = A.update (Key1, 1.3);
     assert (A.size()==1);
     assert (A.empty()==false);
