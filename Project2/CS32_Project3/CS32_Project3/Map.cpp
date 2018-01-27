@@ -51,27 +51,6 @@ Map::Map(const Map& other)
     
     tail = newFirstNode;
     m_size = other.size();
-    /*
-    KeyType temp_key;
-    ValueType temp_value;
-    //CHECK
-    m_size = other.size();
-    head = other.head;
-    tail = other.tail; */
-    
-    //make sure that it's not equal to itself
-    /*if (&other != this)
-    {
-        //use get function to get everything inside of it
-        for (int i =0; i < other.size(); i++)
-            {
-                other.get (i, temp_key, temp_value);
-                //
-                //insert(temp_key, temp_value);
-                m_size++;
-            }
-        other = other->next;
-    }*/
 }
 
 
@@ -111,6 +90,7 @@ void Map::swap(Map& other)
 
 void Map::dump() const
 {
+    cerr << "size is: " << size() << endl;
     cerr << "head address:" << head << endl;
     cerr << "tail address:" << tail << endl;
     Node *p = head;
@@ -195,6 +175,13 @@ bool Map::erase(const KeyType& key)
         return false;
     }
     
+    if(Killme->next == nullptr)
+    {
+        head = nullptr;
+        delete Killme; 
+        m_size--;
+    }
+    
     //check if item is in the front
     else if (head->MapValues.m_key == key)
     {
@@ -208,6 +195,8 @@ bool Map::erase(const KeyType& key)
     //check if item is the end
     else if (tail->MapValues.m_key == key)
     {
+        cout << "cool beans" << endl;
+        cerr << "made it here" << endl;
         tail = Killme->previous;
         tail->next = nullptr;
         m_size--;
@@ -271,6 +260,7 @@ bool Map::get(int i, KeyType& key, ValueType& value) const
         if (iterator != nullptr && iterator->MapValues.m_key == key)
         {
             value = iterator->MapValues.m_value;
+            key = iterator->MapValues.m_key;
             return true;
         }
         iterator = iterator->next;
@@ -323,6 +313,8 @@ bool combine(const Map& m1, const Map& m2, Map& result)
     for (int result_iter1 = 0; result_iter1 < result.size(); result_iter1 ++)
     {
         result.get(result_iter1, empty_result_key, empty_result_val);
+        cerr << "empty result key: " << empty_result_key << endl;
+        cerr << "empty result value: " << empty_result_val << endl;
         result.erase(empty_result_key);
     }
 
