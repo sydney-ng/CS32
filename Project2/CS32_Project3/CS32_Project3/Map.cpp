@@ -22,53 +22,20 @@ Map::~Map()
 
 Map::Map(const Map& other)
 {
-    m_size = 0;	//initialize
+    //set non-node variables
+    m_size = 0;
     head = nullptr;
     tail = nullptr;
     
-    for (int i = 0; i < other.size(); i++)
+    //populate
+    for (int iterator = 0; iterator < other.size(); iterator++)
     {
-        KeyType key;
-        ValueType val;
+        KeyType temp_key;
+        ValueType temp_val;
         
-        other.get(i, key, val);	//for each val get then insert
-        insert(key, val);
+        other.get(iterator, temp_key, temp_val);
+        insert(temp_key, temp_val);
     }
-    
-    /*cerr << other.size() << endl;
-    //check if other is empty
-    
-        Node *newFirstNode = new Node;
-        
-        //get first node in other
-        newFirstNode->MapValues = other.head->MapValues;
-        newFirstNode->previous = nullptr;
-        newFirstNode->next = nullptr;
-        head = newFirstNode;
-        Node *other_iterator = other.head->next;
-        
-        while (other_iterator != nullptr)
-        {
-            //create a new node
-            Node *newNode = new Node;
-            
-            //give it the values of map
-            newNode->MapValues = other_iterator->MapValues;
-            //set previous/next
-            newNode->next = nullptr;
-            newNode->previous = newFirstNode;
-            
-            //set the next of the node before it
-            newNode->previous->next = newNode;
-            
-            newFirstNode = newFirstNode->next;
-            other_iterator = other_iterator->next;
-            
-        }
-        
-        tail = newFirstNode;
-        m_size = other.size();
-   */
 }
 
 
@@ -253,9 +220,7 @@ bool Map::erase(const KeyType& key)
             }
             iterator=iterator->next;
         }
-        
     }
-    
     return false;
 }
 
@@ -343,22 +308,21 @@ bool combine(const Map& m1, const Map& m2, Map& result)
 {
     bool flag = true;
     //empty result
-    KeyType empty_result_key;
-    ValueType empty_result_val;
+    
     if (result.size() > 0)
     {
-        for (int result_iter1 = 0; result_iter1 < result.size(); result_iter1 ++)
+        while (result.size() > 0)
         {
-            result.get(result_iter1, empty_result_key, empty_result_val);
-            cerr << "empty result key: " << empty_result_key << endl;
-            cerr << "empty result value: " << empty_result_val << endl;
-            result.erase(empty_result_key);
+            KeyType empty_result_key;
+            ValueType empty_result_val;
+            result.get(0, empty_result_key, empty_result_val);
+            cerr <<empty_result_key << endl;
+            result.erase(empty_result_key); 
         }
     }
-    
-   
-    return true;
 
+    return true;
+}
    /* KeyType my_key;
     ValueType my_val;
     
@@ -411,7 +375,7 @@ bool combine(const Map& m1, const Map& m2, Map& result)
         }
     }
     return flag; */
-}
+//}
 
 //PREVENT ALIASING
 void subtract(const Map& m1, const Map& m2, Map& result)
