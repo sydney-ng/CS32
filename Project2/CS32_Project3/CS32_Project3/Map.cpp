@@ -205,11 +205,11 @@ bool Map::erase(const KeyType& key)
     //it's the only node
     if(head->next == nullptr && head->MapValues.m_key == key)
     {
-        cerr <<"ONLY NODE CASE" << endl;
         Killme = head;
         head = nullptr;
         delete Killme; 
         m_size--;
+        return true;
     }
     
     //check if item is in the front
@@ -241,9 +241,12 @@ bool Map::erase(const KeyType& key)
         {
             if (iterator->next->MapValues.m_key == key)
             {
+                //set the index to delete
                 Killme = iterator->next;
+                //set the next equal to the one after kill
                 iterator->next = iterator->next->next;
-                iterator->next->next->previous = iterator;
+                //set the previous of the one after kill to be the iterator
+                iterator->next->previous = iterator;
                 m_size--;
                 delete Killme;
                 return true;
