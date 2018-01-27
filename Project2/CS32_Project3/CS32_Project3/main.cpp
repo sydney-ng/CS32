@@ -30,7 +30,8 @@ int main ()
     //testUpdate(A);
     //testInsertOrUpdate ( A);
     //testGet1(A);
-    testGet2(A);
+    //testGet2(A);
+    testErase(A);
     //inserting values into the list
     /*A.insert(Key1, 1.2);
     A.insert(Key2, 3.4);
@@ -50,6 +51,194 @@ int main ()
     //cerr << "val is: " << val << endl;
     //A.dump();
     //Map B = A;
+}
+
+
+void testErase (Map A)
+{
+    // If key is equal to a key currently in the map, remove the key/value
+    // pair with that key from the map and return true.  Otherwise, make
+    // no change to the map and return false.
+    KeyType Key1 = "one";
+    KeyType Key2 = "two";
+    KeyType Key3 = "three";
+    KeyType Key4 = "four";
+    KeyType Key5 = "five";
+    KeyType Key6 = "six";
+    
+    //key is in the map, only entry
+    KeyType tempKeya = "default";
+    ValueType tempVala = 10.1;
+    bool a = A.insertOrUpdate(Key1, 1.2);
+    assert (a == true);
+    bool e1 = A.erase(Key1);
+    assert (e1 == true);
+    assert (A.size() == 0);
+    assert (A.contains(Key1) == false);
+    bool get1 = A.get(0, tempKeya, tempVala);
+    assert(!get1 && tempKeya == "default" && tempVala == 10.1);
+    
+    a = A.insertOrUpdate(Key1, 1.2);
+    bool b = A.insertOrUpdate(Key2, 2.3);
+    bool c = A.insertOrUpdate(Key3, 3.4);
+    bool d = A.insertOrUpdate(Key4, 4.5);
+    bool e = A.insertOrUpdate(Key5, 5.6);
+    assert (b == true);
+    assert (a == true);
+    assert (c == true);
+    assert (d == true);
+    assert (e == true);
+
+    //key is not in map
+    bool e2 = A.erase(Key6);
+    assert(!e2);
+    assert (A.size() == 5);
+    assert (A.contains(Key6) == false);
+    
+    for (int i = -1; i < A.size() +1; i++)
+    {
+        KeyType tempKey = "default";
+        ValueType tempVal = 10.1;
+        bool x = A.get(i, tempKey, tempVal);
+        if (i == -1)
+        {
+            assert (x == false);
+            assert (tempKey == "default" && tempVal == 10.1);
+        }
+        if (i == 0)
+        {
+            assert (x == true);
+            assert (tempKey == "one" && tempVal == 1.2);
+        }
+        else if (i == 1)
+        {
+            assert (x == true);
+            assert (tempKey == Key2 && tempVal == 2.3);
+        }
+        else if (i == 2)
+        {
+            assert (x == true);
+            assert (tempKey == "three" && tempVal == 3.4);
+        }
+        else if (i == 3)
+        {
+            assert (x == true);
+            assert (tempKey == Key4 && tempVal == 4.5);
+        }
+        else if (i == 4)
+        {
+            assert (x == true);
+            assert (tempKey == Key5 && tempVal == 5.6);
+        }
+        else if (i == 5)
+        {
+            assert (x == false);
+            assert (tempKey == "default" && tempVal == 10.1);
+        }
+        
+        else if (i == 6)
+        {
+            assert (x == false);
+            assert (tempKey == "default" && tempVal == 10.1);
+        }
+    }
+    //key is in the map, first position
+    bool e3 = A.erase(Key1);
+    assert (e3);
+    assert (A.size() == 4);
+    assert (A.contains(Key1) == false);
+    for (int i = 0; i < A.size() +1; i++)
+    {
+        KeyType tempKey = "default";
+        ValueType tempVal = 10.1;
+        bool x = A.get(i, tempKey, tempVal);
+        if (i == 0)
+        {
+            assert (x == true);
+            assert (tempKey == "two" && tempVal == 2.3);
+        }
+        else if (i == 1)
+        {
+            assert (x == true);
+            assert (tempKey == Key3 && tempVal == 3.4);
+        }
+        else if (i == 2)
+        {
+            assert (x == true);
+            assert (tempKey == "four" && tempVal == 4.5);
+        }
+        else if (i == 3)
+        {
+            assert (x == true);
+            assert (tempKey == Key5 && tempVal == 5.6);
+        }
+        else if (i == 5)
+        {
+            assert (x == false);
+            assert (tempKey == "default" && tempVal == 10.1);
+        }
+
+    }
+    //key is in the map, last entry
+    bool e4 = A.erase(Key5);
+    assert (e4);
+    assert (A.size() == 3);
+    assert (A.contains(Key5) == false);
+    for (int i = 0; i < A.size(); i++)
+    {
+        KeyType tempKey = "default";
+        ValueType tempVal = 10.1;
+        bool x = A.get(i, tempKey, tempVal);
+        if (i == 0)
+        {
+            assert (x == true);
+            assert (tempKey == "two" && tempVal == 2.3);
+        }
+        else if (i == 1)
+        {
+            assert (x == true);
+            assert (tempKey == Key3 && tempVal == 3.4);
+        }
+        else if (i == 2)
+        {
+            assert (x == true);
+            assert (tempKey == "four" && tempVal == 4.5);
+        }
+        else if (i == 3)
+        {
+            assert (x == false);
+            assert (tempKey == "default" && tempVal == 10.1);
+        }
+    }
+    //key is in the map, middle entry
+    bool e5 = A.erase(Key3);
+    assert (e5);
+    assert (A.size() == 2);
+    assert (A.contains(Key3) == false);
+    for (int i = 0; i < A.size(); i++)
+    {
+        KeyType tempKey = "default";
+        ValueType tempVal = 10.1;
+        bool x = A.get(i, tempKey, tempVal);
+        if (i == 0)
+        {
+            assert (x == true);
+            assert (tempKey == "two" && tempVal == 2.3);
+        }
+        else if (i == 1)
+        {
+            assert (x == true);
+            assert (tempKey == "four" && tempVal == 4.5);
+
+        }
+        else if (i == 2)
+        {
+            assert (x == false);
+            assert (tempKey == "default" && tempVal == 10.1);
+        }
+    }
+    cerr << "Erase() --> passed" << endl;
+
 }
 
 void testGet2 (Map A)
@@ -76,8 +265,7 @@ void testGet2 (Map A)
     assert (d == true);
     assert (e == true);
     
-    int i = -1;
-    for (i; i < A.size() +1; i++)
+    for (int i = -1; i < A.size() +1; i++)
     {
         KeyType tempKey = "default";
         ValueType tempVal = 10.1;
@@ -373,53 +561,6 @@ void test_SizeEmptyContains(Map A)
     
     //after deleting 1 element
 
-}
-
-void testErase (Map A)
-{
-    /* 
-     cats, dogs, cheese, goat, pigs
-    */
-    
-    /* //erase from beginning
-    A.erase("cats");
-    cerr << "finished removing cats " << endl;
-
-    //erase from end
-    A.erase("pigs");
-    A.dump();
-    cerr << "finished removing pigs " << endl;
-    
-     //erase from middle
-     A.erase("cheese");
-     A.dump();
-     cerr << "finished removing cheese " << endl; */
-    
-    
-    //ERASE if it's there's only 1 node or if it's empty node
-    /*Map C;
-    
-    KeyType Key1 = "cats";
-    KeyType Key2 = "dogs";
-
-    C.insert(Key1, 7.8);
-    C.dump();
-    cout << endl;
-
-    C.erase(Key1);
-    C.dump(); */
-    
-    Map B;
-
-    KeyType Key3 = "cats";
-    KeyType Key4 = "dogs";
-    cerr << "b is: " << endl;
-    B.insert(Key3, 1023.2);
-    B.dump();
-
-    B.erase(Key4);
-    cerr << "----------------" << endl;
-    B.dump();
 }
 
 void testCombine (Map A, Map B)
