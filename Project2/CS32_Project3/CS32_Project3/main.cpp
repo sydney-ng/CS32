@@ -14,6 +14,9 @@
 using namespace std;
 void testGet1(Map A);
 void testGet2(Map A);
+void testSwap (Map A, Map B);
+void testCombine (Map A, Map B);
+
 
 int main ()
 {
@@ -22,6 +25,7 @@ int main ()
     KeyType Key1 = "cats";
     KeyType Key2 = "dogs";
     KeyType Key3 = "pigs";
+    KeyType Key4 = "goat";
     Map A;
     
     //inserting values into the list
@@ -30,19 +34,38 @@ int main ()
     A.insert(Key3, 4.5);
     Map B;
     B.insert(Key1, 1.2);
-
-    //A.swap(B);
-    //testGet1(A);
-    A.dump ();
-
-   
+    B.insert(Key2, 6.7);
+    B.insert(Key4, 7.8);
     
+    testGet2(A);
+    //testCombine(A,B);
     //A.erase(Key2);
     //A.get(1, Keys, val);
     //cerr << "val is: " << val << endl;
     //A.dump();
     //Map B = A;
     cerr <<"done" <<endl ;
+}
+
+void testCombine (Map A, Map B)
+{
+    cerr << " A IS: " << endl;
+    A.dump();
+    
+    cerr << " B IS: " << endl;
+    B.dump();
+    Map result;
+    KeyType Key1 = "cats";
+    ValueType Val1 = 0.1;
+    
+    KeyType Key2 = "dogs";
+    ValueType Val2 = 0.21;
+    result.insert(Key1, Val1);
+    //result.insert(Key2, Val2);
+    cerr << " RESULT IS: " << endl;
+    //result.dump();
+    combine(A, B, result);
+    result.dump();
 }
 
 void testUpdate(Map A)
@@ -76,21 +99,50 @@ void testGet1(Map A)
 }
 void testGet2(Map A)
 {
-    KeyType Key1 = "cats";
-    KeyType Key2 = "dogs";
-    KeyType Key3 = "pigs";
+    KeyType Key1;
+    KeyType Key2;
+    KeyType Key3;
     ValueType val;
 
-    bool z = A.get(-1, Key1, val);
-    cerr << "z is : " << z;
-    cout << "val is: " << val << endl;
+    bool z = A.get(1, Key1, val);
+    cerr << "z is : " << z << endl;
+    cout << "key is: " << Key1 << endl;
+    cout << "val is: " << val << endl<< endl;
     
-    bool y =A.get(2, Key2, val);
-    cerr << "y is : " << y;
-    cout << "val is: " << val << endl;
     
-    bool x= A.get(3, Key3, val);
-    cerr << "x is : " << x;
+    bool a =A.get(2, Key2, val);
+    cerr << "y is : " << a<< endl;
+    cout << "key is: " << Key2 << endl;
+    cout << "val is: " << val << endl<< endl;
+    
+    a =A.get(2, Key2, val);
+    cerr << "y is : " << a<< endl;
+    cout << "key is: " << Key2 << endl;
+    cout << "val is: " << val << endl<< endl;
+    
+    cout << "-----" << endl;
+    
+    cout << A.size(); 
+    bool x= A.get(0, Key3, val);
+    cerr << "x is : " << x<< endl;
+    cout << "key is: " << Key3 << endl;
     cout << "val is: " << val << endl;
 
+}
+
+void testSwap (Map A, Map B)
+{
+    cerr << "2nd dump " << endl;
+
+    A.dump();
+    cerr <<"testing if swap worked" << endl << endl << endl;
+    A.swap(B);
+    //testGet1(A);
+    //A.dump ();
+    
+    cerr << "A is: " << endl;
+    A.dump();
+    
+    cerr << endl << endl << "B is: " << endl;
+    B.dump();
 }

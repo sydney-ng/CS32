@@ -255,14 +255,16 @@ bool Map::get(int i, KeyType& key, ValueType& value) const
     
     Node *iterator = head;
     int counter = 0;
+    int iterator_counter = 0;
     while (counter < size())
     {
-        if (iterator != nullptr && iterator->MapValues.m_key == key)
+        if (iterator != nullptr && iterator_counter == i)
         {
             value = iterator->MapValues.m_value;
             key = iterator->MapValues.m_key;
             return true;
         }
+        iterator_counter ++;
         iterator = iterator->next;
         counter ++;
     }
@@ -310,15 +312,24 @@ bool combine(const Map& m1, const Map& m2, Map& result)
     //empty result
     KeyType empty_result_key;
     ValueType empty_result_val;
-    for (int result_iter1 = 0; result_iter1 < result.size(); result_iter1 ++)
+    if (result.size() > 0)
     {
-        result.get(result_iter1, empty_result_key, empty_result_val);
-        cerr << "empty result key: " << empty_result_key << endl;
-        cerr << "empty result value: " << empty_result_val << endl;
-        result.erase(empty_result_key);
+        for (int result_iter1 = 0; result_iter1 < result.size(); result_iter1 ++)
+        {
+            result.get(result_iter1, empty_result_key, empty_result_val);
+            cerr << "empty result key: " << empty_result_key << endl;
+            cerr << "empty result value: " << empty_result_val << endl;
+            result.erase(empty_result_key);
+        }
     }
+    
+    else{
+        cout << "it's empty" << endl;
+    }
+   
+    return true;
 
-    KeyType my_key;
+   /* KeyType my_key;
     ValueType my_val;
     
     //loop through map 1
@@ -369,7 +380,7 @@ bool combine(const Map& m1, const Map& m2, Map& result)
     
         }
     }
-    return flag;
+    return flag; */
 }
 
 //PREVENT ALIASING
