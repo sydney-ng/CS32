@@ -10,5 +10,7 @@
 #define testInsertUpdateFunctions_h
 
 #include "Map.h"
-
+void testUpdate (Map A);
+void testInsertOrUpdate (Map A);
+void testInsert (Map A);
 #endif /* testInsertUpdateFunctions_h */

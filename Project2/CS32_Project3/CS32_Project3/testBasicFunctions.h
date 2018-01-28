@@ -11,6 +11,6 @@
 #include "Map.h"
 
 void test_SizeEmptyContains(Map A);
-
-
+void testErase (Map A);
+void testSwap (Map A, Map B);
 #endif /* testBasicFunctions_h */

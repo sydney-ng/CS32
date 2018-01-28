@@ -9,5 +9,7 @@
 #ifndef testGetFunctions_h
 #define testGetFunctions_h
 #include "Map.h"
+void testGet1(Map A);
+void testGet2(Map A);
 
 #endif /* testGetFunctions_h */
