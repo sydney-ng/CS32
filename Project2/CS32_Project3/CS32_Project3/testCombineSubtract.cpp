@@ -87,9 +87,10 @@ void testCombine (Map A, Map B)
 void combineSameObject (Map A, Map B, Map result1, Map result2)
 {
     A = B;
-    combine(B, B, result1);
-    combine(A, A, result2);
-    
+    bool combine1 = combine(B, B, result1);
+    bool combine2 = combine(A, A, result2);
+    assert (combine1 == true);
+    assert (combine2 == true);
     assert (result1.size() == 3);
     assert (result1.size() == 3);
     
@@ -199,9 +200,10 @@ void combineSameObject (Map A, Map B, Map result1, Map result2)
 void combineSameParam (Map A, Map B, Map result1, Map result2)
 {
     A = B;
-    combine(A, B, result1);
-    combine(B, A, result2);
-    
+    bool combine1 = combine(A, B, result1);
+    bool combine2 = combine(B, A, result2);
+    assert (combine1 != false);
+    assert (combine2 != false);
     assert (result1.size() == 3);
     assert (result1.size() == 3);
     
@@ -312,8 +314,9 @@ void combineSameParam (Map A, Map B, Map result1, Map result2)
 void combineOneEmptyParam (Map B, Map result1, Map result2)
 {
     Map C;
-    combine(C, B, result1);
-    combine(B, C, result2);
+    bool combine1 = combine(C, B, result1);
+    bool combine2 = combine(B, C, result2);
+    assert (combine1 == true && combine2 == true);
     cerr << result1.size();
     
     assert (result1.size() == 3);
@@ -419,8 +422,9 @@ void combineOneEmptyParam (Map B, Map result1, Map result2)
 //both param have things
 void CombineNormal (Map A, Map B, Map result1, Map result2)
 {
-    combine(A, B, result1);
-    combine(A, B, result2);
+    bool combine1 = combine(A, B, result1);
+    bool combine2 = combine(A, B, result2);
+    assert (combine1 == false && combine2 == false);
     
     assert (result1.size() == 4);
     assert (result1.size() == 4);
