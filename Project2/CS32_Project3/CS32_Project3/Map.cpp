@@ -1,8 +1,7 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // Map.cpp
-#include "Map.h"
-//TAKE THIS OUT BEFORE TURNING IN
 
-//do I initialize the MapValues????
+// Map.cpp
+#include "Map.h"
+
 Map::Map()
 : m_size(0), tail(nullptr), head (nullptr)
 {
@@ -11,6 +10,7 @@ Map::Map()
 
 Map::~Map()
 {
+    //empty by iterating through, setting temp & deleting
     Node *p = head;
     while (p != nullptr)
     {
@@ -244,7 +244,6 @@ bool Map::get(const KeyType& key, ValueType& value) const
 
 bool Map::get(int i, KeyType& key, ValueType& value) const
 {
-    //NEED TO WRITE THE CHECKING PART
     //make sure that i is within range
     if (i<0 || i >= size())
     {
@@ -316,42 +315,37 @@ bool combine(const Map& m1, const Map& m2, Map& result)
             KeyType empty_result_key;
             ValueType empty_result_val;
             result.get(0, empty_result_key, empty_result_val);
-            cerr <<empty_result_key << endl;
-            result.erase(empty_result_key); 
+            result.erase(empty_result_key);
         }
     }
-
-    return true;
-}
-   /* KeyType my_key;
+    
+    KeyType my_key;
     ValueType my_val;
     
     //loop through map 1
     for (int map1_iter = 0; map1_iter < m1.size(); map1_iter ++)
     {
-        //make sure that get returns true (aka there is something to return)
-        if (result.get(map1_iter, my_key, my_val))
+        //get the value of something in map1
+        m1.get(map1_iter, my_key, my_val);
+        //if it's not in m2
+        if (m2.contains(my_key) == false)
         {
-            //if it's not in m2
-            if (m2.contains(my_key) == false)
+            result.insert(my_key, my_val);
+        }
+        //it is also in m2
+        else
+        {
+            //check to make sure val in both is the same
+            ValueType temp_val;
+            m2.get(my_key, temp_val);
+            if (temp_val == my_val)
             {
                 result.insert(my_key, my_val);
             }
-            //it is also in m2
+            //same key, different value
             else
             {
-                //check to make sure val in both is the same
-                ValueType temp_val;
-                m2.get(my_key, temp_val);
-                if (temp_val == my_val)
-                {
-                    result.insert(my_key, my_val);
-                }
-                //same key, different value
-                else
-                {
-                    flag = false;
-                }
+                flag = false;
             }
         }
     }
@@ -364,7 +358,7 @@ bool combine(const Map& m1, const Map& m2, Map& result)
     for (int map2_iter = 0; map2_iter < m2.size(); map2_iter ++)
     {
         //make sure that get returns true (aka there is something to return)
-        if (result.get(map2_iter, my_key2, my_val2))
+        if (m2.get(map2_iter, my_key2, my_val2))
         {
             //if it's not in m1
             if (m1.contains(my_key2) == false)
@@ -374,28 +368,30 @@ bool combine(const Map& m1, const Map& m2, Map& result)
     
         }
     }
-    return flag; */
-//}
+    return flag;
+}
 
 //PREVENT ALIASING
 void subtract(const Map& m1, const Map& m2, Map& result)
 {
     //empty result
-    KeyType empty_result_key;
-    ValueType empty_result_val;
-    for (int result_iter1 = 0; result_iter1 < result.size(); result_iter1 ++)
+    if (result.size() > 0)
     {
-        result.get(result_iter1, empty_result_key, empty_result_val);
-        result.erase(empty_result_key);
+        while (result.size() > 0)
+        {
+            KeyType empty_result_key;
+            ValueType empty_result_val;
+            result.get(0, empty_result_key, empty_result_val);
+            result.erase(empty_result_key);
+        }
     }
-    
-    KeyType my_key;
-    ValueType my_val;
     
     for (int map1_iter = 0; map1_iter < m1.size(); map1_iter ++)
     {
+        KeyType my_key;
+        ValueType my_val;
         //make sure that get returns true (aka there is something to return)
-        if (result.get(map1_iter, my_key, my_val))
+        m1.get(map1_iter, my_key, my_val);
         {
             //if it's not in m2
             if (m2.contains(my_key) == false)
@@ -405,4 +401,5 @@ void subtract(const Map& m1, const Map& m2, Map& result)
 
         }
     }
+    
 }
