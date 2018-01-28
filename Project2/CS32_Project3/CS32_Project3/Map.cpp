@@ -51,9 +51,6 @@ Map& Map::operator=(const Map& rhs)
 
 void Map::swap(Map& other)
 {
-    // Swap elements.  Since the only elements that matter are those up to
-    // m_size and other.m_size, only they have to be moved.
-
     //exchange the sizes
     int tempMapSize = other.m_size;
     other.m_size = m_size;
@@ -62,15 +59,28 @@ void Map::swap(Map& other)
     //temp head/tail
     Node *tempHead = head;
     Node *tempTail = tail;
-
+    //tempHead->next = head->next;
+    //tempHead->previous = head->previous;
+    //tempTail->next = tail->next;
+    //tempTail->previous = tail->previous;
     
     //tail/head for the current map
     head = other.head;
+    //head->next = other.head->next;
+    //head->previous = other.head->previous;
+    
     tail = other.tail;
-
+    //tail->next = other.tail->next;
+    //tail->previous = other.tail->previous;
+    
     //tail/head for other map
     other.head = tempHead;
+    //other.head->next = tempHead->next;
+    //other.head->previous = tempHead->previous;
+    
     other.tail = tempTail;
+    //other.tail->next = tempTail->next;
+    //other.tail->previous = tempTail->previous;
 }
 
 void Map::dump() const
