@@ -1,0 +1,86 @@
+1. Stack
+	- create an empty stack
+- push an item on the stack
+- pop an item off the list (delete)
+	- by the rules of the stack, it’ll be the first one that was pushed
+- you can always look @ top item of a stack 
+- is the stack empty? 
+	- can’t pop or look if there’s no item 
+	- you can ask is it empty? 
+- How many items are in the stack?
+- Look @ any item on the stack 
+—— 
+#include <stack>
+using namespace std; 
+int main()
+{
+	stack <int> s;
+	s.push (10); 
+	s.push(20); 
+	int n = s.top (); 
+	// takes no args, will return top element 
+	s.pop();
+	if (!s.empty())
+	{
+		cout << s.size() << ends;
+	}
+} 
+
+//C string can’t be converted to an int 
+
+————————————————
+QUEUE:
+1. create an empty queue 
+-enqueue an item
+-dequeue an item
+-look @ front item on the queue 
+-is the queue empty? 
+
+FIFO (first in first out) data structure 
+
+#include <queue> 
+using namespace std; 
+
+int main ()
+{
+	queue <int> q; 
+	q.push(10);
+	q.pop(20); 
+	int n = q.front(); 
+	if (!q.empty())
+		cout << q.size() << ends;
+	int x = q.back(); 
+	
+}
+
+//DONT DO THIS
+int n = s.pop(); 
+//can’t pop something and return what you popped (removed)
+
+name = “SMITH” and (salary >= 7000 or dept = ‘IT’)
+
+prefix: 
+f(x,y,z)
+add ((sub(8,div(6,2)),1)
++ - 8 / 6 2 1 
+->prefix doesn’t need these extra rules 
+
+infix notation:
+divide six by two: 6/2
+8-6/2+1 
+=> this can be ambiguous 
+=> it now knows that * & / have equal precedence, but it will get confused when it gets to + and -, 
+	-> now we do left to right, 
+
+postfix: 
+8 6 2 / - 1 + \
+
+if you’re given an expression in postfix form:
+- operand stack
+	- 8 6 2 
+	-when you see an operator, pop the last two, figure out the result and push the result back 
+	 
+- grows left to right ->
+
+
+

@@ -1,0 +1,19 @@
+Fixed size array
+Dynamically allocated fixed size array
+Resizable Array sp
+----
+struct Node 
+{
+	int data; 
+	Node *next; 
+}
+
+Node* head; 
+
+for (Node* p = head; p!= nullptr; p->p.next)
+{
+	cout << p->data << endl;
+}
+
+Lecture 2 and 3 link on class webpage --> linked list lecture (104) requires flash
+supplement to the linked list lecture

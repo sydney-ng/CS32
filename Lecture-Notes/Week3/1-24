@@ -21,3 +21,48 @@ i =k;
 j=k;
 //with ints & built in types, the bits get loaded & stomped on 
 //can't do this with class types 
+
+--- 
+
+; ---> valid statement 
+int k;
+for (int k=0; k < N && a[k] >=0; k++)
+; 
+
+=> body of the loop is done in: k < N && a[k] >=0
+=> k is outside of the loop, there's no work for it to do 
+=> 
+
+---
+
+to check for aliasing 
+in operator: 
+
+if (this != &rhs)
+{
+	//THEN COPY AND SWAP 
+	String temp (rhs);
+	swap (temp);
+}
+
+---
+Example of aliasing: 
+
+void transfer (Account& from, Account& to, double amt)
+{
+	if (&from != &to)
+	{
+		if (from.balance()>= amt)
+		{
+			from.debit(amt);
+			to.credit(amt);
+			if (amt >= 1000)
+			{
+				fileForm(); 
+			}
+		}
+	}
+	
+}
+//what if they're the same object???
+---
