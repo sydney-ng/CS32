@@ -1,10 +1,11 @@
 //
+//  main.cpp
 //  eval.cpp
-//  Homework2_StacksQueues
 //
 //  Created by Super on 2/4/18.
 //  Copyright © 2018 Sydney. All rights reserved.
 //
+
 
 #include "Map.h"
 #include <iostream>
@@ -13,8 +14,37 @@
 #include <cctype>
 #include <cassert>
 using namespace std;
-
 int evaluate(string infix, const Map& values, string& postfix, int& result);
+
+
+int main ()
+{
+    
+    char vars[] = { 'a', 'e', 'i', 'o', 'u', 'y', '#' };
+    int  vals[] = {  3,  -9,   6,   2,   4,   1  };
+    Map m;
+    for (int k = 0; vars[k] != '#'; k++)
+        m.insert(vars[k], vals[k]);
+    string pf;
+    int answer;
+    evaluate("abcdefg", m, pf, answer);
+}
+
+int evaluate(string infix, const Map& values, string& postfix, int& result)
+{
+    //make sure that they're only lower case letters
+    for (int i = 0; i < infix.length()-1; i++)
+    {
+
+        if (islower (infix[i]) == false)
+        {
+            return 1;
+
+        }
+    }
+    cout << "finished evaluate";
+    return 0;
+}
 // Evaluates an integer arithmetic expression
 //   If infix is a syntactically valid infix integer expression whose
 //   only operands are single lower case letters (whether or not they

@@ -21,17 +21,17 @@ private:
     int m_c;
 };
 
-void checkDirections(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec, stack <Coord>& coordStack, Coord* curr_location);
+void checkDirectionsStack(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec, stack <Coord>& coordStack, Coord* curr_location);
 
-bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec);
+bool pathExistsStack(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec);
 
 
-int main()
+/*int mains()
     {
         string maze[10] = {
             "XXXXXXXXXX",
             "X...X..X.X",
-            "X..XX....X",
+            "X..XX...XX",
             "X.X.XXXX.X",
             "XX.......X",
             "X...X.XX.X",
@@ -45,9 +45,9 @@ int main()
             cout << "Solvable!" << endl;
         else
             cout << "Out of luck!" << endl;
-    }
+    }*/
 
-void checkDirections(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec, stack <Coord>& coordStack, Coord* curr_location){
+void checkDirectionsStack(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec, stack <Coord>& coordStack, Coord* curr_location){
  
     Coord *pointToCheck = new Coord (curr_location->r(), curr_location->c());
     
@@ -106,7 +106,7 @@ void checkDirections(string maze[], int nRows, int nCols, int sr, int sc, int er
 }
 
 
-bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec)
+bool pathExistsStack(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec)
 {
     //Push the starting coordinate (sr,sc) onto the coordinate stack
     stack <Coord> coordStack;
@@ -140,7 +140,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
         {
             cerr << "this is a valid location" << endl;
             maze[curr_location->r()][curr_location->c()] = 'L';
-            checkDirections(maze,nRows,nCols,sr,sc,er,ec,coordStack,curr_location);
+            checkDirectionsStack(maze,nRows,nCols,sr,sc,er,ec,coordStack,curr_location);
             for (int i = 0; i < nRows; i++)
             {
                 for (int j = 0; j < nCols; j++)

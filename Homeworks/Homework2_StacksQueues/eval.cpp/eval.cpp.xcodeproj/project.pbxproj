@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09EC0D442025811F00381313 /* mazestack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0D432025811F00381313 /* mazestack.cpp */; };
-		09EC0D4C2027F6B100381313 /* mazequeue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0D4A2027F43000381313 /* mazequeue.cpp */; };
+		09EC0D5C2027F77A00381313 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0D5B2027F77A00381313 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		09EC0D3E2025811F00381313 /* CopyFiles */ = {
+		09EC0D562027F77A00381313 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -24,13 +23,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		09EC0D402025811F00381313 /* Homework2_StacksQueues */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Homework2_StacksQueues; sourceTree = BUILT_PRODUCTS_DIR; };
-		09EC0D432025811F00381313 /* mazestack.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mazestack.cpp; sourceTree = "<group>"; };
-		09EC0D4A2027F43000381313 /* mazequeue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mazequeue.cpp; sourceTree = "<group>"; };
+		09EC0D582027F77A00381313 /* eval.cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = eval.cpp; sourceTree = BUILT_PRODUCTS_DIR; };
+		09EC0D5B2027F77A00381313 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		09EC0D3D2025811F00381313 /* Frameworks */ = {
+		09EC0D552027F77A00381313 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -40,97 +38,95 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		09EC0D372025811F00381313 = {
+		09EC0D4F2027F77A00381313 = {
 			isa = PBXGroup;
 			children = (
-				09EC0D422025811F00381313 /* Homework2_StacksQueues */,
-				09EC0D412025811F00381313 /* Products */,
+				09EC0D5A2027F77A00381313 /* eval.cpp */,
+				09EC0D592027F77A00381313 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		09EC0D412025811F00381313 /* Products */ = {
+		09EC0D592027F77A00381313 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				09EC0D402025811F00381313 /* Homework2_StacksQueues */,
+				09EC0D582027F77A00381313 /* eval.cpp */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		09EC0D422025811F00381313 /* Homework2_StacksQueues */ = {
+		09EC0D5A2027F77A00381313 /* eval.cpp */ = {
 			isa = PBXGroup;
 			children = (
-				09EC0D432025811F00381313 /* mazestack.cpp */,
-				09EC0D4A2027F43000381313 /* mazequeue.cpp */,
+				09EC0D5B2027F77A00381313 /* main.cpp */,
 			);
-			path = Homework2_StacksQueues;
+			path = eval.cpp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		09EC0D3F2025811F00381313 /* Homework2_StacksQueues */ = {
+		09EC0D572027F77A00381313 /* eval.cpp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 09EC0D472025811F00381313 /* Build configuration list for PBXNativeTarget "Homework2_StacksQueues" */;
+			buildConfigurationList = 09EC0D5F2027F77A00381313 /* Build configuration list for PBXNativeTarget "eval.cpp" */;
 			buildPhases = (
-				09EC0D3C2025811F00381313 /* Sources */,
-				09EC0D3D2025811F00381313 /* Frameworks */,
-				09EC0D3E2025811F00381313 /* CopyFiles */,
+				09EC0D542027F77A00381313 /* Sources */,
+				09EC0D552027F77A00381313 /* Frameworks */,
+				09EC0D562027F77A00381313 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Homework2_StacksQueues;
-			productName = Homework2_StacksQueues;
-			productReference = 09EC0D402025811F00381313 /* Homework2_StacksQueues */;
+			name = eval.cpp;
+			productName = eval.cpp;
+			productReference = 09EC0D582027F77A00381313 /* eval.cpp */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		09EC0D382025811F00381313 /* Project object */ = {
+		09EC0D502027F77A00381313 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Sydney;
 				TargetAttributes = {
-					09EC0D3F2025811F00381313 = {
+					09EC0D572027F77A00381313 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 09EC0D3B2025811F00381313 /* Build configuration list for PBXProject "Homework2_StacksQueues" */;
+			buildConfigurationList = 09EC0D532027F77A00381313 /* Build configuration list for PBXProject "eval.cpp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 09EC0D372025811F00381313;
-			productRefGroup = 09EC0D412025811F00381313 /* Products */;
+			mainGroup = 09EC0D4F2027F77A00381313;
+			productRefGroup = 09EC0D592027F77A00381313 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				09EC0D3F2025811F00381313 /* Homework2_StacksQueues */,
+				09EC0D572027F77A00381313 /* eval.cpp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		09EC0D3C2025811F00381313 /* Sources */ = {
+		09EC0D542027F77A00381313 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09EC0D4C2027F6B100381313 /* mazequeue.cpp in Sources */,
-				09EC0D442025811F00381313 /* mazestack.cpp in Sources */,
+				09EC0D5C2027F77A00381313 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		09EC0D452025811F00381313 /* Debug */ = {
+		09EC0D5D2027F77A00381313 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -177,7 +173,7 @@
 			};
 			name = Debug;
 		};
-		09EC0D462025811F00381313 /* Release */ = {
+		09EC0D5E2027F77A00381313 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -217,14 +213,14 @@
 			};
 			name = Release;
 		};
-		09EC0D482025811F00381313 /* Debug */ = {
+		09EC0D602027F77A00381313 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		09EC0D492025811F00381313 /* Release */ = {
+		09EC0D612027F77A00381313 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -234,24 +230,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		09EC0D3B2025811F00381313 /* Build configuration list for PBXProject "Homework2_StacksQueues" */ = {
+		09EC0D532027F77A00381313 /* Build configuration list for PBXProject "eval.cpp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09EC0D452025811F00381313 /* Debug */,
-				09EC0D462025811F00381313 /* Release */,
+				09EC0D5D2027F77A00381313 /* Debug */,
+				09EC0D5E2027F77A00381313 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		09EC0D472025811F00381313 /* Build configuration list for PBXNativeTarget "Homework2_StacksQueues" */ = {
+		09EC0D5F2027F77A00381313 /* Build configuration list for PBXNativeTarget "eval.cpp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09EC0D482025811F00381313 /* Debug */,
-				09EC0D492025811F00381313 /* Release */,
+				09EC0D602027F77A00381313 /* Debug */,
+				09EC0D612027F77A00381313 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 09EC0D382025811F00381313 /* Project object */;
+	rootObject = 09EC0D502027F77A00381313 /* Project object */;
 }
