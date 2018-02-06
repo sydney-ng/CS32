@@ -33,7 +33,7 @@ int main()
     assert(evaluate("a+ e", m, pf, answer) == 0  &&
            pf == "ae+"  &&  answer == -6);
     answer = 999;
-    /*assert(evaluate("", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("a+", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("a i", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("ai", m, pf, answer) == 1  &&  answer == 999);
@@ -43,11 +43,9 @@ int main()
     assert(evaluate("(a+(i-o)", m, pf, answer) == 1  &&  answer == 999);
     // unary operators not allowed:
     assert(evaluate("-a", m, pf, answer) == 1  &&  answer == 999);
-    
-    int a = evaluate("a*b", m, pf, answer);
     assert(evaluate("a*b", m, pf, answer) == 2  &&
            pf == "ab*"  &&  answer == 999);
-    /*assert(evaluate("y +o *(   a-u)  ", m, pf, answer) == 0  &&
+    assert(evaluate("y +o *(   a-u)  ", m, pf, answer) == 0  &&
            pf == "yoau-*+"  &&  answer == -1);
     answer = 999;
     assert(evaluate("o/(y-y)", m, pf, answer) == 3  &&
@@ -55,7 +53,7 @@ int main()
     assert(evaluate(" a  ", m, pf, answer) == 0  &&
            pf == "a"  &&  answer == 3);
     assert(evaluate("((a))", m, pf, answer) == 0  &&
-           pf == "a"  &&  answer == 3); */
+           pf == "a"  &&  answer == 3);
     cout << "Passed all tests" << endl;
 }
 
@@ -66,14 +64,13 @@ int evaluate(string infix, const Map& values, string& postfix, int& result)
         cerr <<"there are upper case values" << endl;
         return 1;
     }
+    
+    postfix = getPostfixForm(infix);
     if (CorrectLetters(values, infix) == false)
     {
         cerr <<"there are values that are not in map" << endl;
         return 2;
     }
-    
-    
-    postfix = getPostfixForm(infix);
     cerr << "postfix notation is: " << postfix << endl;
     stack <char> evaluateStack;
     for (int i = 0; i < postfix.length(); i++)
@@ -131,7 +128,7 @@ int Calculate (int num1, int num2, char postfix_char, bool& flag)
     }
     else if (postfix_char == '/')
     {
-        if (num2 == 0)
+        if (num1 == 0)
         {
             flag = false;
             answer = 0;
@@ -171,7 +168,7 @@ bool CorrectLetters (const Map& values, const string infix)
 {
     for (int i=0; i < infix.length(); i++)
     {
-        if (infix[i] != '*' && infix[i] != '/' && infix[i] != '-' && infix[i] != '+' && infix[i] != ' ')
+        if (infix[i] != '*' && infix[i] != '/' && infix[i] != '-' && infix[i] != '+' && infix[i] != ' ' && infix[i] != '(' && infix[i] != ')')
         {
             if (values.contains(infix[i]) == false)
             {
@@ -188,51 +185,98 @@ bool CheckFormation (string infix)
     int paren_r = 0;
     int paren_l = 0;
     int num_alpha = 0;
-    //empty string
-    if (infix.length() == 0)
+    
+    string temp_Infix = "";
+    
+    //empty string with no blanks
+    for (int i = 0; i < infix.length(); i ++)
+    {
+        if (infix[i] != ' ')
+        {
+            temp_Infix += infix[i];
+        }
+    }
+    
+    cerr << "temp_Infix is: " << temp_Infix << endl;
+    
+    if (temp_Infix.length() == 0)
     {
         cerr << "string with length 0, fail" << endl;
         return false;
     }
     
     //or if it's only 1 letter, it must be lower case alphabet letter
-    
-    if (infix.length() == 1)
+    if (temp_Infix.length() == 1)
     {
-        if (isalpha(infix[0]) && islower(infix[0]))
+        if (isalpha(temp_Infix[0]) && islower(temp_Infix[0]))
         {
             cerr << "string with length 1, isn't a number, fail" << endl;
             return true;
         }
     }
-
-    //make sure that they're only lower case letters
-    for (int i = 0; i < infix.length()-1; i++)
+    
+    //make sure it starts w/ a letter or parentheses
+    if (temp_Infix[0] != '(' && (isalpha(temp_Infix[0]) == false))
     {
-        if (infix[i] != '*' && infix[i] != '/' && infix[i] != '-' && infix[i] != '+' && infix[i] != ' ')
+        cerr << "first thing was not a paren or alphabet char" << endl;
+        return false;
+    }
+    
+    //make sure it ends w/ letter or paren
+    if (temp_Infix[temp_Infix.length()-1] != ')' && (isalpha(temp_Infix[temp_Infix.length()-1]) == false))
+    {
+        cerr << "last thing was not a paren or alphabet char" << endl;
+        return false;
+    }
+    
+    //check for doubles
+    for (int j = 0; j < temp_Infix.length()-1; j++)
+    {
+        //string w/ adj letters
+        if (isalpha(temp_Infix[j]) == true && isalpha(temp_Infix[j+1]) == true)
         {
-            if (islower (infix[i]) == false)
+            cerr << "string with 2 adj letters, fail" << endl;
+            return false;
+        }
+        
+        //string with empty paren
+        if (temp_Infix[j] == '(' && temp_Infix[j+1] == ')')
+        {
+            cerr << "string w/ empty paren, fail" << endl;
+            return false;
+        }
+    }
+    
+    //make sure that they're only lower case letters
+    for (int i = 0; i <= temp_Infix.length()-1; i++)
+    {
+        cerr << "we are currently checking " << temp_Infix[i] << endl;
+        //if it's a letter
+        if (temp_Infix[i] != '*' && temp_Infix[i] != '/' && temp_Infix[i] != '-' && temp_Infix[i] != '+' && temp_Infix[i] != '(' && temp_Infix[i] != ')')
+        {
+            if (islower (temp_Infix[i]) == false)
             {
-                cerr << infix [i] << " is not lower case, fail" << endl;
+                cerr << temp_Infix [i] << " is not lower case, fail" << endl;
                 return false;
             }
             
-            if (isalpha(infix[i]))
+            if (isalpha(temp_Infix[i]))
             {
                 num_alpha +=1;
             }
 
         }
-        else if (infix[i] == '*' && infix[i] == '/' && infix[i] == '-' && infix[i] == '+')
+        //if it's an operator
+        if (temp_Infix[i] == '*' || temp_Infix[i] == '/' || temp_Infix[i] == '-' || temp_Infix[i] == '+')
         {
             o_count +=1;
         }
-        
-        else if (infix[i] == '(')
+        //if they're paren
+        if (temp_Infix[i] == '(')
         {
             paren_l +=1;
         }
-        else if (infix[i] == ')')
+        if (temp_Infix[i] == ')')
         {
             paren_r +=1;
         }
