@@ -10,6 +10,7 @@
 #include <string>
 #include <iostream>
 using namespace std;
+
 bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec);
 
 class Coord
@@ -23,28 +24,7 @@ private:
     int m_c;
 };
 
-void checkDirections(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec, queue <Coord>& coordQueue, Coord* curr_location); 
-
-int main()
-{
-    string maze[10] = {
-        "XXXXXXXXXX",
-        "X...X..X.X",
-        "X..XX....X",
-        "X.X.XX.XXX",
-        "XX.......X",
-        "X...X.XX.X",
-        "X.X.X....X",
-        "X.XXXX.X.X",
-        "X..X...X.X",
-        "XXXXXXXXXX"
-    };
-    
-    if (pathExists(maze, 10,10, 4,3, 1,8))
-        cout << "Solvable!" << endl;
-    else
-        cout << "Out of luck!" << endl;
-}
+void checkDirections(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec, queue <Coord>& coordQueue, Coord* curr_location);
 
 
 bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int ec)
@@ -58,12 +38,8 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
     //it (i.e., set maze[sr][sc] to have a value other than '.')
     
     //maze [sr][sc]= 'C';
-    maze [er][ec]= 'F';
+    //maze [er][ec]= 'F';
     
-    for (int i = 0; i < nCols; i++)
-    {
-        cout << maze[i] << endl;
-    }
     Coord *curr_location = new Coord (0,0);
     //While the stack is not empty
     while (coordQueue.empty() == false)
@@ -76,6 +52,13 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
         
         coordQueue.pop();
         
+        //If the current (r,c) coordinate is equal to the ending coordinate,
+        if (curr_location->r() == er && curr_location->c() == ec)
+        {
+        //then we've solved the maze so return true!
+        return true;
+        }
+ 
         //this is a location that is valid
         if (maze[curr_location->r()][curr_location->c()] == '.')
         {
@@ -94,14 +77,6 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
             
         }
         
-        //If the current (r,c) coordinate is equal to the ending coordinate,
-        else if (curr_location->r() == er && curr_location->c() == ec)
-        {
-            //then we've solved the maze so return true!
-            return true;
-        }
-        
-        
     }
     return false;
 }
@@ -119,7 +94,7 @@ void checkDirections(string maze[], int nRows, int nCols, int sr, int sc, int er
         
         //update maze
         cerr <<"there was room on the right" << endl;
-        cerr << "add to the stack: "  << maze [curr_location->r()][curr_location->c()-1] << endl;
+        cerr << "add to the stack: "  << maze [curr_location->r()][curr_location->c()+1] << endl;
     }
     
     //If you can move SOUTH and haven't encountered that cell yet,
@@ -132,7 +107,7 @@ void checkDirections(string maze[], int nRows, int nCols, int sr, int sc, int er
         
         //maze[r+1][c] to indicate the algorithm has encountered it.
         cerr <<"there was room on the bottom" << endl;
-        cerr << "add to the stack "  << maze [curr_location->r()][curr_location->c()-1] << endl;
+        cerr << "add to the stack "  << maze [curr_location->r()+1][curr_location->c()] << endl;
         
     }
     
@@ -158,7 +133,7 @@ void checkDirections(string maze[], int nRows, int nCols, int sr, int sc, int er
         
         //maze[r-1][c] to indicate the algorithm has encountered it.
         cerr <<"there's room on the top" << endl;
-        cerr << "add to the stack "  << maze [curr_location->r()][curr_location->c()-1] << endl;
+        cerr << "add to the stack "  << maze [curr_location->r()-1][curr_location->c()] << endl;
         //maze[curr_location->r()][curr_location->c()] = 'C';
     }
     
