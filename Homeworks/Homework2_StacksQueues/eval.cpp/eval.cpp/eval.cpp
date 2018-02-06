@@ -1,5 +1,4 @@
 //
-//  main.cpp
 //  eval.cpp
 //
 //  Created by Super on 2/4/18.
@@ -30,18 +29,40 @@ int main()
         m.insert(vars[k], vals[k]);
     string pf;
     int answer;
-    assert(evaluate("a+ e", m, pf, answer) == 0  &&
-           pf == "ae+"  &&  answer == -6);
+    assert(evaluate("(u+e)/y", m, pf, answer) == 0  &&  answer == -5 && pf == "ue+y/");
+    assert(evaluate("a/y+o", m, pf, answer) == 0  &&  answer == 5 && pf == "ay/o+");
+    assert(evaluate("(a/y)+o", m, pf, answer) == 0  &&  answer == 5 && pf == "ay/o+");
+    assert(evaluate("i/(a-y)", m, pf, answer) == 0  &&  answer == 3 && pf == "iay-/");
+    assert(evaluate("(i/(a-y))", m, pf, answer) == 0  &&  answer == 3 && pf == "iay-/");
+    assert(evaluate("((i)/(a-y))", m, pf, answer) == 0  &&  answer == 3 && pf == "iay-/");
+    assert(evaluate("a+ e", m, pf, answer) == 0  && pf == "ae+"  &&  answer == -6);
+    assert(evaluate("a*i-o", m, pf, answer) == 0  &&  answer == 16 && pf == "ai*o-");
+    string pf2 = "";
     answer = 999;
+    assert(evaluate("((0)/(a-y))", m, pf, answer) == 1 && answer == 999 && pf2 == "");
+    assert(evaluate("(i/(a-a))", m, pf, answer) == 3 && answer == 999 && pf == "iaa-/");
     assert(evaluate("", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("  +  ", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("    ", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("A", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("a+", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("+", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("a i", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("a++i", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("ai", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("()", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("y(o+u)", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("o+u)", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("y+()", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("y()", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("y+(aa-)", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("a+E", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("(a+(i-o)", m, pf, answer) == 1  &&  answer == 999);
     // unary operators not allowed:
+    assert(evaluate("aE*", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("a+E", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("a+#e", m, pf, answer) == 1  &&  answer == 999);
+    assert(evaluate("a+s", m, pf, answer) == 2  &&  answer == 999);
     assert(evaluate("-a", m, pf, answer) == 1  &&  answer == 999);
     assert(evaluate("a*b", m, pf, answer) == 2  &&
            pf == "ab*"  &&  answer == 999);
@@ -172,6 +193,7 @@ bool CorrectLetters (const Map& values, const string infix)
         {
             if (values.contains(infix[i]) == false)
             {
+                cerr <<"there's a value that's not in the map" << endl;
                 return false;
             }
         }
@@ -215,6 +237,17 @@ bool CheckFormation (string infix)
         }
     }
     
+    //loop through everything and make sure it's valid
+    for (int i = 0; i < temp_Infix.length(); i++)
+    {
+        if (isalpha(temp_Infix[i]) == false && temp_Infix[i] != '*' && temp_Infix[i] != '/' && temp_Infix[i] != '-' && temp_Infix[i] != '+' && temp_Infix[i] != '(' && temp_Infix[i] != ')')
+        {
+            cerr << "this is not an operator, space, or paren" << endl;
+            return false;
+        }
+        continue;
+    }
+
     //make sure it starts w/ a letter or parentheses
     if (temp_Infix[0] != '(' && (isalpha(temp_Infix[0]) == false))
     {
@@ -244,6 +277,13 @@ bool CheckFormation (string infix)
         {
             cerr << "string w/ empty paren, fail" << endl;
             return false;
+        }
+        
+        if ((temp_Infix[j] == '*' || temp_Infix[j] == '/' || temp_Infix[j] == '-' || temp_Infix[j] == '+') &&
+            (temp_Infix[j+1] == '*' || temp_Infix[j+1] == '/' || temp_Infix[j+1] == '-' || temp_Infix[j+1] == '+'))
+        {
+                cerr << temp_Infix[j] << " is an operator and " << temp_Infix[j+1] << " is an operator, fail!" << endl;
+                return false;
         }
     }
     
