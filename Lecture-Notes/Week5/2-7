@@ -1,0 +1,98 @@
+class Rectangle : public shape 
+{
+virtual void draw () const; 
+double diag() const; 
+double m_dx; 
+double m_dy); 
+}
+
+class Shape 
+{
+	void move (double xnew, double ynew);
+	virtual void draw() const; // virtual in bade class 
+	double m_x;
+	double m_y; 
+}; 
+
+
+void Shape:: move (double xnew, double ynew)
+{
+	m_x = xnew; 
+	m_y = ynew; 
+}
+
+void Shape:: draw ()
+{
+	..draw a vague cloud centered at m_x, m_y
+} 
+
+double Rectangle::drag () const
+{
+	return sqrt(m_dx * m_dx + m_dy* m_dy);
+} 
+
+void Rectangle::draw() const 
+{
+	…draw rectangle!!!…
+} 
+
+//pure virtual function: if you put a virtual function and set it equal to zero, you’re saying that there doesn’t have to be an implementation of this function
+//make it impossible for it to select something that is null 
+	//check if you made it to Shape’s virtual table 
+
+IF a class has at least 1 pure virtual function, it is an abstract class, you can’t create any objects that are only of that abstract type.
+
+Polymorphism 
+- idea: many shapes,many forms 
+- a square is also a rectangle + shape 
+- one object can be viewed as multiple possible types 
+
+
+
+
+=========================================================================================================================================================================================
+
+class Shape 
+{
+public:
+	Shape(double x, double y); 
+private:
+	double m_x;
+	double m_y; 
+}; 
+
+Shape::Shape (double x, double y)
+: m_x(x), m_y(y)
+
+{
+}
+
+class Circle: public Shape 
+{
+public:
+	Circle (double r, double x, double y); 
+private:
+	double m_r;	
+} 
+
+Circle c( 5,2,-3); 
+
+Circle::Circle (double r, double x, double y)
+	:m_x(x), m_y(y), m_r(r)//WRONG YOU CAN’T ACCESS THE PRIVATE VARIABLES OF SHAPE
+	:Shape(x,y) //THE CORRECT WAY OF DOING IT
+{
+} 
+
+1A) MAKES SHAPE
+1B) MEMBER INITIALIZATION LIST TO INITIALIZE M_X AND M_Y 
+2) CONSTRUCT DATA MEMBERS 
+3) EXECUTE BODY
+constructors
+1. Construct the base part 
+2. construct the data members
+3. execute constructor body 
+
+destructors: 
+1. execute destructor body
+2. destroy data members
+3. destroy the base part 
