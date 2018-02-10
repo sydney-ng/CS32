@@ -1,0 +1,25 @@
+RECURSION:
+- involves solving smaller instances of the same problem 
+- most of the time, you break it down that aren’t the same problem
+
+sort (an unsorted pile of papers)
+{
+	if (the number of items in the pile >= 2)
+	{
+		split the pile evenly into 2 unsorted supplies (doesn’t have to be of same length, but it helps to increase efficiency)
+		sort (left pile)
+		sort (right pile)
+		merge the two sorted sub-piles into 1 sorted pile.
+	}
+}
+
+to show that it terminates: 
+1. we need at least 1 base case (i.e. one that is solved w/o recursion)
+2. every recursive call must be to solve a strictly “smaller” problem (i.e. one that is “closer” to a base case)
+sort2(an unsorted pile of papers
+{	
+}
+
+void sort (int a[], int beginning, int end) 
+{
+}

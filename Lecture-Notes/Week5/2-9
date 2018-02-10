@@ -1,0 +1,92 @@
+Shape s; 
+f (&s); 
+Shape * sp2 = new shape; 
+f (sp2); 
+Rectangle r; 
+f (&r); 
+
+===== 
+
+class shape 
+{
+	public: 
+		Shape (double x, double y);
+		Shape (); //default constructor
+	private: 
+		double m_x; 
+		string m_name;
+		double m_y;
+};
+void f(Shape* sp)
+{
+	sp->draw(); 
+}
+
+shape:: Shape ()
+: m_x (0), m_y(0)
+
+//DELEGATING CONSTRUCTOR
+Shape::Shape()
+:Shape (0,0)
+{}
+
+Circle::Circle (double r, double x, double y)
+: Shape (x,y), m_r (r)
+{
+	if (r<= 0)
+	{
+		//handle error 
+	} 
+}
+
+//you only pass in the value of the radius 
+Circle::Circle (double r)
+: Circle (r, 0, 0) {}
+
+Circle::Circle (double r)
+: m_r(r)
+{
+}
+
+Compiler-generated Destruction 
+Circle :: Circle ~ circle () 
+{}
+Shape::~Shape()
+{}
+
+
+class Shape {
+
+};
+
+class Polygon: public shape 
+{
+	Node * vertex offsets;
+	~Polygon();
+}; 
+
+Polygon::~Polygon()
+{
+	… walk through linked list, deleting nodes… 
+}
+//when a polygon goes away we need to get rid of the linked list nodes
+
+void f()
+{
+	Shape * pic[100];
+	… 
+	… add various types of shapes to the pic array 
+	for (int k = 0; k < ..; k++)
+	{
+		delete pic[k]; 
+	} 
+	//if you are pointing to a base object, if it’s not virtual it will do compile time binding, which may give you UD behavior 
+
+}
+
+//CONCEPT: if it’s a base class, declare destructor => virtual 
+//if you have the computer do the destructor, it won’t be virtual 
+//you have to implement shape’s destructor because the function is getting called
+
+Shape s; //illegal -> shape is an abstract class 
+
