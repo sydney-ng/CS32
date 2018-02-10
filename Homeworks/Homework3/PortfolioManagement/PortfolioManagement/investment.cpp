@@ -93,7 +93,7 @@ Stock:: ~Stock()
 }
 string Stock::description() const
 {
-    string stock_description = "stock trading as " + nickname + " ";
+    string stock_description = "stock trading as " + nickname;
     return stock_description;
 }
 
@@ -172,7 +172,7 @@ void display(const Investment* inv)
     cout << inv->name();
     if (inv->fungible())
         cout << " (fungible)";
-    cout << ": " << inv->description() << "bought for $" << inv->purchasePrice() << endl;
+    cout << ": " << inv->description() << " bought for $" << inv->purchasePrice() << endl;
 }
 
 int main()
