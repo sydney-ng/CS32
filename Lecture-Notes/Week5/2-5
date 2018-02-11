@@ -28,7 +28,7 @@ f(ws) //this won’t work & won’t flash for Warning Symbol
 class Circle : public shape
 {
 	//void move (double xnew, double ynew);
-	virtualvoid draw() const; //overrides shape::draw
+	virtual void draw() const; //overrides shape::draw
 	//double m_x;
 	//double m_y;
 	double m_r; 
