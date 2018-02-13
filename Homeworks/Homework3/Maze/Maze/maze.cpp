@@ -24,6 +24,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
 
     else
     {
+        cerr << "we aren't at the end, check another point" << endl;
         //Mark the start location as visted ('V')
         maze[sr][sc] = 'V';
         //then call pathExists starting from that location (and ending at the same ending location as in the current call).
@@ -33,7 +34,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
         {
             sc = sc + 1;
             maze[sr][sc] = 'V';
-            cerr  << sr << " " << sc << " is a open point" << endl;
+            cerr  << sr << " " << sc << " is a open east point" << endl;
             for (int i = 0; i < nRows; i++)
             {
                 for (int j = 0; j < nCols; j++)
@@ -44,7 +45,10 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
                 cerr << endl;
             }
             cerr << endl;
-            return pathExists(maze, nRows, nCols, sr, sc, er, ec);
+            if (pathExists(maze, nRows, nCols, sr, sc, er, ec) == true)
+            {
+                return true;
+            }
         }
         
         //check if SOUTH is unvisted
@@ -52,7 +56,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
         {
             sr = sr + 1;
             maze [sr][sc] = 'V';
-            cerr  << sr << " " << sc << " is a open point" << endl;
+            cerr  << sr << " " << sc << " is a open south point" << endl;
             for (int i = 0; i < nRows; i++)
             {
                 for (int j = 0; j < nCols; j++)
@@ -63,7 +67,10 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
                 cerr << endl;
             }
             cerr << endl;
-            pathExists(maze, nRows, nCols, sr, sc, er, ec);
+            if (pathExists(maze, nRows, nCols, sr, sc, er, ec) == true)
+            {
+                return true;
+            }
 
         }
         
@@ -72,7 +79,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
         {
             sc = sc - 1;
             maze [sr][sc] = 'V';
-            cerr  << sr << " " << sc << " is a open point" << endl;
+            cerr  << sr << " " << sc << " is a open west point" << endl;
             for (int i = 0; i < nRows; i++)
             {
                 for (int j = 0; j < nCols; j++)
@@ -83,7 +90,10 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
                 cerr << endl;
             }
             cerr << endl;
-            pathExists(maze, nRows, nCols, sr, sc, er, ec);
+            if (pathExists(maze, nRows, nCols, sr, sc, er, ec) == true)
+            {
+                return true;
+            }
 
         }
         
@@ -92,7 +102,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
         {
             sr = sr-1;
             maze [sr][sc] = 'V';
-            cerr  << sr << " " << sc << " is a open point" << endl;
+            cerr  << sr << " " << sc << " is a open north point" << endl;
             for (int i = 0; i < nRows; i++)
             {
                 for (int j = 0; j < nCols; j++)
@@ -103,32 +113,14 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
                 cerr << endl;
             }
             cerr << endl;
-            pathExists(maze, nRows, nCols, sr, sc, er, ec);
+            if (pathExists(maze, nRows, nCols, sr, sc, er, ec) == true)
+            {
+                return true;
+            }
 
         }
         
     }
    
     return false;
-}
-
-int main ()
-{
-    string maze[10] = {
-        "XXXXXXXXXX",
-        "X...X..X.X",
-        "X..XX....X",
-        "X.X.XXXX.X",
-        "XXX......X",
-        "X...X.XX.X",
-        "X.X.X..X.X",
-        "X.XXXX.X.X",
-        "X..X...X.X",
-        "XXXXXXXXXX"
-    };
-    
-    if (pathExists(maze, 10,10, 4,3, 4,4))
-        cout << "Solvable!" << endl;
-    else
-        cout << "Out of luck!" << endl;
 }
