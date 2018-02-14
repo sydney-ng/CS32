@@ -32,8 +32,8 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
         //check if EAST is unvisted
         if ((maze[sr][sc+1] != 'V') && (maze[sr][sc+1] != 'X'))
         {
-            sc = sc + 1;
-            maze[sr][sc] = 'V';
+            //sc = sc + 1;
+            //maze[sr][sc] = 'V';
             cerr  << sr << " " << sc << " is a open east point" << endl;
             for (int i = 0; i < nRows; i++)
             {
@@ -45,7 +45,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
                 cerr << endl;
             }
             cerr << endl;
-            if (pathExists(maze, nRows, nCols, sr, sc, er, ec) == true)
+            if (pathExists(maze, nRows, nCols, sr, sc+1, er, ec) == true)
             {
                 return true;
             }
@@ -54,8 +54,8 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
         //check if SOUTH is unvisted
         if ((maze[sr+1][sc] != 'V') && (maze[sr+1][sc] != 'X'))
         {
-            sr = sr + 1;
-            maze [sr][sc] = 'V';
+            //sr = sr + 1;
+            //maze [sr][sc] = 'V';
             cerr  << sr << " " << sc << " is a open south point" << endl;
             for (int i = 0; i < nRows; i++)
             {
@@ -67,7 +67,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
                 cerr << endl;
             }
             cerr << endl;
-            if (pathExists(maze, nRows, nCols, sr, sc, er, ec) == true)
+            if (pathExists(maze, nRows, nCols, sr+1, sc, er, ec) == true)
             {
                 return true;
             }
@@ -77,8 +77,8 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
         //check if WEST is unvisited
         if ((maze[sr][sc-1] != 'V') && (maze[sr][sc-1] != 'X'))
         {
-            sc = sc - 1;
-            maze [sr][sc] = 'V';
+            //sc = sc - 1;
+            //maze [sr][sc] = 'V';
             cerr  << sr << " " << sc << " is a open west point" << endl;
             for (int i = 0; i < nRows; i++)
             {
@@ -90,7 +90,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
                 cerr << endl;
             }
             cerr << endl;
-            if (pathExists(maze, nRows, nCols, sr, sc, er, ec) == true)
+            if (pathExists(maze, nRows, nCols, sr, sc-1, er, ec) == true)
             {
                 return true;
             }
@@ -100,8 +100,8 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
         //check if NORTH is unvisited
         if ((maze[sr-1][sc] != 'V') && (maze[sr-1][sc] != 'X'))
         {
-            sr = sr-1;
-            maze [sr][sc] = 'V';
+            //sr = sr-1;
+            //maze [sr][sc] = 'V';
             cerr  << sr << " " << sc << " is a open north point" << endl;
             for (int i = 0; i < nRows; i++)
             {
@@ -113,7 +113,7 @@ bool pathExists(string maze[], int nRows, int nCols, int sr, int sc, int er, int
                 cerr << endl;
             }
             cerr << endl;
-            if (pathExists(maze, nRows, nCols, sr, sc, er, ec) == true)
+            if (pathExists(maze, nRows, nCols, sr-1, sc, er, ec) == true)
             {
                 return true;
             }
