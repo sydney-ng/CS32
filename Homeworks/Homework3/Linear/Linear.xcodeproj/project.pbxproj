@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09EC0DAE202FC36200381313 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0DAD202FC36200381313 /* main.cpp */; };
+		09EC0DAE202FC36200381313 /* linear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0DAD202FC36200381313 /* linear.cpp */; };
+		09EC0DBB2032BF2300381313 /* testLinear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0DBA2032BF2300381313 /* testLinear.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +25,9 @@
 
 /* Begin PBXFileReference section */
 		09EC0DAA202FC36200381313 /* Linear */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Linear; sourceTree = BUILT_PRODUCTS_DIR; };
-		09EC0DAD202FC36200381313 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		09EC0DAD202FC36200381313 /* linear.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = linear.cpp; sourceTree = "<group>"; };
+		09EC0DBA2032BF2300381313 /* testLinear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testLinear.cpp; sourceTree = "<group>"; };
+		09EC0DBC2032BF3100381313 /* testLinear.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testLinear.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +60,9 @@
 		09EC0DAC202FC36200381313 /* Linear */ = {
 			isa = PBXGroup;
 			children = (
-				09EC0DAD202FC36200381313 /* main.cpp */,
+				09EC0DAD202FC36200381313 /* linear.cpp */,
+				09EC0DBA2032BF2300381313 /* testLinear.cpp */,
+				09EC0DBC2032BF3100381313 /* testLinear.h */,
 			);
 			path = Linear;
 			sourceTree = "<group>";
@@ -119,7 +124,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09EC0DAE202FC36200381313 /* main.cpp in Sources */,
+				09EC0DBB2032BF2300381313 /* testLinear.cpp in Sources */,
+				09EC0DAE202FC36200381313 /* linear.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +252,7 @@
 				09EC0DB3202FC36200381313 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -5,8 +5,8 @@
 //  Created by Super on 2/10/18.
 //  Copyright © 2018 Sydney. All rights reserved.
 //
-
-
+//REMOVE BEFORE SUBMITTING
+#include "testTree.h"
 // Return the number of ways that all n2 elements of a2 appear
 // in the n1 element array a1 in the same order (though not
 // necessarily consecutively).  The empty sequence appears in a
@@ -21,20 +21,15 @@
 int countIncludes(const double a1[], int n1, const double a2[], int n2)
 {
     //if you're at the end
-    if (n1 == 1 || n1 < 0)
+    if (n1 <=0)
     {
-        //make sure the 2nd one is at the end  that they are equal
-        if (n2 == 1 && a1[0] == a2[0])
-        {
-            return 1;
-        }
-        else
+        if (n2>0)
         {
             return 0;
         }
     }
     
-    //if n2 is empty, then there can be no permutations
+    //if n2 is empty, then there can be no more permutations
     if (n2 <= 0)
     {
         //empty == it's there
@@ -118,11 +113,12 @@ void split(double a[], int n, double splitter,
 // If n <= 1, do nothing.
 void order(double a[], int n)
 {
+    //don't do anything!
     if (n <= 1)
     {
         return;
     }
-    int middle_index = (n+1)/2;
+    int middle_index = (n)/2;
     int FN = -1;
     int FL = n;
     split(a, n, a[middle_index],FN, FL);
@@ -130,8 +126,4 @@ void order(double a[], int n)
     order(a, FN);
 }
 
-int main ()
-{
-    return 1;
-    
-}
+

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		09EC0D88202E74BC00381313 /* maze.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0D87202E74BC00381313 /* maze.cpp */; };
+		09EC0DB62032B22A00381313 /* testMaze.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0DB42032B22A00381313 /* testMaze.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		09EC0D84202E74BC00381313 /* Maze */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Maze; sourceTree = BUILT_PRODUCTS_DIR; };
 		09EC0D87202E74BC00381313 /* maze.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = maze.cpp; sourceTree = "<group>"; };
+		09EC0DB42032B22A00381313 /* testMaze.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = testMaze.cpp; sourceTree = "<group>"; };
+		09EC0DB52032B22A00381313 /* testMaze.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testMaze.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				09EC0D87202E74BC00381313 /* maze.cpp */,
+				09EC0DB42032B22A00381313 /* testMaze.cpp */,
+				09EC0DB52032B22A00381313 /* testMaze.h */,
 			);
 			path = Maze;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09EC0DB62032B22A00381313 /* testMaze.cpp in Sources */,
 				09EC0D88202E74BC00381313 /* maze.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +252,7 @@
 				09EC0D8D202E74BC00381313 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

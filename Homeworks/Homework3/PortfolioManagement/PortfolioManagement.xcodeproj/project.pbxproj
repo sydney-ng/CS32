@@ -246,6 +246,7 @@
 				09EC0D7A202BC2D200381313 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

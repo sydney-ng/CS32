@@ -1,0 +1,75 @@
+void sort (int a[], int b, int e)
+{
+	if (e-b >=2)
+	{
+		int mid = (b+e)/2; 
+		sort (a,b,mid); //sort left 
+		sort (a, mid,e); //sort right
+		merge (a, b, mid, e); //merge two halves 
+	} 
+} 
+
+int main ()
+{
+	int arr[5]; 
+	sort (arr, 0, 5); 
+} 
+
+
+In a collection of AJ cats, all N cats are the same color.
+
+==========================================================
+
+arr: [0]	[1]	[2]	[3]	[4]	[5]
+      27	82	39	42	18	67
+
+bool contains (const int a[], int n, target)
+{
+	if (n <= 0)
+	{
+		return false; 
+	} 
+	if (a[0] == target)
+	{
+		return true; 
+	} 
+	
+	return contains (a+1, n-1, target);
+} 
+
+//another solution 
+
+bool contains 
+{
+	if (n<= 0)
+	{
+		return false;
+	}
+	
+	if (contains (a+1), n-1, target))
+	{
+		return true; 
+	} 
+	return (a[0] == target); 
+}
+=========================================================
+
+bool solve (start)
+{
+	if start == goal 
+		return true; 
+	for each direction 
+	{
+	if moving 1 step in that direction is possible, and that spot hasn’t been listed yet, 
+		then if solve (position reached by moving that step)) 
+			then return true 
+	} 
+
+	return false
+}
+
+========================================================
+
+TIPS FOR RECURSION:
+1. Test on small cases 
+2. 

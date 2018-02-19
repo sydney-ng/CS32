@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		09EC0D9B202FC2A300381313 /* tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0D9A202FC2A300381313 /* tree.cpp */; };
+		09EC0DBF20350A3800381313 /* testTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 09EC0DBD20350A3800381313 /* testTree.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +25,9 @@
 
 /* Begin PBXFileReference section */
 		09EC0D97202FC2A300381313 /* Tree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tree; sourceTree = BUILT_PRODUCTS_DIR; };
-		09EC0D9A202FC2A300381313 /* tree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tree.cpp; sourceTree = "<group>"; };
+		09EC0D9A202FC2A300381313 /* tree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = tree.cpp; path = Tree/tree.cpp; sourceTree = "<group>"; };
+		09EC0DBD20350A3800381313 /* testTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = testTree.cpp; path = Tree/testTree.cpp; sourceTree = "<group>"; };
+		09EC0DBE20350A3800381313 /* testTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = testTree.h; path = Tree/testTree.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +44,9 @@
 		09EC0D8E202FC2A300381313 = {
 			isa = PBXGroup;
 			children = (
+				09EC0DBD20350A3800381313 /* testTree.cpp */,
+				09EC0DBE20350A3800381313 /* testTree.h */,
+				09EC0D9A202FC2A300381313 /* tree.cpp */,
 				09EC0D99202FC2A300381313 /* Tree */,
 				09EC0D98202FC2A300381313 /* Products */,
 			);
@@ -57,7 +63,6 @@
 		09EC0D99202FC2A300381313 /* Tree */ = {
 			isa = PBXGroup;
 			children = (
-				09EC0D9A202FC2A300381313 /* tree.cpp */,
 			);
 			path = Tree;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09EC0D9B202FC2A300381313 /* tree.cpp in Sources */,
+				09EC0DBF20350A3800381313 /* testTree.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +252,7 @@
 				09EC0DA0202FC2A300381313 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
