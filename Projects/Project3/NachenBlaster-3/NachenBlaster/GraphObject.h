@@ -23,15 +23,6 @@ protected:
 	}
 
 public:
-    virtual void DoSomething()
-    {        
-    };
-    
-    virtual bool CheckIfAlive()
-    {
-        return true;
-    };
-    
 	virtual ~GraphObject()
 	{
 		getGraphObjects(m_depth).erase(this);

@@ -4,7 +4,21 @@
 #include "GraphObject.h"
 
 // Students:  Add code to this file, Actor.cpp, StudentWorld.h, and StudentWorld.cpp
-class Star : public GraphObject
+
+class AllObjects: public GraphObject
+{
+public:
+    AllObjects(int imageID, double startX, double startY, int dir, double size, int depth);
+    virtual void doSomething()
+    {
+    };
+    
+    virtual bool CheckIfAlive()
+    {
+        return true;
+    };
+};
+class Star : public AllObjects
 {
 public:
     //constructor
@@ -14,7 +28,7 @@ public:
     virtual ~Star ();
     
     //DoSomething Function
-    virtual void DoSomething();
+    virtual void doSomething();
     
     //checks if the star has gone off the screen to the left
     virtual bool CheckIfAlive();

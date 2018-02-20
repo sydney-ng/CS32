@@ -21,7 +21,7 @@ StudentWorld::StudentWorld(string assetDir)
 int StudentWorld::init()
 {
     Star *starP = new Star (IID_STAR, 100, 100, 0, .40, 3);
-    AllObjects.push_back(starP);
+    gameObjectVector.push_back(starP);
     return GWSTATUS_CONTINUE_GAME;
 }
 
@@ -29,7 +29,12 @@ int StudentWorld::move()
 {
     for (int i = 0; i < 1; i++)
     {
-        AllObjects[i]->DoSomething();
+        gameObjectVector[i]->doSomething();
+        if (gameObjectVector[i]->CheckIfAlive() == false)
+        {
+            delete gameObjectVector[i];
+            return GWSTATUS_PLAYER_DIED;
+        }
     }
     // This code is here merely to allow the game to build, run, and terminate after you hit enter.
     // Notice that the return value GWSTATUS_PLAYER_DIED will cause our framework to end the current level.
