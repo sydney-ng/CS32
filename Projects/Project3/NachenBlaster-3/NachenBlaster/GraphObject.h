@@ -4,6 +4,10 @@
 #include "GameConstants.h"
 #include <set>
 
+//REMOVE
+#include <iostream>
+using namespace std;
+
 const int ANIMATION_POSITIONS_PER_TICK = 1;
 
 
@@ -19,6 +23,15 @@ protected:
 	}
 
 public:
+    virtual void DoSomething()
+    {        
+    };
+    
+    virtual bool CheckIfAlive()
+    {
+        return true;
+    };
+    
 	virtual ~GraphObject()
 	{
 		getGraphObjects(m_depth).erase(this);
