@@ -12,37 +12,58 @@ GameWorld* createStudentWorld(string assetDir)
 
 // Students:  Add code to this file, StudentWorld.h, Actor.h and Actor.cpp
 
+//CREATE NACHENBLASTER HERE?????
 StudentWorld::StudentWorld(string assetDir)
-: GameWorld(assetDir)
+: GameWorld(assetDir), m_NachenBlaster(nullptr)
 {
+}
+
+StudentWorld::~StudentWorld()
+{
+    cleanUp();
 }
 
 double StudentWorld::randDouble(double min, double max)
 {
     double f = (double)rand() / RAND_MAX;
     double x = min + f * (max - min);
-    cerr << "the rand double between " << min << "is: " << x << endl;
     return abs(x);
 }
 
+void StudentWorld::addNewObjects()
+{
+    //add a possible star?
+    int StarChance = randInt(1, 15);
+    if (StarChance == 1)
+    {
+        Star *starP = new Star (IID_STAR, 255, randInt(0, VIEW_HEIGHT), 0 , (randDouble(.05, .50)), 3);
+        gameObjectVector.push_back(starP);
+    }
+}
+
+
 int StudentWorld::init()
 {
+    NachenBlaster *nachenblasterP = new NachenBlaster ();
+    //create 30 stars
     for (int i =0; i <30; i ++)
     {
         Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH), randInt(0, VIEW_HEIGHT), 0 , (randDouble(.05, .50)), 3);
         gameObjectVector.push_back(starP);
-
     }
+    //create a NachenBlaster
+    
     return GWSTATUS_CONTINUE_GAME;
 }
 
-
 int StudentWorld::move()
 {
+    //add more objects?
+    addNewObjects();
     for (int i = 0; i < gameObjectVector.size(); i++)
     {
         
-       cerr << "object number " << i << endl;
+        cerr << "object number " << i << endl;
         if (gameObjectVector.size() > 0)
         {
             gameObjectVector[i]->doSomething();
@@ -58,4 +79,9 @@ int StudentWorld::move()
 
 void StudentWorld::cleanUp()
 {
+    delete m_NachenBlaster;
+    for (int i =0; i < gameObjectVector.size(); i ++)
+    {
+        delete gameObjectVector[i];
+    }
 }

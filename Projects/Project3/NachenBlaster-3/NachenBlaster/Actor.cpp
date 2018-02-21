@@ -33,11 +33,18 @@ Ships::Ships(int imageID, double startX, double startY, int dir, double size, in
 }
 
 ////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS////////////////////////////////
-NachenBlaster::NachenBlaster(int imageID, double startX, double startY, int dir, double size, int depth)
+NachenBlaster::NachenBlaster()
 :Ships(IID_NACHENBLASTER, 0, 128, 0, 1.0, 0)
 {
+    cerr << "in nachenblaster constructor " << endl;
+    
     m_HitPoints = 50;
     m_CabbageEnergyPoints = 30;
+}
+
+NachenBlaster::~NachenBlaster()
+{
+    cerr << "deconstructing NachenBlaster"<< endl;
 }
 
 bool NachenBlaster:: CheckIfAlive()

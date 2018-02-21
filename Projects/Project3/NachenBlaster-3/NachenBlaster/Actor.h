@@ -37,8 +37,8 @@ public:
 class NachenBlaster: public Ships
 {
 public:
-    NachenBlaster(int imageID, double startX, double startY, int dir, double size, int depth);
-
+    NachenBlaster();
+    virtual ~NachenBlaster();
     virtual bool CheckIfAlive();
     
 private:

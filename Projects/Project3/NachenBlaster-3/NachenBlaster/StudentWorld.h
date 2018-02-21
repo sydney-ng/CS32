@@ -12,15 +12,18 @@ class StudentWorld : public GameWorld
 {
 public:
     StudentWorld(std::string assetDir);
+    virtual ~StudentWorld();
     virtual int init();
     virtual int move();
     virtual void cleanUp();
     
     //every tick, calculate the probability of a new object being created & execute
     double randDouble(double min, double max);
+    //get the probability of each of the new objects
     void addNewObjects();
 private:
     std::vector<AllObjects*> gameObjectVector;
+    NachenBlaster* m_NachenBlaster;
     
 };
 
