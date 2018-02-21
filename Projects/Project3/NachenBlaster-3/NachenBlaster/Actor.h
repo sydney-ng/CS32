@@ -11,6 +11,7 @@ class AllObjects: public GraphObject
 {
 public:
     AllObjects(int imageID, double startX, double startY, int dir, double size, int depth);
+
     void doSomething();
 
     virtual void somethingBody()
@@ -37,6 +38,9 @@ class NachenBlaster: public Ships
 {
 public:
     NachenBlaster(int imageID, double startX, double startY, int dir, double size, int depth);
+
+    virtual bool CheckIfAlive();
+    
 private:
     int m_HitPoints;
     int m_CabbageEnergyPoints;

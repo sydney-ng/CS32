@@ -15,14 +15,15 @@ AllObjects::AllObjects(int imageID, double startX, double startY, int dir, doubl
 
 void AllObjects::doSomething()
 {
-    if (CheckIfAlive() == false)
+    /*if (CheckIfAlive() == false)
     {
         return;
-    }
+    }*/
     
     somethingBody();
     
 }
+
 
 ////////////////////////////////IMPLEMENTATION FOR SHIPS CLASS////////////////////////////////
 
@@ -38,6 +39,17 @@ NachenBlaster::NachenBlaster(int imageID, double startX, double startY, int dir,
     m_HitPoints = 50;
     m_CabbageEnergyPoints = 30;
 }
+
+bool NachenBlaster:: CheckIfAlive()
+{
+    //make sure the hit points are above 0
+    if (m_HitPoints <= 0)
+    {
+        return false;
+    }
+    return true;
+}
+
 
 /*////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
 Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth)
@@ -71,7 +83,7 @@ bool Cabbage::CheckIfAlive()
 } */
 ///////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////////
 Star::Star(int imageID, double startX, double startY, int dir, double size, int depth)
-: AllObjects(IID_STAR, startX, startY, 0, randInt(.05, .50), 3)
+: AllObjects(imageID, startX, startY, dir, size, depth)
 {
 }
 
@@ -81,12 +93,12 @@ Star::~Star ()
 }
 void Star::somethingBody()
 {
-    cerr << "here in Star's DoSomething body!" << endl;
+    cerr << "here in Star's somethingBody!" << endl;
         //check if it's on the screen
-    if (CheckIfAlive() == true)
-    {
+    //if (CheckIfAlive() == true)
+    //{
         moveTo(getX()-1, getY());
-    }
+    //}
     //it's off the screen
 }
 

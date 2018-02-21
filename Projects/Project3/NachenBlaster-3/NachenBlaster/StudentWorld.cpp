@@ -17,31 +17,42 @@ StudentWorld::StudentWorld(string assetDir)
 {
 }
 
+double StudentWorld::randDouble(double min, double max)
+{
+    double f = (double)rand() / RAND_MAX;
+    double x = min + f * (max - min);
+    cerr << "the rand double between " << min << "is: " << x << endl;
+    return abs(x);
+}
+
 int StudentWorld::init()
 {
-    Star *starP = new Star (IID_STAR, 100, 100, 0, .40, 3);
-    //Cabbage *cabbageP = new Cabbage (IID_CABBAGE, 200, 200, 0, .5, 1);
-    gameObjectVector.push_back(starP);
-    //gameObjectVector.push_back(cabbageP);
+    for (int i =0; i <30; i ++)
+    {
+        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH), randInt(0, VIEW_HEIGHT), 0 , (randDouble(.05, .50)), 3);
+        gameObjectVector.push_back(starP);
 
+    }
     return GWSTATUS_CONTINUE_GAME;
 }
 
+
 int StudentWorld::move()
 {
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < gameObjectVector.size(); i++)
     {
-        gameObjectVector[i]->doSomething();
-        if (gameObjectVector[i]->CheckIfAlive() == false)
+        
+       cerr << "object number " << i << endl;
+        if (gameObjectVector.size() > 0)
         {
-            delete gameObjectVector[i];
-            return GWSTATUS_PLAYER_DIED;
+            gameObjectVector[i]->doSomething();
         }
     }
+    return GWSTATUS_CONTINUE_GAME;
+
     // This code is here merely to allow the game to build, run, and terminate after you hit enter.
     // Notice that the return value GWSTATUS_PLAYER_DIED will cause our framework to end the current level.
     //decLives();
-    return GWSTATUS_CONTINUE_GAME;
     //return GWSTATUS_PLAYER_DIED;
 }
 
