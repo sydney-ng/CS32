@@ -11,17 +11,37 @@ class AllObjects: public GraphObject
 {
 public:
     AllObjects(int imageID, double startX, double startY, int dir, double size, int depth);
-    virtual void doSomething()
+    void doSomething();
+
+    virtual void somethingBody()
     {
     };
-    
+
     virtual bool CheckIfAlive()
     {
         return true;
     };
 
 };
-////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
+
+////////////////////////////////IMPLEMENTATION FOR SHIPS CLASS////////////////////////////////
+class Ships: public AllObjects
+{
+public:
+    Ships(int imageID, double startX, double startY, int dir, double size, int depth);
+
+};
+
+////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS////////////////////////////////
+class NachenBlaster: public Ships
+{
+public:
+    NachenBlaster(int imageID, double startX, double startY, int dir, double size, int depth);
+private:
+    int m_HitPoints;
+    int m_CabbageEnergyPoints;
+};
+/*////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
 class Projectiles: public AllObjects
 {
 public:
@@ -33,8 +53,9 @@ class Cabbage: public Projectiles
 {
 public:
     Cabbage(int imageID, double startX, double startY, int dir, double size, int depth);
-    void doSomething();
-};
+    virtual void somethingBody();
+    bool CheckIfAlive();
+}; */
 
 ////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////
 
@@ -48,7 +69,7 @@ public:
     virtual ~Star ();
     
     //DoSomething Function
-    virtual void doSomething();
+    virtual void somethingBody();
     
     //checks if the star has gone off the screen to the left
     virtual bool CheckIfAlive();

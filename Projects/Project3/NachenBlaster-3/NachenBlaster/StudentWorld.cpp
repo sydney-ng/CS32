@@ -2,7 +2,6 @@
 #include "GameConstants.h"
 #include <string>
 //remove?
-#include "Actor.h"
 #include <iostream>
 using namespace std;
 
@@ -21,16 +20,16 @@ StudentWorld::StudentWorld(string assetDir)
 int StudentWorld::init()
 {
     Star *starP = new Star (IID_STAR, 100, 100, 0, .40, 3);
-    Cabbage *cabbageP = new Cabbage (IID_CABBAGE, 200, 200, 0, .5, 1);
+    //Cabbage *cabbageP = new Cabbage (IID_CABBAGE, 200, 200, 0, .5, 1);
     gameObjectVector.push_back(starP);
-    gameObjectVector.push_back(cabbageP);
+    //gameObjectVector.push_back(cabbageP);
 
     return GWSTATUS_CONTINUE_GAME;
 }
 
 int StudentWorld::move()
 {
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 1; i++)
     {
         gameObjectVector[i]->doSomething();
         if (gameObjectVector[i]->CheckIfAlive() == false)

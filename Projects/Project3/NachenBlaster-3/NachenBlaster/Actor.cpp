@@ -13,7 +13,33 @@ AllObjects::AllObjects(int imageID, double startX, double startY, int dir, doubl
 {
 }
 
-////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
+void AllObjects::doSomething()
+{
+    if (CheckIfAlive() == false)
+    {
+        return;
+    }
+    
+    somethingBody();
+    
+}
+
+////////////////////////////////IMPLEMENTATION FOR SHIPS CLASS////////////////////////////////
+
+Ships::Ships(int imageID, double startX, double startY, int dir, double size, int depth)
+:AllObjects(imageID, startX, startY, dir, size, depth)
+{
+}
+
+////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS////////////////////////////////
+NachenBlaster::NachenBlaster(int imageID, double startX, double startY, int dir, double size, int depth)
+:Ships(IID_NACHENBLASTER, 0, 128, 0, 1.0, 0)
+{
+    m_HitPoints = 50;
+    m_CabbageEnergyPoints = 30;
+}
+
+/*////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
 Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth)
 :AllObjects(imageID, startX, startY, dir, size, depth)
 {
@@ -26,10 +52,23 @@ Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size
     
 }
 
-void Cabbage::doSomething()
+void Cabbage::somethingBody()
 {
-    cerr << "Cabbage's do something!" << endl;
+    //if it's not alive, return false immediately
+    if (CheckIfAlive() == false)
+    {
+        return;
+    }
 }
+
+bool Cabbage::CheckIfAlive()
+{
+    if (getX() > VIEW_WIDTH || getX() == VIEW_WIDTH)
+    {
+        return false;
+    }
+    return true;
+} */
 ///////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////////
 Star::Star(int imageID, double startX, double startY, int dir, double size, int depth)
 : AllObjects(IID_STAR, startX, startY, 0, randInt(.05, .50), 3)
@@ -40,9 +79,9 @@ Star::~Star ()
 {
     cerr << "deconstructing a Star" << endl;
 }
-void Star::doSomething()
+void Star::somethingBody()
 {
-    cerr << "here in Star's DoSomething!" << endl;
+    cerr << "here in Star's DoSomething body!" << endl;
         //check if it's on the screen
     if (CheckIfAlive() == true)
     {
