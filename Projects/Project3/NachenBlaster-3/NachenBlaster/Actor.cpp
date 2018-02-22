@@ -8,27 +8,35 @@ using namespace std;
 
 
 ////////////////////////////////IMPLEMENTATION FOR ALLOBJECTS CLASS////////////////////////////////
-AllObjects::AllObjects(int imageID, double startX, double startY, int dir, double size, int depth)
+Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth)
 :GraphObject(imageID, startX, startY, dir, size, depth)
 {
 }
 
-void AllObjects::doSomething()
+void Actor::doSomething()
 {
     /*if (CheckIfAlive() == false)
     {
         return;
     }*/
-    
+    cerr << "In doSomething of Base Class! "<< endl;
     somethingBody();
     
 }
+StudentWorld* Actor::getWorld()
+{
+    return m_SudentworldPointer;
+}
 
+void Actor::whatWorld(StudentWorld* world)
+{
+    m_SudentworldPointer = world;
+}
 
 ////////////////////////////////IMPLEMENTATION FOR SHIPS CLASS////////////////////////////////
 
 Ships::Ships(int imageID, double startX, double startY, int dir, double size, int depth)
-:AllObjects(imageID, startX, startY, dir, size, depth)
+:Actor(imageID, startX, startY, dir, size, depth)
 {
 }
 
@@ -40,6 +48,48 @@ NachenBlaster::NachenBlaster()
     
     m_HitPoints = 50;
     m_CabbageEnergyPoints = 30;
+}
+
+void NachenBlaster::somethingBody()
+{
+    cerr << "IN THE BODY OF NACHENBLASTER" << endl;
+    int ch;
+    if (getWorld()->getKey(ch))
+    {
+    
+        if (ch == KEY_PRESS_LEFT)
+        {
+            int newX = getX()-6;
+            if (newX > 0)
+            {
+                moveTo(newX, getY());
+            }
+        }
+        else if (ch == KEY_PRESS_RIGHT)
+        {
+            int newX = getX()+6;
+            if (newX < VIEW_WIDTH)
+            {
+                moveTo(newX, getY());
+            }
+        }
+        else if (ch == KEY_PRESS_UP)
+        {
+            int newY = getY()+6;
+            if (newY < VIEW_HEIGHT)
+            {
+                moveTo(getX(), newY);
+            }
+        }
+        else if (ch == KEY_PRESS_DOWN)
+        {
+            int newY = getY()-6;
+            if (newY > 0)
+            {
+                moveTo(getX(), newY);
+            }
+        }
+    }
 }
 
 NachenBlaster::~NachenBlaster()
@@ -90,7 +140,7 @@ bool Cabbage::CheckIfAlive()
 } */
 ///////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////////
 Star::Star(int imageID, double startX, double startY, int dir, double size, int depth)
-: AllObjects(imageID, startX, startY, dir, size, depth)
+: Actor(imageID, startX, startY, dir, size, depth)
 {
 }
 

@@ -6,11 +6,12 @@
 // Students:  Add code to this file, Actor.cpp, StudentWorld.h, and StudentWorld.cpp
 
 ////////////////////////////////IMPLEMENTATION FOR ALLOBJECTS CLASS////////////////////////////////
+class StudentWorld;
 
-class AllObjects: public GraphObject
+class Actor: public GraphObject
 {
 public:
-    AllObjects(int imageID, double startX, double startY, int dir, double size, int depth);
+    Actor(int imageID, double startX, double startY, int dir, double size, int depth);
 
     void doSomething();
 
@@ -22,11 +23,16 @@ public:
     {
         return true;
     };
+    StudentWorld* getWorld();
+    void whatWorld(StudentWorld* world);
+    
+private:
+    StudentWorld *m_SudentworldPointer;
 
 };
 
 ////////////////////////////////IMPLEMENTATION FOR SHIPS CLASS////////////////////////////////
-class Ships: public AllObjects
+class Ships: public Actor
 {
 public:
     Ships(int imageID, double startX, double startY, int dir, double size, int depth);
@@ -40,7 +46,7 @@ public:
     NachenBlaster();
     virtual ~NachenBlaster();
     virtual bool CheckIfAlive();
-    
+    virtual void somethingBody();
 private:
     int m_HitPoints;
     int m_CabbageEnergyPoints;
@@ -63,7 +69,7 @@ public:
 
 ////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////
 
-class Star : public AllObjects
+class Star : public Actor
 {
 public:
     //constructor

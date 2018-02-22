@@ -22,9 +22,8 @@ public:
     //get the probability of each of the new objects
     void addNewObjects();
 private:
-    std::vector<AllObjects*> gameObjectVector;
-    NachenBlaster* m_NachenBlaster;
-    
+    std::vector<Actor*> gameObjectVector;
+    //NachenBlaster * m_NachenBlaster;
 };
 
 #endif // STUDENTWORLD_H_

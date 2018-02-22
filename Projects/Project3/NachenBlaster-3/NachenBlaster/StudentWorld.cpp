@@ -14,7 +14,7 @@ GameWorld* createStudentWorld(string assetDir)
 
 //CREATE NACHENBLASTER HERE?????
 StudentWorld::StudentWorld(string assetDir)
-: GameWorld(assetDir), m_NachenBlaster(nullptr)
+: GameWorld(assetDir) //, m_NachenBlaster(nullptr)
 {
 }
 
@@ -44,14 +44,17 @@ void StudentWorld::addNewObjects()
 
 int StudentWorld::init()
 {
+    //create a NachenBlaster
     NachenBlaster *nachenblasterP = new NachenBlaster ();
+    nachenblasterP->whatWorld(this);
+    gameObjectVector.push_back(nachenblasterP);
+
     //create 30 stars
     for (int i =0; i <30; i ++)
     {
         Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH), randInt(0, VIEW_HEIGHT), 0 , (randDouble(.05, .50)), 3);
         gameObjectVector.push_back(starP);
     }
-    //create a NachenBlaster
     
     return GWSTATUS_CONTINUE_GAME;
 }
@@ -79,7 +82,6 @@ int StudentWorld::move()
 
 void StudentWorld::cleanUp()
 {
-    delete m_NachenBlaster;
     for (int i =0; i < gameObjectVector.size(); i ++)
     {
         delete gameObjectVector[i];
