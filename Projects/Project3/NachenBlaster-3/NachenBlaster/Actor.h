@@ -12,7 +12,7 @@ class Actor: public GraphObject
 {
 public:
     Actor(int imageID, double startX, double startY, int dir, double size, int depth);
-
+    virtual ~Actor ();
     void doSomething();
 
     virtual void somethingBody()
@@ -28,6 +28,7 @@ public:
     
 private:
     StudentWorld *m_SudentworldPointer;
+    bool isAlive;
 
 };
 

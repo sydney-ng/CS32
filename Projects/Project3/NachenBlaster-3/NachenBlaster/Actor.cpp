@@ -9,7 +9,7 @@ using namespace std;
 
 ////////////////////////////////IMPLEMENTATION FOR ALLOBJECTS CLASS////////////////////////////////
 Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth)
-:GraphObject(imageID, startX, startY, dir, size, depth)
+:GraphObject(imageID, startX, startY, dir, size, depth), m_SudentworldPointer(nullptr)
 {
 }
 
@@ -23,6 +23,12 @@ void Actor::doSomething()
     somethingBody();
     
 }
+
+Actor::~Actor ()
+{
+    delete m_SudentworldPointer;
+}
+
 StudentWorld* Actor::getWorld()
 {
     return m_SudentworldPointer;
@@ -152,11 +158,10 @@ void Star::somethingBody()
 {
     cerr << "here in Star's somethingBody!" << endl;
         //check if it's on the screen
-    //if (CheckIfAlive() == true)
-    //{
+    if (CheckIfAlive() == true)
+    {
         moveTo(getX()-1, getY());
-    //}
-    //it's off the screen
+    }
 }
 
 bool Star:: CheckIfAlive()
