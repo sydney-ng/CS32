@@ -21,14 +21,19 @@ public:
 
     virtual bool CheckIfAlive()
     {
-        return true;
-    };
+        return false;
+    }
+    
+    bool AliveStatus();
+    
     StudentWorld* getWorld();
     void whatWorld(StudentWorld* world);
+    virtual void setDead();
     
 private:
     StudentWorld *m_SudentworldPointer;
-    bool isAlive;
+    bool m_isAlive;
+    int name_num;
 
 };
 

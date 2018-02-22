@@ -16,7 +16,7 @@ public:
     virtual int init();
     virtual int move();
     virtual void cleanUp();
-    
+    virtual void removeDead();
     //every tick, calculate the probability of a new object being created & execute
     double randDouble(double min, double max);
     //get the probability of each of the new objects

@@ -11,17 +11,29 @@ using namespace std;
 Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth)
 :GraphObject(imageID, startX, startY, dir, size, depth), m_SudentworldPointer(nullptr)
 {
+    m_isAlive = true;
+    name_num = startX;
+}
+
+void Actor::setDead()
+{
+    m_isAlive = false;
 }
 
 void Actor::doSomething()
 {
-    /*if (CheckIfAlive() == false)
+    if (CheckIfAlive() == false)
     {
+        cerr << "this is dead, marked dead" << endl;
+        setDead();
         return;
-    }*/
+    }
     cerr << "In doSomething of Base Class! "<< endl;
     somethingBody();
-    
+}
+bool Actor::AliveStatus()
+{
+    return m_isAlive;
 }
 
 Actor::~Actor ()
@@ -106,10 +118,10 @@ NachenBlaster::~NachenBlaster()
 bool NachenBlaster:: CheckIfAlive()
 {
     //make sure the hit points are above 0
-    if (m_HitPoints <= 0)
+    /*if (m_HitPoints <= 0)
     {
         return false;
-    }
+    }*/
     return true;
 }
 
@@ -158,19 +170,23 @@ void Star::somethingBody()
 {
     cerr << "here in Star's somethingBody!" << endl;
         //check if it's on the screen
-    if (CheckIfAlive() == true)
-    {
+    //if (CheckIfAlive() == true)
+    //{
         moveTo(getX()-1, getY());
-    }
+    //}
 }
 
 bool Star:: CheckIfAlive()
 {
     int x_coord = getX();
+    
     if (x_coord > 0)
     {
         return true;
     }
-    return false;
+    else
+    {
+        return false;
+    }
 }
 
