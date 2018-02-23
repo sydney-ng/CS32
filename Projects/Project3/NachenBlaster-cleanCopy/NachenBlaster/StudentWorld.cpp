@@ -36,8 +36,7 @@ void StudentWorld::addNewObjects()
     int StarChance = randInt(1, 15);
     if (StarChance == 1)
     {
-        Star *starP = new Star (IID_STAR, 255, randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3);
-        //starP->whatWorld(this);
+        Star *starP = new Star (IID_STAR, 255, randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
         gameObjectVector.push_back(starP);
     }
 }
@@ -46,15 +45,13 @@ void StudentWorld::addNewObjects()
 int StudentWorld::init()
 {
     //create a NachenBlaster
-    NachenBlaster *nachenblasterP = new NachenBlaster ();
-    nachenblasterP->whatWorld(this);
+    NachenBlaster *nachenblasterP = new NachenBlaster (this);
     gameObjectVector.push_back(nachenblasterP);
 
     //create 30 stars
     for (int i =0; i <30; i ++)
     {
-        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3);
-        //starP->whatWorld(this);
+        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
         gameObjectVector.push_back(starP);
     }
     

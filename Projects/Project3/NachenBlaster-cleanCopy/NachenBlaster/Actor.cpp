@@ -8,8 +8,8 @@ using namespace std;
 
 
 ////////////////////////////////IMPLEMENTATION FOR ALLOBJECTS CLASS////////////////////////////////
-Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth)
-:GraphObject(imageID, startX, startY, dir, size, depth), m_SudentworldPointer(nullptr)
+Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+:GraphObject(imageID, startX, startY, dir, size, depth), m_SudentworldPointer(world)
 {
     m_isAlive = true;
 }
@@ -41,14 +41,14 @@ void Actor::whatWorld(StudentWorld* world)
 
 ////////////////////////////////IMPLEMENTATION FOR SHIPS CLASS////////////////////////////////
 
-Ships::Ships(int imageID, double startX, double startY, int dir, double size, int depth)
-:Actor(imageID, startX, startY, dir, size, depth)
+Ships::Ships(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+:Actor(imageID, startX, startY, dir, size, depth, world)
 {
 }
 
 ////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS////////////////////////////////
-NachenBlaster::NachenBlaster()
-:Ships(IID_NACHENBLASTER, 0, 128, 0, 1.0, 0)
+NachenBlaster::NachenBlaster(StudentWorld *world)
+:Ships(IID_NACHENBLASTER, 0, 128, 0, 1.0, 0, world)
 {
     cerr << "in nachenblaster constructor " << endl;
     
@@ -95,6 +95,15 @@ void NachenBlaster::somethingBody()
                 moveTo(getX(), newY);
             }
         }
+        else if (ch == KEY_PRESS_SPACE)
+        {
+            if (m_CabbageEnergyPoints > 5 || m_CabbageEnergyPoints == 5)
+            {
+                //fire a cabbage
+                //reduce cabbage points by 5
+                m_CabbageEnergyPoints -= 5; 
+            }
+        }
     }
 }
 
@@ -106,26 +115,32 @@ NachenBlaster::~NachenBlaster()
 bool NachenBlaster:: CheckIfAlive()
 {
     //make sure the hit points are above 0
-    /*if (m_HitPoints <= 0)
+    if (m_HitPoints <= 0)
     {
         return false;
-    }*/
+    }
     
     return true;
 }
 
 
-/*////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
-Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth)
-:AllObjects(imageID, startX, startY, dir, size, depth)
+/////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
+Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+:Actor(imageID, startX, startY, dir, size, depth, world)
 {
-    
 }
-////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
-Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size, int depth)
-:Projectiles(IID_CABBAGE, startX, startY, 0, .5, 1)
+Projectiles::~Projectiles ()
 {
-    
+}
+
+////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
+Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+:Projectiles(IID_CABBAGE, startX, startY, 0, .5, 1, world)
+{
+}
+
+Cabbage::~Cabbage()
+{
 }
 
 void Cabbage::somethingBody()
@@ -144,10 +159,10 @@ bool Cabbage::CheckIfAlive()
         return false;
     }
     return true;
-} */
+} 
 ///////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////////
-Star::Star(int imageID, double startX, double startY, int dir, double size, int depth)
-: Actor(imageID, startX, startY, dir, size, depth)
+Star::Star(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+: Actor(imageID, startX, startY, dir, size, depth, world)
 {
 }
 

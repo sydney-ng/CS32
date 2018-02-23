@@ -11,7 +11,7 @@ class StudentWorld;
 class Actor: public GraphObject
 {
 public:
-    Actor(int imageID, double startX, double startY, int dir, double size, int depth);
+    Actor(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
 
     ~Actor();
     
@@ -50,7 +50,7 @@ private:
 class Ships: public Actor
 {
 public:
-    Ships(int imageID, double startX, double startY, int dir, double size, int depth);
+    Ships(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
 
 };
 
@@ -58,7 +58,7 @@ public:
 class NachenBlaster: public Ships
 {
 public:
-    NachenBlaster();
+    NachenBlaster(StudentWorld *world);
     virtual ~NachenBlaster();
     virtual bool CheckIfAlive();
     virtual void somethingBody();
@@ -66,21 +66,23 @@ private:
     int m_HitPoints;
     int m_CabbageEnergyPoints;
 };
-/*////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
-class Projectiles: public AllObjects
+/////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
+class Projectiles: public Actor
 {
 public:
-    Projectiles(int imageID, double startX, double startY, int dir, double size, int depth);
+    Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    virtual ~Projectiles();
 };
 
 ////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
 class Cabbage: public Projectiles
 {
 public:
-    Cabbage(int imageID, double startX, double startY, int dir, double size, int depth);
+    Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    virtual ~Cabbage();
     virtual void somethingBody();
     bool CheckIfAlive();
-}; */
+};
 
 ////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////
 
@@ -88,7 +90,7 @@ class Star : public Actor
 {
 public:
     //constructor
-    Star(int imageID, double startX, double startY, int dir, double size, int depth);
+    Star(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     
     //destructor
     virtual ~Star ();
