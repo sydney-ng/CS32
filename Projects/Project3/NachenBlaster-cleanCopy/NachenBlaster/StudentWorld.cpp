@@ -36,7 +36,7 @@ void StudentWorld::addNewObjects()
     int StarChance = randInt(1, 15);
     if (StarChance == 1)
     {
-        Star *starP = new Star (IID_STAR, 255, randInt(0, VIEW_HEIGHT), 0 , (randDouble(.05, .50)), 3);
+        Star *starP = new Star (IID_STAR, 255, randInt(0, VIEW_WIDTH), 0 , (randDouble(.05, .50)), 3);
         //starP->whatWorld(this);
         gameObjectVector.push_back(starP);
     }
@@ -51,7 +51,7 @@ int StudentWorld::init()
     gameObjectVector.push_back(nachenblasterP);
 
     //create 30 stars
-    for (int i =0; i <3; i ++)
+    for (int i =0; i <30; i ++)
     {
         Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH), randInt(0, VIEW_HEIGHT), 0 , (randDouble(.05, .50)), 3);
         //starP->whatWorld(this);
@@ -106,5 +106,7 @@ void StudentWorld::cleanUp()
     for (int i =0; i < gameObjectVector.size(); i ++)
     {
         delete gameObjectVector[i];
+        gameObjectVector[i] = nullptr;
+        //gameObjectVector.erase(gameObjectVector[i]);
     }
 }

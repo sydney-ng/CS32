@@ -9,7 +9,7 @@ using namespace std;
 
 ////////////////////////////////IMPLEMENTATION FOR ALLOBJECTS CLASS////////////////////////////////
 Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth)
-:GraphObject(imageID, startX, startY, dir, size, depth)
+:GraphObject(imageID, startX, startY, dir, size, depth), m_SudentworldPointer(nullptr)
 {
     m_isAlive = true;
 }
