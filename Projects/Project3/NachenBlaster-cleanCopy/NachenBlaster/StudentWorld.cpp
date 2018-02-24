@@ -38,7 +38,6 @@ void StudentWorld::ProbabilityaddNewObjects()
     {
         Star *starP = new Star (IID_STAR, 255, randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
         gameObjectVector.push_back(starP);
-
     }
     
 }

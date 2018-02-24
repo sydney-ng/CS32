@@ -57,13 +57,28 @@ Ships::Ships(int imageID, double startX, double startY, int dir, double size, in
 {
 }
 
-////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS////////////////////////////////
+void Ships::setHitPoints(int hits)
+{
+    m_HitPoints = hits;
+}
+
+void Ships::UpdateHitPoints (int hits)
+{
+    m_HitPoints += hits;
+}
+
+int Ships::getHitPoints()
+{
+    return m_HitPoints;
+}
+
+////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS/////////////////////////////
 NachenBlaster::NachenBlaster(StudentWorld *world)
 :Ships(IID_NACHENBLASTER, 0, 128, 0, 1.0, 0, world)
 {
     cerr << "in nachenblaster constructor " << endl;
     
-    m_HitPoints = 50;
+    setHitPoints(50);
     m_CabbageEnergyPoints = 30;
 }
 
@@ -121,6 +136,9 @@ void NachenBlaster::somethingBody()
             }
         }
     }
+    //give the NB 5 more cabbage points, just cuz
+    m_CabbageEnergyPoints += 5;
+
 }
 
 NachenBlaster::~NachenBlaster()
@@ -131,7 +149,7 @@ NachenBlaster::~NachenBlaster()
 bool NachenBlaster:: CheckIfAlive()
 {
     //make sure the hit points are above 0
-    if (m_HitPoints <= 0)
+    if (getHitPoints()<= 0)
     {
         return false;
     }
@@ -139,12 +157,27 @@ bool NachenBlaster:: CheckIfAlive()
     return true;
 }
 
+/////////////////////////////////IMPLEMENTATION FOR ALIENS CLASS////////////////////////////////////
+
+Aliens::Aliens(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+:Ships(imageID, startX, startY, dir, size, depth, world)
+{
+}
+
+
+/////////////////////////////////IMPLEMENTATION FOR SMALLGON CLASS////////////////////////////////////
+
+Smallgon::Smallgon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+:Aliens(IID_SMALLGON, startX, startY, 0, 1.5, 1, world)
+{
+}
 
 /////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
 Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Actor(imageID, startX, startY, dir, size, depth, world)
 {
 }
+
 Projectiles::~Projectiles ()
 {
 }

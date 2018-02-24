@@ -48,7 +48,11 @@ class Ships: public Actor
 {
 public:
     Ships(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
-
+    void setHitPoints(int hits);
+    void UpdateHitPoints (int hits);
+    int getHitPoints();
+private:
+    int m_HitPoints;
 };
 
 ////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS////////////////////////////////
@@ -60,9 +64,24 @@ public:
     virtual bool CheckIfAlive();
     virtual void somethingBody();
 private:
-    int m_HitPoints;
+    //int m_HitPoints;
     int m_CabbageEnergyPoints;
 };
+
+/////////////////////////////////IMPLEMENTATION FOR ALIENS CLASS////////////////////////////////
+class Aliens: public Ships
+{
+public:
+    Aliens(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+};
+
+/////////////////////////////////IMPLEMENTATION FOR SMALLGON CLASS////////////////////////////////
+class Smallgon: public Aliens
+{
+public:
+    Smallgon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+};
+
 /////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
 class Projectiles: public Actor
 {
