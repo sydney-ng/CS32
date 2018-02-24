@@ -15,12 +15,23 @@ public:
     virtual ~StudentWorld();
     virtual int init();
     virtual int move();
+    
+    //basically destructor
     virtual void cleanUp();
+    
+    //call after the doSomething to check what to remove
     void removeDead();
+    
     //every tick, calculate the probability of a new object being created & execute
     double randDouble(double min, double max);
+    
     //get the probability of each of the new objects
-    void addNewObjects();
+    void ProbabilityaddNewObjects();
+    
+    //add a new object to the vector
+    void AddObjectToVector(Actor * ActorP);
+
+    
 private:
     std::vector<Actor*> gameObjectVector;
     //NachenBlaster * m_NachenBlaster;

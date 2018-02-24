@@ -30,7 +30,7 @@ double StudentWorld::randDouble(double min, double max)
     return abs(x);
 }
 
-void StudentWorld::addNewObjects()
+void StudentWorld::ProbabilityaddNewObjects()
 {
     //add a possible star?
     int StarChance = randInt(1, 15);
@@ -43,6 +43,11 @@ void StudentWorld::addNewObjects()
     
 }
 
+void StudentWorld::AddObjectToVector(Actor * ActorP)
+{
+    gameObjectVector.push_back(ActorP);
+    cerr << "added cabbage to the vec" <<endl;
+}
 
 int StudentWorld::init()
 {
@@ -64,7 +69,7 @@ int StudentWorld::init()
     Turnip *turnipP = new Turnip (IID_TURNIP, 255, 200, 0, .5, 1, this);
     gameObjectVector.push_back(turnipP);
     
-    F_Torpedo *f_torpP = new F_Torpedo (IID_TORPEDO, 0, 50, 0, .5, 1, this, IID_NACHENBLASTER);
+    F_Torpedo *f_torpP = new F_Torpedo (IID_TORPEDO, 1, 50, 0, .5, 1, this, IID_NACHENBLASTER);
     gameObjectVector.push_back(f_torpP);
 
     
@@ -74,7 +79,7 @@ int StudentWorld::init()
 int StudentWorld::move()
 {
     //add more objects?
-    addNewObjects();
+    ProbabilityaddNewObjects();
     for (int i = 0; i < gameObjectVector.size(); i++)
     {
         

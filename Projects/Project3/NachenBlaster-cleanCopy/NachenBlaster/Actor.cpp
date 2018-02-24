@@ -12,6 +12,7 @@ Actor::Actor(int imageID, double startX, double startY, int dir, double size, in
 :GraphObject(imageID, startX, startY, dir, size, depth), m_SudentworldPointer(world)
 {
     m_isAlive = true;
+    cerr << "created object using Actor Constructor " << endl;
 }
 
 void Actor::doSomething()
@@ -109,7 +110,12 @@ void NachenBlaster::somethingBody()
         {
             if (m_CabbageEnergyPoints > 5 || m_CabbageEnergyPoints == 5)
             {
-                //fire a cabbage
+                //fire a cabbage by adding a new cabbage 12 pxl to the right of NB
+                //Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+
+                Cabbage* actorP = new Cabbage (IID_CABBAGE, getX()+12, getY(), 0, .5, 1, getWorld());
+                getWorld()->AddObjectToVector(actorP);
+                
                 //reduce cabbage points by 5
                 m_CabbageEnergyPoints -= 5; 
             }
@@ -147,11 +153,12 @@ Projectiles::~Projectiles ()
 Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Projectiles(IID_CABBAGE, startX, startY, 0, .5, 1, world)
 {
+    cerr << "created a cabbage " << endl;
 }
 
 Cabbage::~Cabbage()
 {
-    cerr << "deconstructing a cabbage"; 
+    cerr << "deconstructing a cabbage" << endl;
 }
 
 void Cabbage::somethingBody()
