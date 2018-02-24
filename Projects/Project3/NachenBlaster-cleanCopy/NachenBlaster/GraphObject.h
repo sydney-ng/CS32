@@ -1,4 +1,4 @@
-#ifndef GRAPHOBJ_H_
+ #ifndef GRAPHOBJ_H_
 #define GRAPHOBJ_H_
 
 #include "GameConstants.h"

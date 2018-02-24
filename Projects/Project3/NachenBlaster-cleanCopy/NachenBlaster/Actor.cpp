@@ -16,7 +16,7 @@ Actor::Actor(int imageID, double startX, double startY, int dir, double size, in
 
 void Actor::doSomething()
 {
-    if (CheckIfAlive() == false)
+    if (CheckIfAlive() 	== false)
     {
         setDead();
         return;
@@ -28,6 +28,16 @@ void Actor::doSomething()
 Actor::~Actor()
 {
 }
+
+bool Actor::CheckIfAlive()
+{
+    int x_coord = getX();
+    if (x_coord > 0 && x_coord < VIEW_WIDTH)
+    {
+        return true;
+    }
+    return false;
+};
 
 StudentWorld* Actor::getWorld()
 {
@@ -141,28 +151,76 @@ Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size
 
 Cabbage::~Cabbage()
 {
+    cerr << "deconstructing a cabbage"; 
 }
 
 void Cabbage::somethingBody()
 {
-    //if it's not alive, return false immediately
-    if (CheckIfAlive() == false)
-    {
-        return;
-    }
+    cerr << " in something fx() of cabbage" << endl;
+
+    //move 8 px to the right
+    moveTo (getX() + 8, getY());
+    setDirection(20);
 }
 
 bool Cabbage::CheckIfAlive()
 {
+    cerr << " in checkIAlive fx() of cabbage" << endl;
+    //if it's not alive, return false immediately
     if (getX() > VIEW_WIDTH || getX() == VIEW_WIDTH)
     {
+        cerr << "it's dead" << endl;
         return false;
     }
     return true;
-} 
+}
+
+////////////////////////////////IMPLEMENTATION FOR TURNIP CLASS//////////////////////////////////////
+Turnip::Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world)
+{
+}
+
+Turnip::~Turnip()
+{
+    cerr << "deconstructing a turnip";
+}
+void Turnip::somethingBody()
+{
+    moveTo(getX()-6, getY());
+    setDirection(20);
+}
+
+
+////////////////////////////////IMPLEMENTATION FOR FLATULAN TORPEDO CLASS//////////////////////////////////////
+F_Torpedo::F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner)
+:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world)
+{
+    m_owner = owner;
+}
+
+F_Torpedo::~F_Torpedo()
+{
+    cerr << "deconstructing a turnip";
+}
+
+void F_Torpedo::somethingBody()
+{
+    if (m_owner == IID_NACHENBLASTER)
+    {
+        //move right by 8 pxl
+        moveTo(getX()+8, getY());
+    }
+    
+    if (m_owner == IID_SNAGGLEGON)
+    {
+        //move left by 8 pxl
+        moveTo(getX()-8, getY());
+    }
+}
 ///////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////////
 Star::Star(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
-: Actor(imageID, startX, startY, dir, size, depth, world)
+: Actor(imageID, startX, startY, 0, .5, 1, world)
 {
 }
 
@@ -173,21 +231,7 @@ Star::~Star ()
 void Star::somethingBody()
 {
     cerr << "here in Star's somethingBody!" << endl;
-        //check if it's on the screen
-    //if (CheckIfAlive() == true)
-    //{
-        moveTo(getX()-1, getY());
-    //}
-    //it's off the screen
+    
+    //check if it's on the screen
+    moveTo(getX()-1, getY());
 }
-
-bool Star:: CheckIfAlive()
-{
-    int x_coord = getX();
-    if (x_coord > 0)
-    {
-        return true;
-    }
-    return false;
-}
-

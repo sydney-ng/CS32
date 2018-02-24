@@ -38,7 +38,9 @@ void StudentWorld::addNewObjects()
     {
         Star *starP = new Star (IID_STAR, 255, randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
         gameObjectVector.push_back(starP);
+
     }
+    
 }
 
 
@@ -54,6 +56,17 @@ int StudentWorld::init()
         Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
         gameObjectVector.push_back(starP);
     }
+    
+    
+    Cabbage * cabbageP = new Cabbage (IID_CABBAGE, 0, 100, 0, .5, 1, this);
+    gameObjectVector.push_back(cabbageP);
+    
+    Turnip *turnipP = new Turnip (IID_TURNIP, 255, 200, 0, .5, 1, this);
+    gameObjectVector.push_back(turnipP);
+    
+    F_Torpedo *f_torpP = new F_Torpedo (IID_TORPEDO, 0, 50, 0, .5, 1, this, IID_NACHENBLASTER);
+    gameObjectVector.push_back(f_torpP);
+
     
     return GWSTATUS_CONTINUE_GAME;
 }

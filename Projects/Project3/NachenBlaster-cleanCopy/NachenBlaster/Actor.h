@@ -21,10 +21,7 @@ public:
     {
     };
 
-    virtual bool CheckIfAlive()
-    {
-        return true;
-    };
+    virtual bool CheckIfAlive();
     
     bool AliveStatus()
     {
@@ -81,9 +78,27 @@ public:
     Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     virtual ~Cabbage();
     virtual void somethingBody();
-    bool CheckIfAlive();
+    virtual bool CheckIfAlive();
 };
 
+////////////////////////////////IMPLEMENTATION FOR TURNIP CLASS////////////////////////////////
+class Turnip: public Projectiles
+{
+public:
+    Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    virtual ~Turnip();
+    virtual void somethingBody();
+};
+////////////////////////////////IMPLEMENTATION FOR FLATULAN TORPEDO CLASS//////////////////////////////////////
+class F_Torpedo: public Projectiles
+{
+public:
+    F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner);
+    virtual ~F_Torpedo();
+    virtual void somethingBody();
+private:
+    int m_owner;
+};
 ////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////
 
 class Star : public Actor
@@ -99,6 +114,6 @@ public:
     virtual void somethingBody();
     
     //checks if the star has gone off the screen to the left
-    virtual bool CheckIfAlive();
+    //virtual bool CheckIfAlive();
 };
 #endif // ACTOR_H_
