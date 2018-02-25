@@ -14,7 +14,7 @@ GameWorld* createStudentWorld(string assetDir)
 
 //CREATE NACHENBLASTER HERE?????
 StudentWorld::StudentWorld(string assetDir)
-: GameWorld(assetDir) //, m_NachenBlaster(nullptr)
+: GameWorld(assetDir), m_NachenBlaster(nullptr)
 {
 }
 
@@ -42,6 +42,10 @@ void StudentWorld::ProbabilityaddNewObjects()
     
 }
 
+NachenBlaster* StudentWorld::getNachenblasterPointer()
+{
+    return m_NachenBlaster;
+}
 void StudentWorld::AddObjectToVector(Actor * ActorP)
 {
     gameObjectVector.push_back(ActorP);
@@ -53,14 +57,21 @@ int StudentWorld::init()
     //create a NachenBlaster
     NachenBlaster *nachenblasterP = new NachenBlaster (this);
     gameObjectVector.push_back(nachenblasterP);
-
+    
+    Smallgon *smallgonP = new Smallgon (IID_SMALLGON, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
+    gameObjectVector.push_back(smallgonP);
+    //set member variable equal to the item in the Vector that is the NB
+    m_NachenBlaster = nachenblasterP;
+    
     //create 30 stars
-    for (int i =0; i <30; i ++)
+    /*for (int i =0; i <30; i ++)
     {
         Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
         gameObjectVector.push_back(starP);
     }
     
+   
+
     
     Cabbage * cabbageP = new Cabbage (IID_CABBAGE, 0, 100, 0, .5, 1, this);
     gameObjectVector.push_back(cabbageP);
@@ -70,15 +81,16 @@ int StudentWorld::init()
     
     F_Torpedo *f_torpP = new F_Torpedo (IID_TORPEDO, 1, 50, 0, .5, 1, this, IID_NACHENBLASTER);
     gameObjectVector.push_back(f_torpP);
-
+*/
     
     return GWSTATUS_CONTINUE_GAME;
 }
 
 int StudentWorld::move()
 {
+    //PUT BACK IN
     //add more objects?
-    ProbabilityaddNewObjects();
+   // ProbabilityaddNewObjects();
     for (int i = 0; i < gameObjectVector.size(); i++)
     {
         
@@ -99,7 +111,7 @@ int StudentWorld::move()
 
 void StudentWorld::removeDead()
 {
-    cerr << "at the beginning, remove dead size is : " << gameObjectVector.size();
+    cerr << "at the beginning, remove dead size is : " << gameObjectVector.size() << endl;;
     vector<Actor*>::iterator vi = gameObjectVector.begin();
     while (vi!= gameObjectVector.end())
     {
@@ -112,7 +124,7 @@ void StudentWorld::removeDead()
         vi++;
     }
     
-    cerr << "at the end, remove dead size is : " << gameObjectVector.size();
+    cerr << "at the end, remove dead size is : " << gameObjectVector.size() <<endl;
 }
 
 void StudentWorld::cleanUp()

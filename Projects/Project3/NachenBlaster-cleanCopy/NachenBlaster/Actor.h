@@ -12,28 +12,20 @@ class Actor: public GraphObject
 {
 public:
     Actor(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
-
     ~Actor();
-    
-    void doSomething();
-
+    virtual void doSomething();
     virtual void somethingBody()
     {
     };
-
     virtual bool CheckIfAlive();
-    
     bool AliveStatus()
     {
         return m_isAlive;
     }
-    
     void setDead()
     {
         m_isAlive = false;
     }
-
-    
     StudentWorld* getWorld();
     void whatWorld(StudentWorld* world);
     
@@ -51,6 +43,10 @@ public:
     void setHitPoints(int hits);
     void UpdateHitPoints (int hits);
     int getHitPoints();
+    bool CheckIfAlive();
+    virtual void doSomething();
+    virtual void moveShip();
+
 private:
     int m_HitPoints;
 };
@@ -61,8 +57,7 @@ class NachenBlaster: public Ships
 public:
     NachenBlaster(StudentWorld *world);
     virtual ~NachenBlaster();
-    virtual bool CheckIfAlive();
-    virtual void somethingBody();
+    virtual void moveShip();
 private:
     //int m_HitPoints;
     int m_CabbageEnergyPoints;
@@ -73,6 +68,15 @@ class Aliens: public Ships
 {
 public:
     Aliens(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    int getFlightPlan();
+    double getTravelSpeed();
+    virtual void moveShip();
+    bool CollisionOccurred();
+    double CalculateEcludianDistance(double x1, double y1, double x2, double y2);
+
+private:
+    int m_flightPlan;
+    double m_TravelSpeed;
 };
 
 /////////////////////////////////IMPLEMENTATION FOR SMALLGON CLASS////////////////////////////////
@@ -80,6 +84,19 @@ class Smallgon: public Aliens
 {
 public:
     Smallgon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    virtual void somethingBody();
+/*private:
+    int m_flightPlan;
+    double m_TravelSpeed;*/
+};
+
+////////////////////////////////IMPLEMENTATION FOR SMOREGON CLASS/////////////////////////////
+
+class Smoregon: public Aliens
+{
+public:
+    Smoregon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    //virtual void somethingBody();
 };
 
 /////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////

@@ -31,10 +31,10 @@ public:
     //add a new object to the vector
     void AddObjectToVector(Actor * ActorP);
 
-    
+    NachenBlaster* getNachenblasterPointer();
 private:
     std::vector<Actor*> gameObjectVector;
-    //NachenBlaster * m_NachenBlaster;
+    NachenBlaster * m_NachenBlaster;
 };
 
 #endif // STUDENTWORLD_H_
