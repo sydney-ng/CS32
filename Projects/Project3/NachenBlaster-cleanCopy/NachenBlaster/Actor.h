@@ -3,6 +3,9 @@
 
 #include "GraphObject.h"
 
+//REMOVE THESE BOTTOM TWO
+#include <iostream>
+using namespace std;
 // Students:  Add code to this file, Actor.cpp, StudentWorld.h, and StudentWorld.cpp
 
 ////////////////////////////////IMPLEMENTATION FOR ALLOBJECTS CLASS////////////////////////////////
@@ -20,6 +23,7 @@ public:
     virtual bool CheckIfAlive();
     bool AliveStatus()
     {
+        cerr << "the alive status () is " << m_isAlive << endl;
         return m_isAlive;
     }
     void setDead()
@@ -40,6 +44,7 @@ class Ships: public Actor
 {
 public:
     Ships(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    ~Ships();
     void setHitPoints(int hits);
     void UpdateHitPoints (int hits);
     int getHitPoints();
@@ -58,6 +63,7 @@ public:
     NachenBlaster(StudentWorld *world);
     virtual ~NachenBlaster();
     virtual void moveShip();
+    void SufferDamage();
 private:
     //int m_HitPoints;
     int m_CabbageEnergyPoints;
@@ -68,11 +74,13 @@ class Aliens: public Ships
 {
 public:
     Aliens(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    ~Aliens();
     int getFlightPlan();
     double getTravelSpeed();
     virtual void moveShip();
     bool CollisionOccurred();
     double CalculateEcludianDistance(double x1, double y1, double x2, double y2);
+    void PostCollisionActions();
 
 private:
     int m_flightPlan;
@@ -84,10 +92,11 @@ class Smallgon: public Aliens
 {
 public:
     Smallgon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    ~Smallgon();
     virtual void somethingBody();
-/*private:
-    int m_flightPlan;
-    double m_TravelSpeed;*/
+    //private:
+  //  int m_flightPlan;
+   // double m_TravelSpeed;*/
 };
 
 ////////////////////////////////IMPLEMENTATION FOR SMOREGON CLASS/////////////////////////////
@@ -148,8 +157,19 @@ public:
     
     //DoSomething Function
     virtual void somethingBody();
-    
     //checks if the star has gone off the screen to the left
     //virtual bool CheckIfAlive();
 };
+////////////////////////////////IMPLEMENTATION FOR EXPLOSION CLASS////////////////////////////////
+class Explosion : public Actor
+{
+public:
+    Explosion(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    ~Explosion();
+    virtual void somethingBody();
+    virtual bool CheckIfAlive();
+private:
+    int m_AliveTicksLeft;
+};
+
 #endif // ACTOR_H_

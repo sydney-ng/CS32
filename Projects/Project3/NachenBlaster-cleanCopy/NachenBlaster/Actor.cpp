@@ -59,6 +59,9 @@ Ships::Ships(int imageID, double startX, double startY, int dir, double size, in
     m_HitPoints = 5 * (1 + ( curr_level - 1) * .1);
 }
 
+Ships::~Ships()
+{
+}
 void Ships::setHitPoints(int hits)
 {
     m_HitPoints = hits;
@@ -179,6 +182,13 @@ void NachenBlaster::moveShip()
     m_CabbageEnergyPoints += 5;
 }
 
+void NachenBlaster::SufferDamage()
+{
+    cerr << "before suffering damage, the cabbage points was: " << m_CabbageEnergyPoints << endl;
+    m_CabbageEnergyPoints -= 5;
+    cerr << "after suffering damage, the cabbage points is: " << m_CabbageEnergyPoints << endl;
+
+}
 NachenBlaster::~NachenBlaster()
 {
     cerr << "deconstructing NachenBlaster"<< endl;
@@ -191,6 +201,10 @@ Aliens::Aliens(int imageID, double startX, double startY, int dir, double size, 
 {
     m_flightPlan = 0;
     m_TravelSpeed = 2.0;
+}
+
+Aliens::~Aliens()
+{
 }
 
 int Aliens::getFlightPlan()
@@ -209,15 +223,32 @@ void Aliens::moveShip()
     //check if it collided with NB
     if (CollisionOccurred()==true)
     {
-        cerr << "THERE WAS A COLLISION!! you collided, bro" << endl;
+        return PostCollisionActions();
+        
     }
-    else
-    {
-        cerr << "none collided" << endl;
-    }
-    somethingBody();
+    //somethingBody();
 }
 
+void Aliens::PostCollisionActions()
+{
+    cerr << "YOU COLLIDED!" << endl;
+    //suffer damage to NB
+    getWorld()->getNachenblasterPointer()->SufferDamage();
+    
+    //add points to player's game
+    getWorld()->SetGamePoints(250);
+    
+    //play soundDeath
+    getWorld()->playSound(SOUND_DEATH);
+    
+    //INTRODUCE EXPLOSION
+    
+    //make the alien ship dead so it'll be removed
+    setDead();
+    
+    //DROP GOODIE?
+
+}
 bool Aliens::CollisionOccurred()
 {
     
@@ -255,10 +286,14 @@ Smallgon::Smallgon(int imageID, double startX, double startY, int dir, double si
 :Aliens(IID_SMALLGON, startX, startY, 0, 1.5, 1, world)
 {
 }
+Smallgon::~Smallgon()
+{
+    cerr << "destructing Smallgon" << endl;
+}
 
 void Smallgon::somethingBody()
 {
-    cerr << "status of SMALLGON is: " << AliveStatus() << endl;
+    /*//cerr << "status of SMALLGON is: " << AliveStatus() << endl;
     cerr << "IN SMALLGON MOVESHIP" << endl;
     //flight plan length has reached zero, top, or bottom
     if (getFlightPlan() == 0 || getY() == VIEW_HEIGHT -1 || getY() < 1)
@@ -268,7 +303,7 @@ void Smallgon::somethingBody()
         {
          //then the Smallgon will set its travel direction to down and left.
         }
-    }
+    }*/
 }
 
 ////////////////////////////////IMPLEMENTATION FOR SMOREGON CLASS/////////////////////////////
@@ -379,4 +414,28 @@ void Star::somethingBody()
     
     //check if it's on the screen
     moveTo(getX()-1, getY());
+}
+////////////////////////////////IMPLEMENTATION FOR EXPLOSION CLASS////////////////////////////////
+Explosion::Explosion(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+: Actor(imageID, startX, startY, 0, .5, 1, world)
+{
+    m_AliveTicksLeft = 4;
+}
+
+void Explosion::somethingBody()
+{
+    m_AliveTicksLeft --;
+}
+Explosion::~Explosion()
+{
+    cerr << "destroying explosion";
+}
+
+bool Explosion::CheckIfAlive()
+{
+    if (m_AliveTicksLeft > 0)
+    {
+        return true;
+    }
+    return false;
 }

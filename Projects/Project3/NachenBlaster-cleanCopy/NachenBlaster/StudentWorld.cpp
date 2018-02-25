@@ -13,14 +13,23 @@ GameWorld* createStudentWorld(string assetDir)
 // Students:  Add code to this file, StudentWorld.h, Actor.h and Actor.cpp
 
 //CREATE NACHENBLASTER HERE?????
+//CHANGE GAME POINTS
 StudentWorld::StudentWorld(string assetDir)
 : GameWorld(assetDir), m_NachenBlaster(nullptr)
 {
+    m_GamePoints = 0;
 }
 
 StudentWorld::~StudentWorld()
 {
     cleanUp();
+}
+
+void StudentWorld::SetGamePoints(int points)
+{
+    cerr << "before the game points were " << m_GamePoints << endl;
+    m_GamePoints += points;
+    cerr << "now the game points are: " << m_GamePoints << endl;
 }
 
 double StudentWorld::randDouble(double min, double max)
@@ -58,7 +67,7 @@ int StudentWorld::init()
     NachenBlaster *nachenblasterP = new NachenBlaster (this);
     gameObjectVector.push_back(nachenblasterP);
     
-    Smallgon *smallgonP = new Smallgon (IID_SMALLGON, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
+    Smallgon *smallgonP = new Smallgon (IID_SMALLGON, 0, 128, 0 , (randDouble(.05, .50)), 3, this);
     gameObjectVector.push_back(smallgonP);
     //set member variable equal to the item in the Vector that is the NB
     m_NachenBlaster = nachenblasterP;
@@ -91,16 +100,22 @@ int StudentWorld::move()
     //PUT BACK IN
     //add more objects?
    // ProbabilityaddNewObjects();
+    cerr << "let's move all the objects! " << endl << endl;
+    cerr << "the object vector size at the beginning of move is: " << gameObjectVector.size() << endl;
+
     for (int i = 0; i < gameObjectVector.size(); i++)
     {
         
-        cerr << "object number " << i << endl;
-        if (gameObjectVector.size() > 0)
+        cerr << "about to move object number " << i << endl;
+        if (gameObjectVector.size() > 0 && gameObjectVector[i]->getWorld() != nullptr)
         {
             gameObjectVector[i]->doSomething();
         }
+        cerr << "finished the move for object number " << i << endl;
+
     }
     removeDead();
+    cerr << "finished removing dead" <<endl;
     return GWSTATUS_CONTINUE_GAME;
 
     // This code is here merely to allow the game to build, run, and terminate after you hit enter.
@@ -113,18 +128,30 @@ void StudentWorld::removeDead()
 {
     cerr << "at the beginning, remove dead size is : " << gameObjectVector.size() << endl;;
     vector<Actor*>::iterator vi = gameObjectVector.begin();
+    int counter = 0;
     while (vi!= gameObjectVector.end())
     {
-        if ((*vi)->AliveStatus() == false)
+        cerr << "on object " << counter << endl;
+        if (*vi != nullptr)
         {
-            cerr << "found a dead one " << endl;
-            delete *vi;
-            vi = gameObjectVector.erase(vi);
+            cerr << "going to check if it's alive" <<endl;
+            if ((*vi)->AliveStatus() == false)
+            {
+                cerr << "object " << counter << " is dead "<< endl;
+                delete *vi;
+                vi = gameObjectVector.erase(vi);
+                counter --;
+            
+                cerr << "the size of objectVector after deleting this object is now: " << gameObjectVector.size() << endl;
+            }
         }
+                cerr << "okay, now go to the next one" << endl << endl;
         vi++;
+        counter = counter + 1;
+
     }
     
-    cerr << "at the end, remove dead size is : " << gameObjectVector.size() <<endl;
+    cerr << "at the end of all removes, the vector size is : " << gameObjectVector.size() <<endl;
 }
 
 void StudentWorld::cleanUp()
