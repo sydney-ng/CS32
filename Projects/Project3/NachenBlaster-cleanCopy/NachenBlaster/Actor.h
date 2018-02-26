@@ -71,6 +71,7 @@ public:
     NachenBlaster(StudentWorld *world);
     virtual ~NachenBlaster();
     virtual void moveShip();
+    virtual void somethingBody(); 
     //CHECK IF THIS WORKS? NO PARAMETERS
     virtual void SufferDamage(int ID);
 private:
@@ -91,7 +92,7 @@ public:
     double CalculateEcludianDistance(double x1, double y1, double x2, double y2);
     void PostCollisionActions();
     virtual void SufferDamage(int ID);
-
+    void CheckForAllCollisions ();
 private:
     int m_flightPlan;
     double m_TravelSpeed;
@@ -196,6 +197,7 @@ public:
     ~Goodies();
     
 };
+////////////////////////////////IMPLEMENTATION FOR EXTRALIFE CLASS////////////////////////////////
 
 class ExtraLife: public Goodies
 {
@@ -204,4 +206,23 @@ public:
     ~ExtraLife();
 };
 
+////////////////////////////////IMPLEMENTATION FOR REPAIRGOODIE CLASS////////////////////////////////
+class RepairGoodie: public Goodies
+{
+    
+public:
+    RepairGoodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    ~RepairGoodie();
+    
+};
+
+////////////////////////////////IMPLEMENTATION FOR FT_Goodie CLASS////////////////////////////////
+class FT_Goodie: public Goodies
+{
+    
+public:
+    FT_Goodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    ~FT_Goodie();
+    
+};
 #endif // ACTOR_H_

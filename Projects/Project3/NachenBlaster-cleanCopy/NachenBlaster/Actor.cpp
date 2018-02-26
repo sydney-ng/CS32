@@ -120,6 +120,7 @@ void Ships::doSomething()
     //call somethingBody
     moveShip();
     somethingBody();
+    moveShip();
 }
 
 void Ships::moveShip()
@@ -148,12 +149,17 @@ NachenBlaster::NachenBlaster(StudentWorld *world)
 
 void NachenBlaster::moveShip()
 {
+    return; 
+}
+
+void NachenBlaster::somethingBody()
+{
     cerr << "status of NACHENBLASTER is: " << AliveStatus() << endl;
     cerr << "IN THE BODY OF NACHENBLASTER" << endl;
     int ch;
     if (getWorld()->getKey(ch))
     {
-    
+        
         if (ch == KEY_PRESS_LEFT)
         {
             int newX = getX()-6;
@@ -192,20 +198,19 @@ void NachenBlaster::moveShip()
             {
                 //fire a cabbage by adding a new cabbage 12 pxl to the right of NB
                 //Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
-
+                
                 Cabbage* actorP = new Cabbage (IID_CABBAGE, getX()+12, getY(), 0, .5, 1, getWorld());
                 getWorld()->AddObjectToVector(actorP);
                 getWorld()->playSound(SOUND_PLAYER_SHOOT);
-
+                
                 //reduce cabbage points by 5
-                m_CabbageEnergyPoints -= 5; 
+                m_CabbageEnergyPoints -= 5;
             }
         }
     }
     //give the NB 5 more cabbage points, just cuz
     m_CabbageEnergyPoints += 5;
 }
-
 void NachenBlaster::SufferDamage(int ID)
 {
     cerr << "before suffering damage, the cabbage points was: " << m_CabbageEnergyPoints << endl;
@@ -251,6 +256,11 @@ void Aliens::SufferDamage(int ID)
 
 void Aliens::moveShip()
 {
+    CheckForAllCollisions();
+}
+
+void Aliens::CheckForAllCollisions ()
+{
     cerr << "we will check if there was a collision " << endl;
     
     //get coordinates of the NB
@@ -270,11 +280,17 @@ void Aliens::moveShip()
     {
         if (vec[i]->getIsProjectile() == true)
         {
-            SufferDamage(getImageID());
+            if (CollisionOccurred(vec[i]->getX(), vec[i]->getY(), vec[i]->getRadius() ) )
+            {
+                //cause damage to aliens
+                SufferDamage(getImageID());
+                //make the projectile dead
+                vec[i]->setDead();
+            }
         }
     }
+ 
 }
-
 void Aliens::PostCollisionActions()
 {
     cerr << "YOU COLLIDED!" << endl;
@@ -532,13 +548,24 @@ ExtraLife::~ExtraLife()
     cerr << "destructing an ExtraLife " << endl;
 }
 
-/*////////////////////////////////IMPLEMENTATION FOR REPAIRGOODIE CLASS////////////////////////////////
+////////////////////////////////IMPLEMENTATION FOR REPAIRGOODIE CLASS////////////////////////////////
 RepairGoodie::RepairGoodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
-: Goodies(IID_LIFE_GOODIE, startX, startY, 0 , 0.5, 1, world)
+: Goodies(IID_REPAIR_GOODIE, startX, startY, 0 , 0.5, 1, world)
 {
 }
 
 RepairGoodie::~RepairGoodie()
 {
     cerr << "destructing an RepairGoodie " << endl;
-}*/
+}
+
+////////////////////////////////IMPLEMENTATION FOR FT_Goodie CLASS////////////////////////////////
+FT_Goodie::FT_Goodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+: Goodies(IID_TORPEDO_GOODIE, startX, startY, 0 , 0.5, 1, world)
+{
+}
+
+FT_Goodie::~FT_Goodie()
+{
+    cerr << "destructing an FT_Goodie " << endl;
+}
