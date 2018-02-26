@@ -21,6 +21,7 @@ public:
     {
     };
     virtual bool CheckIfAlive();
+    
     bool AliveStatus()
     {
         cerr << "the alive status () is " << m_isAlive << endl;
@@ -36,7 +37,6 @@ public:
 private:
     bool m_isAlive;
     StudentWorld *m_SudentworldPointer;
-
 };
 
 ////////////////////////////////IMPLEMENTATION FOR SHIPS CLASS////////////////////////////////
@@ -168,8 +168,27 @@ public:
     ~Explosion();
     virtual void somethingBody();
     virtual bool CheckIfAlive();
+    void explodeExplosion();
+
 private:
     int m_AliveTicksLeft;
+};
+
+////////////////////////////////IMPLEMENTATION FOR exraLifeGoodie CLASS////////////////////////////////
+class Goodies: public Actor
+{
+    
+public:
+    Goodies(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    ~Goodies();
+    
+};
+
+class ExtraLife: public Goodies
+{
+public:
+    ExtraLife(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    ~ExtraLife();
 };
 
 #endif // ACTOR_H_

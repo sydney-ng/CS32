@@ -64,14 +64,17 @@ void StudentWorld::AddObjectToVector(Actor * ActorP)
 int StudentWorld::init()
 {
     //create a NachenBlaster
-    NachenBlaster *nachenblasterP = new NachenBlaster (this);
-    gameObjectVector.push_back(nachenblasterP);
+    //NachenBlaster *nachenblasterP = new NachenBlaster (this);
+    //gameObjectVector.push_back(nachenblasterP);
     
-    Smallgon *smallgonP = new Smallgon (IID_SMALLGON, 0, 128, 0 , (randDouble(.05, .50)), 3, this);
-    gameObjectVector.push_back(smallgonP);
+    //Smallgon *smallgonP = new Smallgon (IID_SMALLGON, 0, 128, 0 , (randDouble(.05, .50)), 3, this);
+    //gameObjectVector.push_back(smallgonP);
     //set member variable equal to the item in the Vector that is the NB
-    m_NachenBlaster = nachenblasterP;
+    //m_NachenBlaster = nachenblasterP;
     
+    Explosion *explosionP = new Explosion (IID_EXPLOSION, 0, 128, 0, 1, 0, this);
+    gameObjectVector.push_back(explosionP);
+
     //create 30 stars
     /*for (int i =0; i <30; i ++)
     {
@@ -101,21 +104,22 @@ int StudentWorld::move()
     //add more objects?
    // ProbabilityaddNewObjects();
     cerr << "let's move all the objects! " << endl << endl;
-    cerr << "the object vector size at the beginning of move is: " << gameObjectVector.size() << endl;
-
-    for (int i = 0; i < gameObjectVector.size(); i++)
-    {
-        
-        cerr << "about to move object number " << i << endl;
-        if (gameObjectVector.size() > 0 && gameObjectVector[i]->getWorld() != nullptr)
+        cerr << "still objects in Vector, size @ beginning of move is: " << gameObjectVector.size() << endl;
+        for (int i = 0; i < gameObjectVector.size(); i++)
         {
-            gameObjectVector[i]->doSomething();
+            
+            cerr << "about to move object number " << i << endl;
+            if (gameObjectVector.size() > 0 && gameObjectVector[i]->getWorld() != nullptr)
+            {
+                cerr << "v size is: " << gameObjectVector.size();
+                gameObjectVector[i]->doSomething();
+            }
+            cerr << "finished the move for object number " << i << endl;
+            
         }
-        cerr << "finished the move for object number " << i << endl;
-
-    }
-    removeDead();
-    cerr << "finished removing dead" <<endl;
+        removeDead();
+        cerr << "finished removing dead" <<endl;
+    
     return GWSTATUS_CONTINUE_GAME;
 
     // This code is here merely to allow the game to build, run, and terminate after you hit enter.
@@ -126,40 +130,78 @@ int StudentWorld::move()
 
 void StudentWorld::removeDead()
 {
-    cerr << "at the beginning, remove dead size is : " << gameObjectVector.size() << endl;;
-    vector<Actor*>::iterator vi = gameObjectVector.begin();
+    cerr << "at the beginning of removeDead(), remove dead size is : " << gameObjectVector.size() << endl;;
+    /*vector<Actor*>::iterator vi = gameObjectVector.begin();
     int counter = 0;
-    while (vi!= gameObjectVector.end())
+    
+    if (gameObjectVector.empty() == false)
     {
-        cerr << "on object " << counter << endl;
-        if (*vi != nullptr)
+     
+        while (vi != gameObjectVector.end())
         {
-            cerr << "going to check if it's alive" <<endl;
-            if ((*vi)->AliveStatus() == false)
+            cerr << "on object " << counter << endl;
+            if (*vi != nullptr && gameObjectVector.empty() == false)
             {
-                cerr << "object " << counter << " is dead "<< endl;
-                delete *vi;
-                vi = gameObjectVector.erase(vi);
-                counter --;
-            
-                cerr << "the size of objectVector after deleting this object is now: " << gameObjectVector.size() << endl;
+                cerr << "going to check if it's alive" <<endl;
+                if ((*vi)->AliveStatus() == false)
+                {
+                    cerr << "object " << counter << " is dead "<< endl;
+                    delete *vi;
+                    *vi = nullptr;
+                    vi = gameObjectVector.erase(vi);
+                    counter --;
+                    
+                    cerr << "the size of objectVector after deleting this object is now: " << gameObjectVector.size() << endl;
+                }
+            }
+            else
+            {
+             vi++;
+            counter = counter + 1;
             }
         }
-                cerr << "okay, now go to the next one" << endl << endl;
-        vi++;
-        counter = counter + 1;
-
+        
     }
+    cerr << "at the end of all removes, the vector size is : " << gameObjectVector.size() <<endl; */
+   
+    /*for (int i = 0; i < gameObjectVector.size(); i++)
+    {
+        if (gameObjectVector[i]->AliveStatus() == false)
+        {
+            delete gameObjectVector[i];
+        }
+    }*/
     
-    cerr << "at the end of all removes, the vector size is : " << gameObjectVector.size() <<endl;
+    vector<Actor*>::iterator vi = gameObjectVector.begin();
+    int counter = 0;
+    while (vi != gameObjectVector.end())
+    {
+        cerr << "here time #" << counter << endl;
+        cerr << "is vec empty? " << gameObjectVector.empty() << endl;
+        if (gameObjectVector.empty () == false)
+        {
+            if ((*vi)->AliveStatus() == false)
+            {
+                delete *vi;
+                *vi = nullptr;
+                vi = gameObjectVector.erase(vi);
+                vi++;
+            }
+            counter ++;
+            vi++;
+        }
+    }
 }
 
 void StudentWorld::cleanUp()
 {
     for (int i =0; i < gameObjectVector.size(); i ++)
     {
-        delete gameObjectVector[i];
-        gameObjectVector[i] = nullptr;
-        //gameObjectVector.erase(gameObjectVector[i]);
+        if (gameObjectVector.empty() == false)
+        {
+            delete gameObjectVector[i];
+            gameObjectVector[i] = nullptr;
+            //gameObjectVector.erase(gameObjectVector[i]);
+        }
     }
 }

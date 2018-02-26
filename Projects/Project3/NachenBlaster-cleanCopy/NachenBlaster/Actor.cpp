@@ -417,7 +417,7 @@ void Star::somethingBody()
 }
 ////////////////////////////////IMPLEMENTATION FOR EXPLOSION CLASS////////////////////////////////
 Explosion::Explosion(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
-: Actor(imageID, startX, startY, 0, .5, 1, world)
+: Actor(IID_EXPLOSION , startX, startY, 0, 1, 0, world)
 {
     m_AliveTicksLeft = 4;
 }
@@ -425,6 +425,7 @@ Explosion::Explosion(int imageID, double startX, double startY, int dir, double 
 void Explosion::somethingBody()
 {
     m_AliveTicksLeft --;
+    explodeExplosion();
 }
 Explosion::~Explosion()
 {
@@ -433,9 +434,36 @@ Explosion::~Explosion()
 
 bool Explosion::CheckIfAlive()
 {
-    if (m_AliveTicksLeft > 0)
+    if (m_AliveTicksLeft > 1)
     {
         return true;
     }
     return false;
+}
+
+void Explosion::explodeExplosion()
+{
+    double newSize = getSize() * 1.5;
+    setSize(newSize);
+}
+
+////////////////////////////////IMPLEMENTATION FOR GOODIES CLASS////////////////////////////////
+Goodies::Goodies(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+: Actor(imageID, startX, startY, dir , size, depth, world)
+{
+}
+
+Goodies::~Goodies()
+{
+    cerr << "destructing a goodie " << endl;
+}
+////////////////////////////////IMPLEMENTATION FOR ExtraLife CLASS////////////////////////////////
+ExtraLife::ExtraLife(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+: Goodies(IID_LIFE_GOODIE, startX, startY, 0 , 0.5, 1, world)
+{
+}
+
+ExtraLife::~ExtraLife()
+{
+    cerr << "destructing an ExtraLife " << endl;
 }
