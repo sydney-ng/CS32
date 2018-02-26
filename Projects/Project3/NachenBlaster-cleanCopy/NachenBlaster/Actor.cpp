@@ -412,7 +412,7 @@ void Star::somethingBody()
 {
     cerr << "here in Star's somethingBody!" << endl;
     
-    //check if it's on the screen
+    //check if it's on the screenq
     moveTo(getX()-1, getY());
 }
 ////////////////////////////////IMPLEMENTATION FOR EXPLOSION CLASS////////////////////////////////
@@ -424,7 +424,8 @@ Explosion::Explosion(int imageID, double startX, double startY, int dir, double 
 
 void Explosion::somethingBody()
 {
-    m_AliveTicksLeft --;
+    m_AliveTicksLeft = m_AliveTicksLeft-1;
+    cerr << "in somethingBody of explosion, Ticks left is: " << m_AliveTicksLeft << endl;
     explodeExplosion();
 }
 Explosion::~Explosion()
@@ -457,6 +458,7 @@ Goodies::~Goodies()
 {
     cerr << "destructing a goodie " << endl;
 }
+
 ////////////////////////////////IMPLEMENTATION FOR ExtraLife CLASS////////////////////////////////
 ExtraLife::ExtraLife(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 : Goodies(IID_LIFE_GOODIE, startX, startY, 0 , 0.5, 1, world)
@@ -467,3 +469,14 @@ ExtraLife::~ExtraLife()
 {
     cerr << "destructing an ExtraLife " << endl;
 }
+
+/*////////////////////////////////IMPLEMENTATION FOR REPAIRGOODIE CLASS////////////////////////////////
+RepairGoodie::RepairGoodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+: Goodies(IID_LIFE_GOODIE, startX, startY, 0 , 0.5, 1, world)
+{
+}
+
+RepairGoodie::~RepairGoodie()
+{
+    cerr << "destructing an RepairGoodie " << endl;
+}*/
