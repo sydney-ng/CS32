@@ -33,9 +33,16 @@ public:
     }
     StudentWorld* getWorld();
     void whatWorld(StudentWorld* world);
+   
+    int getImageID();
+    bool getIsProjectile();
+    void setImageID(int ID);
+    void setIsProjectile (bool projectileBool);
     
 private:
+    int m_ImageID;
     bool m_isAlive;
+    bool m_isProjectile;
     StudentWorld *m_SudentworldPointer;
 };
 
@@ -51,7 +58,8 @@ public:
     bool CheckIfAlive();
     virtual void doSomething();
     virtual void moveShip();
-
+    virtual void SufferDamage(int ID) = 0;
+    
 private:
     int m_HitPoints;
 };
@@ -63,7 +71,8 @@ public:
     NachenBlaster(StudentWorld *world);
     virtual ~NachenBlaster();
     virtual void moveShip();
-    void SufferDamage();
+    //CHECK IF THIS WORKS? NO PARAMETERS
+    virtual void SufferDamage(int ID);
 private:
     //int m_HitPoints;
     int m_CabbageEnergyPoints;
@@ -78,9 +87,10 @@ public:
     int getFlightPlan();
     double getTravelSpeed();
     virtual void moveShip();
-    bool CollisionOccurred();
+    bool CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius);
     double CalculateEcludianDistance(double x1, double y1, double x2, double y2);
     void PostCollisionActions();
+    virtual void SufferDamage(int ID);
 
 private:
     int m_flightPlan;
@@ -114,6 +124,7 @@ class Projectiles: public Actor
 public:
     Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     virtual ~Projectiles();
+    virtual int getDamagePoints();
 };
 
 ////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
@@ -141,6 +152,8 @@ public:
     F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner);
     virtual ~F_Torpedo();
     virtual void somethingBody();
+    virtual int getDamagePoints();
+
 private:
     int m_owner;
 };

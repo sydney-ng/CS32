@@ -12,6 +12,8 @@ Actor::Actor(int imageID, double startX, double startY, int dir, double size, in
 :GraphObject(imageID, startX, startY, dir, size, depth), m_SudentworldPointer(world)
 {
     m_isAlive = true;
+    m_ImageID = imageID;
+    m_isProjectile = false;
     cerr << "created object using Actor Constructor " << endl;
 }
 
@@ -24,6 +26,26 @@ void Actor::doSomething()
         return;
     }
     somethingBody();
+}
+void Actor::setImageID(int ID)
+{
+    m_ImageID = ID;
+}
+
+void Actor::setIsProjectile (bool projectileBool)
+{
+    m_isProjectile = projectileBool;
+
+}
+
+int Actor::getImageID()
+{
+    return m_ImageID;
+}
+
+bool Actor::getIsProjectile()
+{
+    return m_isProjectile;
 }
 
 Actor::~Actor()
@@ -55,6 +77,8 @@ Ships::Ships(int imageID, double startX, double startY, int dir, double size, in
 :Actor(imageID, startX, startY, dir, size, depth, world)
 {
     //SET THIS EQUAL TO ACTUAL LEVEL LATER
+    setImageID(imageID);
+    setIsProjectile(false);
     int curr_level = 1;
     m_HitPoints = 5 * (1 + ( curr_level - 1) * .1);
 }
@@ -182,7 +206,7 @@ void NachenBlaster::moveShip()
     m_CabbageEnergyPoints += 5;
 }
 
-void NachenBlaster::SufferDamage()
+void NachenBlaster::SufferDamage(int ID)
 {
     cerr << "before suffering damage, the cabbage points was: " << m_CabbageEnergyPoints << endl;
     m_CabbageEnergyPoints -= 5;
@@ -217,23 +241,47 @@ double Aliens::getTravelSpeed()
     return m_TravelSpeed;
 }
 
+void Aliens::SufferDamage(int ID)
+{
+    cerr << "before sufferDamage, hit points is: " << getHitPoints() << endl;
+    int subtract_Points = -2;
+    UpdateHitPoints(subtract_Points);
+    cerr << "after sufferDamage, hit points is: " << getHitPoints() << endl;
+}
+
 void Aliens::moveShip()
 {
     cerr << "we will check if there was a collision " << endl;
+    
+    //get coordinates of the NB
+    int NB_xCoord = getWorld()->getNachenblasterPointer()->getX();
+    int NB_yCoord = getWorld()->getNachenblasterPointer()->getY();
+    double NB_radius = getWorld()->getNachenblasterPointer()->getRadius();
+    
     //check if it collided with NB
-    if (CollisionOccurred()==true)
+    if (CollisionOccurred(NB_xCoord, NB_yCoord, NB_radius)==true)
     {
         return PostCollisionActions();
-        
     }
-    //somethingBody();
+    
+    std::vector<Actor*> vec = getWorld()->getVector();
+    
+    for (int i = 0; i < vec.size(); i++)
+    {
+        if (vec[i]->getIsProjectile() == true)
+        {
+            SufferDamage(getImageID());
+        }
+    }
 }
 
 void Aliens::PostCollisionActions()
 {
     cerr << "YOU COLLIDED!" << endl;
     //suffer damage to NB
-    getWorld()->getNachenblasterPointer()->SufferDamage();
+    //SET THIS TO SOMETHING
+    int x = 2;
+    getWorld()->getNachenblasterPointer()->SufferDamage(x);
     
     //add points to player's game
     getWorld()->SetGamePoints(250);
@@ -249,17 +297,11 @@ void Aliens::PostCollisionActions()
     //DROP GOODIE?
 
 }
-bool Aliens::CollisionOccurred()
+bool Aliens::CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius)
 {
-    
-    //get coordinates of the NB
-    int NB_xCoord = getWorld()->getNachenblasterPointer()->getX();
-    int NB_yCoord = getWorld()->getNachenblasterPointer()->getY();
-    double NB_radius = getWorld()->getNachenblasterPointer()->getRadius();
-    
     //calculate both sides of the equation
-    double LH_Side = CalculateEcludianDistance(getX(), getY(), NB_xCoord, NB_yCoord);
-    double RH_Side = 0.75 * (getRadius() + NB_radius);
+    double LH_Side = CalculateEcludianDistance(getX(), getY(), otherXCoord, otherYCoord);
+    double RH_Side = 0.75 * (getRadius() + otherRadius);
     
     if (LH_Side < RH_Side)
     {
@@ -315,12 +357,19 @@ Smoregon::Smoregon(int imageID, double startX, double startY, int dir, double si
 Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Actor(imageID, startX, startY, dir, size, depth, world)
 {
+    setImageID(imageID);
+    setIsProjectile(true);
 }
 
 Projectiles::~Projectiles ()
 {
 }
 
+int Projectiles::getDamagePoints()
+{
+    //2 hit points for turnips and cabbages
+    return 2;
+}
 ////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
 Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Projectiles(IID_CABBAGE, startX, startY, 0, .5, 1, world)
@@ -398,10 +447,18 @@ void F_Torpedo::somethingBody()
         moveTo(getX()-8, getY());
     }
 }
+
+int F_Torpedo::getDamagePoints()
+{
+    //torpedos cause 8 points of damage
+    return 8;
+}
 ///////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////////
 Star::Star(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 : Actor(imageID, startX, startY, 0, .5, 1, world)
 {
+    setImageID(imageID);
+    setIsProjectile(false);
 }
 
 Star::~Star ()
@@ -419,6 +476,9 @@ void Star::somethingBody()
 Explosion::Explosion(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 : Actor(IID_EXPLOSION , startX, startY, 0, 1, 0, world)
 {
+    
+    setImageID(imageID);
+    setIsProjectile(false);
     m_AliveTicksLeft = 4;
 }
 
@@ -452,6 +512,8 @@ void Explosion::explodeExplosion()
 Goodies::Goodies(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 : Actor(imageID, startX, startY, dir , size, depth, world)
 {
+    setImageID(imageID);
+    setIsProjectile(false);
 }
 
 Goodies::~Goodies()

@@ -15,9 +15,14 @@ GameWorld* createStudentWorld(string assetDir)
 //CREATE NACHENBLASTER HERE?????
 //CHANGE GAME POINTS
 StudentWorld::StudentWorld(string assetDir)
-: GameWorld(assetDir), m_NachenBlaster(nullptr)
+: GameWorld(assetDir), m_NachenBlaster(nullptr), m_vectorPointer(nullptr)
 {
     m_GamePoints = 0;
+}
+
+std::vector<Actor*> StudentWorld::getVector()
+{
+    return gameObjectVector;
 }
 
 StudentWorld::~StudentWorld()
@@ -144,7 +149,6 @@ void StudentWorld::removeDead()
         }
     }
 }
-
 void StudentWorld::cleanUp()
 {
     for (int i =0; i < gameObjectVector.size(); i ++)
