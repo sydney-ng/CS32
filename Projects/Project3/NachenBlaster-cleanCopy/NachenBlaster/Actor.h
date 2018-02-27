@@ -102,9 +102,9 @@ public:
     //reorients your direction if you need new FP
     void NewFlightPathActions();
     //checks if NB in range for a new goodie to be dropped
-    bool CheckForNewGoodie();
+    bool CheckForFiringProjectile();
     //drops the goodie -> specific to each alien (PV)
-    virtual void NewGoodieActions();
+    virtual void FireProjectile();
     //tells the alien where to move 
     void MoveInDirection();
 private:

@@ -118,12 +118,7 @@ void Ships::doSomething()
         setDead();
         return;
     }
-    cerr << "about ot call moveShip()" <<endl;
-    //call somethingBody
-    //moveShip();
     somethingBody();
-    
-    //moveShip();
 }
 
 bool Ships:: CheckIfAlive()
@@ -258,10 +253,10 @@ void Aliens::somethingBody()
     }
     
     //step 5: new goodie??
-    if (CheckForNewGoodie() == true)
+    if (CheckForFiringProjectile() == true)
     {
         //create the goodie
-        NewGoodieActions();
+        FireProjectile();
         //don't do anything for the rest of this tick
         return;
     }
@@ -272,7 +267,7 @@ void Aliens::somethingBody()
     CheckForAllCollisions();
 }
 
-bool Aliens::CheckForNewGoodie()
+bool Aliens::CheckForFiringProjectile()
 {
     //get NB x and y coords
     int NB_X = getWorld()->getNachenblasterPointer()->getX();
@@ -286,15 +281,19 @@ bool Aliens::CheckForNewGoodie()
         {
             return true;
         }
- 
     }
     return false;
 }
 
-void Aliens::NewGoodieActions()
+void Aliens::FireProjectile()
 {
     // 1/20 chance of firing a new turnip
-    int randNum = randInt(1, 20);
+    //calculate formula : 1 in ((20/CurrentLevelNumber)+5)
+    int currLevel = getWorld()->getCurrentLevel();
+    int max_Num = (20/currLevel) + 5;
+    
+    int randNum = randInt(1, max_Num);
+    
     if (randNum == 1)
     {
         //get goodie coordinates
@@ -312,7 +311,7 @@ void Aliens::NewGoodieActions()
 bool Aliens::CheckForNewFlightPath()
 {
     //flight plan length has reached zero OR is @ top, or bottom
-    if (getFlightPlan() == 0 || getY() > VIEW_HEIGHT -1 || getY() < 1)
+    if (getFlightPlan() == 0 || getY() > VIEW_HEIGHT -1 ||  getY() == VIEW_HEIGHT -1 || getY() == 0 || getY() < 0)
     {
         return true;
     }
@@ -322,7 +321,7 @@ bool Aliens::CheckForNewFlightPath()
 void Aliens::NewFlightPathActions()
 {
     //if y coordinate >= to VIEW_HEIGHT-1
-    if (getY() > VIEW_HEIGHT -1 || getY() == VIEW_HEIGHT)
+    if (getY() > VIEW_HEIGHT -1 || getY() == VIEW_HEIGHT -1)
     {
         m_flightDirection = 1;
         //then the alien will set its travel direction to down and left.
@@ -344,7 +343,6 @@ void Aliens::NewFlightPathActions()
 
 void Aliens::MoveInDirection()
 {
-    
     //alien will set its travel direction to down and left.
     if (m_flightDirection == 1)
     {

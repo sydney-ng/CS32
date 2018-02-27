@@ -18,6 +18,7 @@ StudentWorld::StudentWorld(string assetDir)
 : GameWorld(assetDir), m_NachenBlaster(nullptr), m_vectorPointer(nullptr)
 {
     m_GamePoints = 0;
+    m_CurrentLevel = 1;
 }
 
 std::vector<Actor*> StudentWorld::getVector()
@@ -28,6 +29,11 @@ std::vector<Actor*> StudentWorld::getVector()
 StudentWorld::~StudentWorld()
 {
     cleanUp();
+}
+
+int StudentWorld::getCurrentLevel()
+{
+    return m_CurrentLevel;
 }
 
 void StudentWorld::UpdateGamePoints(int points)

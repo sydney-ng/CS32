@@ -34,6 +34,9 @@ public:
     //updates the player's score
     void UpdateGamePoints(int points);
     
+    //returns current level
+    int getCurrentLevel();
+    
     NachenBlaster* getNachenblasterPointer();
     
     std::vector<Actor*> getVector();
@@ -41,6 +44,7 @@ private:
     std::vector<Actor*> gameObjectVector;
     NachenBlaster * m_NachenBlaster;
     int m_GamePoints;
+    int m_CurrentLevel;
     std::vector<Actor*>* m_vectorPointer;
 };
 
