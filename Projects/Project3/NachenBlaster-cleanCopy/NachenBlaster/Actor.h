@@ -58,6 +58,9 @@ public:
     bool CheckIfAlive();
     virtual void doSomething();
     void SufferDamage(int ID);
+    bool CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius);
+    //shows how far
+    double CalculateEcludianDistance(double x1, double y1, double x2, double y2);
     
 private:
     int m_HitPoints;
@@ -69,7 +72,8 @@ class NachenBlaster: public Ships
 public:
     NachenBlaster(StudentWorld *world);
     virtual ~NachenBlaster();
-    virtual void somethingBody(); 
+    virtual void somethingBody();
+    void KeyPressMovement();
     //CHECK IF THIS WORKS? NO PARAMETERS
     //virtual void SufferDamage(int ID);
 private:
@@ -86,9 +90,6 @@ public:
     int getFlightPlan();
     double getTravelSpeed();
     virtual void somethingBody();
-    bool CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius);
-    //shows how far 
-    double CalculateEcludianDistance(double x1, double y1, double x2, double y2);
     //everything of collision for NB
     void PostNBCollisionActions();
     //decrements hit points depending on what hit it

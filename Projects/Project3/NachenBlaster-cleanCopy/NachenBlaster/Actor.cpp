@@ -143,6 +143,32 @@ void Ships::SufferDamage(int ID)
     cerr << "after suffering damage, the hit points is: " << m_HitPoints << endl;
     
 }
+
+bool Ships::CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius)
+{
+    //calculate both sides of the equation
+    double LH_Side = CalculateEcludianDistance(getX(), getY(), otherXCoord, otherYCoord);
+    double RH_Side = 0.75 * (getRadius() + otherRadius);
+    
+    if (LH_Side < RH_Side)
+    {
+        //there was a collision
+        return true;
+    }
+    return false;
+}
+
+double Ships::CalculateEcludianDistance(double x1, double y1, double x2, double y2)
+{
+    double distance_between;
+    double x_dist = x1 - x2;
+    double y_dist = y1 - y2;
+    
+    distance_between = pow(x_dist,2)+pow(y_dist,2);
+    distance_between = sqrt(distance_between);
+    
+    return distance_between;
+}
 ////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS/////////////////////////////
 NachenBlaster::NachenBlaster(StudentWorld *world)
 :Ships(IID_NACHENBLASTER, 0, 128, 0, 1.0, 0, world)
@@ -156,6 +182,16 @@ void NachenBlaster::somethingBody()
 {
     cerr << "status of NACHENBLASTER is: " << AliveStatus() << endl;
     cerr << "IN THE BODY OF NACHENBLASTER" << endl;
+    
+    //move the NB based on user input
+    KeyPressMovement();
+    
+    //give the NB 5 more cabbage points, just cuz
+    m_CabbageEnergyPoints += 5;
+}
+
+void NachenBlaster::KeyPressMovement()
+{
     int ch;
     if (getWorld()->getKey(ch))
     {
@@ -207,9 +243,12 @@ void NachenBlaster::somethingBody()
                 m_CabbageEnergyPoints -= 5;
             }
         }
+        else if (ch == KEY_PRESS_TAB)
+        {
+            //CODE FOR TORPS
+        }
+        
     }
-    //give the NB 5 more cabbage points, just cuz
-    m_CabbageEnergyPoints += 5;
 }
 
 NachenBlaster::~NachenBlaster()
@@ -440,31 +479,6 @@ void Aliens::PostNBCollisionActions()
     setDead();
     
     //DROP GOODIE?
-}
-bool Aliens::CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius)
-{
-    //calculate both sides of the equation
-    double LH_Side = CalculateEcludianDistance(getX(), getY(), otherXCoord, otherYCoord);
-    double RH_Side = 0.75 * (getRadius() + otherRadius);
-    
-    if (LH_Side < RH_Side)
-    {
-        //there was a collision
-        return true;
-    }
-    return false;
-}
-
-double Aliens::CalculateEcludianDistance(double x1, double y1, double x2, double y2)
-{
-     double distance_between;
-     double x_dist = x1 - x2;
-     double y_dist = y1 - y2;
-    
-     distance_between = pow(x_dist,2)+pow(y_dist,2);
-     distance_between = sqrt(distance_between);
-    
-     return distance_between;
 }
 
 /////////////////////////////////IMPLEMENTATION FOR SMALLGON CLASS////////////////////////////////////
