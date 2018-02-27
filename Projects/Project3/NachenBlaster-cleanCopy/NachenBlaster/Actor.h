@@ -57,7 +57,7 @@ public:
     int getHitPoints();
     bool CheckIfAlive();
     virtual void doSomething();
-    virtual void SufferDamage(int ID) = 0;
+    void SufferDamage(int ID);
     
 private:
     int m_HitPoints;
@@ -71,7 +71,7 @@ public:
     virtual ~NachenBlaster();
     virtual void somethingBody(); 
     //CHECK IF THIS WORKS? NO PARAMETERS
-    virtual void SufferDamage(int ID);
+    //virtual void SufferDamage(int ID);
 private:
     //int m_HitPoints;
     int m_CabbageEnergyPoints;
@@ -92,11 +92,11 @@ public:
     //everything of collision for NB
     void PostNBCollisionActions();
     //decrements hit points depending on what hit it
-    virtual void SufferDamage(int ID);
+    //virtual void SufferDamage(int ID);
     //checks if NB & projectile has collieded w/ alien
     void CheckForAllCollisions ();
     //everything of collision for projectiles
-    void PostAlienProjectileCollisionActions();
+    void PostAlienProjectileCollisionActions(int projectileID);
     //checks if you need a new FP
     bool CheckForNewFlightPath();
     //reorients your direction if you need new FP

@@ -136,6 +136,18 @@ bool Ships:: CheckIfAlive()
     
     return true;
 }
+
+void Ships::SufferDamage(int ID)
+{
+    cerr << "before suffering damage, the hit points was: " << m_HitPoints << endl;
+    //find out what it it
+    if (ID == IID_CABBAGE || ID == IID_TURNIP)
+    {
+        m_HitPoints -= 2;
+    }
+    cerr << "after suffering damage, the hit points is: " << m_HitPoints << endl;
+    
+}
 ////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS/////////////////////////////
 NachenBlaster::NachenBlaster(StudentWorld *world)
 :Ships(IID_NACHENBLASTER, 0, 128, 0, 1.0, 0, world)
@@ -204,13 +216,7 @@ void NachenBlaster::somethingBody()
     //give the NB 5 more cabbage points, just cuz
     m_CabbageEnergyPoints += 5;
 }
-void NachenBlaster::SufferDamage(int ID)
-{
-    cerr << "before suffering damage, the cabbage points was: " << m_CabbageEnergyPoints << endl;
-    m_CabbageEnergyPoints -= 5;
-    cerr << "after suffering damage, the cabbage points is: " << m_CabbageEnergyPoints << endl;
 
-}
 NachenBlaster::~NachenBlaster()
 {
     cerr << "deconstructing NachenBlaster"<< endl;
@@ -237,14 +243,6 @@ int Aliens::getFlightPlan()
 double Aliens::getTravelSpeed()
 {
     return m_TravelSpeed;
-}
-
-void Aliens::SufferDamage(int ID)
-{
-    cerr << "before sufferDamage, hit points is: " << getHitPoints() << endl;
-    int subtract_Points = -2;
-    UpdateHitPoints(subtract_Points);
-    cerr << "after sufferDamage, hit points is: " << getHitPoints() << endl;
 }
 
 void Aliens::somethingBody()
@@ -361,7 +359,8 @@ void Aliens::CheckForAllCollisions ()
             {
                 cerr << "alien collided with a projectile!" << endl;
                 
-                PostAlienProjectileCollisionActions();
+                
+                PostAlienProjectileCollisionActions(vec[i]->getImageID());
                 //make the projectile dead
                 vec[i]->setDead();
             }
@@ -372,11 +371,13 @@ void Aliens::CheckForAllCollisions ()
     }
 }
 
-void Aliens::PostAlienProjectileCollisionActions()
+void Aliens::PostAlienProjectileCollisionActions(int projectileID)
 {
     //cause damage to aliens
-    SufferDamage(getImageID());
-    
+    SufferDamage(projectileID);
+    //add points to player's game
+    getWorld()->UpdateGamePoints(250);
+
     if (CheckIfAlive() == false)
     {
         setDead();
@@ -393,8 +394,8 @@ void Aliens::PostNBCollisionActions()
     getWorld()->getNachenblasterPointer()->SufferDamage(x);
     
     //add points to player's game
-    getWorld()->SetGamePoints(250);
-    
+    getWorld()->UpdateGamePoints(250);
+
     //play soundDeath
     getWorld()->playSound(SOUND_DEATH);
     

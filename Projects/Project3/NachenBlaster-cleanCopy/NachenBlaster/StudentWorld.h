@@ -31,7 +31,8 @@ public:
     //add a new object to the vector
     void AddObjectToVector(Actor * ActorP);
     
-    void SetGamePoints(int points);
+    //updates the player's score
+    void UpdateGamePoints(int points);
     
     NachenBlaster* getNachenblasterPointer();
     

@@ -30,7 +30,7 @@ StudentWorld::~StudentWorld()
     cleanUp();
 }
 
-void StudentWorld::SetGamePoints(int points)
+void StudentWorld::UpdateGamePoints(int points)
 {
     cerr << "before the game points were " << m_GamePoints << endl;
     m_GamePoints += points;
