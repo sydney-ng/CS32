@@ -20,7 +20,7 @@ public:
     virtual void somethingBody()
     {
     };
-    virtual bool CheckIfAlive();
+    virtual bool CheckIfOffScreen();
     
     bool AliveStatus()
     {
@@ -57,7 +57,6 @@ public:
     int getHitPoints();
     bool CheckIfAlive();
     virtual void doSomething();
-    virtual void moveShip();
     virtual void SufferDamage(int ID) = 0;
     
 private:
@@ -70,7 +69,6 @@ class NachenBlaster: public Ships
 public:
     NachenBlaster(StudentWorld *world);
     virtual ~NachenBlaster();
-    virtual void moveShip();
     virtual void somethingBody(); 
     //CHECK IF THIS WORKS? NO PARAMETERS
     virtual void SufferDamage(int ID);
@@ -87,12 +85,27 @@ public:
     ~Aliens();
     int getFlightPlan();
     double getTravelSpeed();
-    virtual void moveShip();
+    virtual void somethingBody();
     bool CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius);
+    //shows how far 
     double CalculateEcludianDistance(double x1, double y1, double x2, double y2);
-    void PostCollisionActions();
+    //everything of collision for NB
+    void PostNBCollisionActions();
+    //decrements hit points depending on what hit it
     virtual void SufferDamage(int ID);
+    //checks if NB & projectile has collieded w/ alien
     void CheckForAllCollisions ();
+    //everything of collision for projectiles
+    void PostAlienProjectileCollisionActions();
+    //checks if you need a new FP
+    bool CheckForNewFlightPath();
+    //reorients your direction if you need new FP
+    void NewFlightPathActions();
+    //checks if NB in range for a new goodie to be dropped
+    bool CheckForNewGoodie();
+    //drops the goodie -> specific to each alien (PV)
+    virtual void NewGoodieActions();
+
 private:
     int m_flightPlan;
     double m_TravelSpeed;
@@ -104,7 +117,7 @@ class Smallgon: public Aliens
 public:
     Smallgon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     ~Smallgon();
-    virtual void somethingBody();
+    //virtual void somethingBody();
     //private:
   //  int m_flightPlan;
    // double m_TravelSpeed;*/
@@ -123,34 +136,39 @@ public:
 class Projectiles: public Actor
 {
 public:
-    Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name);
     virtual ~Projectiles();
     virtual int getDamagePoints();
+    //allows derived classes to set damageName
+    void setDamageName(char passedIn_DName);
+private:
+    char m_DamageName;
 };
 
 ////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
 class Cabbage: public Projectiles
 {
 public:
-    Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name);
     virtual ~Cabbage();
     virtual void somethingBody();
-    virtual bool CheckIfAlive();
+    virtual bool CheckIfOffScreen();
 };
 
 ////////////////////////////////IMPLEMENTATION FOR TURNIP CLASS////////////////////////////////
 class Turnip: public Projectiles
 {
 public:
-    Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name);
     virtual ~Turnip();
     virtual void somethingBody();
+private:
 };
 ////////////////////////////////IMPLEMENTATION FOR FLATULAN TORPEDO CLASS//////////////////////////////////////
 class F_Torpedo: public Projectiles
 {
 public:
-    F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner);
+    F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner, char d_Name);
     virtual ~F_Torpedo();
     virtual void somethingBody();
     virtual int getDamagePoints();
@@ -181,7 +199,7 @@ public:
     Explosion(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     ~Explosion();
     virtual void somethingBody();
-    virtual bool CheckIfAlive();
+    virtual bool CheckIfOffScreen();
     void explodeExplosion();
 
 private:

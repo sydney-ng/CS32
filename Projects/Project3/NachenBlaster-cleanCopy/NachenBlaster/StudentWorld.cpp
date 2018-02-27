@@ -62,7 +62,7 @@ NachenBlaster* StudentWorld::getNachenblasterPointer()
 void StudentWorld::AddObjectToVector(Actor * ActorP)
 {
     gameObjectVector.push_back(ActorP);
-    cerr << "added cabbage to the vec" <<endl;
+    cerr << "added object to the vec" <<endl;
 }
 
 int StudentWorld::init()
@@ -80,14 +80,14 @@ int StudentWorld::init()
     //gameObjectVector.push_back(explosionP);
 
     //create 30 stars
-    /*for (int i =0; i <30; i ++)
-    {
-        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
-        gameObjectVector.push_back(starP);
-    }*/
-    
-   Cabbage * cabbageP = new Cabbage (IID_CABBAGE, 99, 100, 0, .5, 1, this);
-    gameObjectVector.push_back(cabbageP);
+//    for (int i =0; i <30; i ++)
+//    {
+//        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
+//        gameObjectVector.push_back(starP);
+//    }
+//    
+    //Cabbage * cabbageP = new Cabbage (IID_CABBAGE, 99, 100, 0, .5, 1, this);
+    //gameObjectVector.push_back(cabbageP);
     /*
     Turnip *turnipP = new Turnip (IID_TURNIP, 255, 200, 0, .5, 1, this);
     gameObjectVector.push_back(turnipP);

@@ -20,7 +20,7 @@ Actor::Actor(int imageID, double startX, double startY, int dir, double size, in
 void Actor::doSomething()
 {
     cerr << "In doSomething of Actor, the Base Class! "<< endl;
-    if (CheckIfAlive() 	== false)
+    if (CheckIfOffScreen() 	== false)
     {
         setDead();
         return;
@@ -52,10 +52,10 @@ Actor::~Actor()
 {
 }
 
-bool Actor::CheckIfAlive()
+bool Actor::CheckIfOffScreen()
 {
     int x_coord = getX();
-    if (x_coord > 0 && x_coord < VIEW_WIDTH)
+    if (x_coord > -1 && x_coord < VIEW_WIDTH)
     {
         return true;
     }
@@ -99,6 +99,7 @@ int Ships::getHitPoints()
 {
     return m_HitPoints;
 }
+
 void Ships::doSomething()
 {
     cerr << "in doSomething of Ships" <<endl;
@@ -107,10 +108,11 @@ void Ships::doSomething()
     if (CheckIfAlive() == false)
     {
         cerr << "it's not alive, so don't do anything " << endl;
+        setDead();
         return;
     }
     //check if off the screen
-    if (getX() < 0)
+    if (CheckIfOffScreen() ==false)
     {
         cerr << "it's off the screen, set dead" << endl;
         setDead();
@@ -118,20 +120,16 @@ void Ships::doSomething()
     }
     cerr << "about ot call moveShip()" <<endl;
     //call somethingBody
-    moveShip();
+    //moveShip();
     somethingBody();
-    moveShip();
-}
-
-void Ships::moveShip()
-{
-    cerr << "in moveship of ships" << endl;
+    
+    //moveShip();
 }
 
 bool Ships:: CheckIfAlive()
 {
     //make sure the hit points are above 0
-    if (getHitPoints()<= 0)
+    if (getHitPoints() <= 0)
     {
         return false;
     }
@@ -145,11 +143,6 @@ NachenBlaster::NachenBlaster(StudentWorld *world)
     cerr << "in nachenblaster constructor " << endl;
     setHitPoints(50);
     m_CabbageEnergyPoints = 30;
-}
-
-void NachenBlaster::moveShip()
-{
-    return; 
 }
 
 void NachenBlaster::somethingBody()
@@ -199,7 +192,7 @@ void NachenBlaster::somethingBody()
                 //fire a cabbage by adding a new cabbage 12 pxl to the right of NB
                 //Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
                 
-                Cabbage* actorP = new Cabbage (IID_CABBAGE, getX()+12, getY(), 0, .5, 1, getWorld());
+                Cabbage* actorP = new Cabbage (IID_CABBAGE, getX()+12, getY(), 0, .5, 1, getWorld(), 'c');
                 getWorld()->AddObjectToVector(actorP);
                 getWorld()->playSound(SOUND_PLAYER_SHOOT);
                 
@@ -254,11 +247,95 @@ void Aliens::SufferDamage(int ID)
     cerr << "after sufferDamage, hit points is: " << getHitPoints() << endl;
 }
 
-void Aliens::moveShip()
+void Aliens::somethingBody()
 {
+    //step 3: checking for collisions
+    CheckForAllCollisions();
+    
+    //setp 4: checking for New Flight plan
+    if (CheckForNewFlightPath() == true)
+    {
+        NewFlightPathActions();
+    }
+    
+    //step 5: new goodie??
+    if (CheckForNewGoodie() == true)
+    {
+        //create the goodie
+        NewGoodieActions();
+        //don't do anything for the rest of this tick
+        return;
+    }
     CheckForAllCollisions();
 }
 
+bool Aliens::CheckForNewGoodie()
+{
+    //get NB x and y coords
+    int NB_X = getWorld()->getNachenblasterPointer()->getX();
+    int NB_Y = getWorld()->getNachenblasterPointer()->getY();
+
+    //if NB is to the left of the Smallgon
+    if (NB_X < getX())
+    {
+        //check if alien y coord w/in 4 coords of NB's Y
+        if (NB_Y + 5 > getY() && NB_Y -5 < getY() )
+        {
+            return true;
+        }
+ 
+    }
+    return false;
+}
+
+void Aliens::NewGoodieActions()
+{
+    // 1/20 chance of firing a new turnip
+    int randNum = randInt(1, 20);
+    if (randNum == 1)
+    {
+        //get goodie coordinates
+        int goodie_Xcoord = 14 + (getWorld()->getNachenblasterPointer()->getX());
+        int goodie_Ycoord = getY();
+        
+        //create new turnip & add to vector
+        Turnip * newTurnipP = new Turnip (IID_TURNIP, goodie_Xcoord, goodie_Ycoord, 0, .5, 1, getWorld(), 'T');
+        getWorld()->AddObjectToVector(newTurnipP);
+        
+        //play the sound
+        getWorld()->playSound(SOUND_ALIEN_SHOOT);
+    }
+}
+bool Aliens::CheckForNewFlightPath()
+{
+    //flight plan length has reached zero OR is @ top, or bottom
+    if (getFlightPlan() == 0 || getY() == VIEW_HEIGHT -1 || getY() < 1)
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+void Aliens::NewFlightPathActions()
+{
+    //if y coordinate >= to VIEW_HEIGHT-1
+    if (getY() > VIEW_HEIGHT -1 || getY() == VIEW_HEIGHT)
+    {
+        //then the alien will set its travel direction to down and left.
+    }
+    else if (getY() < 0 || getY() == 0)
+    {
+        //then the alien will set its travel direction to up and left.
+    }
+    else if (m_flightPlan == 0)
+    {
+        //set a new travel direction: left, up and left, down and left
+        
+        //pick a new flight plan length from 1-32
+        m_flightPlan = randInt(1, 32);
+    }
+}
 void Aliens::CheckForAllCollisions ()
 {
     cerr << "we will check if there was a collision " << endl;
@@ -271,27 +348,43 @@ void Aliens::CheckForAllCollisions ()
     //check if it collided with NB
     if (CollisionOccurred(NB_xCoord, NB_yCoord, NB_radius)==true)
     {
-        return PostCollisionActions();
+        return PostNBCollisionActions();
     }
     
+    //check if it's collided w/ a projectile
     std::vector<Actor*> vec = getWorld()->getVector();
-    
     for (int i = 0; i < vec.size(); i++)
     {
-        if (vec[i]->getIsProjectile() == true)
+        if (vec[i]->getIsProjectile() == true && vec[i]->AliveStatus() == true)
         {
             if (CollisionOccurred(vec[i]->getX(), vec[i]->getY(), vec[i]->getRadius() ) )
             {
-                //cause damage to aliens
-                SufferDamage(getImageID());
+                cerr << "alien collided with a projectile!" << endl;
+                
+                PostAlienProjectileCollisionActions();
                 //make the projectile dead
                 vec[i]->setDead();
             }
+            else{
+                cerr << "alien didn't collide w/ projectile" << endl;
+            }
         }
     }
- 
 }
-void Aliens::PostCollisionActions()
+
+void Aliens::PostAlienProjectileCollisionActions()
+{
+    //cause damage to aliens
+    SufferDamage(getImageID());
+    
+    if (CheckIfAlive() == false)
+    {
+        setDead();
+        Explosion * explosionP = new Explosion (IID_EXPLOSION, getX(), getY(), 0, 1, 0, getWorld());
+        getWorld()->AddObjectToVector(explosionP);
+    }
+}
+void Aliens::PostNBCollisionActions()
 {
     cerr << "YOU COLLIDED!" << endl;
     //suffer damage to NB
@@ -306,12 +399,12 @@ void Aliens::PostCollisionActions()
     getWorld()->playSound(SOUND_DEATH);
     
     //INTRODUCE EXPLOSION
-    
+    Explosion * explosionP = new Explosion (IID_EXPLOSION, getX(), getY(), 0, 1, 0, getWorld());
+    getWorld()->AddObjectToVector(explosionP);
     //make the alien ship dead so it'll be removed
     setDead();
     
     //DROP GOODIE?
-
 }
 bool Aliens::CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius)
 {
@@ -349,20 +442,11 @@ Smallgon::~Smallgon()
     cerr << "destructing Smallgon" << endl;
 }
 
-void Smallgon::somethingBody()
-{
-    /*//cerr << "status of SMALLGON is: " << AliveStatus() << endl;
-    cerr << "IN SMALLGON MOVESHIP" << endl;
-    //flight plan length has reached zero, top, or bottom
-    if (getFlightPlan() == 0 || getY() == VIEW_HEIGHT -1 || getY() < 1)
-    {
-     //if y coordinate >= to VIEW_HEIGHT-1
-        if (getY() > VIEW_HEIGHT -1 || getY() == VIEW_HEIGHT)
-        {
-         //then the Smallgon will set its travel direction to down and left.
-        }
-    }*/
-}
+//void Smallgon::somethingBody()
+//{
+//    return;
+//
+//}
 
 ////////////////////////////////IMPLEMENTATION FOR SMOREGON CLASS/////////////////////////////
 Smoregon::Smoregon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
@@ -370,11 +454,12 @@ Smoregon::Smoregon(int imageID, double startX, double startY, int dir, double si
 {
 }
 /////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
-Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name)
 :Actor(imageID, startX, startY, dir, size, depth, world)
 {
     setImageID(imageID);
     setIsProjectile(true);
+    m_DamageName = d_Name;
 }
 
 Projectiles::~Projectiles ()
@@ -386,9 +471,15 @@ int Projectiles::getDamagePoints()
     //2 hit points for turnips and cabbages
     return 2;
 }
+
+void Projectiles::setDamageName(char passedIn_DName)
+{
+    m_DamageName = passedIn_DName;
+}
+
 ////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
-Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
-:Projectiles(IID_CABBAGE, startX, startY, 0, .5, 1, world)
+Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name)
+:Projectiles(IID_CABBAGE, startX, startY, 0, .5, 1, world, d_Name)
 {
     cerr << "created a cabbage " << endl;
 }
@@ -407,7 +498,7 @@ void Cabbage::somethingBody()
     setDirection(20);
 }
 
-bool Cabbage::CheckIfAlive()
+bool Cabbage::CheckIfOffScreen()
 {
     cerr << " in checkIAlive fx() of cabbage" << endl;
     //if it's not alive, return false immediately
@@ -420,8 +511,8 @@ bool Cabbage::CheckIfAlive()
 }
 
 ////////////////////////////////IMPLEMENTATION FOR TURNIP CLASS//////////////////////////////////////
-Turnip::Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
-:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world)
+Turnip::Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name)
+:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world, d_Name)
 {
     cerr << "created a turnip" << endl;
 }
@@ -438,8 +529,8 @@ void Turnip::somethingBody()
 
 
 ////////////////////////////////IMPLEMENTATION FOR FLATULAN TORPEDO CLASS//////////////////////////////////////
-F_Torpedo::F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner)
-:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world)
+F_Torpedo::F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner, char d_Name)
+:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world, d_Name)
 {
     m_owner = owner;
 }
@@ -500,7 +591,7 @@ Explosion::Explosion(int imageID, double startX, double startY, int dir, double 
 
 void Explosion::somethingBody()
 {
-    m_AliveTicksLeft = m_AliveTicksLeft-1;
+    m_AliveTicksLeft -= 1;
     cerr << "in somethingBody of explosion, Ticks left is: " << m_AliveTicksLeft << endl;
     explodeExplosion();
 }
@@ -509,7 +600,7 @@ Explosion::~Explosion()
     cerr << "destroying explosion";
 }
 
-bool Explosion::CheckIfAlive()
+bool Explosion::CheckIfOffScreen()
 {
     if (m_AliveTicksLeft > 1)
     {
@@ -564,7 +655,6 @@ FT_Goodie::FT_Goodie(int imageID, double startX, double startY, int dir, double 
 : Goodies(IID_TORPEDO_GOODIE, startX, startY, 0 , 0.5, 1, world)
 {
 }
-
 FT_Goodie::~FT_Goodie()
 {
     cerr << "destructing an FT_Goodie " << endl;
