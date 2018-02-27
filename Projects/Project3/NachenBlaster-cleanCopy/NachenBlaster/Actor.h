@@ -105,9 +105,11 @@ public:
     bool CheckForNewGoodie();
     //drops the goodie -> specific to each alien (PV)
     virtual void NewGoodieActions();
-
+    //tells the alien where to move 
+    void MoveInDirection();
 private:
     int m_flightPlan;
+    int m_flightDirection;
     double m_TravelSpeed;
 };
 

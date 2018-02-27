@@ -229,6 +229,7 @@ Aliens::Aliens(int imageID, double startX, double startY, int dir, double size, 
 {
     m_flightPlan = 0;
     m_TravelSpeed = 2.0;
+    m_flightDirection = dir;
 }
 
 Aliens::~Aliens()
@@ -264,6 +265,10 @@ void Aliens::somethingBody()
         //don't do anything for the rest of this tick
         return;
     }
+    
+    //step 6: move in direction of it's travel
+    MoveInDirection();
+    
     CheckForAllCollisions();
 }
 
@@ -307,11 +312,10 @@ void Aliens::NewGoodieActions()
 bool Aliens::CheckForNewFlightPath()
 {
     //flight plan length has reached zero OR is @ top, or bottom
-    if (getFlightPlan() == 0 || getY() == VIEW_HEIGHT -1 || getY() < 1)
+    if (getFlightPlan() == 0 || getY() > VIEW_HEIGHT -1 || getY() < 1)
     {
         return true;
     }
-    
     return false;
 }
 
@@ -320,20 +324,52 @@ void Aliens::NewFlightPathActions()
     //if y coordinate >= to VIEW_HEIGHT-1
     if (getY() > VIEW_HEIGHT -1 || getY() == VIEW_HEIGHT)
     {
+        m_flightDirection = 1;
         //then the alien will set its travel direction to down and left.
     }
     else if (getY() < 0 || getY() == 0)
     {
         //then the alien will set its travel direction to up and left.
+        m_flightDirection = 2;
+
     }
     else if (m_flightPlan == 0)
     {
         //set a new travel direction: left, up and left, down and left
-        
+        m_flightDirection = randInt(1, 3);
         //pick a new flight plan length from 1-32
         m_flightPlan = randInt(1, 32);
     }
 }
+
+void Aliens::MoveInDirection()
+{
+    
+    //alien will set its travel direction to down and left.
+    if (m_flightDirection == 1)
+    {
+        int newXCoord = getX() - m_TravelSpeed;
+        int newYCoord = getY() - m_TravelSpeed;
+        moveTo(newXCoord, newYCoord);
+    }
+    //alien will set its travel direction to up and left.
+    else if (m_flightDirection == 2)
+    {
+        int newXCoord = getX() - m_TravelSpeed;
+        int newYCoord = getY() + m_TravelSpeed;
+        moveTo(newXCoord, newYCoord);
+
+    }
+    //alien will set its travel direction to due left.
+    else if (m_flightDirection == 3)
+    {
+        int newXCoord = getX() - m_TravelSpeed;
+        moveTo(newXCoord, getY());
+    }
+    //reduce flight plan length by 1
+    m_flightPlan -- ;
+}
+
 void Aliens::CheckForAllCollisions ()
 {
     cerr << "we will check if there was a collision " << endl;

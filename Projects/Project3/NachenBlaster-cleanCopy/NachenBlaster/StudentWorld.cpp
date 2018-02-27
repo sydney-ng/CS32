@@ -73,7 +73,7 @@ int StudentWorld::init()
     //set member variable equal to the item in the Vector that is the NB
     m_NachenBlaster = nachenblasterP;
     
-    Smallgon *smallgonP = new Smallgon (IID_SMALLGON, 100 , 100, 0 , (randDouble(.05, .50)), 3, this);
+    Smallgon *smallgonP = new Smallgon (IID_SMALLGON, 255 , 100, 0 , (randDouble(.05, .50)), 3, this);
     gameObjectVector.push_back(smallgonP);
     
     //Explosion *explosionP = new Explosion (IID_EXPLOSION, 0, 128, 0, 1, 0, this);
