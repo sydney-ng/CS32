@@ -356,9 +356,11 @@ void Aliens::somethingBody()
     if (CheckForFiringProjectile() == true)
     {
         //create the goodie
-        FireProjectile();
-        //don't do anything for the rest of this tick
-        return;
+        if (FireProjectile() == true)
+        {
+            //don't do anything for the rest of this tick if you fired a projectile
+            return;
+        }
     }
     
     //step 6: move in direction of it's travel
@@ -400,7 +402,7 @@ bool Aliens::CheckProperSide (int other, int currShip)
         return true;
     }
 }
-void Aliens::FireProjectile()
+bool Aliens::FireProjectile()
 {
     // 1/20 chance of firing a new turnip
     //calculate formula : 1 in ((20/CurrentLevelNumber)+5)
@@ -423,8 +425,9 @@ void Aliens::FireProjectile()
         
         //play the sound
         getWorld()->playSound(SOUND_ALIEN_SHOOT);
-        return;
+        return true;
     }
+    return false;
 }
 bool Aliens::CheckForNewFlightPath()
 {

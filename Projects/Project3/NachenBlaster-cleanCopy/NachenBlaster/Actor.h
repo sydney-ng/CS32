@@ -113,7 +113,7 @@ public:
     //checks if NB in range for a new goodie to be dropped
     bool CheckForFiringProjectile();
     //drops the goodie -> specific to each alien (PV)
-    virtual void FireProjectile();
+    virtual bool FireProjectile();
     //tells the alien where to move 
     void MoveInDirection();
     //checks if the projectile is coming from an alien or NB
