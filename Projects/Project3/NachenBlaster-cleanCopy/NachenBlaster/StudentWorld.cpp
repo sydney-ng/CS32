@@ -86,12 +86,12 @@ int StudentWorld::init()
     //gameObjectVector.push_back(explosionP);
 
     //create 30 stars
-//    for (int i =0; i <30; i ++)
-//    {
-//        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
-//        gameObjectVector.push_back(starP);
-//    }
-//    
+    for (int i =0; i <30; i ++)
+    {
+        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
+        gameObjectVector.push_back(starP);
+    }
+    
     //Cabbage * cabbageP = new Cabbage (IID_CABBAGE, 99, 100, 0, .5, 1, this);
     //gameObjectVector.push_back(cabbageP);
     /*
@@ -108,7 +108,7 @@ int StudentWorld::init()
 int StudentWorld::move()
 {
     //add more objects?
-    //ProbabilityaddNewObjects();
+    ProbabilityaddNewObjects();
     cerr << "let's move all the objects! " << endl << endl;
         cerr << "still objects in Vector, size @ beginning of move is: " << gameObjectVector.size() << endl;
         for (int i = 0; i < gameObjectVector.size(); i++)

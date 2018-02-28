@@ -61,6 +61,11 @@ public:
     bool CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius);
     //shows how far
     double CalculateEcludianDistance(double x1, double y1, double x2, double y2);
+    //checks if projectile has collided w/ alien
+    void CheckForProjCollisions();
+    //if there's a projectile collision it will do things
+    virtual void PostProjectileCollisionActions() = 0;
+    virtual bool CheckProperSide (int other, int currShip) = 0;
     
 private:
     int m_HitPoints;
@@ -74,6 +79,9 @@ public:
     virtual ~NachenBlaster();
     virtual void somethingBody();
     void KeyPressMovement();
+    virtual void PostProjectileCollisionActions();
+    virtual bool CheckProperSide (int other, int currShip);
+
     //CHECK IF THIS WORKS? NO PARAMETERS
     //virtual void SufferDamage(int ID);
 private:
@@ -94,10 +102,10 @@ public:
     void PostNBCollisionActions();
     //decrements hit points depending on what hit it
     //virtual void SufferDamage(int ID);
-    //checks if NB & projectile has collieded w/ alien
-    void CheckForAllCollisions ();
+    //checks if NB has collieded w/ alien
+    void CheckForNBCollisions();
     //everything of collision for projectiles
-    void PostAlienProjectileCollisionActions(int projectileID);
+    virtual void PostProjectileCollisionActions();
     //checks if you need a new FP
     bool CheckForNewFlightPath();
     //reorients your direction if you need new FP
@@ -108,6 +116,8 @@ public:
     virtual void FireProjectile();
     //tells the alien where to move 
     void MoveInDirection();
+    //checks if the projectile is coming from an alien or NB
+    bool CheckProperSide (int other, int currShip);
 private:
     int m_flightPlan;
     int m_flightDirection;
@@ -139,20 +149,21 @@ public:
 class Projectiles: public Actor
 {
 public:
-    Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name);
+    Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name, string Owner);
     virtual ~Projectiles();
     virtual int getDamagePoints();
     //allows derived classes to set damageName
     void setDamageName(char passedIn_DName);
 private:
     char m_DamageName;
+    string m_Owner;
 };
 
 ////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
 class Cabbage: public Projectiles
 {
 public:
-    Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name);
+    Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name, string Owner);
     virtual ~Cabbage();
     virtual void somethingBody();
     virtual bool CheckIfOffScreen();
@@ -162,7 +173,7 @@ public:
 class Turnip: public Projectiles
 {
 public:
-    Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name);
+    Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name, string Owner);
     virtual ~Turnip();
     virtual void somethingBody();
 private:
@@ -171,13 +182,10 @@ private:
 class F_Torpedo: public Projectiles
 {
 public:
-    F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner, char d_Name);
+    F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner, char d_Name, string Owner);
     virtual ~F_Torpedo();
-    virtual void somethingBody();
+    //virtual void somethingBody();
     virtual int getDamagePoints();
-
-private:
-    int m_owner;
 };
 ////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////
 

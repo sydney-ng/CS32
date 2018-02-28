@@ -78,8 +78,8 @@
 		4B91F8A72033F260003AFA78 /* NachenBlaster */ = {
 			isa = PBXGroup;
 			children = (
-				4B91F8B62033F3F7003AFA78 /* Actor.cpp */,
 				4B91F8B02033F3F7003AFA78 /* Actor.h */,
+				4B91F8B62033F3F7003AFA78 /* Actor.cpp */,
 				4B91F8B52033F3F7003AFA78 /* GameConstants.h */,
 				4B91F8B82033F3F7003AFA78 /* GameController.cpp */,
 				4B91F8BA2033F3F7003AFA78 /* GameController.h */,
