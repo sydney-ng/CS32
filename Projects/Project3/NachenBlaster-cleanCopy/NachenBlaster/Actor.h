@@ -139,7 +139,7 @@ public:
     //set FlightPlan length
     void setFlightPlan (int len);
     //set m_TravelSpeed
-    void setTravelSpeed (int speed);
+    void setTravelSpeed (double speed);
     //calls all of the functions when an alien dies
     virtual void AllAlienDeathStuff();
     //not pv because it's smallgons dont have it
@@ -177,6 +177,21 @@ public:
     virtual void AllAlienDeathStuff();
     virtual void DropGoodie ();
 
+    //virtual void somethingBody();
+};
+
+////////////////////////////////IMPLEMENTATION FOR SNAGGLEGON CLASS/////////////////////////////
+
+class Snagglegon: public Aliens
+{
+public:
+    Snagglegon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    virtual ~Snagglegon();
+    //virtual bool AttackNB();
+    //void PossiblyCharge();
+    //virtual void AllAlienDeathStuff();
+    //virtual void DropGoodie ();
+    
     //virtual void somethingBody();
 };
 

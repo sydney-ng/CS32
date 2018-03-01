@@ -72,8 +72,11 @@ int StudentWorld::init()
     //set member variable equal to the item in the Vector that is the NB
     m_NachenBlaster = nachenblasterP;
     
-    RepairGoodie * RepairGoodieP = new RepairGoodie (IID_REPAIR_GOODIE, 200, 200, 0, .5, 1, this);
-    gameObjectVector.push_back(RepairGoodieP);
+    Snagglegon * SnagglegonP = new Snagglegon (IID_SNAGGLEGON, 200, 200, 0, .5, 1, this);
+    gameObjectVector.push_back(SnagglegonP);
+    
+//    RepairGoodie * RepairGoodieP = new RepairGoodie (IID_REPAIR_GOODIE, 200, 200, 0, .5, 1, this);
+//    gameObjectVector.push_back(RepairGoodieP);
     
 //    FT_Goodie * FT_GoodieP = new FT_Goodie (IID_TORPEDO_GOODIE, 100, 100, 0, .5, 1, this);
 //    gameObjectVector.push_back(FT_GoodieP);

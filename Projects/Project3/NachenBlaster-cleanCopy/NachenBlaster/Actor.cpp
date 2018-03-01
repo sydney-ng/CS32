@@ -6,8 +6,6 @@
 using namespace std;
 // Students:  Add code to this file, Actor.h, StudentWorld.h, and StudentWorld.cpp
 
-//CURRENTLY WORKING ON THE GET DAMAGE PART for collisions with alien
-
 ////////////////////////////////IMPLEMENTATION FOR ALLOBJECTS CLASS////////////////////////////////
 Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :GraphObject(imageID, startX, startY, dir, size, depth), m_SudentworldPointer(world)
@@ -20,13 +18,13 @@ Actor::Actor(int imageID, double startX, double startY, int dir, double size, in
 
 void Actor::doSomething()
 {
-    //first make sure it's alive before you do anything
+    //1. first make sure it's alive before you do anything
     if (m_isAlive == false)
     {
         return;
     }
     
-    //make sure it's on the screen
+    //2. make sure it's on the screen
     if (CheckIfOffScreen() 	== false)
     {
         setDead();
@@ -363,7 +361,7 @@ Aliens::Aliens(int imageID, double startX, double startY, int dir, double size, 
     m_flightDirection = dir;
     
     //SET THIS EQUAL TO ACTUAL CURR LEVEL LATER
-    int curr_level = 1;
+    int curr_level = getWorld()->getCurrentLevel();
     int temp_Hitpoints = 5 * (1 + ( curr_level - 1) * .1);
     setHitPoints(temp_Hitpoints);
     
@@ -596,7 +594,7 @@ void Aliens::setFlightPlan(int len)
     m_flightPlan = len;
 }
 
-void Aliens::setTravelSpeed (int speed)
+void Aliens::setTravelSpeed (double speed)
 {
     m_TravelSpeed = speed;
 }
@@ -704,6 +702,27 @@ void Smoregon::DropGoodie()
 Smoregon::~Smoregon()
 {
     cerr << "destructing Smoregon!!" << endl;
+}
+
+////////////////////////////////IMPLEMENTATION FOR SNAGGLEGON CLASS/////////////////////////////
+Snagglegon::Snagglegon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+:Aliens(IID_SMALLGON, startX, startY, 0, 1.5, 1, world)
+{
+    //set the hit points
+    int curr_level = getWorld()->getCurrentLevel();
+    int temp_Hitpoints = 10 * (1 + ( curr_level - 1) * .1);
+    setHitPoints(temp_Hitpoints);
+    
+    //set FlightDirection
+    setFlightDirection(1);
+    
+    //set TravelSpeed
+    setTravelSpeed(1.75);
+}
+
+Snagglegon::~Snagglegon()
+{
+    cerr << "destructing Snagglegon" << endl;
 }
 /////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
 Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
