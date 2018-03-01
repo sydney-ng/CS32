@@ -51,6 +51,12 @@ public:
     //sets NBDead to false
     void setNBDead();
     
+    //determines if you have finished level, died or, or on same level
+    int CalculateGameStatus();
+    
+    //tells you how many ships you need to kill to finish level
+    int numShipsLefToKill();
+    
     std::vector<Actor*> getVector();
 private:
     std::vector<Actor*> gameObjectVector;

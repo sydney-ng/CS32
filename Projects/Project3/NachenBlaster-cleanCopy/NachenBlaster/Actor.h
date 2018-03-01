@@ -49,7 +49,7 @@ public:
     //everything of collision for NB
     virtual void PostNBCollisionActions(){};
     void setLevelOver();
-    void setStatusBar(size_t hitNum, size_t cabbNum, size_t torpNum);
+    void setStatusBar(int hitNum, int cabbNum, int torpNum);
     
 
 private:
@@ -95,6 +95,9 @@ public:
     virtual bool CheckProperSide (int other, int currShip);
     //add a certain number of Torpedos
     void UpdateNumTorps (int numTorps);
+    void setCabbagePoints(int points);
+    void setNumTorps(int torpnum);
+    void StatusBarBody();
     
 
     //CHECK IF THIS WORKS? NO PARAMETERS

@@ -3,6 +3,11 @@
 
 //REMOVE
 #include <iostream>
+#include <sstream>
+#include <iomanip>
+#include <string>
+
+
 using namespace std;
 // Students:  Add code to this file, Actor.h, StudentWorld.h, and StudentWorld.cpp
 
@@ -141,25 +146,51 @@ void Actor::setLevelOver()
     }
 }
 
-void Actor::setStatusBar(size_t hitNum, size_t cabbNum, size_t torpNum)
+void Actor::setStatusBar(int hitNum, int cabbNum, int torpNum)
 {
-    char lives_Num = m_SudentworldPointer->getLives();
-    char score_Num = m_SudentworldPointer->getScore();
-    char level_Num = m_SudentworldPointer->getLevel();
-    size_t health_Num = hitNum/50;
-    size_t cabb_Num = cabbNum/30;
-    
-    string x = "hello!";
-    m_SudentworldPointer->setGameStatText("hello world"); 
+    cerr << "in StatusBar(), the num of hits you have is " << hitNum << endl;
+    stringstream stream;
 
-//    string finalString = "Lives: " + lives_Num +
-//                         "  Health: " + health_Num +
-//                         "  Score: " + score_Num +
-//                         "  Level: " + level_Num +
-//                         "  Cabbages: " + cabbNum +
-//                         "  Torpedos: " + torpNum; 
-//    
+    //LIVES
+    stream.fill('0');
+    int lives_Num = m_SudentworldPointer->getLives();
+    stream << "Lives: ";
+    stream << setw(1) << lives_Num;
     
+    //HEALTH
+    double health_Num = (hitNum/50.0) * 100.0;
+    stream << "  Health: ";
+    if (health_Num == 100)
+    {
+        stream << setw(3) << health_Num << "%";
+    }
+    else
+    {
+        stream << setw(2) << health_Num << "%";
+    }
+    
+    //SCORE
+    int score_Num = m_SudentworldPointer->getScore();
+    stream << "  Score: ";
+    stream << setw(1) << score_Num;
+    
+    //LEVEL
+    int level_Num = m_SudentworldPointer->getLevel();
+    stream << "  Level: ";
+    stream << setw(1) << level_Num;
+    
+    //CABBAGES
+    stream << "  Cabbages: ";
+    //stream.precision(1);
+    double cabb_Num = (cabbNum/30.0) * 100;
+    stream << cabb_Num << "%";
+
+    
+    //TORPS
+    stream << "  Torpedos: ";
+    stream << setw(1) << torpNum;
+
+    m_SudentworldPointer->setGameStatText(stream.str());
 }
 
 
@@ -282,6 +313,17 @@ NachenBlaster::NachenBlaster(StudentWorld *world)
     m_FTorps = 0;
 }
 
+void NachenBlaster::setNumTorps(int torpnum)
+{
+    m_FTorps = torpnum;
+}
+
+void NachenBlaster::setCabbagePoints(int points)
+{
+    m_CabbageEnergyPoints = points;
+    cerr << " " << endl;
+}
+
 bool NachenBlaster::CheckProperSide (int other, int currShip)
 {
     //the projectile needs to be coming from the right hand side
@@ -309,9 +351,21 @@ void NachenBlaster::somethingBody()
     CheckForProjCollisions();
     
     //give the NB 5 more cabbage points, just cuz
-    m_CabbageEnergyPoints += 5;
-    setStatusBar(getHitPoints(), m_CabbageEnergyPoints,m_FTorps);
+    int toAdd = 5;
+    if (m_CabbageEnergyPoints + toAdd > 30 || m_CabbageEnergyPoints + toAdd == 30)
+    {
+        m_CabbageEnergyPoints = 30;
+    }
+    else
+    {
+        m_CabbageEnergyPoints += toAdd;
+    }
 
+}
+
+void NachenBlaster::StatusBarBody()
+{
+    setStatusBar(getHitPoints(), m_CabbageEnergyPoints,m_FTorps);
 }
 
 void NachenBlaster::PostProjectileCollisionActions()

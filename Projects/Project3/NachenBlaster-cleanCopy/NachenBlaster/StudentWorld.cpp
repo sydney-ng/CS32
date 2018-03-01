@@ -5,6 +5,7 @@
 #include <iostream>
 using namespace std;
 
+//LOOK INTO STAR SIZES
 GameWorld* createStudentWorld(string assetDir)
 {
 	return new StudentWorld(assetDir);
@@ -19,9 +20,8 @@ StudentWorld::StudentWorld(string assetDir)
 {
     m_GamePoints = 0;
     m_CurrentLevel = 1;
-    m_numShipsDestroyed = 0;
+//    m_numShipsDestroyed = 0;
     m_NBDead = false;
-
 }
 
 std::vector<Actor*> StudentWorld::getVector()
@@ -90,14 +90,8 @@ void StudentWorld::AddObjectToVector(Actor * ActorP)
 
 bool StudentWorld::CheckForAddingShips()
 {
-    //get the num of ships you've destroyed so far
-    int D = m_numShipsDestroyed;
-    
-    //calculate the num of ships needed to pass the level, formula: T = 6+(4*n)
-    int T = 6 + (4 * m_CurrentLevel);
-    
-    //calculate the number of remaining ships needed to
-    int N = T - D;
+
+    int N = numShipsLefToKill();
     
     //calculate the formula for the max number of ships that should be on this level, formula: M = 4 + (.5 * current_level_number)
     int M = 4 + (.5 * m_CurrentLevel);
@@ -119,6 +113,20 @@ bool StudentWorld::CheckForAddingShips()
         return true;
     }
     return false;
+}
+
+int StudentWorld:: numShipsLefToKill()
+{
+    //get the num of ships you've destroyed so far
+    int D = m_numShipsDestroyed;
+    
+    //calculate the num of ships needed to pass the level, formula: T = 6+(4*n)
+    int T = 6 + (4 * m_CurrentLevel);
+    
+    //calculate the number of remaining ships needed to
+    int N = T - D;
+    
+    return N;
 }
 
 void StudentWorld::AddShips()
@@ -152,6 +160,25 @@ void StudentWorld::AddShips()
     }
 }
 
+int StudentWorld:: CalculateGameStatus()
+{
+    //if you have died, then return get dead,
+    if (m_NBDead == true)
+    {
+        //INDICATE THAT YOU'VE DIED
+        return GWSTATUS_PLAYER_DIED;
+    }
+    //if you're alive and you have killed the right num of aliens, new level
+    else if (numShipsLefToKill() == 0 || numShipsLefToKill() < 0)
+    {
+            return GWSTATUS_FINISHED_LEVEL;
+    }
+    else
+    {
+        return GWSTATUS_CONTINUE_GAME;
+    }
+    //otherwise, just return CONT
+}
 void StudentWorld::setNBDead()
 {
     m_NBDead = true;
@@ -160,15 +187,23 @@ void StudentWorld::setNBDead()
 
 int StudentWorld::init()
 {
+    m_numShipsDestroyed = 0;
+
     //create a NachenBlaster
     NachenBlaster *nachenblasterP = new NachenBlaster (this);
     gameObjectVector.push_back(nachenblasterP);
     //set member variable equal to the item in the Vector that is the NB
     m_NachenBlaster = nachenblasterP;
     
+    //give NB full points
+    m_NachenBlaster->setHitPoints(50);
+    m_NachenBlaster->setCabbagePoints(30);
+    m_NachenBlaster->setNumTorps(0);
+    
     //create 30 stars
     for (int i =0; i <30; i ++)
     {
+        
         Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
         gameObjectVector.push_back(starP);
     }
@@ -192,18 +227,16 @@ int StudentWorld::move()
             cerr << "finished the move for object number " << i << endl;
         }
     
-    //check if NB is alive
-    if (m_NBDead == true)
-    {
-        //INDICATE THAT YOU'VE DIED
-        return GWSTATUS_PLAYER_DIED;
-    }
+    CalculateGameStatus();
     
     //remove dead objects
     removeDead();
     
     //UPDATE THE STATUS BAR AT THE TOP
-    return GWSTATUS_CONTINUE_GAME;
+    m_NachenBlaster->StatusBarBody();
+    
+    //determine if to end level, end game, cont level
+    return CalculateGameStatus();
 }
 
 void StudentWorld::removeDead()
