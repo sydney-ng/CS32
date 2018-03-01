@@ -332,10 +332,14 @@ Aliens::Aliens(int imageID, double startX, double startY, int dir, double size, 
     m_flightPlan = 0;
     m_TravelSpeed = 2.0;
     m_flightDirection = dir;
+    
     //SET THIS EQUAL TO ACTUAL CURR LEVEL LATER
     int curr_level = 1;
     int temp_Hitpoints = 5 * (1 + ( curr_level - 1) * .1);
     setHitPoints(temp_Hitpoints);
+    
+    //if a NB collides, take this many points away from NB's hitPoints
+    setDamageVal(5);
 }
 
 Aliens::~Aliens()
@@ -368,19 +372,20 @@ void Aliens::somethingBody()
         NewFlightPathActions();
     }
     
-    //step 5: new goodie??
-    if (CheckForFiringProjectile() == true)
+    //step 5: firing a proj?
+    if (CheckForAttacking() == true)
     {
-        //create the goodie
-        if (FireProjectile() == true)
+        //yes you're within range to attack
+        if (AttackNB() == true)
         {
-            //don't do anything for the rest of this tick if you fired a projectile
+            cerr << "you fired a projectile don't do anything the rest of this tick" << endl;
+            //you fired a projectile so don't do anything the rest of the tick
             return;
         }
     }
     
     //step 6: move in direction of it's travel
-//MoveInDirection();
+    MoveInDirection();
     
     if (CheckForNBCollisions() == true)
     {
@@ -390,7 +395,22 @@ void Aliens::somethingBody()
     CheckForProjCollisions();
 }
 
-bool Aliens::CheckForFiringProjectile()
+bool Aliens::AttackNB()
+{
+    return allShootingProjectileStuff();
+}
+
+bool Aliens::allShootingProjectileStuff()
+{
+    //create the goodie
+    if (FireProjectile() == true)
+    {
+        return true;;
+    }
+    return false;
+}
+
+bool Aliens::CheckForAttacking()
 {
     //get NB x and y coords
     int NB_X = getWorld()->getNachenblasterPointer()->getX();
@@ -529,8 +549,6 @@ bool Aliens::CheckForNBCollisions ()
 void Aliens::PostProjectileCollisionActions()
 {
     cerr << "In alien's PostProjectileCollisionActions() " << endl;
-    //add points to player's game
-    getWorld()->increaseScore(250);
 
     if (CheckIfAlive() == false)
     {
@@ -555,18 +573,35 @@ void Aliens::PostNBCollisionActions()
     AlienDeadActions();
 }
 
+void Aliens::setFlightDirection(int dir)
+{
+    m_flightDirection = dir;
+}
+
+void Aliens::setFlightPlan(int len)
+{
+    m_flightPlan = len;
+}
+
+void Aliens::setTravelSpeed (int speed)
+{
+    m_TravelSpeed = speed;
+}
+
+
 void Aliens::AlienDeadActions()
 {
-    //make the alien ship dead so it'll be removed
+    
+    //2a. add points to player's game
+    getWorld()->increaseScore(250);
+ 
+    //2b. make the alien ship dead so it'll be removed
     setDead();
     
-    //add points to player's game
-    getWorld()->increaseScore(250);
-    
-    //play soundDeath
+    //2c. play soundDeath
     getWorld()->playSound(SOUND_DEATH);
     
-    //INTRODUCE EXPLOSION
+    //2d. INTRODUCE EXPLOSION
     Explosion * explosionP = new Explosion (IID_EXPLOSION, getX(), getY(), 0, 1, 0, getWorld());
     getWorld()->AddObjectToVector(explosionP);
 }
@@ -575,7 +610,6 @@ void Aliens::AlienDeadActions()
 Smallgon::Smallgon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Aliens(IID_SMALLGON, startX, startY, 0, 1.5, 1, world)
 {
-    setDamageVal(5);
 }
 Smallgon::~Smallgon()
 {
@@ -593,6 +627,38 @@ Smoregon::Smoregon(int imageID, double startX, double startY, int dir, double si
 :Aliens(IID_SMOREGON, startX, startY, 0, 1.5, 1, world)
 {
 }
+
+bool Smoregon::AttackNB()
+{
+    if (allShootingProjectileStuff() == true)
+    {
+        return true;
+    }
+    PossiblyCharge();
+    return false;
+}
+
+void Smoregon::PossiblyCharge()
+{
+    int currLevel = getWorld()->getCurrentLevel();
+    int max_Num = (20/currLevel) + 5;
+    int randNum = randInt(1, max_Num);
+    
+    if (randNum == 1)
+    {
+        //5bi. set Travel Direction to Due Left (which is option 3)
+        setFlightDirection(3);
+        //5bii. set flight plan to VIEW_WIDTH steps
+        setFlightPlan(VIEW_WIDTH);
+        cerr << "VIEW_WIDTH IS " << VIEW_WIDTH << endl;
+        //5biii. set travel speed to 5 pixels per tick
+        setTravelSpeed(5);
+    }
+}
+Smoregon::~Smoregon()
+{
+    cerr << "destructing Smoregon!!" << endl;
+}
 /////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
 Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Actor(imageID, startX, startY, dir, size, depth, world)
@@ -603,7 +669,9 @@ Projectiles::Projectiles(int imageID, double startX, double startY, int dir, dou
 
 Projectiles::~Projectiles ()
 {
+    cerr << "destructing Projectile" << endl;
 }
+
 ////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
 Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Projectiles(IID_CABBAGE, startX, startY, 0, .5, 1, world)

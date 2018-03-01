@@ -113,8 +113,8 @@ public:
     bool CheckForNewFlightPath();
     //reorients your direction if you need new FP
     void NewFlightPathActions();
-    //checks if NB in range for a new goodie to be dropped
-    bool CheckForFiringProjectile();
+    //checks if NB in range for an attack
+    bool CheckForAttacking();
     //drops the goodie -> specific to each alien (PV)
     virtual bool FireProjectile();
     //tells the alien where to move 
@@ -123,6 +123,18 @@ public:
     bool CheckProperSide (int other, int currShip);
     //if the alien is dead, kill it, increase points & new explosion, sounds 
     void AlienDeadActions();
+    //fire a proj possibly & ram possibly?
+    virtual bool AttackNB();
+    //takes care of CheckForFiringProjectile & FireProjectile
+    bool allShootingProjectileStuff();
+    //set Travel Direction
+    void setFlightDirection(int dir);
+    //set FlightPlan length
+    void setFlightPlan (int len);
+    //set m_TravelSpeed
+    void setTravelSpeed (int speed);
+    
+    
 private:
     int m_flightPlan;
     int m_flightDirection;
@@ -148,6 +160,8 @@ class Smoregon: public Aliens
 public:
     Smoregon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     virtual ~Smoregon();
+    virtual bool AttackNB();
+    void PossiblyCharge();
     //virtual void somethingBody();
 };
 
