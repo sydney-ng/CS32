@@ -75,7 +75,7 @@ int StudentWorld::init()
 //    Smallgon *smallgonP = new Smallgon (IID_SMALLGON, 255 , 100, 0 , 1, 3, this);
 //    gameObjectVector.push_back(smallgonP);
     
-    Smoregon *smoregonP = new Smoregon (IID_SMALLGON, 255 , 100, 0 , 1.5, 1, this);
+    Smoregon *smoregonP = new Smoregon (IID_SMALLGON, 100 , 100, 0 , 1.5, 1, this);
     gameObjectVector.push_back(smoregonP);
     
     //create 30 stars

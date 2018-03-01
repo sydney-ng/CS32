@@ -21,7 +21,12 @@ public:
     {
     };
     virtual bool CheckIfOffScreen();
-    
+    //calls CalculateED to check if there's a collision
+    bool CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius);
+    //shows how far
+    double CalculateEcludianDistance(double x1, double y1, double x2, double y2);
+    //checks if NB has collieded w/ alien
+    bool CheckForNBCollisions();
     bool AliveStatus()
     {
         cerr << "the alive status () is " << m_isAlive << endl;
@@ -40,7 +45,10 @@ public:
     void setIsProjectile (bool projectileBool);
     virtual void setDamageVal(int val);
     int getDamageValue();
-    
+    //bool RandIntTrue(int num_Min, int num_Max); <- implement if time
+    //everything of collision for NB
+    virtual void PostNBCollisionActions(){};
+
 private:
     int m_ImageID;
     int m_DamageValue;
@@ -56,19 +64,18 @@ public:
     Ships(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     ~Ships();
     void setHitPoints(int hits);
-    void UpdateHitPoints (int hits);
     int getHitPoints();
     bool CheckIfAlive();
     virtual void doSomething();
     void SufferDamage(int ID);
-    bool CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius);
-    //shows how far
-    double CalculateEcludianDistance(double x1, double y1, double x2, double y2);
     //checks if projectile has collided w/ alien
     void CheckForProjCollisions();
     //if there's a projectile collision it will do things
     virtual void PostProjectileCollisionActions() = 0;
     virtual bool CheckProperSide (int other, int currShip) = 0;
+    //adds integer to hit points of object
+    void UpdateHitPoints (int hits);
+
     
 private:
     int m_HitPoints;
@@ -101,12 +108,8 @@ public:
     int getFlightPlan();
     double getTravelSpeed();
     virtual void somethingBody();
-    //everything of collision for NB
-    void PostNBCollisionActions();
     //decrements hit points depending on what hit it
     //virtual void SufferDamage(int ID);
-    //checks if NB has collieded w/ alien
-    bool CheckForNBCollisions();
     //everything of collision for projectiles
     virtual void PostProjectileCollisionActions();
     //checks if you need a new FP
@@ -133,7 +136,12 @@ public:
     void setFlightPlan (int len);
     //set m_TravelSpeed
     void setTravelSpeed (int speed);
-    
+    //calls all of the functions when an alien dies
+    virtual void AllAlienDeathStuff();
+    //not pv because it's smallgons dont have it
+    virtual void DropGoodie (){};
+    //everything of collision for NB
+    virtual void PostNBCollisionActions();
     
 private:
     int m_flightPlan;
@@ -162,6 +170,9 @@ public:
     virtual ~Smoregon();
     virtual bool AttackNB();
     void PossiblyCharge();
+    virtual void AllAlienDeathStuff();
+    virtual void DropGoodie ();
+
     //virtual void somethingBody();
 };
 
@@ -238,6 +249,10 @@ class Goodies: public Actor
     
 public:
     Goodies(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    virtual void PostNBCollisionActions();
+    virtual void somethingBody();
+    //PV bc all goodies have a power
+    virtual void goodiePowers() = 0;
     ~Goodies();
     
 };
@@ -247,6 +262,7 @@ class ExtraLife: public Goodies
 {
 public:
     ExtraLife(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    virtual void goodiePowers();
     ~ExtraLife();
 };
 
@@ -257,6 +273,7 @@ class RepairGoodie: public Goodies
 public:
     RepairGoodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     ~RepairGoodie();
+    virtual void goodiePowers();
     
 };
 
@@ -267,6 +284,7 @@ class FT_Goodie: public Goodies
 public:
     FT_Goodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     ~FT_Goodie();
+    virtual void goodiePowers();
     
 };
 #endif // ACTOR_H_

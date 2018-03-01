@@ -89,6 +89,50 @@ void Actor::whatWorld(StudentWorld* world)
     m_SudentworldPointer = world;
 }
 
+bool Actor::CheckForNBCollisions ()
+{
+    cerr << "we will check if there was a collision " << endl;
+    
+    //get coordinates of the NB
+    int NB_xCoord = getWorld()->getNachenblasterPointer()->getX();
+    int NB_yCoord = getWorld()->getNachenblasterPointer()->getY();
+    double NB_radius = getWorld()->getNachenblasterPointer()->getRadius();
+    
+    //check if it collided with NB
+    if (CollisionOccurred(NB_xCoord, NB_yCoord, NB_radius)==true)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool Actor::CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius)
+{
+    //calculate both sides of the equation
+    double LH_Side = CalculateEcludianDistance(getX(), getY(), otherXCoord, otherYCoord);
+    double RH_Side = 0.75 * (getRadius() + otherRadius);
+    
+    if (LH_Side < RH_Side)
+    {
+        //there was a collision
+        return true;
+    }
+    return false;
+}
+
+double Actor::CalculateEcludianDistance(double x1, double y1, double x2, double y2)
+{
+    double distance_between;
+    double x_dist = x1 - x2;
+    double y_dist = y1 - y2;
+    
+    distance_between = pow(x_dist,2)+pow(y_dist,2);
+    distance_between = sqrt(distance_between);
+    
+    return distance_between;
+}
+
+
 ////////////////////////////////IMPLEMENTATION FOR SHIPS CLASS////////////////////////////////
 Ships::Ships(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Actor(imageID, startX, startY, dir, size, depth, world)
@@ -104,10 +148,6 @@ Ships::~Ships()
 void Ships::setHitPoints(int hits)
 {
     m_HitPoints = hits;
-}
-void Ships::UpdateHitPoints (int hits)
-{
-    m_HitPoints += hits;
 }
 
 int Ships::getHitPoints()
@@ -155,32 +195,6 @@ void Ships::SufferDamage(int damagePoints)
     
 }
 
-bool Ships::CollisionOccurred(int otherXCoord, int otherYCoord, int otherRadius)
-{
-    //calculate both sides of the equation
-    double LH_Side = CalculateEcludianDistance(getX(), getY(), otherXCoord, otherYCoord);
-    double RH_Side = 0.75 * (getRadius() + otherRadius);
-    
-    if (LH_Side < RH_Side)
-    {
-        //there was a collision
-        return true;
-    }
-    return false;
-}
-
-double Ships::CalculateEcludianDistance(double x1, double y1, double x2, double y2)
-{
-    double distance_between;
-    double x_dist = x1 - x2;
-    double y_dist = y1 - y2;
-    
-    distance_between = pow(x_dist,2)+pow(y_dist,2);
-    distance_between = sqrt(distance_between);
-    
-    return distance_between;
-}
-
 void Ships::CheckForProjCollisions()
 {
     //check if it's collided w/ a projectile
@@ -210,6 +224,14 @@ void Ships::CheckForProjCollisions()
             }
         }
     }
+}
+
+void Ships::UpdateHitPoints (int hits)
+{
+    cerr << "ship's hit points before were: " << m_HitPoints << endl;
+    m_HitPoints += hits;
+    cerr << "ship's hit points now are: " << m_HitPoints << endl;
+
 }
 
 ////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS/////////////////////////////
@@ -385,7 +407,7 @@ void Aliens::somethingBody()
     }
     
     //step 6: move in direction of it's travel
-    MoveInDirection();
+    //MoveInDirection();
     
     if (CheckForNBCollisions() == true)
     {
@@ -530,30 +552,13 @@ void Aliens::MoveInDirection()
     m_flightPlan -- ;
 }
 
-bool Aliens::CheckForNBCollisions ()
-{
-    cerr << "we will check if there was a collision " << endl;
-    
-    //get coordinates of the NB
-    int NB_xCoord = getWorld()->getNachenblasterPointer()->getX();
-    int NB_yCoord = getWorld()->getNachenblasterPointer()->getY();
-    double NB_radius = getWorld()->getNachenblasterPointer()->getRadius();
-    
-    //check if it collided with NB
-    if (CollisionOccurred(NB_xCoord, NB_yCoord, NB_radius)==true)
-    {
-        return true;
-    }
-    return false;
-}
 void Aliens::PostProjectileCollisionActions()
 {
     cerr << "In alien's PostProjectileCollisionActions() " << endl;
 
     if (CheckIfAlive() == false)
     {
-        AlienDeadActions();
-        
+        AllAlienDeathStuff();
     }
     //the alien is still alive
     else
@@ -570,7 +575,8 @@ void Aliens::PostNBCollisionActions()
     //make the NB suffer damage
     int alienDamageValue = getDamageValue();
     getWorld()->getNachenblasterPointer()->SufferDamage(alienDamageValue);
-    AlienDeadActions();
+    AllAlienDeathStuff();
+    
 }
 
 void Aliens::setFlightDirection(int dir)
@@ -588,6 +594,10 @@ void Aliens::setTravelSpeed (int speed)
     m_TravelSpeed = speed;
 }
 
+void Aliens::AllAlienDeathStuff()
+{
+    AlienDeadActions();
+}
 
 void Aliens::AlienDeadActions()
 {
@@ -605,6 +615,7 @@ void Aliens::AlienDeadActions()
     Explosion * explosionP = new Explosion (IID_EXPLOSION, getX(), getY(), 0, 1, 0, getWorld());
     getWorld()->AddObjectToVector(explosionP);
 }
+
 
 /////////////////////////////////IMPLEMENTATION FOR SMALLGON CLASS////////////////////////////////////
 Smallgon::Smallgon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
@@ -655,6 +666,34 @@ void Smoregon::PossiblyCharge()
         setTravelSpeed(5);
     }
 }
+
+void Smoregon::AllAlienDeathStuff()
+{
+    AlienDeadActions();
+    int randNum = randInt(1, 3);
+    if (randNum > 0)
+    {
+        DropGoodie();
+    }
+
+}
+
+void Smoregon::DropGoodie()
+{
+    int randNum = randInt(1, 2);
+    if (randNum > 0) // 1)
+    {
+        //create a new repair goodie @ the death coordinates
+        RepairGoodie * RepairGoodieP = new RepairGoodie (IID_REPAIR_GOODIE, getX(), getY(), 0, .5, 1, getWorld());
+        getWorld()->AddObjectToVector(RepairGoodieP);
+    }
+    else
+    {
+        FT_Goodie * FT_GoodieP = new FT_Goodie (IID_TORPEDO_GOODIE, getX(), getY(), 0, .5, 1, getWorld());
+        getWorld()->AddObjectToVector(FT_GoodieP);
+    }
+}
+
 Smoregon::~Smoregon()
 {
     cerr << "destructing Smoregon!!" << endl;
@@ -820,6 +859,39 @@ Goodies::Goodies(int imageID, double startX, double startY, int dir, double size
     setIsProjectile(false);
 }
 
+void Goodies::somethingBody()
+{
+    //3. check if NB collided with it
+    if (CheckForNBCollisions()==true)
+    {
+        PostNBCollisionActions();
+        //3e. return immediately
+        return;
+    }
+    //4. move .75 units left & down
+    //moveTo(getX()-.75, getY()-.75);
+    
+    //5. check for NB collision again
+    if (CheckForNBCollisions()==true)
+    {
+        PostNBCollisionActions();
+        //3e. return immediately
+        return;
+    }
+}
+
+void Goodies::PostNBCollisionActions()
+{
+    //3a. increase points by 100
+    getWorld()->increaseScore(100);
+    //3b. set its state to dead
+    setDead();
+    //3c. play SOUND_GOOIDE
+    getWorld()->playSound(SOUND_GOODIE);
+    //3d. perform specialized goodie powers!
+    goodiePowers();
+}
+
 Goodies::~Goodies()
 {
     cerr << "destructing a goodie " << endl;
@@ -836,6 +908,13 @@ ExtraLife::~ExtraLife()
     cerr << "destructing an ExtraLife " << endl;
 }
 
+void ExtraLife::goodiePowers()
+{
+    //3d. increase number of lives by 1
+    getWorld()->incLives();
+}
+
+
 ////////////////////////////////IMPLEMENTATION FOR REPAIRGOODIE CLASS////////////////////////////////
 RepairGoodie::RepairGoodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 : Goodies(IID_REPAIR_GOODIE, startX, startY, 0 , 0.5, 1, world)
@@ -847,6 +926,26 @@ RepairGoodie::~RepairGoodie()
     cerr << "destructing an RepairGoodie " << endl;
 }
 
+void RepairGoodie::goodiePowers()
+{
+    //3d. increase NB's hit points by 10
+    
+    int NB_CurrhitPoints = getWorld()->getNachenblasterPointer()->getHitPoints();
+    
+    //set NB's hit points to 50 if it's
+    int addTo_Points;
+    if (addTo_Points + 10 > 50)
+    {
+        //calculate the difference then
+        addTo_Points = 50 - NB_CurrhitPoints;
+    }
+    
+    else
+    {   //it won't cause you to go over 50 so just add ten
+        addTo_Points = 10;
+    }
+    getWorld()->getNachenblasterPointer()->UpdateHitPoints(addTo_Points);
+}
 ////////////////////////////////IMPLEMENTATION FOR FT_Goodie CLASS////////////////////////////////
 FT_Goodie::FT_Goodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 : Goodies(IID_TORPEDO_GOODIE, startX, startY, 0 , 0.5, 1, world)
@@ -855,4 +954,9 @@ FT_Goodie::FT_Goodie(int imageID, double startX, double startY, int dir, double 
 FT_Goodie::~FT_Goodie()
 {
     cerr << "destructing an FT_Goodie " << endl;
+}
+
+void FT_Goodie::goodiePowers()
+{
+    return;
 }
