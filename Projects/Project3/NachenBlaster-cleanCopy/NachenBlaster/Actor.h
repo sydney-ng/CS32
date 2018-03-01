@@ -121,6 +121,8 @@ public:
     void MoveInDirection();
     //checks if the projectile is coming from an alien or NB
     bool CheckProperSide (int other, int currShip);
+    //if the alien is dead, kill it, increase points & new explosion, sounds 
+    void AlienDeadActions();
 private:
     int m_flightPlan;
     int m_flightDirection;
@@ -132,7 +134,7 @@ class Smallgon: public Aliens
 {
 public:
     Smallgon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
-    ~Smallgon();
+    virtual ~Smallgon();
     //virtual void somethingBody();
     //private:
   //  int m_flightPlan;
@@ -145,6 +147,7 @@ class Smoregon: public Aliens
 {
 public:
     Smoregon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    virtual ~Smoregon();
     //virtual void somethingBody();
 };
 

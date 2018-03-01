@@ -94,10 +94,8 @@ Ships::Ships(int imageID, double startX, double startY, int dir, double size, in
 :Actor(imageID, startX, startY, dir, size, depth, world)
 {
     //SET THIS EQUAL TO ACTUAL LEVEL LATER
-    setImageID(imageID);
+    //setImageID(imageID);
     setIsProjectile(false);
-    int curr_level = 1;
-    m_HitPoints = 5 * (1 + ( curr_level - 1) * .1);
 }
 
 Ships::~Ships()
@@ -334,6 +332,10 @@ Aliens::Aliens(int imageID, double startX, double startY, int dir, double size, 
     m_flightPlan = 0;
     m_TravelSpeed = 2.0;
     m_flightDirection = dir;
+    //SET THIS EQUAL TO ACTUAL CURR LEVEL LATER
+    int curr_level = 1;
+    int temp_Hitpoints = 5 * (1 + ( curr_level - 1) * .1);
+    setHitPoints(temp_Hitpoints);
 }
 
 Aliens::~Aliens()
@@ -378,7 +380,7 @@ void Aliens::somethingBody()
     }
     
     //step 6: move in direction of it's travel
-    MoveInDirection();
+//MoveInDirection();
     
     if (CheckForNBCollisions() == true)
     {
@@ -532,10 +534,7 @@ void Aliens::PostProjectileCollisionActions()
 
     if (CheckIfAlive() == false)
     {
-        getWorld()->playSound(SOUND_DEATH);
-        setDead();
-        Explosion * explosionP = new Explosion (IID_EXPLOSION, getX(), getY(), 0, 1, 0, getWorld());
-        getWorld()->AddObjectToVector(explosionP);
+        AlienDeadActions();
         
     }
     //the alien is still alive
@@ -553,21 +552,23 @@ void Aliens::PostNBCollisionActions()
     //make the NB suffer damage
     int alienDamageValue = getDamageValue();
     getWorld()->getNachenblasterPointer()->SufferDamage(alienDamageValue);
-    
+    AlienDeadActions();
+}
+
+void Aliens::AlienDeadActions()
+{
     //make the alien ship dead so it'll be removed
     setDead();
     
     //add points to player's game
     getWorld()->increaseScore(250);
-
+    
     //play soundDeath
     getWorld()->playSound(SOUND_DEATH);
     
     //INTRODUCE EXPLOSION
     Explosion * explosionP = new Explosion (IID_EXPLOSION, getX(), getY(), 0, 1, 0, getWorld());
     getWorld()->AddObjectToVector(explosionP);
-    
-    //DROP GOODIE?
 }
 
 /////////////////////////////////IMPLEMENTATION FOR SMALLGON CLASS////////////////////////////////////
