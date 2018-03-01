@@ -34,6 +34,18 @@ public:
     //returns current level
     int getCurrentLevel();
     
+    //does calculations to determine if you should add another ship
+    bool CheckForAddingShips();
+    
+    //increments the number of ships destroyed by 1
+    void incNumShipsDestroyed();
+    
+    //decrements the number of ships onscreen by 1
+    void decNumOnScreenShips();
+    
+    //do the actual adding of the ships
+    void AddShips();
+
     NachenBlaster* getNachenblasterPointer();
     
     std::vector<Actor*> getVector();
@@ -42,6 +54,8 @@ private:
     NachenBlaster * m_NachenBlaster;
     int m_GamePoints;
     int m_CurrentLevel;
+    int m_numShipsDestroyed;
+    int m_numOnScreenShips;
     std::vector<Actor*>* m_vectorPointer;
 };
 

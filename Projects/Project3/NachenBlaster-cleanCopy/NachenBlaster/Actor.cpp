@@ -169,6 +169,10 @@ void Ships::doSomething()
     {
         cerr << "it's off the screen, set dead" << endl;
         setDead();
+        if (getImageID() != IID_NACHENBLASTER)
+        {
+            getWorld()->decNumOnScreenShips();
+        }
         return;
     }
     somethingBody();
@@ -424,7 +428,7 @@ void Aliens::somethingBody()
     }
     
     //step 6: move in direction of it's travel
-    //MoveInDirection();
+    MoveInDirection();
     
     if (CheckForNBCollisions() == true)
     {
@@ -575,6 +579,9 @@ void Aliens::PostProjectileCollisionActions()
 
     if (CheckIfAlive() == false)
     {
+        
+        //increment the number of ships destroyed
+        getWorld()->incNumShipsDestroyed();
         AllAlienDeathStuff();
     }
     //the alien is still alive
@@ -588,6 +595,8 @@ void Aliens::PostProjectileCollisionActions()
 void Aliens::PostNBCollisionActions()
 {
     cerr << "YOU COLLIDED!" << endl;
+    //increment the number of ships destroyed
+    getWorld()->incNumShipsDestroyed();
     
     //make the NB suffer damage
     int alienDamageValue = getDamageValue();
@@ -776,7 +785,8 @@ void Snagglegon::AllAlienDeathStuff()
 {
     AlienDeadActions();
     int randNum = randInt(1, 6);
-    if (randNum > 0) //== 1)
+    
+    if (randNum == 1)
     {
         DropGoodie();
     }

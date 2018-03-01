@@ -32,7 +32,7 @@ public:
         cerr << "the alive status () is " << m_isAlive << endl;
         return m_isAlive;
     }
-    void setDead()
+    virtual void setDead()
     {
         m_isAlive = false;
     }
@@ -75,7 +75,6 @@ public:
     virtual bool CheckProperSide (int other, int currShip) = 0;
     //adds integer to hit points of object
     void UpdateHitPoints (int hits);
-
     
 private:
     int m_HitPoints;
@@ -146,7 +145,7 @@ public:
     virtual void DropGoodie (){};
     //everything of collision for NB
     virtual void PostNBCollisionActions();
-    
+
 private:
     int m_flightPlan;
     int m_flightDirection;
@@ -252,7 +251,6 @@ public:
     //destructor
     virtual ~Star ();
     
-    //DoSomething Function
     virtual void somethingBody();
     //checks if the star has gone off the screen to the left
     //virtual bool CheckIfAlive();
