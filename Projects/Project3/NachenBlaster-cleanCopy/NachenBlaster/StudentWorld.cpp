@@ -36,13 +36,6 @@ int StudentWorld::getCurrentLevel()
     return m_CurrentLevel;
 }
 
-void StudentWorld::UpdateGamePoints(int points)
-{
-    cerr << "before the game points were " << m_GamePoints << endl;
-    m_GamePoints += points;
-    cerr << "now the game points are: " << m_GamePoints << endl;
-}
-
 double StudentWorld::randDouble(double min, double max)
 {
     double f = (double)rand() / RAND_MAX;

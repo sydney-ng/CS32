@@ -38,9 +38,12 @@ public:
     bool getIsProjectile();
     void setImageID(int ID);
     void setIsProjectile (bool projectileBool);
+    virtual void setDamageVal(int val);
+    int getDamageValue();
     
 private:
     int m_ImageID;
+    int m_DamageValue;
     bool m_isAlive;
     bool m_isProjectile;
     StudentWorld *m_SudentworldPointer;
@@ -103,7 +106,7 @@ public:
     //decrements hit points depending on what hit it
     //virtual void SufferDamage(int ID);
     //checks if NB has collieded w/ alien
-    void CheckForNBCollisions();
+    bool CheckForNBCollisions();
     //everything of collision for projectiles
     virtual void PostProjectileCollisionActions();
     //checks if you need a new FP
@@ -149,21 +152,15 @@ public:
 class Projectiles: public Actor
 {
 public:
-    Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name, string Owner);
+    Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     virtual ~Projectiles();
-    virtual int getDamagePoints();
-    //allows derived classes to set damageName
-    void setDamageName(char passedIn_DName);
-private:
-    char m_DamageName;
-    string m_Owner;
 };
 
 ////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
 class Cabbage: public Projectiles
 {
 public:
-    Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name, string Owner);
+    Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     virtual ~Cabbage();
     virtual void somethingBody();
     virtual bool CheckIfOffScreen();
@@ -173,19 +170,20 @@ public:
 class Turnip: public Projectiles
 {
 public:
-    Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name, string Owner);
+    Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     virtual ~Turnip();
     virtual void somethingBody();
-private:
 };
 ////////////////////////////////IMPLEMENTATION FOR FLATULAN TORPEDO CLASS//////////////////////////////////////
 class F_Torpedo: public Projectiles
 {
 public:
-    F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner, char d_Name, string Owner);
+    F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner);
     virtual ~F_Torpedo();
-    //virtual void somethingBody();
-    virtual int getDamagePoints();
+    virtual void somethingBody();
+    //virtual int getDamagePoints();
+private:
+    int m_Owner;
 };
 ////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////
 

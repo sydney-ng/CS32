@@ -6,6 +6,7 @@
 using namespace std;
 // Students:  Add code to this file, Actor.h, StudentWorld.h, and StudentWorld.cpp
 
+//CURRENTLY WORKING ON THE GET DAMAGE PART for collisions with alien
 
 ////////////////////////////////IMPLEMENTATION FOR ALLOBJECTS CLASS////////////////////////////////
 Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
@@ -19,7 +20,13 @@ Actor::Actor(int imageID, double startX, double startY, int dir, double size, in
 
 void Actor::doSomething()
 {
-    cerr << "In doSomething of Actor, the Base Class! "<< endl;
+    //first make sure it's alive before you do anything
+    if (m_isAlive == false)
+    {
+        return;
+    }
+    
+    //make sure it's on the screen
     if (CheckIfOffScreen() 	== false)
     {
         setDead();
@@ -32,10 +39,20 @@ void Actor::setImageID(int ID)
     m_ImageID = ID;
 }
 
+int Actor::getDamageValue()
+{
+    return m_DamageValue;
+}
+
 void Actor::setIsProjectile (bool projectileBool)
 {
     m_isProjectile = projectileBool;
 
+}
+
+void Actor::setDamageVal(int val)
+{
+    m_DamageValue = val;
 }
 
 int Actor::getImageID()
@@ -132,19 +149,10 @@ bool Ships:: CheckIfAlive()
     return true;
 }
 
-void Ships::SufferDamage(int ID)
+void Ships::SufferDamage(int damagePoints)
 {
     cerr << "before suffering damage, the hit points was: " << m_HitPoints << endl;
-    //find out what it it
-    if (ID == IID_CABBAGE || ID == IID_TURNIP)
-    {
-        m_HitPoints -= 2;
-    }
-    
-    if (ID == IID_SMALLGON)
-    {
-        m_HitPoints -= 2;
-    }
+    m_HitPoints = m_HitPoints - damagePoints;
     cerr << "after suffering damage, the hit points is: " << m_HitPoints << endl;
     
 }
@@ -187,10 +195,10 @@ void Ships::CheckForProjCollisions()
             {
                 if (CheckProperSide(vec[i]->getX(), getX())== true)
                 {
-                    cerr << "this ship collided with a projectile!" << endl;
+                    cerr << "this ship collided with a projectile, minus " << vec[i]->getDamageValue() << "hit points " << endl;
                     
                     //cause damage to the ship that collided w/ it
-                    SufferDamage(vec[i]->getImageID());
+                    SufferDamage(vec[i]->getDamageValue());
                     
                     //all the other stuff after a projectile collision
                     PostProjectileCollisionActions();
@@ -213,6 +221,7 @@ NachenBlaster::NachenBlaster(StudentWorld *world)
     cerr << "in nachenblaster constructor " << endl;
     setHitPoints(50);
     m_CabbageEnergyPoints = 30;
+    setDamageVal(0);
 }
 
 bool NachenBlaster::CheckProperSide (int other, int currShip)
@@ -240,13 +249,14 @@ void NachenBlaster::somethingBody()
     
     //check for collisions
     CheckForProjCollisions();
-
+    
     //give the NB 5 more cabbage points, just cuz
     m_CabbageEnergyPoints += 5;
 }
 
 void NachenBlaster::PostProjectileCollisionActions()
 {
+    cerr << "In NB's PostProjectileCollisionActions() " << endl;
     getWorld()->playSound(SOUND_BLAST);
     return;
 }
@@ -295,7 +305,7 @@ void NachenBlaster::KeyPressMovement()
                 //fire a cabbage by adding a new cabbage 12 pxl to the right of NB
                 //Actor::Actor(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
                 
-                Cabbage* actorP = new Cabbage (IID_CABBAGE, getX()+12, getY(), 0, .5, 1, getWorld(), 'c', "NB");
+                Cabbage* actorP = new Cabbage (IID_CABBAGE, getX()+12, getY(), 0, .5, 1, getWorld());
                 getWorld()->AddObjectToVector(actorP);
                 getWorld()->playSound(SOUND_PLAYER_SHOOT);
                 
@@ -343,7 +353,11 @@ double Aliens::getTravelSpeed()
 void Aliens::somethingBody()
 {
     //step 3: checking for collisions
-    CheckForNBCollisions();
+    if (CheckForNBCollisions() == true)
+    {
+        PostNBCollisionActions();
+        return;
+    }
     CheckForProjCollisions();
     
     //setp 4: checking for New Flight plan
@@ -366,7 +380,11 @@ void Aliens::somethingBody()
     //step 6: move in direction of it's travel
     MoveInDirection();
     
-    CheckForNBCollisions();
+    if (CheckForNBCollisions() == true)
+    {
+        PostNBCollisionActions();
+        return;
+    }
     CheckForProjCollisions();
 }
 
@@ -390,6 +408,7 @@ bool Aliens::CheckForFiringProjectile()
 
 bool Aliens::CheckProperSide (int other, int currShip)
 {
+    
     //the projectile needs to be coming from the left hand side
     if (other > currShip)
     {
@@ -420,7 +439,7 @@ bool Aliens::FireProjectile()
         cerr << "alien's coords are " << getX() << " " << getY() << endl;
         //create new turnip & add to vector
         cerr << "creating a new turnip at " << projectile_Xcoord << " " <<  projectile_Ycoord << endl;
-        Turnip * newTurnipP = new Turnip (IID_TURNIP, projectile_Xcoord, projectile_Ycoord, 0, .5, 1, getWorld(), 'T', "Alien");
+        Turnip * newTurnipP = new Turnip (IID_TURNIP, projectile_Xcoord, projectile_Ycoord, 0, .5, 1, getWorld());
         getWorld()->AddObjectToVector(newTurnipP);
         
         //play the sound
@@ -489,7 +508,7 @@ void Aliens::MoveInDirection()
     m_flightPlan -- ;
 }
 
-void Aliens::CheckForNBCollisions ()
+bool Aliens::CheckForNBCollisions ()
 {
     cerr << "we will check if there was a collision " << endl;
     
@@ -501,13 +520,15 @@ void Aliens::CheckForNBCollisions ()
     //check if it collided with NB
     if (CollisionOccurred(NB_xCoord, NB_yCoord, NB_radius)==true)
     {
-        return PostNBCollisionActions();
+        return true;
     }
+    return false;
 }
 void Aliens::PostProjectileCollisionActions()
 {
+    cerr << "In alien's PostProjectileCollisionActions() " << endl;
     //add points to player's game
-    getWorld()->UpdateGamePoints(250);
+    getWorld()->increaseScore(250);
 
     if (CheckIfAlive() == false)
     {
@@ -530,14 +551,14 @@ void Aliens::PostNBCollisionActions()
     cerr << "YOU COLLIDED!" << endl;
     
     //make the NB suffer damage
-    int alienID = getImageID();
-    getWorld()->getNachenblasterPointer()->SufferDamage(alienID);
+    int alienDamageValue = getDamageValue();
+    getWorld()->getNachenblasterPointer()->SufferDamage(alienDamageValue);
     
     //make the alien ship dead so it'll be removed
     setDead();
     
     //add points to player's game
-    getWorld()->UpdateGamePoints(250);
+    getWorld()->increaseScore(250);
 
     //play soundDeath
     getWorld()->playSound(SOUND_DEATH);
@@ -553,6 +574,7 @@ void Aliens::PostNBCollisionActions()
 Smallgon::Smallgon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Aliens(IID_SMALLGON, startX, startY, 0, 1.5, 1, world)
 {
+    setDamageVal(5);
 }
 Smallgon::~Smallgon()
 {
@@ -571,35 +593,23 @@ Smoregon::Smoregon(int imageID, double startX, double startY, int dir, double si
 {
 }
 /////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
-Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name, string Owner)
+Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Actor(imageID, startX, startY, dir, size, depth, world)
 {
     setImageID(imageID);
     setIsProjectile(true);
-    m_DamageName = d_Name;
-    m_Owner = Owner;
 }
 
 Projectiles::~Projectiles ()
 {
 }
-
-int Projectiles::getDamagePoints()
-{
-    //2 hit points for turnips and cabbages
-    return 2;
-}
-
-void Projectiles::setDamageName(char passedIn_DName)
-{
-    m_DamageName = passedIn_DName;
-}
-
 ////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
-Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name, string Owner)
-:Projectiles(IID_CABBAGE, startX, startY, 0, .5, 1, world, d_Name, Owner)
+Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+:Projectiles(IID_CABBAGE, startX, startY, 0, .5, 1, world)
 {
     cerr << "created a cabbage " << endl;
+    setDamageVal(2);
+
 }
 
 Cabbage::~Cabbage()
@@ -629,10 +639,11 @@ bool Cabbage::CheckIfOffScreen()
 }
 
 ////////////////////////////////IMPLEMENTATION FOR TURNIP CLASS//////////////////////////////////////
-Turnip::Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, char d_Name, string Owner)
-:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world, d_Name, Owner)
+Turnip::Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
+:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world)
 {
     cerr << "created a turnip" << endl;
+    setDamageVal(2);
 }
 
 Turnip::~Turnip()
@@ -649,9 +660,11 @@ void Turnip::somethingBody()
 
 
 ////////////////////////////////IMPLEMENTATION FOR FLATULAN TORPEDO CLASS//////////////////////////////////////
-F_Torpedo::F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner, char d_Name, string Owner)
-:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world, d_Name, Owner)
+F_Torpedo::F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner)
+:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world)
 {
+    setDamageVal(8);
+    m_Owner = owner;
 }
 
 F_Torpedo::~F_Torpedo()
@@ -659,32 +672,28 @@ F_Torpedo::~F_Torpedo()
     cerr << "deconstructing a turnip";
 }
 
-//void F_Torpedo::somethingBody()
-//{
-////    if (m_owner == IID_NACHENBLASTER)
-////    {
-////        //move right by 8 pxl
-////        moveTo(getX()+8, getY());
-////    }
-////    
-////    if (m_owner == IID_SNAGGLEGON)
-////    {
-////        //move left by 8 pxl
-////        moveTo(getX()-8, getY());
-////    }
-//}
-
-int F_Torpedo::getDamagePoints()
+void F_Torpedo::somethingBody()
 {
-    //torpedos cause 8 points of damage
-    return 8;
+    if (m_Owner == IID_NACHENBLASTER)
+    {
+        //move right by 8 pxl
+        moveTo(getX()+8, getY());
+    }
+    
+    if (m_Owner == IID_SNAGGLEGON)
+    {
+        //move left by 8 pxl
+        moveTo(getX()-8, getY());
+    }
 }
+
 ///////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////////
 Star::Star(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 : Actor(imageID, startX, startY, 0, .5, 1, world)
 {
     setImageID(imageID);
     setIsProjectile(false);
+    setDamageVal(0);
 }
 
 Star::~Star ()
@@ -702,7 +711,7 @@ void Star::somethingBody()
 Explosion::Explosion(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 : Actor(IID_EXPLOSION , startX, startY, 0, 1, 0, world)
 {
-    
+    setDamageVal(0);
     setImageID(imageID);
     setIsProjectile(false);
     m_AliveTicksLeft = 4;

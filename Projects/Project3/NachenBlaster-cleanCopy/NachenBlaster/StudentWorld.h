@@ -31,9 +31,6 @@ public:
     //add a new object to the vector
     void AddObjectToVector(Actor * ActorP);
     
-    //updates the player's score
-    void UpdateGamePoints(int points);
-    
     //returns current level
     int getCurrentLevel();
     
