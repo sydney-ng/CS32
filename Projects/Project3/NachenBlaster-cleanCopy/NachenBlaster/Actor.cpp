@@ -333,7 +333,19 @@ void NachenBlaster::KeyPressMovement()
         }
         else if (ch == KEY_PRESS_TAB)
         {
-            //CODE FOR TORPS
+            //check if you have any f torps in your inventory
+            if (m_FTorps > 0)
+            {
+                //fire a torpedo
+                F_Torpedo * fTorpedoP = new F_Torpedo(IID_TORPEDO, getX()+12, getY(), 0, 1.5, 1, getWorld(), IID_NACHENBLASTER);
+                getWorld()->AddObjectToVector(fTorpedoP);
+                
+                //play torp sound
+                getWorld()->playSound(SOUND_TORPEDO);
+                
+                //decrement num of torps left
+                m_FTorps--;
+            }
         }
         
     }
@@ -432,7 +444,7 @@ bool Aliens::allShootingProjectileStuff()
     //create the goodie
     if (FireProjectile() == true)
     {
-        return true;;
+        return true;
     }
     return false;
 }
@@ -581,7 +593,6 @@ void Aliens::PostNBCollisionActions()
     int alienDamageValue = getDamageValue();
     getWorld()->getNachenblasterPointer()->SufferDamage(alienDamageValue);
     AllAlienDeathStuff();
-    
 }
 
 void Aliens::setFlightDirection(int dir)
@@ -642,6 +653,7 @@ Smallgon::~Smallgon()
 Smoregon::Smoregon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Aliens(IID_SMOREGON, startX, startY, 0, 1.5, 1, world)
 {
+    
 }
 
 bool Smoregon::AttackNB()
@@ -706,7 +718,7 @@ Smoregon::~Smoregon()
 
 ////////////////////////////////IMPLEMENTATION FOR SNAGGLEGON CLASS/////////////////////////////
 Snagglegon::Snagglegon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
-:Aliens(IID_SMALLGON, startX, startY, 0, 1.5, 1, world)
+:Aliens(IID_SNAGGLEGON, startX, startY, 0, 1.5, 1, world)
 {
     //set the hit points
     int curr_level = getWorld()->getCurrentLevel();
@@ -718,7 +730,123 @@ Snagglegon::Snagglegon(int imageID, double startX, double startY, int dir, doubl
     
     //set TravelSpeed
     setTravelSpeed(1.75);
+    
+    //set Damage points
+    setDamageVal(15);
+
 }
+
+bool Snagglegon::AttackNB()
+{
+    if (allShootingProjectileStuff() == true)
+    {
+        return true;
+    }
+    return false;
+}
+
+void Snagglegon::AlienDeadActions()
+{
+    
+    //2a. add points to player's game
+    getWorld()->increaseScore(1000);
+    
+    //2b. make the alien ship dead so it'll be removed
+    setDead();
+    
+    //2c. play soundDeath
+    getWorld()->playSound(SOUND_DEATH);
+    
+    //2d. INTRODUCE EXPLOSION
+    Explosion * explosionP = new Explosion (IID_EXPLOSION, getX(), getY(), 0, 1, 0, getWorld());
+    getWorld()->AddObjectToVector(explosionP);
+}
+
+bool Snagglegon::CheckForNewFlightPath()
+{
+    //snagglegon is @ top, or bottom
+    if (getY() > VIEW_HEIGHT -1 ||  getY() == VIEW_HEIGHT -1 || getY() == 0 || getY() < 0)
+    {
+        return true;
+    }
+    return false;
+}
+
+void Snagglegon::AllAlienDeathStuff()
+{
+    AlienDeadActions();
+    int randNum = randInt(1, 6);
+    if (randNum > 0) //== 1)
+    {
+        DropGoodie();
+    }
+}
+
+void Snagglegon::DropGoodie()
+{
+    ExtraLife * extraLifeP = new ExtraLife (IID_LIFE_GOODIE, getX(), getY(), 0, 0.5, 1, getWorld());
+    getWorld()->AddObjectToVector(extraLifeP);
+}
+
+//reorients your direction if you need new FP
+void Snagglegon::NewFlightPathActions()
+{
+    //if y coordinate >= to VIEW_HEIGHT-1
+    if (getY() > VIEW_HEIGHT -1 || getY() == VIEW_HEIGHT -1)
+    {
+        setFlightDirection(1);
+    }
+    else if (getY() < 0 || getY() == 0)
+    {
+        //then the alien will set its travel direction to up and left.
+        setFlightDirection(2);
+        
+    }
+}
+bool Snagglegon::FireProjectile()
+{
+ 
+    //calculate formula : 1 in ((20/CurrentLevelNumber)+5)
+    int currLevel = getWorld()->getCurrentLevel();
+    int max_Num = (15/currLevel) + 10;
+    int randNum = randInt(1, max_Num);
+    
+    // you will fire
+    if (randNum == 1)
+    {
+        //add a new torpedo to the vector/screen
+        F_Torpedo * fTorpedoP = new F_Torpedo(IID_TORPEDO, getX()-14, getY(), 0, 1.5, 1, getWorld(), IID_SNAGGLEGON);
+        getWorld()->AddObjectToVector(fTorpedoP);
+        
+        //5aii. play torpedo sound
+        getWorld()->playSound(SOUND_TORPEDO);
+        return true;
+    }
+    return false;
+}
+
+//// 1/20 chance of firing a new turnip
+
+//
+//int randNum = randInt(1, max_Num);
+//
+//if (randNum == 1)
+//{
+//    //get goodie coordinates
+//    int projectile_Xcoord = getX()- 14;
+//    int projectile_Ycoord = getY();
+//    
+//    cerr << "alien's coords are " << getX() << " " << getY() << endl;
+//    //create new turnip & add to vector
+//    cerr << "creating a new turnip at " << projectile_Xcoord << " " <<  projectile_Ycoord << endl;
+//    Turnip * newTurnipP = new Turnip (IID_TURNIP, projectile_Xcoord, projectile_Ycoord, 0, .5, 1, getWorld());
+//    getWorld()->AddObjectToVector(newTurnipP);
+//    
+//    //play the sound
+//    getWorld()->playSound(SOUND_ALIEN_SHOOT);
+//    return true;
+//    }
+//    return false;
 
 Snagglegon::~Snagglegon()
 {
@@ -936,10 +1064,10 @@ ExtraLife::~ExtraLife()
 
 void ExtraLife::goodiePowers()
 {
+    cerr <<"INCREASING NUM LIVES BY 1 " << endl;
     //3d. increase number of lives by 1
     getWorld()->incLives();
 }
-
 
 ////////////////////////////////IMPLEMENTATION FOR REPAIRGOODIE CLASS////////////////////////////////
 RepairGoodie::RepairGoodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)

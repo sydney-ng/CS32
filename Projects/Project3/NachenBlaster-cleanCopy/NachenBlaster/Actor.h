@@ -116,20 +116,20 @@ public:
     //virtual void SufferDamage(int ID);
     //everything of collision for projectiles
     virtual void PostProjectileCollisionActions();
-    //checks if you need a new FP
-    bool CheckForNewFlightPath();
+    //checks if you need a new FP - snaggle diff
+    virtual bool CheckForNewFlightPath();
     //reorients your direction if you need new FP
-    void NewFlightPathActions();
+    virtual void NewFlightPathActions();
     //checks if NB in range for an attack
     bool CheckForAttacking();
-    //drops the goodie -> specific to each alien (PV)
+    //drops the goodie -> specific to each alien (Snaggle diff)
     virtual bool FireProjectile();
     //tells the alien where to move 
     void MoveInDirection();
     //checks if the projectile is coming from an alien or NB
     bool CheckProperSide (int other, int currShip);
     //if the alien is dead, kill it, increase points & new explosion, sounds 
-    void AlienDeadActions();
+    virtual void AlienDeadActions();
     //fire a proj possibly & ram possibly?
     virtual bool AttackNB();
     //takes care of CheckForFiringProjectile & FireProjectile
@@ -187,10 +187,19 @@ class Snagglegon: public Aliens
 public:
     Snagglegon(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
     virtual ~Snagglegon();
-    //virtual bool AttackNB();
-    //void PossiblyCharge();
-    //virtual void AllAlienDeathStuff();
-    //virtual void DropGoodie ();
+    //checks if within coords
+    virtual bool AttackNB();
+    //drops the goodie -> specific to each alien (Snaggle diff)
+    virtual bool FireProjectile();
+    //checks if it's hit top or bottom
+    virtual bool CheckForNewFlightPath();
+    //reorients your direction if you need new FP
+    virtual void NewFlightPathActions();
+    //takes care of everything if a snagglegon dies
+    virtual void AllAlienDeathStuff();
+    //if the alien is dead, kill it, increase points & new explosion, sounds
+    virtual void AlienDeadActions();
+    virtual void DropGoodie ();
     
     //virtual void somethingBody();
 };
