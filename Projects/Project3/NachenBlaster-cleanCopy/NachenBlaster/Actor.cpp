@@ -130,6 +130,10 @@ double Actor::CalculateEcludianDistance(double x1, double y1, double x2, double 
     return distance_between;
 }
 
+void Actor::setLevelOver()
+{
+    m_SudentworldPointer->setNBDead(); 
+}
 
 ////////////////////////////////IMPLEMENTATION FOR SHIPS CLASS////////////////////////////////
 Ships::Ships(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
@@ -162,6 +166,10 @@ void Ships::doSomething()
     {
         cerr << "it's not alive, so don't do anything " << endl;
         setDead();
+        if (getImageID() != IID_NACHENBLASTER)
+        {
+            setLevelOver();
+        }
         return;
     }
     //check if off the screen

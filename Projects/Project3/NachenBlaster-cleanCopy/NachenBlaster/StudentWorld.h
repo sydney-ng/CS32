@@ -48,6 +48,9 @@ public:
 
     NachenBlaster* getNachenblasterPointer();
     
+    //sets NBDead to false
+    void setNBDead();
+    
     std::vector<Actor*> getVector();
 private:
     std::vector<Actor*> gameObjectVector;
@@ -56,6 +59,7 @@ private:
     int m_CurrentLevel;
     int m_numShipsDestroyed;
     int m_numOnScreenShips;
+    bool m_NBDead;
     std::vector<Actor*>* m_vectorPointer;
 };
 

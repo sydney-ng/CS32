@@ -20,6 +20,8 @@ StudentWorld::StudentWorld(string assetDir)
     m_GamePoints = 0;
     m_CurrentLevel = 1;
     m_numShipsDestroyed = 0;
+    m_NBDead = false;
+
 }
 
 std::vector<Actor*> StudentWorld::getVector()
@@ -67,6 +69,12 @@ void StudentWorld::ProbabilityaddNewObjects()
     {
         Star *starP = new Star (IID_STAR, 255, randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
         gameObjectVector.push_back(starP);
+    }
+    
+    //add ships?
+    if (CheckForAddingShips() == true)
+    {
+        AddShips();
     }
 }
 
@@ -142,9 +150,13 @@ void StudentWorld::AddShips()
         gameObjectVector.push_back(SnagglegonP);
         m_numOnScreenShips++;
     }
-    
-
 }
+
+void StudentWorld::setNBDead()
+{
+    m_NBDead = true;
+}
+
 
 int StudentWorld::init()
 {
@@ -175,11 +187,11 @@ int StudentWorld::init()
 
     
     //create 30 stars
-//    for (int i =0; i <30; i ++)
-//    {
-//        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
-//        gameObjectVector.push_back(starP);
-//    }
+    for (int i =0; i <30; i ++)
+    {
+        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
+        gameObjectVector.push_back(starP);
+    }
     
     //Cabbage * cabbageP = new Cabbage (IID_CABBAGE, 99, 100, 0, .5, 1, this);
     //gameObjectVector.push_back(cabbageP);
@@ -197,10 +209,10 @@ int StudentWorld::init()
 int StudentWorld::move()
 {
     //add more objects?
-    //ProbabilityaddNewObjects();
-    cerr << "let's move all the objects! " << endl << endl;
-        cerr << "still objects in Vector, size @ beginning of move is: " << gameObjectVector.size() << endl;
-        for (int i = 0; i < gameObjectVector.size(); i++)
+    ProbabilityaddNewObjects();
+    
+    //let everything move
+    for (int i = 0; i < gameObjectVector.size(); i++)
         {
             cerr << "about to move object number " << i << endl;
             if (gameObjectVector.size() > 0 && gameObjectVector[i]->getWorld() != nullptr)
@@ -209,16 +221,20 @@ int StudentWorld::move()
                 gameObjectVector[i]->doSomething();
             }
             cerr << "finished the move for object number " << i << endl;
-            
         }
+    
+    //check if NB is alive
+    if (m_NBDead == true)
+    {
+        //INDICATE THAT YOU'VE DIED
+        return GWSTATUS_PLAYER_DIED;
+    }
+    
+    //remove dead objects
     removeDead();
-    cerr << "finished removing dead" <<endl;
+    
+    //UPDATE THE STATUS BAR AT THE TOP
     return GWSTATUS_CONTINUE_GAME;
-
-    // This code is here merely to allow the game to build, run, and terminate after you hit enter.
-    // Notice that the return value GWSTATUS_PLAYER_DIED will cause our framework to end the current level.
-    //decLives();
-    //return GWSTATUS_PLAYER_DIED;
 }
 
 void StudentWorld::removeDead()

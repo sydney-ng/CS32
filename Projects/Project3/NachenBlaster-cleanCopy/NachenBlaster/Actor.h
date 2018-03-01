@@ -48,6 +48,7 @@ public:
     //bool RandIntTrue(int num_Min, int num_Max); <- implement if time
     //everything of collision for NB
     virtual void PostNBCollisionActions(){};
+    void setLevelOver();
 
 private:
     int m_ImageID;
