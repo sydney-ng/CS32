@@ -166,43 +166,12 @@ int StudentWorld::init()
     //set member variable equal to the item in the Vector that is the NB
     m_NachenBlaster = nachenblasterP;
     
-//    Snagglegon * SnagglegonP = new Snagglegon (IID_SNAGGLEGON, 200, 200, 0, .5, 1, this);
-//    gameObjectVector.push_back(SnagglegonP);
-//    m_numOnScreenShips++;
-    
-//    RepairGoodie * RepairGoodieP = new RepairGoodie (IID_REPAIR_GOODIE, 200, 200, 0, .5, 1, this);
-//    gameObjectVector.push_back(RepairGoodieP);
-    
-//    FT_Goodie * FT_GoodieP = new FT_Goodie (IID_TORPEDO_GOODIE, 100, 100, 0, .5, 1, this);
-//    gameObjectVector.push_back(FT_GoodieP);
-////    
-//    Smallgon *smallgonP = new Smallgon (IID_SMALLGON, 255 , 100, 0 , 1, 3, this);
-//    gameObjectVector.push_back(smallgonP);
-//    m_numOnScreenShips++;
-
-//    
-//    Smoregon *smoregonP = new Smoregon (IID_SMALLGON, 100 , 100, 0 , 1.5, 1, this);
-//    gameObjectVector.push_back(smoregonP);
-//    m_numOnScreenShips++;
-
-    
     //create 30 stars
     for (int i =0; i <30; i ++)
     {
         Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
         gameObjectVector.push_back(starP);
     }
-    
-    //Cabbage * cabbageP = new Cabbage (IID_CABBAGE, 99, 100, 0, .5, 1, this);
-    //gameObjectVector.push_back(cabbageP);
-    /*
-    Turnip *turnipP = new Turnip (IID_TURNIP, 255, 200, 0, .5, 1, this);
-    gameObjectVector.push_back(turnipP);
-    
-    F_Torpedo *f_torpP = new F_Torpedo (IID_TORPEDO, 1, 50, 0, .5, 1, this, IID_NACHENBLASTER);
-    gameObjectVector.push_back(f_torpP);
-*/
-    
     return GWSTATUS_CONTINUE_GAME;
 }
 

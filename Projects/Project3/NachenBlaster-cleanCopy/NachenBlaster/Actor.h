@@ -49,6 +49,8 @@ public:
     //everything of collision for NB
     virtual void PostNBCollisionActions(){};
     void setLevelOver();
+    void setStatusBar(size_t hitNum, size_t cabbNum, size_t torpNum);
+    
 
 private:
     int m_ImageID;

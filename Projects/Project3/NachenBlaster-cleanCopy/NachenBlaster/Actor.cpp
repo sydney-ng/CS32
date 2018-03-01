@@ -132,8 +132,36 @@ double Actor::CalculateEcludianDistance(double x1, double y1, double x2, double 
 
 void Actor::setLevelOver()
 {
-    m_SudentworldPointer->setNBDead(); 
+    //decrement the number of NB lives by 1
+    m_SudentworldPointer->decLives();
+    int temp = m_SudentworldPointer->getLives() - 0;
+    if ( temp == 0 || temp < 0)
+    {
+        m_SudentworldPointer->setNBDead();
+    }
 }
+
+void Actor::setStatusBar(size_t hitNum, size_t cabbNum, size_t torpNum)
+{
+    char lives_Num = m_SudentworldPointer->getLives();
+    char score_Num = m_SudentworldPointer->getScore();
+    char level_Num = m_SudentworldPointer->getLevel();
+    size_t health_Num = hitNum/50;
+    size_t cabb_Num = cabbNum/30;
+    
+    string x = "hello!";
+    m_SudentworldPointer->setGameStatText("hello world"); 
+
+//    string finalString = "Lives: " + lives_Num +
+//                         "  Health: " + health_Num +
+//                         "  Score: " + score_Num +
+//                         "  Level: " + level_Num +
+//                         "  Cabbages: " + cabbNum +
+//                         "  Torpedos: " + torpNum; 
+//    
+    
+}
+
 
 ////////////////////////////////IMPLEMENTATION FOR SHIPS CLASS////////////////////////////////
 Ships::Ships(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
@@ -282,6 +310,8 @@ void NachenBlaster::somethingBody()
     
     //give the NB 5 more cabbage points, just cuz
     m_CabbageEnergyPoints += 5;
+    setStatusBar(getHitPoints(), m_CabbageEnergyPoints,m_FTorps);
+
 }
 
 void NachenBlaster::PostProjectileCollisionActions()
