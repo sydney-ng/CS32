@@ -231,7 +231,6 @@ void Ships::UpdateHitPoints (int hits)
     cerr << "ship's hit points before were: " << m_HitPoints << endl;
     m_HitPoints += hits;
     cerr << "ship's hit points now are: " << m_HitPoints << endl;
-
 }
 
 ////////////////////////////////IMPLEMENTATION FOR NACHENBLASTER CLASS/////////////////////////////
@@ -242,6 +241,7 @@ NachenBlaster::NachenBlaster(StudentWorld *world)
     setHitPoints(50);
     m_CabbageEnergyPoints = 30;
     setDamageVal(0);
+    m_FTorps = 0;
 }
 
 bool NachenBlaster::CheckProperSide (int other, int currShip)
@@ -339,6 +339,13 @@ void NachenBlaster::KeyPressMovement()
         }
         
     }
+}
+
+void NachenBlaster:: UpdateNumTorps (int numTorps)
+{
+    cerr << "before UpdateNumTorps your numtorps was " << m_FTorps << endl;
+    m_FTorps += numTorps;
+    cerr << "after UpdateNumTorps your numtorps was " << m_FTorps << endl;
 }
 
 NachenBlaster::~NachenBlaster()
@@ -671,7 +678,7 @@ void Smoregon::AllAlienDeathStuff()
 {
     AlienDeadActions();
     int randNum = randInt(1, 3);
-    if (randNum > 0)
+    if (randNum == 1)
     {
         DropGoodie();
     }
@@ -681,7 +688,7 @@ void Smoregon::AllAlienDeathStuff()
 void Smoregon::DropGoodie()
 {
     int randNum = randInt(1, 2);
-    if (randNum > 0) // 1)
+    if (randNum == 1)
     {
         //create a new repair goodie @ the death coordinates
         RepairGoodie * RepairGoodieP = new RepairGoodie (IID_REPAIR_GOODIE, getX(), getY(), 0, .5, 1, getWorld());
@@ -958,5 +965,6 @@ FT_Goodie::~FT_Goodie()
 
 void FT_Goodie::goodiePowers()
 {
-    return;
+    //3d. give the NB 5 more torpedos
+    getWorld()->getNachenblasterPointer()->UpdateNumTorps(5);
 }

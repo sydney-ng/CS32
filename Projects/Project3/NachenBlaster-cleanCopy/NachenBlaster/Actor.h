@@ -91,12 +91,16 @@ public:
     void KeyPressMovement();
     virtual void PostProjectileCollisionActions();
     virtual bool CheckProperSide (int other, int currShip);
+    //add a certain number of Torpedos
+    void UpdateNumTorps (int numTorps);
+    
 
     //CHECK IF THIS WORKS? NO PARAMETERS
     //virtual void SufferDamage(int ID);
 private:
     //int m_HitPoints;
     int m_CabbageEnergyPoints;
+    int m_FTorps; 
 };
 
 /////////////////////////////////IMPLEMENTATION FOR ALIENS CLASS////////////////////////////////
