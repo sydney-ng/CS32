@@ -19,7 +19,6 @@ StudentWorld::StudentWorld(string assetDir)
 : GameWorld(assetDir), m_NachenBlaster(nullptr), m_vectorPointer(nullptr)
 {
     m_GamePoints = 0;
-    m_CurrentLevel = 1;
 //    m_numShipsDestroyed = 0;
 }
 
@@ -46,11 +45,6 @@ void StudentWorld::decNumOnScreenShips()
 StudentWorld::~StudentWorld()
 {
     cleanUp();
-}
-
-int StudentWorld::getCurrentLevel()
-{
-    return m_CurrentLevel;
 }
 
 double StudentWorld::randDouble(double min, double max)
@@ -93,7 +87,7 @@ bool StudentWorld::CheckForAddingShips()
     int N = numShipsLefToKill();
     
     //calculate the formula for the max number of ships that should be on this level, formula: M = 4 + (.5 * current_level_number)
-    int M = 4 + (.5 * m_CurrentLevel);
+    int M = 4 + (.5 * getLevel());
     
     //calculate min between N & M
     int minNum;
@@ -120,7 +114,7 @@ int StudentWorld:: numShipsLefToKill()
     int D = m_numShipsDestroyed;
     
     //calculate the num of ships needed to pass the level, formula: T = 6+(4*n)
-    int T = 6 + (4 * m_CurrentLevel);
+    int T = 6 + (4 * getLevel());
     
     //calculate the number of remaining ships needed to
     int N = T - D;
@@ -131,8 +125,8 @@ int StudentWorld:: numShipsLefToKill()
 void StudentWorld::AddShips()
 {
     int S1 = 60;
-    int S2 = 20 + (m_CurrentLevel * 5);
-    int S3 = 5 + (m_CurrentLevel * 10);
+    int S2 = 20 + (getLevel() * 5);
+    int S3 = 5 + (getLevel() * 10);
     int S = S1 + S2 + S3;
     
     int probSmallgon = randInt(S1, S);
@@ -141,7 +135,7 @@ void StudentWorld::AddShips()
     
     if (probSmallgon < S1 +1)
     {
-        Smallgon *smallgonP = new Smallgon (IID_SMALLGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0 , 1, 3, this);
+        Smallgon *smallgonP = new Smallgon (IID_SMALLGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0 , 1.5, 1, this);
         gameObjectVector.push_back(smallgonP);
         m_numOnScreenShips++;
     }
@@ -153,7 +147,7 @@ void StudentWorld::AddShips()
     }
     if (probSnagglegon < S3 +1)
     {
-        Snagglegon * SnagglegonP = new Snagglegon (IID_SNAGGLEGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0, .5, 1, this);
+        Snagglegon * SnagglegonP = new Snagglegon (IID_SNAGGLEGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0, 1.5, 1, this);
         gameObjectVector.push_back(SnagglegonP);
         m_numOnScreenShips++;
     }
@@ -241,35 +235,14 @@ int StudentWorld::move()
                 else if (numShipsLefToKill() == 0 || numShipsLefToKill() < 0)
                 {
                     cleanUp();
-                    m_CurrentLevel ++;
+                    incLives();
+                    playSound(SOUND_FINISHED_LEVEL);
                     return GWSTATUS_FINISHED_LEVEL;
                 }
             }
             cerr << "finished the move for object number " << i << endl;
         }
     
-    //m_NachenBlaster->setHitPoints(0);
-
-//    if (CalculateGameStatus() == GWSTATUS_PLAYER_DIED)
-//    {
-//        int x = getLives();
-//        //if you have lives still, you can continue the game
-//        if (getLives() > 0 )
-//        {
-//            decLives();
-//        }
-//        return GWSTATUS_PLAYER_DIED;
-//        //you have no lives left, ya died bud
-//    }
-    
-//    else if (CalculateGameStatus() == GWSTATUS_FINISHED_LEVEL)
-//    {
-//        cleanUp();
-//        m_CurrentLevel ++;
-//        return GWSTATUS_FINISHED_LEVEL;
-//    }
-    
-    //remove dead objects
     removeDead();
     //UPDATE THE STATUS BAR AT THE TOP
     m_NachenBlaster->StatusBarBody();

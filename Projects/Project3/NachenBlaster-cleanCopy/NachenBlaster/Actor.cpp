@@ -477,7 +477,7 @@ Aliens::Aliens(int imageID, double startX, double startY, int dir, double size, 
     m_flightDirection = dir;
     
     //SET THIS EQUAL TO ACTUAL CURR LEVEL LATER
-    int curr_level = getWorld()->getCurrentLevel();
+    int curr_level = getWorld()->getLevel();
     int temp_Hitpoints = 5 * (1 + ( curr_level - 1) * .1);
     setHitPoints(temp_Hitpoints);
     
@@ -590,7 +590,7 @@ bool Aliens::FireProjectile()
 {
     // 1/20 chance of firing a new turnip
     //calculate formula : 1 in ((20/CurrentLevelNumber)+5)
-    int currLevel = getWorld()->getCurrentLevel();
+    int currLevel = getWorld()->getLevel();
     int max_Num = (20/currLevel) + 5;
     
     int randNum = randInt(1, max_Num);
@@ -780,7 +780,7 @@ bool Smoregon::AttackNB()
 
 void Smoregon::PossiblyCharge()
 {
-    int currLevel = getWorld()->getCurrentLevel();
+    int currLevel = getWorld()->getLevel();
     int max_Num = (20/currLevel) + 5;
     int randNum = randInt(1, max_Num);
     
@@ -833,7 +833,7 @@ Snagglegon::Snagglegon(int imageID, double startX, double startY, int dir, doubl
 :Aliens(IID_SNAGGLEGON, startX, startY, 0, 1.5, 1, world)
 {
     //set the hit points
-    int curr_level = getWorld()->getCurrentLevel();
+    int curr_level = getWorld()->getLevel();
     int temp_Hitpoints = 10 * (1 + ( curr_level - 1) * .1);
     setHitPoints(temp_Hitpoints);
     
@@ -920,7 +920,7 @@ bool Snagglegon::FireProjectile()
 {
  
     //calculate formula : 1 in ((20/CurrentLevelNumber)+5)
-    int currLevel = getWorld()->getCurrentLevel();
+    int currLevel = getWorld()->getLevel();
     int max_Num = (15/currLevel) + 10;
     int randNum = randInt(1, max_Num);
     
@@ -1041,7 +1041,7 @@ void F_Torpedo::somethingBody()
 
 ///////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////////
 Star::Star(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
-: Actor(imageID, startX, startY, 0, .5, 1, world)
+: Actor(imageID, startX, startY, 0, .5, 3, world)
 {
     setImageID(imageID);
     setIsProjectile(false);
