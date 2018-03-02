@@ -1196,18 +1196,17 @@ void RepairGoodie::goodiePowers()
     int NB_CurrhitPoints = getWorld()->getNachenblasterPointer()->getHitPoints();
     
     //set NB's hit points to 50 if it's
-    int addTo_Points;
-    if (addTo_Points + 10 > 50)
+    if (NB_CurrhitPoints + 10 > 50)
     {
         //calculate the difference then
-        addTo_Points = 50 - NB_CurrhitPoints;
+        getWorld()->getNachenblasterPointer()->setHitPoints(50);
     }
     
     else
     {   //it won't cause you to go over 50 so just add ten
-        addTo_Points = 10;
-    }
+    int addTo_Points = 10;
     getWorld()->getNachenblasterPointer()->UpdateHitPoints(addTo_Points);
+    }
 }
 ////////////////////////////////IMPLEMENTATION FOR FT_Goodie CLASS////////////////////////////////
 FT_Goodie::FT_Goodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
