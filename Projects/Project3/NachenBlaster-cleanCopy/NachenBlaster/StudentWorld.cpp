@@ -60,7 +60,7 @@ void StudentWorld::ProbabilityaddNewObjects()
     int StarChance = randInt(1, 15);
     if (StarChance == 1)
     {
-        Star *starP = new Star (IID_STAR, VIEW_WIDTH-1, randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
+        Star *starP = new Star (IID_STAR, VIEW_WIDTH-1, randInt(0, VIEW_HEIGHT-1), 0 , (randInt(5, 50)/100.0), 3, this);
         gameObjectVector.push_back(starP);
     }
     
@@ -187,8 +187,7 @@ int StudentWorld::init()
     //create 30 stars
     for (int i =0; i <30; i ++)
     {
-        
-        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
+        Star *starP = new Star (IID_STAR, randInt(0, VIEW_WIDTH-1), randInt(0, VIEW_HEIGHT-1), 0 , (randInt(5, 50)/100.0), 3, this);
         gameObjectVector.push_back(starP);
     }
     return GWSTATUS_CONTINUE_GAME;

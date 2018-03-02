@@ -406,7 +406,7 @@ void NachenBlaster::KeyPressMovement()
         else if (ch == KEY_PRESS_RIGHT)
         {
             int newX = getX()+6;
-            if (newX < VIEW_WIDTH)
+            if (newX < VIEW_WIDTH || newX == VIEW_WIDTH)
             {
                 moveTo(newX, getY());
             }
@@ -414,7 +414,7 @@ void NachenBlaster::KeyPressMovement()
         else if (ch == KEY_PRESS_UP)
         {
             int newY = getY()+6;
-            if (newY < VIEW_HEIGHT)
+            if (newY < VIEW_HEIGHT || newY == VIEW_HEIGHT)
             {
                 moveTo(getX(), newY);
             }
@@ -448,6 +448,7 @@ void NachenBlaster::KeyPressMovement()
             //check if you have any f torps in your inventory
             if (m_FTorps > 0)
             {
+
                 //fire a torpedo
                 F_Torpedo * fTorpedoP = new F_Torpedo(IID_TORPEDO, getX()+12, getY(), 0, 1.5, 1, getWorld(), IID_NACHENBLASTER);
                 getWorld()->AddObjectToVector(fTorpedoP);
@@ -936,7 +937,8 @@ bool Snagglegon::FireProjectile()
     if (randNum == 1)
     {
         //add a new torpedo to the vector/screen
-        F_Torpedo * fTorpedoP = new F_Torpedo(IID_TORPEDO, getX()-14, getY(), 0, 1.5, 1, getWorld(), IID_SNAGGLEGON);
+        
+        F_Torpedo * fTorpedoP = new F_Torpedo(IID_TORPEDO, getX()-14, getY(), 180, 0.5, 1, getWorld(), IID_SNAGGLEGON);
         getWorld()->AddObjectToVector(fTorpedoP);
         
         //5aii. play torpedo sound
@@ -1025,7 +1027,7 @@ void Turnip::somethingBody()
 
 ////////////////////////////////IMPLEMENTATION FOR FLATULAN TORPEDO CLASS//////////////////////////////////////
 F_Torpedo::F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner)
-:Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world)
+:Projectiles(IID_TURNIP, startX, startY, dir, .5, 1, world)
 {
     setDamageVal(8);
     m_Owner = owner;
@@ -1058,7 +1060,7 @@ bool F_Torpedo::DoesItRotate()
 
 ///////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////////
 Star::Star(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
-: Actor(imageID, startX, startY, 0, .5, 3, world)
+: Actor(imageID, startX, startY, 0, size, 3, world)
 {
     setImageID(imageID);
     setIsProjectile(false);

@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/Actor.cpp"
-            timestampString = "541717475.2269731"
+            timestampString = "541722098.1984479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1092"
-            endingLineNumber = "1092"
+            startingLineNumber = "1100"
+            endingLineNumber = "1100"
             landmarkName = "Explosion::somethingBody()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/Actor.cpp"
-            timestampString = "541717475.2269731"
+            timestampString = "541722098.1984479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1084"
-            endingLineNumber = "1084"
+            startingLineNumber = "1092"
+            endingLineNumber = "1092"
             landmarkName = "Explosion::Explosion(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541721093.236189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541721093.236189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
             landmarkName = "StudentWorld::removeDead()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541721093.236189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541721093.236189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -280,11 +280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/Actor.cpp"
-            timestampString = "541717475.2269731"
+            timestampString = "541722098.1984479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1106"
-            endingLineNumber = "1106"
+            startingLineNumber = "1114"
+            endingLineNumber = "1114"
             landmarkName = "Explosion::CheckIfOffScreen()"
             landmarkType = "7">
          </BreakpointContent>
@@ -598,11 +598,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541718538.551751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1061,11 +1061,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/Actor.cpp"
-            timestampString = "541717475.2269731"
+            timestampString = "541722098.1984479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1126"
-            endingLineNumber = "1126"
+            startingLineNumber = "1134"
+            endingLineNumber = "1134"
             landmarkName = "Goodies::somethingBody()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1077,11 +1077,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/Actor.cpp"
-            timestampString = "541717475.2269731"
+            timestampString = "541722098.1984479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1130"
-            endingLineNumber = "1130"
+            startingLineNumber = "1138"
+            endingLineNumber = "1138"
             landmarkName = "Goodies::somethingBody()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1109,11 +1109,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/Actor.cpp"
-            timestampString = "541717475.2269731"
+            timestampString = "541722098.1984479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1128"
-            endingLineNumber = "1128"
+            startingLineNumber = "1136"
+            endingLineNumber = "1136"
             landmarkName = "Goodies::somethingBody()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1492,11 +1492,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541718538.551751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "StudentWorld::init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1667,11 +1667,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541718538.551751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "StudentWorld::init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1683,11 +1683,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541718538.551751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "StudentWorld::init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1731,11 +1731,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541718538.551751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "StudentWorld::init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2019,11 +2019,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541721093.236189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2035,11 +2035,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541721093.236189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2083,11 +2083,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/Actor.cpp"
-            timestampString = "541717475.2269731"
+            timestampString = "541722098.1984479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1211"
-            endingLineNumber = "1211"
+            startingLineNumber = "1219"
+            endingLineNumber = "1219"
             landmarkName = "FT_Goodie::FT_Goodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2099,11 +2099,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/Actor.cpp"
-            timestampString = "541717475.2269731"
+            timestampString = "541722098.1984479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1210"
-            endingLineNumber = "1210"
+            startingLineNumber = "1218"
+            endingLineNumber = "1218"
             landmarkName = "FT_Goodie::FT_Goodie(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2339,11 +2339,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541718538.551751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2371,11 +2371,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541718538.551751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2387,11 +2387,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541719478.727343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2403,11 +2403,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541721093.236189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2419,43 +2419,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
-            landmarkName = "StudentWorld::move()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
-            landmarkName = "StudentWorld::move()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541721093.236189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "219"
             endingLineNumber = "219"
+            landmarkName = "StudentWorld::move()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NachenBlaster/StudentWorld.cpp"
+            timestampString = "541721093.236189"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "StudentWorld::move()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NachenBlaster/StudentWorld.cpp"
+            timestampString = "541721093.236189"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2483,11 +2483,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NachenBlaster/StudentWorld.cpp"
-            timestampString = "541708805.094173"
+            timestampString = "541718538.551751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "StudentWorld::move()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2585,6 +2585,22 @@
             startingLineNumber = "82"
             endingLineNumber = "82"
             landmarkName = "StudentWorld::CheckForAddingShips()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NachenBlaster/Actor.cpp"
+            timestampString = "541722121.699867"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1038"
+            endingLineNumber = "1038"
+            landmarkName = "F_Torpedo::F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
