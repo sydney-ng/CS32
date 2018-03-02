@@ -7,7 +7,6 @@
 #include <iomanip>
 #include <string>
 
-
 using namespace std;
 // Students:  Add code to this file, Actor.h, StudentWorld.h, and StudentWorld.cpp
 
@@ -18,6 +17,7 @@ Actor::Actor(int imageID, double startX, double startY, int dir, double size, in
     m_isAlive = true;
     m_ImageID = imageID;
     m_isProjectile = false;
+    whatWorld(world); 
     cerr << "created object using Actor Constructor " << endl;
 }
 
@@ -140,10 +140,10 @@ void Actor::setLevelOver()
     //decrement the number of NB lives by 1
     m_SudentworldPointer->decLives();
     int temp = m_SudentworldPointer->getLives() - 0;
-    if ( temp == 0 || temp < 0)
-    {
+    //if ( temp == 0 || temp < 0)
+    //{
         m_SudentworldPointer->setNBDead();
-    }
+    //}
 }
 
 void Actor::setStatusBar(int hitNum, int cabbNum, int torpNum)
@@ -225,7 +225,7 @@ void Ships::doSomething()
     {
         cerr << "it's not alive, so don't do anything " << endl;
         setDead();
-        if (getImageID() != IID_NACHENBLASTER)
+        if (getImageID() == IID_NACHENBLASTER)
         {
             setLevelOver();
         }
@@ -270,27 +270,30 @@ void Ships::CheckForProjCollisions()
     std::vector<Actor*> vec = getWorld()->getVector();
     for (int i = 0; i < vec.size(); i++)
     {
-        if (vec[i]->getIsProjectile() == true && vec[i]->AliveStatus() == true)
+        if (vec[i] != nullptr)
         {
-            if (CollisionOccurred(vec[i]->getX(), vec[i]->getY(), vec[i]->getRadius() ) )
+            if (vec[i]->getIsProjectile() == true && vec[i]->AliveStatus() == true)
             {
-                if (CheckProperSide(vec[i]->getX(), getX())== true)
+                if (CollisionOccurred(vec[i]->getX(), vec[i]->getY(), vec[i]->getRadius() ) )
                 {
-                    cerr << "this ship collided with a projectile, minus " << vec[i]->getDamageValue() << "hit points " << endl;
-                    
-                    //cause damage to the ship that collided w/ it
-                    SufferDamage(vec[i]->getDamageValue());
-                    
-                    //all the other stuff after a projectile collision
-                    PostProjectileCollisionActions();
-                    
-                    //make the projectile dead
-                    vec[i]->setDead();
+                    if (CheckProperSide(vec[i]->getX(), getX())== true)
+                    {
+                        cerr << "this ship collided with a projectile, minus " << vec[i]->getDamageValue() << "hit points " << endl;
+                        
+                        //cause damage to the ship that collided w/ it
+                        SufferDamage(vec[i]->getDamageValue());
+                        
+                        //all the other stuff after a projectile collision
+                        PostProjectileCollisionActions();
+                        
+                        //make the projectile dead
+                        vec[i]->setDead();
+                    }
                 }
-            }
-            else{
-                cerr << "alien didn't collide w/ projectile" << endl;
-            }
+                else{
+                    cerr << "alien didn't collide w/ projectile" << endl;
+                }
+            }   
         }
     }
 }
@@ -360,7 +363,12 @@ void NachenBlaster::somethingBody()
     {
         m_CabbageEnergyPoints += toAdd;
     }
-
+    
+    if (CheckIfAlive() == false)
+    {
+        setLevelOver();
+    }
+    
 }
 
 void NachenBlaster::StatusBarBody()
@@ -690,6 +698,9 @@ void Aliens::PostNBCollisionActions()
     //increment the number of ships destroyed
     getWorld()->incNumShipsDestroyed();
     
+    //play sound to show that it collided w/ NB
+    getWorld()->playSound(SOUND_DEATH);
+
     //make the NB suffer damage
     int alienDamageValue = getDamageValue();
     getWorld()->getNachenblasterPointer()->SufferDamage(alienDamageValue);
@@ -927,29 +938,6 @@ bool Snagglegon::FireProjectile()
     return false;
 }
 
-//// 1/20 chance of firing a new turnip
-
-//
-//int randNum = randInt(1, max_Num);
-//
-//if (randNum == 1)
-//{
-//    //get goodie coordinates
-//    int projectile_Xcoord = getX()- 14;
-//    int projectile_Ycoord = getY();
-//    
-//    cerr << "alien's coords are " << getX() << " " << getY() << endl;
-//    //create new turnip & add to vector
-//    cerr << "creating a new turnip at " << projectile_Xcoord << " " <<  projectile_Ycoord << endl;
-//    Turnip * newTurnipP = new Turnip (IID_TURNIP, projectile_Xcoord, projectile_Ycoord, 0, .5, 1, getWorld());
-//    getWorld()->AddObjectToVector(newTurnipP);
-//    
-//    //play the sound
-//    getWorld()->playSound(SOUND_ALIEN_SHOOT);
-//    return true;
-//    }
-//    return false;
-
 Snagglegon::~Snagglegon()
 {
     cerr << "destructing Snagglegon" << endl;
@@ -1125,7 +1113,7 @@ void Goodies::somethingBody()
         return;
     }
     //4. move .75 units left & down
-    //moveTo(getX()-.75, getY()-.75);
+    moveTo(getX()-.75, getY()-.75);
     
     //5. check for NB collision again
     if (CheckForNBCollisions()==true)

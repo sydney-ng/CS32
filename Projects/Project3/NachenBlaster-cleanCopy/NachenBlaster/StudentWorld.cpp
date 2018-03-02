@@ -21,7 +21,6 @@ StudentWorld::StudentWorld(string assetDir)
     m_GamePoints = 0;
     m_CurrentLevel = 1;
 //    m_numShipsDestroyed = 0;
-    m_NBDead = false;
 }
 
 std::vector<Actor*> StudentWorld::getVector()
@@ -171,7 +170,7 @@ int StudentWorld:: CalculateGameStatus()
     //if you're alive and you have killed the right num of aliens, new level
     else if (numShipsLefToKill() == 0 || numShipsLefToKill() < 0)
     {
-            return GWSTATUS_FINISHED_LEVEL;
+        return GWSTATUS_FINISHED_LEVEL;
     }
     else
     {
@@ -179,22 +178,33 @@ int StudentWorld:: CalculateGameStatus()
     }
     //otherwise, just return CONT
 }
+
 void StudentWorld::setNBDead()
 {
     m_NBDead = true;
+    
 }
 
 
 int StudentWorld::init()
 {
     m_numShipsDestroyed = 0;
+    m_numOnScreenShips = 0;
+
+//
+//    Snagglegon * SnagglegonP = new Snagglegon (IID_SNAGGLEGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0, .5, 1, this);
+//    gameObjectVector.push_back(SnagglegonP);
+//    m_numOnScreenShips++;
 
     //create a NachenBlaster
     NachenBlaster *nachenblasterP = new NachenBlaster (this);
     gameObjectVector.push_back(nachenblasterP);
+    
     //set member variable equal to the item in the Vector that is the NB
     m_NachenBlaster = nachenblasterP;
     
+    m_NBDead = false;
+
     //give NB full points
     m_NachenBlaster->setHitPoints(50);
     m_NachenBlaster->setCabbagePoints(30);
@@ -216,27 +226,57 @@ int StudentWorld::move()
     ProbabilityaddNewObjects();
     
     //let everything move
+    cerr << "in move, we will now iterate to: " << gameObjectVector.size() << endl;
     for (int i = 0; i < gameObjectVector.size(); i++)
         {
-            cerr << "about to move object number " << i << endl;
-            if (gameObjectVector.size() > 0 && gameObjectVector[i]->getWorld() != nullptr)
+            if (gameObjectVector.size() > 0 && gameObjectVector[i] != nullptr)
             {
-                cerr << "v size is: " << gameObjectVector.size();
+                cerr << "about to move object number " << i << endl;
                 gameObjectVector[i]->doSomething();
+                if (m_NBDead == true)
+                {
+                    //INDICATE THAT YOU'VE DIED
+                    return GWSTATUS_PLAYER_DIED;
+                }
+                else if (numShipsLefToKill() == 0 || numShipsLefToKill() < 0)
+                {
+                    cleanUp();
+                    m_CurrentLevel ++;
+                    return GWSTATUS_FINISHED_LEVEL;
+                }
             }
             cerr << "finished the move for object number " << i << endl;
         }
     
-    CalculateGameStatus();
+    //m_NachenBlaster->setHitPoints(0);
+
+//    if (CalculateGameStatus() == GWSTATUS_PLAYER_DIED)
+//    {
+//        int x = getLives();
+//        //if you have lives still, you can continue the game
+//        if (getLives() > 0 )
+//        {
+//            decLives();
+//        }
+//        return GWSTATUS_PLAYER_DIED;
+//        //you have no lives left, ya died bud
+//    }
+    
+//    else if (CalculateGameStatus() == GWSTATUS_FINISHED_LEVEL)
+//    {
+//        cleanUp();
+//        m_CurrentLevel ++;
+//        return GWSTATUS_FINISHED_LEVEL;
+//    }
     
     //remove dead objects
     removeDead();
-    
     //UPDATE THE STATUS BAR AT THE TOP
     m_NachenBlaster->StatusBarBody();
+    return GWSTATUS_CONTINUE_GAME;
     
     //determine if to end level, end game, cont level
-    return CalculateGameStatus();
+    //if (CalculateGameStatus() == GWSTATUS_PLAYER_WON
 }
 
 void StudentWorld::removeDead()
@@ -246,13 +286,20 @@ void StudentWorld::removeDead()
     while (vi != gameObjectVector.end())
     {
         cerr << "is vec empty? " << gameObjectVector.empty() << endl;
-        if (gameObjectVector.empty () == false && *vi != nullptr)
+        if (gameObjectVector.empty () == false)
         {
-            if ((*vi)->AliveStatus() == false)
+            if (*vi != nullptr)
             {
-                delete *vi;
-                *vi = nullptr;
-                vi = gameObjectVector.erase(vi);
+                if ((*vi)->AliveStatus() == false)
+                {
+                    delete *vi;
+                    *vi = nullptr;
+                    vi = gameObjectVector.erase(vi);
+                }
+                else
+                {
+                    vi++;
+                }
             }
             else
             {

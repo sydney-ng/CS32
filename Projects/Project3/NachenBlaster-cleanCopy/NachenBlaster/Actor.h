@@ -15,7 +15,7 @@ class Actor: public GraphObject
 {
 public:
     Actor(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
-    ~Actor();
+    virtual ~Actor();
     virtual void doSomething();
     virtual void somethingBody()
     {
