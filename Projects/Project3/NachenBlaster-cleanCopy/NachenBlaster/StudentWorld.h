@@ -32,16 +32,13 @@ public:
     void AddObjectToVector(Actor * ActorP);
     
     //does calculations to determine if you should add another ship
-    bool CheckForAddingShips();
+    void CheckForAddingShips();
     
     //increments the number of ships destroyed by 1
     void incNumShipsDestroyed();
     
     //decrements the number of ships onscreen by 1
     void decNumOnScreenShips();
-    
-    //do the actual adding of the ships
-    void AddShips();
 
     NachenBlaster* getNachenblasterPointer();
     

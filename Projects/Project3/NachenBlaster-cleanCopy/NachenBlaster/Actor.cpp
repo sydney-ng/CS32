@@ -17,7 +17,7 @@ Actor::Actor(int imageID, double startX, double startY, int dir, double size, in
     m_isAlive = true;
     m_ImageID = imageID;
     m_isProjectile = false;
-    whatWorld(world); 
+    whatWorld(world);
     cerr << "created object using Actor Constructor " << endl;
 }
 
@@ -37,6 +37,7 @@ void Actor::doSomething()
     }
     somethingBody();
 }
+
 void Actor::setImageID(int ID)
 {
     m_ImageID = ID;
@@ -149,6 +150,7 @@ void Actor::setLevelOver()
 void Actor::setStatusBar(int hitNum, int cabbNum, int torpNum)
 {
     cerr << "in StatusBar(), the num of hits you have is " << hitNum << endl;
+    
     stringstream stream;
 
     //LIVES
@@ -158,6 +160,7 @@ void Actor::setStatusBar(int hitNum, int cabbNum, int torpNum)
     stream << setw(1) << lives_Num;
     
     //HEALTH
+
     double health_Num = (hitNum/50.0) * 100.0;
     stream << "  Health: ";
     if (health_Num == 100)
@@ -166,7 +169,7 @@ void Actor::setStatusBar(int hitNum, int cabbNum, int torpNum)
     }
     else
     {
-        stream << setw(2) << health_Num << "%";
+        stream << setw(1) << health_Num << "%";
     }
     
     //SCORE
@@ -181,9 +184,10 @@ void Actor::setStatusBar(int hitNum, int cabbNum, int torpNum)
     
     //CABBAGES
     stream << "  Cabbages: ";
-    //stream.precision(1);
-    double cabb_Num = (cabbNum/30.0) * 100;
-    stream << cabb_Num << "%";
+    cerr << "the number of cabbages you have is: " << cabbNum << endl;
+    double cabb_Percent = (cabbNum/30.0) * 100.0;
+    cerr << "this equates to " << cabb_Percent << endl;
+    stream << int(cabb_Percent) << "%";
 
     
     //TORPS
@@ -346,15 +350,16 @@ void NachenBlaster::somethingBody()
 {
     cerr << "status of NACHENBLASTER is: " << AliveStatus() << endl;
     cerr << "IN THE BODY OF NACHENBLASTER" << endl;
-    
+    StatusBarBody();
+
     //move the NB based on user input
     KeyPressMovement();
-    
+
     //check for collisions
     CheckForProjCollisions();
-    
+
     //give the NB 5 more cabbage points, just cuz
-    int toAdd = 5;
+    int toAdd = 1;
     if (m_CabbageEnergyPoints + toAdd > 30 || m_CabbageEnergyPoints + toAdd == 30)
     {
         m_CabbageEnergyPoints = 30;
@@ -363,12 +368,14 @@ void NachenBlaster::somethingBody()
     {
         m_CabbageEnergyPoints += toAdd;
     }
-    
+    //StatusBarBody();
+
     if (CheckIfAlive() == false)
     {
         setLevelOver();
     }
-    
+    //StatusBarBody();
+
 }
 
 void NachenBlaster::StatusBarBody()
@@ -378,7 +385,7 @@ void NachenBlaster::StatusBarBody()
 
 void NachenBlaster::PostProjectileCollisionActions()
 {
-    cerr << "In NB's PostProjectileCollisionActions() " << endl;
+    //cerr << "In NB's PostProjectileCollisionActions() " << endl;
     getWorld()->playSound(SOUND_BLAST);
     return;
 }
@@ -433,6 +440,7 @@ void NachenBlaster::KeyPressMovement()
                 
                 //reduce cabbage points by 5
                 m_CabbageEnergyPoints -= 5;
+                //StatusBarBody();
             }
         }
         else if (ch == KEY_PRESS_TAB)
@@ -457,14 +465,14 @@ void NachenBlaster::KeyPressMovement()
 
 void NachenBlaster:: UpdateNumTorps (int numTorps)
 {
-    cerr << "before UpdateNumTorps your numtorps was " << m_FTorps << endl;
+    //cerr << "before UpdateNumTorps your numtorps was " << m_FTorps << endl;
     m_FTorps += numTorps;
-    cerr << "after UpdateNumTorps your numtorps was " << m_FTorps << endl;
+    //cerr << "after UpdateNumTorps your numtorps was " << m_FTorps << endl;
 }
 
 NachenBlaster::~NachenBlaster()
 {
-    cerr << "deconstructing NachenBlaster"<< endl;
+    //cerr << "deconstructing NachenBlaster"<< endl;
 }
 
 /////////////////////////////////IMPLEMENTATION FOR ALIENS CLASS////////////////////////////////////
@@ -521,7 +529,7 @@ void Aliens::somethingBody()
         //yes you're within range to attack
         if (AttackNB() == true)
         {
-            cerr << "you fired a projectile don't do anything the rest of this tick" << endl;
+            //cerr << "you fired a projectile don't do anything the rest of this tick" << endl;
             //you fired a projectile so don't do anything the rest of the tick
             return;
         }
@@ -601,9 +609,9 @@ bool Aliens::FireProjectile()
         int projectile_Xcoord = getX()- 14;
         int projectile_Ycoord = getY();
         
-        cerr << "alien's coords are " << getX() << " " << getY() << endl;
+        //cerr << "alien's coords are " << getX() << " " << getY() << endl;
         //create new turnip & add to vector
-        cerr << "creating a new turnip at " << projectile_Xcoord << " " <<  projectile_Ycoord << endl;
+        //cerr << "creating a new turnip at " << projectile_Xcoord << " " <<  projectile_Ycoord << endl;
         Turnip * newTurnipP = new Turnip (IID_TURNIP, projectile_Xcoord, projectile_Ycoord, 0, .5, 1, getWorld());
         getWorld()->AddObjectToVector(newTurnipP);
         
@@ -675,7 +683,7 @@ void Aliens::MoveInDirection()
 
 void Aliens::PostProjectileCollisionActions()
 {
-    cerr << "In alien's PostProjectileCollisionActions() " << endl;
+    //cerr << "In alien's PostProjectileCollisionActions() " << endl;
 
     if (CheckIfAlive() == false)
     {
@@ -694,7 +702,7 @@ void Aliens::PostProjectileCollisionActions()
 }
 void Aliens::PostNBCollisionActions()
 {
-    cerr << "YOU COLLIDED!" << endl;
+    //cerr << "YOU COLLIDED!" << endl;
     //increment the number of ships destroyed
     getWorld()->incNumShipsDestroyed();
     
@@ -825,7 +833,7 @@ void Smoregon::DropGoodie()
 
 Smoregon::~Smoregon()
 {
-    cerr << "destructing Smoregon!!" << endl;
+    //cerr << "destructing Smoregon!!" << endl;
 }
 
 ////////////////////////////////IMPLEMENTATION FOR SNAGGLEGON CLASS/////////////////////////////
@@ -940,7 +948,7 @@ bool Snagglegon::FireProjectile()
 
 Snagglegon::~Snagglegon()
 {
-    cerr << "destructing Snagglegon" << endl;
+    //cerr << "destructing Snagglegon" << endl;
 }
 /////////////////////////////////IMPLEMENTATION FOR PROJECTILES CLASS////////////////////////////////
 Projectiles::Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
@@ -950,37 +958,41 @@ Projectiles::Projectiles(int imageID, double startX, double startY, int dir, dou
     setIsProjectile(true);
 }
 
+bool Projectiles::DoesItRotate()
+{
+    return true;
+}
 Projectiles::~Projectiles ()
 {
-    cerr << "destructing Projectile" << endl;
+   // cerr << "destructing Projectile" << endl;
 }
 
 ////////////////////////////////IMPLEMENTATION FOR CABBAGE CLASS////////////////////////////////
 Cabbage::Cabbage(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Projectiles(IID_CABBAGE, startX, startY, 0, .5, 1, world)
 {
-    cerr << "created a cabbage " << endl;
+    //cerr << "created a cabbage " << endl;
     setDamageVal(2);
 
 }
 
 Cabbage::~Cabbage()
 {
-    cerr << "deconstructing a cabbage" << endl;
+    //cerr << "deconstructing a cabbage" << endl;
 }
 
 void Cabbage::somethingBody()
 {
-    cerr << " in something fx() of cabbage" << endl;
+    //cerr << " in something fx() of cabbage" << endl;
 
     //move 8 px to the right
     moveTo (getX() + 8, getY());
-    setDirection(20);
+    setDirection(getDirection()+20);
 }
 
 bool Cabbage::CheckIfOffScreen()
 {
-    cerr << " in checkIAlive fx() of cabbage" << endl;
+    //cerr << " in checkIAlive fx() of cabbage" << endl;
     //if it's not alive, return false immediately
     if (getX() > VIEW_WIDTH || getX() == VIEW_WIDTH)
     {
@@ -994,20 +1006,20 @@ bool Cabbage::CheckIfOffScreen()
 Turnip::Turnip(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 :Projectiles(IID_TURNIP, startX, startY, 0, .5, 1, world)
 {
-    cerr << "created a turnip" << endl;
+    //cerr << "created a turnip" << endl;
     setDamageVal(2);
 }
 
 Turnip::~Turnip()
 {
-    cerr << "deconstructing a turnip" << endl;
+    //cerr << "deconstructing a turnip" << endl;
 }
 void Turnip::somethingBody()
 {
-    cerr << "old Turnip coords were: " << getX() << " " << getY() << endl;
+    //cerr << "old Turnip coords were: " << getX() << " " << getY() << endl;
     moveTo(getX()-6, getY());
-    cerr << "new Turnip coords are: " << getX() << " " << getY() << endl;
-    setDirection(20);
+    //cerr << "new Turnip coords are: " << getX() << " " << getY() << endl;
+    setDirection(getDirection()+20);
 }
 
 
@@ -1021,7 +1033,7 @@ F_Torpedo::F_Torpedo(int imageID, double startX, double startY, int dir, double 
 
 F_Torpedo::~F_Torpedo()
 {
-    cerr << "deconstructing a turnip";
+    //cerr << "deconstructing a turnip";
 }
 
 void F_Torpedo::somethingBody()
@@ -1039,6 +1051,11 @@ void F_Torpedo::somethingBody()
     }
 }
 
+bool F_Torpedo::DoesItRotate()
+{
+    return false;
+}
+
 ///////////////////////////////////IMPLEMENTATION FOR STAR CLASS////////////////////////////////////
 Star::Star(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world)
 : Actor(imageID, startX, startY, 0, .5, 3, world)
@@ -1050,11 +1067,11 @@ Star::Star(int imageID, double startX, double startY, int dir, double size, int 
 
 Star::~Star ()
 {
-    cerr << "deconstructing a Star" << endl;
+    //cerr << "deconstructing a Star" << endl;
 }
 void Star::somethingBody()
 {
-    cerr << "here in Star's somethingBody!" << endl;
+    //cerr << "here in Star's somethingBody!" << endl;
     
     //check if it's on the screenq
     moveTo(getX()-1, getY());
@@ -1072,12 +1089,12 @@ Explosion::Explosion(int imageID, double startX, double startY, int dir, double 
 void Explosion::somethingBody()
 {
     m_AliveTicksLeft -= 1;
-    cerr << "in somethingBody of explosion, Ticks left is: " << m_AliveTicksLeft << endl;
+    //cerr << "in somethingBody of explosion, Ticks left is: " << m_AliveTicksLeft << endl;
     explodeExplosion();
 }
 Explosion::~Explosion()
 {
-    cerr << "destroying explosion";
+    //cerr << "destroying explosion";
 }
 
 bool Explosion::CheckIfOffScreen()
@@ -1138,7 +1155,7 @@ void Goodies::PostNBCollisionActions()
 
 Goodies::~Goodies()
 {
-    cerr << "destructing a goodie " << endl;
+    //cerr << "destructing a goodie " << endl;
 }
 
 ////////////////////////////////IMPLEMENTATION FOR ExtraLife CLASS////////////////////////////////
@@ -1149,12 +1166,12 @@ ExtraLife::ExtraLife(int imageID, double startX, double startY, int dir, double 
 
 ExtraLife::~ExtraLife()
 {
-    cerr << "destructing an ExtraLife " << endl;
+    //cerr << "destructing an ExtraLife " << endl;
 }
 
 void ExtraLife::goodiePowers()
 {
-    cerr <<"INCREASING NUM LIVES BY 1 " << endl;
+    //cerr <<"INCREASING NUM LIVES BY 1 " << endl;
     //3d. increase number of lives by 1
     getWorld()->incLives();
 }
@@ -1167,7 +1184,7 @@ RepairGoodie::RepairGoodie(int imageID, double startX, double startY, int dir, d
 
 RepairGoodie::~RepairGoodie()
 {
-    cerr << "destructing an RepairGoodie " << endl;
+    //cerr << "destructing an RepairGoodie " << endl;
 }
 
 void RepairGoodie::goodiePowers()
@@ -1197,7 +1214,7 @@ FT_Goodie::FT_Goodie(int imageID, double startX, double startY, int dir, double 
 }
 FT_Goodie::~FT_Goodie()
 {
-    cerr << "destructing an FT_Goodie " << endl;
+    //cerr << "destructing an FT_Goodie " << endl;
 }
 
 void FT_Goodie::goodiePowers()

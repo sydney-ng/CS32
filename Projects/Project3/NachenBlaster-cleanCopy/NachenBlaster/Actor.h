@@ -214,6 +214,7 @@ class Projectiles: public Actor
 {
 public:
     Projectiles(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world);
+    virtual bool DoesItRotate();
     virtual ~Projectiles();
 };
 
@@ -241,6 +242,7 @@ class F_Torpedo: public Projectiles
 public:
     F_Torpedo(int imageID, double startX, double startY, int dir, double size, int depth, StudentWorld *world, int owner);
     virtual ~F_Torpedo();
+    virtual bool DoesItRotate();
     virtual void somethingBody();
     //virtual int getDamagePoints();
 private:

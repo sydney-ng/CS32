@@ -60,15 +60,12 @@ void StudentWorld::ProbabilityaddNewObjects()
     int StarChance = randInt(1, 15);
     if (StarChance == 1)
     {
-        Star *starP = new Star (IID_STAR, 255, randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
+        Star *starP = new Star (IID_STAR, VIEW_WIDTH-1, randInt(0, VIEW_HEIGHT-1), 0 , (randDouble(.05, .50)), 3, this);
         gameObjectVector.push_back(starP);
     }
     
     //add ships?
-    if (CheckForAddingShips() == true)
-    {
-        AddShips();
-    }
+    CheckForAddingShips();
 }
 
 NachenBlaster* StudentWorld::getNachenblasterPointer()
@@ -81,31 +78,46 @@ void StudentWorld::AddObjectToVector(Actor * ActorP)
     cerr << "added object to the vec" <<endl;
 }
 
-bool StudentWorld::CheckForAddingShips()
+void StudentWorld::CheckForAddingShips()
 {
-
     int N = numShipsLefToKill();
     
     //calculate the formula for the max number of ships that should be on this level, formula: M = 4 + (.5 * current_level_number)
     int M = 4 + (.5 * getLevel());
     
-    //calculate min between N & M
-    int minNum;
-    if (M < N)
-    {
-        minNum = M;
-    }
-    else
-    {
-        minNum = N;
-    }
-    
     //compare it to the number of onScreenShips
-    if (m_numOnScreenShips < minNum)
+    if (m_numOnScreenShips < min (M, N))
     {
-        return true;
+        int S1 = 60;
+        int S2 = 20 + (getLevel() * 5);
+        int S3 = 5 + (getLevel() * 10);
+        int S = S1 + S2 + S3;
+        
+        if ((rand()% S) < S1)
+        {
+                Smallgon *smallgonP = new Smallgon (IID_SMALLGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0 , 1.5, 1, this);
+                gameObjectVector.push_back(smallgonP);
+                m_numOnScreenShips++;
+            return;
+        }
+        if ((rand()% S) < S2)
+        {
+            Smoregon *smoregonP = new Smoregon (IID_SMALLGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0 , 1.5, 1, this);
+            gameObjectVector.push_back(smoregonP);
+            m_numOnScreenShips++;
+            return;
+        }
+        if ((rand()% S) < S3)
+        {
+            Snagglegon * SnagglegonP = new Snagglegon (IID_SNAGGLEGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0, 1.5, 1, this);
+            gameObjectVector.push_back(SnagglegonP);
+            m_numOnScreenShips++;
+            return;
+        }
+        else
+            CheckForAddingShips();
     }
-    return false;
+    return;
 }
 
 int StudentWorld:: numShipsLefToKill()
@@ -120,37 +132,6 @@ int StudentWorld:: numShipsLefToKill()
     int N = T - D;
     
     return N;
-}
-
-void StudentWorld::AddShips()
-{
-    int S1 = 60;
-    int S2 = 20 + (getLevel() * 5);
-    int S3 = 5 + (getLevel() * 10);
-    int S = S1 + S2 + S3;
-    
-    int probSmallgon = randInt(S1, S);
-    int probSmoregon = randInt(S2, S);
-    int probSnagglegon = randInt(S3, S);
-    
-    if (probSmallgon < S1 +1)
-    {
-        Smallgon *smallgonP = new Smallgon (IID_SMALLGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0 , 1.5, 1, this);
-        gameObjectVector.push_back(smallgonP);
-        m_numOnScreenShips++;
-    }
-    if (probSmoregon < S2 +1)
-    {
-        Smoregon *smoregonP = new Smoregon (IID_SMALLGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0 , 1.5, 1, this);
-        gameObjectVector.push_back(smoregonP);
-        m_numOnScreenShips++;
-    }
-    if (probSnagglegon < S3 +1)
-    {
-        Snagglegon * SnagglegonP = new Snagglegon (IID_SNAGGLEGON, VIEW_WIDTH-1, randInt(0, VIEW_WIDTH-1), 0, 1.5, 1, this);
-        gameObjectVector.push_back(SnagglegonP);
-        m_numOnScreenShips++;
-    }
 }
 
 int StudentWorld:: CalculateGameStatus()
@@ -178,7 +159,6 @@ void StudentWorld::setNBDead()
     m_NBDead = true;
     
 }
-
 
 int StudentWorld::init()
 {
@@ -258,7 +238,7 @@ void StudentWorld::removeDead()
     
     while (vi != gameObjectVector.end())
     {
-        cerr << "is vec empty? " << gameObjectVector.empty() << endl;
+        //cerr << "is vec empty? " << gameObjectVector.empty() << endl;
         if (gameObjectVector.empty () == false)
         {
             if (*vi != nullptr)
@@ -281,6 +261,7 @@ void StudentWorld::removeDead()
         }
     }
 }
+
 void StudentWorld::cleanUp()
 {
     for (int i =0; i < gameObjectVector.size(); i ++)
