@@ -4,7 +4,8 @@
 #include <iostream>
 using namespace std;
 
-Map::Map()
+template <typename KeyType, typename ValueType>
+Map<KeyType, ValueType>::Map()
 : m_size(0)
 {
     // create dummy node
@@ -13,7 +14,8 @@ Map::Map()
     m_head->m_prev = m_head;
 }
 
-Map::~Map()
+template <typename KeyType, typename ValueType>
+Map<KeyType, ValueType>::~Map()
 {
     // Delete the m_size non-dummy nodes plus the dummy node
     
@@ -24,8 +26,8 @@ Map::~Map()
         delete toBeDeleted;
     }
 }
-
-Map::Map(const Map& other)
+template <typename KeyType, typename ValueType>
+Map<KeyType, ValueType>::Map(const Map<KeyType, ValueType>& other)
 : m_size(other.m_size)
 {
     // Create dummy node; don't initialize its pointers
@@ -58,18 +60,18 @@ Map::Map(const Map& other)
     m_head->m_prev = prev;
     prev->m_next = m_head;
 }
-
-Map& Map::operator=(const Map& rhs)
+template <typename KeyType, typename ValueType>
+Map<KeyType, ValueType>& Map<KeyType, ValueType>::operator=(const Map<KeyType, ValueType>& rhs)
 {
     if (this != &rhs)
     {
-        Map temp(rhs);
+        Map<KeyType, ValueType> temp(rhs);
         swap(temp);
     }
     return *this;
 }
-
-bool Map::erase(const KeyType& key)
+template <typename KeyType, typename ValueType>
+bool Map<KeyType, ValueType>::erase(const KeyType& key)
 {
     Node* p = find(key);
     
@@ -85,8 +87,8 @@ bool Map::erase(const KeyType& key)
     m_size--;
     return true;
 }
-
-bool Map::get(const KeyType& key, ValueType& value) const
+template <typename KeyType, typename ValueType>
+bool Map<KeyType, ValueType>::get(const KeyType& key, ValueType& value) const
 {
     Node* p = find(key);
     if (p == m_head)  // not found
@@ -95,7 +97,8 @@ bool Map::get(const KeyType& key, ValueType& value) const
     return true;
 }
 
-bool Map::get(int i, KeyType& key, ValueType& value) const
+template <typename KeyType, typename ValueType>
+bool Map<KeyType, ValueType>::get(int i, KeyType& key, ValueType& value) const
 {
     if (i < 0  ||  i >= m_size)
         return false;
@@ -129,7 +132,8 @@ bool Map::get(int i, KeyType& key, ValueType& value) const
     return true;
 }
 
-void Map::swap(Map& other)
+template <typename KeyType, typename ValueType>
+void Map<KeyType, ValueType>::swap(Map& other)
 {
     // swap head pointers
     Node* tempHead = m_head;
@@ -142,7 +146,8 @@ void Map::swap(Map& other)
     other.m_size = t;
 }
 
-Map::Node* Map::find(const KeyType& key) const
+template <typename KeyType, typename ValueType>
+typename Map<KeyType, ValueType>::Node* Map<KeyType, ValueType>::find(const KeyType& key) const
 {
     // Do a linear search through the list
     
@@ -152,7 +157,8 @@ Map::Node* Map::find(const KeyType& key) const
     return p;
 }
 
-bool Map::doInsertOrUpdate(const KeyType& key, const ValueType& value,
+template <typename KeyType, typename ValueType>
+bool Map<KeyType, ValueType>::doInsertOrUpdate(const KeyType& key, const ValueType& value,
                            bool mayInsert, bool mayUpdate)
 {
     Node* p = find(key);
@@ -184,14 +190,15 @@ bool Map::doInsertOrUpdate(const KeyType& key, const ValueType& value,
     return true;
 }
 
-bool combine(const Map& m1, const Map& m2, Map& result)
+template <typename KeyType, typename ValueType>
+bool combine(const Map<KeyType, ValueType>& m1, const Map<KeyType, ValueType>& m2, Map<KeyType, ValueType>& result)
 {
     // For better performance, the bigger map should be the basis for
     // the result, and we should iterate over the elements of the
     // smaller one, adjusting the result as required.
     
-    const Map* bigger;
-    const Map* smaller;
+    const Map<KeyType, ValueType>* bigger;
+    const Map<KeyType, ValueType>* smaller;
     if (m1.size() >= m2.size())
     {
         bigger = &m1;
@@ -210,7 +217,7 @@ bool combine(const Map& m1, const Map& m2, Map& result)
     // be destroyed when res is destroyed.
     
     bool status = true;
-    Map res(*bigger);               // res starts as a copy of the bigger map
+    Map<KeyType, ValueType> res(*bigger);               // res starts as a copy of the bigger map
     for (int n = 0; n < smaller->size(); n++)  // for each pair in smaller
     {
         KeyType k;
@@ -229,7 +236,8 @@ bool combine(const Map& m1, const Map& m2, Map& result)
     return status;
 }
 
-void subtract(const Map& m1, const Map& m2, Map& result)
+template <typename KeyType, typename ValueType>
+void subtract(const Map<KeyType, ValueType>& m1, const Map<KeyType, ValueType>& m2, Map<KeyType, ValueType>& result)
 {
     // Guard against the case that result is an alias for m1 or m2
     // (i.e., that result is a reference to the same map that m1 or m2
@@ -242,7 +250,7 @@ void subtract(const Map& m1, const Map& m2, Map& result)
         // If m1 is smaller, if an item in m1 should be in the result because
         // its key is not in m2, add it
         
-        Map res;
+        Map<KeyType, ValueType> res;
         for (int n = 0; n < m1.size(); n++)
         {
             KeyType k;
@@ -258,7 +266,7 @@ void subtract(const Map& m1, const Map& m2, Map& result)
         // If m1 is larger, copy it to the result and remove from result
         // keys that are in m2
         
-        Map res(m1);
+        Map<KeyType, ValueType> res(m1);
         for (int n = 0; n < m2.size(); n++)
         {
             KeyType k;
@@ -268,9 +276,4 @@ void subtract(const Map& m1, const Map& m2, Map& result)
         }
         result.swap(res);
     }
-}
-
-int main()
-{
-    Map <int, double> mid;
 }
