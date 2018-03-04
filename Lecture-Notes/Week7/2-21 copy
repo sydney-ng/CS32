@@ -1,0 +1,172 @@
+Can you pass nontype parameters to templates? 
+
+Yes, they juust must be const 
+
+/////////////////////////////////////////////
+Practice from Slides: 
+
+//call for int aray 
+arrMin<int, 10000> (arr1, n1)
+//call for char array 
+arrMin<char, 256> (arr2,n2)
+
+////////////////////////////////////////////
+Difference between function overloading & templates:
+
+Overloading: similar code
+Templates: will have the exact same code
+
+Inheritance: you can write the code once & use it for inherited class 
+Polymorphism: similar thing for different types 
+-restricting parameters to certain types 
+
+/////////////////////////////////////////////
+STL 
+- containers & lists 
+	-vectors: dynamic arrays w/ a lot of size
+		-access using index notation (since they're an array) 
+	-list: doubly linked list
+
+REVERSE THE ELEMENTS OF A VECTOR:
+
+void reverse (vector<int> v)
+{
+	stack <int> s; 
+	for (int x = 0; x < v.size(); x++)
+	{
+		s.push (v[x]);
+	}
+	for (int x = 0; x < v.size; x++)
+	{
+		v[x] = s.top();
+		s.pop();
+	}
+}
+
+void reverse (vector <int> v)
+{
+	vector <int>::iterator first = v.begin(); 
+	vector <int>::iterator second = v.end ()-1;
+	while (second - first > 0)
+	{
+		swap (*first, *second);
+		first ++;
+		second ++;
+	}
+}
+
+
+/// put all the elements that are even in the front, odd in the back 
+
+list <int> sortEven (vector<int>v)
+{
+	list <int> l;
+	for (int i = 0; i < v.size(); i ++)
+	{
+		if (v[i] % 2 == 0)
+		{
+			l.pushfront(v[i]);
+		}
+		else
+		{
+			l.pushback (v[i]);
+		}
+	}
+	return l;
+}
+
+
+template <typename T>
+class Stack 
+{
+	pop 
+	{
+		v.pop_back();
+	}; 
+	push(typename a)
+	{
+		return v.pushback(a);
+	};
+	top ()
+	{
+		return v[v.size()-1]; 
+	}
+	private:
+	vector <t> v; 
+}
+
+
+///// simple calculator using class template 
+template <typename T>
+class Calculator 
+{
+	Calculator (T t1, T t2)
+	{
+		m_firstNum = t1;
+		m_secondNum = t2;
+	}
+	displayResult()
+	{
+		cout << m_firstNum + m_secondNum; 
+		cout << m_firstNum - m_secondNum; 
+		cout << m_firstNum * m_secondNum; 
+		cout << m_firstNum / m_secondNum; 
+
+	}
+	private:
+	T m_firstNum; 
+	T m_secondNum;
+}	
+
+
+++X => X+1 
+X++ => X
+4
+3
+2
+1
+fun (3) 
+fun(2)
+fun (1)
+
+///recursive factorial 
+
+int main ()
+{
+	factorial (n)
+}
+
+factorial (n)
+{
+	if (n <= 1)
+	{
+		return n;
+	}
+	return n * factorial (n-1);
+}
+
+/////recursive fibonaccci 
+{
+	if (n ==1)
+	{
+		return 1;
+	}
+	if (n==2)
+	{
+		return 1;
+	}
+	return f (n-1) + f(n-2);
+
+
+	int f2 (int a, int b, int n)
+	{
+		if (n <= 0)
+		{
+			return n;
+		}
+		else
+		{
+			return a + (f2, a+b, n-1)
+		}
+		}
+	}

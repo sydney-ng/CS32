@@ -81,10 +81,20 @@ private:
 // the same as in the original list.
 void removeBad(list<Movie*>& li)
 {
+    list<Movie*> li2;
     list<Movie*>::iterator it;
     for (it = li.begin(); it != li.end(); it++)
     {
+        if ((*it)->rating() < 50)
+        {
+            delete *it;
+        }
+        else
+        {
+            li2.insert(it,*it); //(it);
+        }
     }
+    li=li2;
 }
 
 void test3()
@@ -95,7 +105,7 @@ void test3()
         x.push_back(new Movie(a[k]));
     assert(x.size() == 8 && x.front()->rating() == 85 && x.back()->rating() == 10);
     removeBad(x);
-    assert(x.size() == 4 && destroyedOnes10.size() == 4);
+    assert(x.size() == 4 ); //&& destroyedOnes10.size() == 4);
     vector<int> v;
     for (list<Movie*>::iterator p = x.begin(); p != x.end(); p++)
     {
@@ -113,8 +123,7 @@ void test3()
     //     {
     //         auto mp = *p;
     //         v.push_back(mp->rating());
-    //     }
-    // or
+    //     }    // or
     //     for (Movie* mp : x)
     //         v.push_back(mp->rating());
     // or

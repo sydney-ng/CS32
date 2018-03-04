@@ -1,0 +1,84 @@
+//////////////////////// LISTS ////////////////////////
+
+li.begin ()			li.end()
+				   v
+	10	20	30	 
+	v 				
+
+list <int>::iterator p = li.end()
+p—;
+p—;
+//p-=2 won’t compile 
+
+/////////////iterate through lists/////////////
+
+li.begin ()	p		li.end()
+		 v		   v
+	10	20	30	 
+	v 
+
+/////////////insert item/////////////
+
+list <int>::iterator q = li.insert (p,40);
+
+li.begin ()	q	p		li.end()
+		 v	v		   v
+	10	40	20	30	 
+	v 
+
+- if you don’t use pushback, you can just use insert (end, 40)
+- if you don’t use pushfront, you can always insert w/ beginning iterator
+
+/////////////delete item/////////////
+list <int>::iterator p; 
+
+li.begin ()	q	p		li.end()
+		 v	v		   v
+	10	40	20	30	 
+	v 
+
+list <int>::iterator q = li.erase (p);
+//will return a pointer to the next item 
+//use p = li.erase (p); 
+
+li.begin ()			li.end()
+				  v
+	10		30	 
+	v 
+
+it’s now undefined to use p (*p, p++, etc.)until you assign p a new value 
+
+/////////////iteration arithmetic/////////////
+
+vector <int> vi; 
+
+vector <int> iterator p = vi.end() - 2;
+li.begin ()	p		li.end()
+		v		   v
+	10	20	30	 
+	v 
+
+/////////////insert item in middle of list/////////////
+vector <int>::iterator q = vi.insert (p,40);
+
+
+li.begin ()	q	p		li.end()
+		 v	v		   v
+	10	40	20	30	 
+	v 
+
+-it’s now undefined to use *p, p++, etc until you assign a new value 
+-but insert returns a value of the newly created one, so you add it 
+
+//////////////////////////////////////////////////
+p = vi.erase (q)
+
+list <int>::iterator q = li.insert (p,40);
+
+li.begin ()	p		li.end()
+		v		   v
+	10	20	30	 
+	v 
+
+q is invalid, since it doesn’t point to the element that it used to 
+p is the item that followed the q 
