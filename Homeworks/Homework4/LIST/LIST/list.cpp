@@ -33,6 +33,7 @@ void listAll(const Class* c, string path)  // two-parameter overload
         return;
     }
     path = path + c->name();
+    cout << path << endl;
     path += "=>";
     for (int i = 0; i < pointers_Subclasses.size(); i++)
     {
