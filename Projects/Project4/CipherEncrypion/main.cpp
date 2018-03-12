@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 //    wl->loadWordList("/Users/J/Desktop/CS32/Projects/Project4/skeleton/wordlist.txt");
 //    f();
     
-    MyHash<string,string> * biggerHash = new MyHash <string, string>();
+//    MyHash<string,string> * biggerHash = new MyHash <string, string>();
     
 //	if (argc == 3  &&  argv[1][0] == '-')
 //	{

@@ -44,10 +44,14 @@ private:
         int m_NumAssociations;
     
     //private functions
-    void addEntrytoHash(std::string toHashWord);
     void PossiblyResize();
     void GenerateAHashTable();
-    void CopyEntriesOver(Node * oldHash);
+    void CopyEntriesOver(Node ** oldHash);
+    unsigned int getBucketNumber(const KeyType &key) const;
+    bool CheckIfExists(const KeyType& key);
+    void AddNewEntry(const KeyType& key, const ValueType& value, int bucketNum);
+    void UpdateEntry(const KeyType& key, const ValueType& value, int bucketNum);
+
 };
 
 template<typename KeyType, typename ValueType>
@@ -72,7 +76,7 @@ void MyHash<KeyType, ValueType>::GenerateAHashTable()
 }
 
 template<typename KeyType, typename ValueType>
-void MyHash<KeyType, ValueType>::CopyEntriesOver(Node * oldHash)
+void MyHash<KeyType, ValueType>::CopyEntriesOver(Node ** oldHash)
 {
     //iterate through everything in the hash
     //m_HashSize should still be the original number of buckets
@@ -80,58 +84,28 @@ void MyHash<KeyType, ValueType>::CopyEntriesOver(Node * oldHash)
     {
         if (oldHash[i] != nullptr)
         {
-            Node ** iterator = oldHash[i];
-            while(iterator->nextEntry != nullptr)
+            Node * iterator = oldHash[i];
+            while(iterator != nullptr)
             {
-                addEntrytoHash(iterator->value);
+                associate(iterator->key, iterator->value);
                 iterator = iterator->nextEntry;
             }
         }
     }
     
     //delete everything in the oldHash now
+    delete [] oldHash;
 }
 
 template<typename KeyType, typename ValueType>
 void MyHash<KeyType, ValueType>::PossiblyResize()
 {
-    int maxSize = m_IncreaseFactor * 100;
-    if (m_HashSize > maxSize || m_HashSize == maxSize)
+    if (getLoadFactor() > 0.5 || getLoadFactor() == 0.5)
     {
         m_IncreaseFactor++;
+        m_HashSize *=2;
         GenerateAHashTable();
     }
-}
-
-template<typename KeyType, typename ValueType>
-void MyHash<KeyType, ValueType>::addEntrytoHash(std::string toHashWord)
-{
-    //hash the word, determine which bucket it will go in
-
-    unsigned int hash(const std::string &toHashWord);
-    int numHash = hash(toHashWord) % m_HashSize;
-    //depending on the number, add it to the hash table
-    
-    Node * newNode = new Node();
-    newNode->value = toHashWord;
-    newNode->nextEntry = nullptr;
-    //if the bucket is empty (it points to null, set it equal to that)
-    if (m_HashTable[numHash]->value == nullptr)
-    {
-        m_HashTable[numHash] = newNode;
-    }
-    else
-    {
-        //traverse to the end of this linked list
-        Node * iterateNode = m_HashTable[numHash];
-        while (iterateNode->nextEntry != nullptr)
-        {
-            iterateNode = iterateNode->nextEntry;
-        }
-        //you have made it to the end, make the next entry that node
-        iterateNode->nextEntry = newNode;
-    }
-    m_NumAssociations++;
 }
 
 template<typename KeyType, typename ValueType>
@@ -145,7 +119,7 @@ void MyHash<KeyType, ValueType>::reset()
 {
     for (int i = 0; i < m_HashSize; i++)
     {
-        Node* current = *m_HashTable[i];
+        Node* current = m_HashTable[i];
         while (current->nextEntry != nullptr)
         {
             Node * deleteMe = current;
@@ -165,20 +139,109 @@ int MyHash<KeyType, ValueType>::getNumItems() const
 template<typename KeyType, typename ValueType>
 double MyHash<KeyType, ValueType>::getLoadFactor() const
 {
-    double LF = (m_NumAssociations/m_HashSize)/2;
+    double LF = (m_NumAssociations/m_HashSize);
     return LF;
 }
 
-//template<typename KeyType, typename ValueType>
-//const ValueType* MyHash<KeyType, ValueType>::find(const KeyType& key) const
-//{
-//
-//}
+template<typename KeyType, typename ValueType>
+const ValueType* MyHash<KeyType, ValueType>::find(const KeyType& key) const
+{
+    //hash the key
+    unsigned int buckNum = getBucketNumber(key);
+    //search that bucket
+    Node * iterator = m_HashTable[buckNum];
+    while (iterator != nullptr)
+    {
+        if (iterator->key == key)
+        {
+            ValueType * ValTypePointer;
+            *ValTypePointer = iterator->value;
+            return ValTypePointer;
+        }
+    }
+    return nullptr;
+    //return pointer to value NOT THE KEY
+}
 
+template<typename KeyType, typename ValueType>
+unsigned int MyHash<KeyType, ValueType>:: getBucketNumber(const KeyType &key) const
+{
+    //hash the word, determine which bucket it will go in
+    
+    unsigned int hash(const KeyType &k);
+    unsigned int numHash = hash(key);
+    unsigned int bucketNum = numHash % m_HashSize;
+    return bucketNum;
+}
+
+template<typename KeyType, typename ValueType>
+void MyHash<KeyType, ValueType>::AddNewEntry(const KeyType& key, const ValueType& value, int bucketNum)
+{
+    Node * newNode = new Node();
+    newNode->key = key;
+    newNode->value = value;
+    newNode->nextEntry = nullptr;
+    
+    if (m_HashTable[bucketNum] == nullptr)
+    {
+        m_HashTable[bucketNum] = newNode;
+    }
+    
+    else
+    {
+        //traverse to the end of this linked list
+        Node * iterateNode = m_HashTable[bucketNum];
+        while (iterateNode != nullptr)
+        {
+            iterateNode = iterateNode->nextEntry;
+        }
+        //you have made it to the end, make the next entry that node
+        iterateNode->nextEntry = newNode;
+    }
+    m_NumAssociations++;
+}
+
+template<typename KeyType, typename ValueType>
+void MyHash<KeyType, ValueType>::UpdateEntry(const KeyType& key, const ValueType& value, int bucketNum)
+{
+    Node * iterateNode = m_HashTable[bucketNum];
+    while (iterateNode != nullptr)
+    {
+        if (iterateNode->key == key)
+        {
+            iterateNode->value = value;
+        }
+    }
+}
 template<typename KeyType, typename ValueType>
 void MyHash<KeyType, ValueType>::associate(const KeyType& key, const ValueType& value)
 {
+    //depending on the number, add it to the hash table
+    int bucketNum = getBucketNumber(key);
     
+    
+    if (CheckIfExists(key) == false)
+    {
+        PossiblyResize();
+        AddNewEntry(key, value, bucketNum);
+    }
+
+    //this already exists, so overwrite it
+    else
+    {
+        UpdateEntry(key, value, bucketNum);
+    }
+}
+
+template<typename KeyType, typename ValueType>
+bool MyHash<KeyType, ValueType>::CheckIfExists(const KeyType& key)
+{
+    ValueType * valTypePointer = find(key);
+    if (valTypePointer == nullptr)
+    {
+        return false;
+    }
+    return true;
 }
 //
 //#ifndef MYHASH_INCLUDED
