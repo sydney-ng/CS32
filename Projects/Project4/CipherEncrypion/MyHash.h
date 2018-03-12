@@ -32,11 +32,12 @@ private:
     public:
         Node * nextEntry;
         ValueType value;
+        KeyType key;
     };
     
     //private member variables
         //The pointer to the first entry of the hash table
-        Node * m_HashTable;
+        Node ** m_HashTable;
         //how much you're going to increase size by
         int m_IncreaseFactor;
         int m_HashSize;
@@ -45,35 +46,50 @@ private:
     //private functions
     void addEntrytoHash(std::string toHashWord);
     void PossiblyResize();
-    void setMHashTable();
-    void setIncreaseFactor(int factor);
-    
-    
+    void GenerateAHashTable();
+    void CopyEntriesOver(Node * oldHash);
 };
-
-template<typename KeyType, typename ValueType>
-void MyHash<KeyType, ValueType>::setIncreaseFactor(int factor)
-{
-    m_IncreaseFactor = factor;
-}
 
 template<typename KeyType, typename ValueType>
 MyHash<KeyType, ValueType>::MyHash(double maxLoadFactor)
 {
-    m_HashTable = nullptr;
     m_IncreaseFactor = 1;
+    m_HashTable = new Node * [m_IncreaseFactor*100];
+    for (int i = 0; i < 100; i ++)
+    {
+        m_HashTable [i] = nullptr; 
+    }
     m_HashSize = 0;
     m_NumAssociations = 0;
-    setMHashTable();
 }
 
 template<typename KeyType, typename ValueType>
-void MyHash<KeyType, ValueType>::setMHashTable()
+void MyHash<KeyType, ValueType>::GenerateAHashTable()
 {
-    for (int i = 0; i < m_IncreaseFactor*100; i++)
+    Node **oldHash = m_HashTable;
+    m_HashTable = new Node  *[m_IncreaseFactor*100];
+    CopyEntriesOver(oldHash);
+}
+
+template<typename KeyType, typename ValueType>
+void MyHash<KeyType, ValueType>::CopyEntriesOver(Node * oldHash)
+{
+    //iterate through everything in the hash
+    //m_HashSize should still be the original number of buckets
+    for (int i = 0; i < m_HashSize; i++)
     {
-        m_HashTable[i] = nullptr;
+        if (oldHash[i] != nullptr)
+        {
+            Node ** iterator = oldHash[i];
+            while(iterator->nextEntry != nullptr)
+            {
+                addEntrytoHash(iterator->value);
+                iterator = iterator->nextEntry;
+            }
+        }
     }
+    
+    //delete everything in the oldHash now
 }
 
 template<typename KeyType, typename ValueType>
@@ -82,29 +98,25 @@ void MyHash<KeyType, ValueType>::PossiblyResize()
     int maxSize = m_IncreaseFactor * 100;
     if (m_HashSize > maxSize || m_HashSize == maxSize)
     {
-        MyHash * biggerHash = new MyHash();
-        biggerHash->setIncreaseFactor(m_IncreaseFactor+1);
-        
-        //rehash everything
-        
-        //add it to new hash
-        //set m_HashTable equal to it
+        m_IncreaseFactor++;
+        GenerateAHashTable();
     }
 }
 
 template<typename KeyType, typename ValueType>
 void MyHash<KeyType, ValueType>::addEntrytoHash(std::string toHashWord)
 {
-    //hash the word
+    //hash the word, determine which bucket it will go in
+
     unsigned int hash(const std::string &toHashWord);
-    int numHash = hash(toHashWord); //which bucket it will go in
+    int numHash = hash(toHashWord) % m_HashSize;
     //depending on the number, add it to the hash table
     
     Node * newNode = new Node();
     newNode->value = toHashWord;
     newNode->nextEntry = nullptr;
     //if the bucket is empty (it points to null, set it equal to that)
-    if (m_HashTable[numHash] == nullptr)
+    if (m_HashTable[numHash]->value == nullptr)
     {
         m_HashTable[numHash] = newNode;
     }
