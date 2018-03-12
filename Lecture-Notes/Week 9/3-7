@@ -1,0 +1,55 @@
+map<string,double> ious; 
+
+string name; 
+double amt; 
+
+while (can >> name >> am)
+{
+ious[name] += amt; // ious.operaor[](name)+=amt;
+}
+
+for (map<string, double>:: iterator p = ious.begin(); p!=ious.end(); p++)
+{
+	cout << p->first << owes me $” << p->second << endl;
+}
+
+closed: 
+-make sure that there is still space in the hash table
+-load factor: divide the number of elements/slots
+
+int getPairsSum (int *arr, int size, int sum)
+{
+	//sorted array, move one left one right
+	sort (arr);
+	int counter = 0;	
+	int endlen = size;	
+	while (arr != arr[endlen])
+	{
+		if (arr[0] + (*arr+endlen) == sum)
+		{
+		counter ++;
+		}
+		if (arr[0] + (*arr+endlen) > sum )
+		{
+			enlden —; 
+		}
+		if (arr[0] + (*arr+endlen) > sum )
+		{
+			arr++; 
+		}
+	}  
+	 
+	else if (
+
+}
+
+unordered_map<int,int>mp;
+for (int i = 0; i <size; i++)
+{
+	mp[arr[i]]++;
+}
+
+//in initial state, all elements in a map are 0
+
+mp[sum-arr[i]] => v
+key 			value
