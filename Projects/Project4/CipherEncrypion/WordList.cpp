@@ -62,7 +62,12 @@ bool WordListImpl::loadWordList(string filename)
 
 bool WordListImpl::contains(string word) const
 {
-    
+    unsigned int hash(const std::string &word);
+    int numHash = hash(word);
+//    if (*(m_WLIHash->find(numHash)) == word)
+//    {
+//        return true;
+//    }
     return false; // This compiles, but may not be correct
 }
 

@@ -42,25 +42,41 @@ bool decrypt(string ciphertext)
 		cout << s << endl;
 	return true;
 }
-
+void f();
 int main(int argc, char* argv[])
 {
-    MyHash<int,char> * exHash = new MyHash<int, char>;
-	/*if (argc == 3  &&  argv[1][0] == '-')
-	{
-		switch (tolower(argv[1][1]))
-		{
-		  case 'e':
-			cout << encrypt(argv[2]) << endl;
-			return 0;
-		  case 'd':
-			if (decrypt(argv[2]))
-				return 0;
-			return 1;
-		}
-	}
+    //Tokenizer * tokens123 = new Tokenizer("abc");
+//    
+//    WordList *wl = new WordList();
+//    wl->loadWordList("/Users/J/Desktop/CS32/Projects/Project4/skeleton/wordlist.txt");
+//    f();
+    
+    MyHash<string,string> * biggerHash = new MyHash <string, string>();
+    
+//	if (argc == 3  &&  argv[1][0] == '-')
+//	{
+//		switch (tolower(argv[1][1]))
+//		{
+//		  case 'e':
+//			cout << encrypt(argv[2]) << endl;
+//			return 0;
+//		  case 'd':
+//			if (decrypt(argv[2]))
+//				return 0;
+//			return 1;
+//		}
+//	}
+//
+//	cout << "Usage to encrypt:  " << argv[0] << " -e \"Your message here.\"" << endl;
+//	cout << "Usage to decrypt:  " << argv[0] << " -d \"Uwey tirrboi miyi.\"" << endl;
+//	return 1;
+}
 
-	cout << "Usage to encrypt:  " << argv[0] << " -e \"Your message here.\"" << endl;
-	cout << "Usage to decrypt:  " << argv[0] << " -d \"Uwey tirrboi miyi.\"" << endl;*/
-	return 1;
+void f()
+{
+    Translator t; // Define a translator object
+    string secret = "Hdqlx!";
+    string translated = t.getTranslation(secret);
+    cout << "The translated message is: " << translated;
+    // writes The translated message is: ?????!
 }

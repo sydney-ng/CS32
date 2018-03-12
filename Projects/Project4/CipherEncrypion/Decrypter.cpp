@@ -9,11 +9,12 @@ public:
     bool load(string filename);
     vector<string> crack(const string& ciphertext);
 private:
+    WordList * m_WL;
 };
 
 bool DecrypterImpl::load(string filename)
 {
-    return false;  // This compiles, but may not be correct
+    return m_WL->loadWordList(filename);  //delegate to loadWordList
 }
 
 vector<string> DecrypterImpl::crack(const string& ciphertext)
