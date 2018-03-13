@@ -51,7 +51,6 @@ private:
     bool CheckIfExists(const KeyType& key);
     void AddNewEntry(const KeyType& key, const ValueType& value, int bucketNum);
     void UpdateEntry(const KeyType& key, const ValueType& value, int bucketNum);
-
 };
 
 template<typename KeyType, typename ValueType>
@@ -130,10 +129,11 @@ void MyHash<KeyType, ValueType>::reset()
     }
 }
 
+//returns # of buckets being used
 template<typename KeyType, typename ValueType>
 int MyHash<KeyType, ValueType>::getNumItems() const
 {
-    return m_NumAssociations;
+    return m_HashSize;
 }
 
 template<typename KeyType, typename ValueType>

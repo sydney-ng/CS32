@@ -43,15 +43,18 @@ bool decrypt(string ciphertext)
 	return true;
 }
 void f();
+
+void f2();
 int main(int argc, char* argv[])
 {
-//    MyHash<string, string> * exampleHash = new MyHash<string, string>();
-//    string * stringPtr = exampleHash->find("abc");//('abc');
-//    exampleHash->associate("abc", "def");
+
+    
+    WordList * wlPointer = new WordList();
+    wlPointer->loadWordList("apple"); 
+    
 //    string * stringPtr2 = exampleHash->find("abc");//('abc');
 //    cerr << "cool ben" << endl;
     
-    f();
     
 //    WordList *wl = new WordList();
 //    wl->loadWordList("/Users/J/Desktop/CS32/Projects/Project4/skeleton/wordlist.txt");
@@ -78,6 +81,25 @@ int main(int argc, char* argv[])
 //	return 1;
 }
 
+void f2()
+{
+    vector<string> v;
+    v.push_back("momma");
+    v.push_back("dadda");
+    MyHash<string, std::vector<string>> * exampleHash = new MyHash<string, std::vector<string>>();
+    vector<string> * stringPtr = exampleHash->find("abc");//('abc');
+    if (stringPtr == nullptr)
+    {
+        cerr << "it is null " << endl;
+    }
+    exampleHash->associate("abc", v);
+    stringPtr = exampleHash->find("abc");//('abc');
+    
+    if (stringPtr == nullptr)
+    {
+        cerr << "it is null x2" << endl;
+    }
+}
 void f()
 {
 				Tokenizer	t("	,.!");

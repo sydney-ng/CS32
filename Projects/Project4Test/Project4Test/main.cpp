@@ -1,15 +1,19 @@
-//
-//  main.cpp
-//  Project4Test
-//
-//  Created by Super on 3/11/18.
-//  Copyright © 2018 Sydney. All rights reserved.
-//
-
+#include "MyHash.h"
 #include <iostream>
+#include <string>
+#include <vector>
+#include <cstring>
+#include <cctype>
+#include <random>
+#include <algorithm>
+#include <numeric>
+using namespace std;
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+
+int main()
+{
+    MyHash<string, string> * exampleHash = new MyHash<string, string>();
+    exampleHash->find("abc");//('abc');
+    //string * X = exampleHash.find("cool");
+    cout << "nice" << endl;
 }

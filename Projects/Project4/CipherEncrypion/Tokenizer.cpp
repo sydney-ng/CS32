@@ -25,6 +25,7 @@ vector<string> TokenizerImpl::tokenize(const std::string& s) const
     string temp = "";
     for (int i =0; i < s.size(); i++)
     {
+        //this is a valid word so far
         bool flag = true;
         //cerr << "checking " << s[i] << endl;
         for (int j = 0; j < m_Delims.size(); j++)
@@ -53,10 +54,6 @@ vector<string> TokenizerImpl::tokenize(const std::string& s) const
     }
     cerr << "the final vector is: " << endl;
     
-    for (int i = 0; i < completeWordsVector.size(); i++)
-    {
-        cerr << completeWordsVector[i] << endl;
-    }
     return completeWordsVector;  // This compiles, but may not be correct
 }
 

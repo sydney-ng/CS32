@@ -9,10 +9,42 @@ public:
     bool popMapping();
     string getTranslation(const string& ciphertext) const;
 private:
+    bool InputValidationPushMapping (string ciphertext, string plaintext);
 };
+
+bool TranslatorImpl::InputValidationPushMapping (string ciphertext, string plaintext)
+{
+    //parameters not the same length
+    if (ciphertext.size() != plaintext.size())
+    {
+        return false;
+    }
+    
+    //check if either have a non letter
+    for (int i = 0; i < ciphertext.size(); i++)
+    {
+        if (isalpha (ciphertext[i]) == false || isalpha (plaintext[i]) == false)
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
 {
+    //input validation
+    if (InputValidationPushMapping (ciphertext,plaintext) == false)
+    {
+        return false;
+    }
+    //check if there's already that table in the hash (most updated copy)
+        //return false
+    
+    //else, it's valide
+        //create a new map, combined with the old features
+        //create the new associations (using hash)
+    //return true
     return false;  // This compiles, but may not be correct
 }
 
