@@ -20,15 +20,44 @@ TokenizerImpl::TokenizerImpl(string separators)
 
 vector<string> TokenizerImpl::tokenize(const std::string& s) const
 {
-    for (int i = 0; i < s.size(); i++)
+    //cerr << "here" << endl;
+    vector<string>completeWordsVector;
+    string temp = "";
+    for (int i =0; i < s.size(); i++)
     {
-        cout << s[i] << endl;
-//        for (int j = 0; j< m_Delims.size(); j++)
-//        {
-//
-//        }
+        bool flag = true;
+        //cerr << "checking " << s[i] << endl;
+        for (int j = 0; j < m_Delims.size(); j++)
+        {
+            if (s[i] == m_Delims[j])
+            {
+                if (temp == "")
+                {
+                    flag = false;
+                    break;
+                }
+                else
+                {
+                    completeWordsVector.push_back(temp);
+                    //cerr << "this is a delim" << endl;
+                    temp = "";
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        if (flag == true)
+        {
+            temp += s[i];
+        }
     }
-    return vector<string>();  // This compiles, but may not be correct
+    cerr << "the final vector is: " << endl;
+    
+    for (int i = 0; i < completeWordsVector.size(); i++)
+    {
+        cerr << completeWordsVector[i] << endl;
+    }
+    return completeWordsVector;  // This compiles, but may not be correct
 }
 
 //******************** Tokenizer functions ************************************

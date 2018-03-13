@@ -63,7 +63,7 @@ MyHash<KeyType, ValueType>::MyHash(double maxLoadFactor)
     {
         m_HashTable [i] = nullptr; 
     }
-    m_HashSize = 0;
+    m_HashSize = 100;
     m_NumAssociations = 0;
 }
 
@@ -155,7 +155,7 @@ const ValueType* MyHash<KeyType, ValueType>::find(const KeyType& key) const
         if (iterator->key == key)
         {
             ValueType * ValTypePointer;
-            *ValTypePointer = iterator->value;
+            ValTypePointer = &(iterator->value);
             return ValTypePointer;
         }
     }
@@ -167,11 +167,9 @@ template<typename KeyType, typename ValueType>
 unsigned int MyHash<KeyType, ValueType>:: getBucketNumber(const KeyType &key) const
 {
     //hash the word, determine which bucket it will go in
-    
     unsigned int hash(const KeyType &k);
-    unsigned int numHash = hash(key);
-    unsigned int bucketNum = numHash % m_HashSize;
-    return bucketNum;
+    unsigned int numHash = hash(key) % m_HashSize;
+    return numHash;
 }
 
 template<typename KeyType, typename ValueType>

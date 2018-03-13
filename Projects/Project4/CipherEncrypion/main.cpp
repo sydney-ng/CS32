@@ -45,8 +45,14 @@ bool decrypt(string ciphertext)
 void f();
 int main(int argc, char* argv[])
 {
-    //Tokenizer * tokens123 = new Tokenizer("abc");
-//    
+//    MyHash<string, string> * exampleHash = new MyHash<string, string>();
+//    string * stringPtr = exampleHash->find("abc");//('abc');
+//    exampleHash->associate("abc", "def");
+//    string * stringPtr2 = exampleHash->find("abc");//('abc');
+//    cerr << "cool ben" << endl;
+    
+    f();
+    
 //    WordList *wl = new WordList();
 //    wl->loadWordList("/Users/J/Desktop/CS32/Projects/Project4/skeleton/wordlist.txt");
 //    f();
@@ -74,9 +80,10 @@ int main(int argc, char* argv[])
 
 void f()
 {
-    Translator t; // Define a translator object
-    string secret = "Hdqlx!";
-    string translated = t.getTranslation(secret);
-    cout << "The translated message is: " << translated;
-    // writes The translated message is: ?????!
+				Tokenizer	t("	,.!");
+				vector<string>	v =	t.tokenize ("This,,	is	a				test!	It's	the...	best!");
+        
+    //	v	now	contains	"This",	"is",	"a",	"test",	"It's",	"the",	and	"best"
+				string	s	=	"!!!!!";
+				v	=	t.tokenize(s);
 }

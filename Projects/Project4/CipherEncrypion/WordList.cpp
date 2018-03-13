@@ -6,7 +6,7 @@ using namespace std;
 //I added these:
 #include <iostream>
 #include <fstream>
-
+using namespace std;
 class WordListImpl
 {
 public:
@@ -14,10 +14,20 @@ public:
     bool contains(string word) const;
     vector<string> findCandidates(string cipherWord, string currTranslation) const;
 private:
-    MyHash <int, string> * m_WLIHash;
+    MyHash <string, std::vector<string>> * m_WLIHash;
+    string createPattern (string readLine);
+
     
 };
 
+string WordListImpl::createPattern (string readLine)
+{
+    for (int i = 0; i < readLine.size(); i++)
+    {
+        
+    }
+    return ""; 
+}
 bool WordListImpl::loadWordList(string filename)
 {
     ifstream infile(filename);    // infile is a name of our choosing
@@ -26,12 +36,14 @@ bool WordListImpl::loadWordList(string filename)
         cerr << "you opened word list" << endl;
 
         //create a new hash
-        m_WLIHash = new MyHash<int,string>::MyHash();
+        m_WLIHash = new MyHash<string, vector<string>>::MyHash();
         string readLine;
         while (getline(infile,readLine))
         {
+            //create the pattern
+            createPattern (readLine);
             //TO-DO: MAKE SURE IT'S NOT ALREADY IN THE HASH
-            
+            cerr << readLine << endl;
             //input validation
             bool flag = true;
             for (int i =0; i < readLine.size(); i++)
@@ -51,7 +63,7 @@ bool WordListImpl::loadWordList(string filename)
                 unsigned int hash (const string &k);
                 int hashNum = hash(readLine);
                 //TO-DO: change the empty string
-                m_WLIHash->associate(hashNum, readLine);
+                //m_WLIHash->associate(hashNum, readLine);
             }
         }
         return true; //means you were able to open the file
