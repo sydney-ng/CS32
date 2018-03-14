@@ -71,11 +71,12 @@ bool TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)
     for (int i =0; i < plaintext.size(); i++)
     {
         
-        for (auto it = getMostCurrentMap().begin(); it != getMostCurrentMap().end(); ++it )
+        for (auto it = VectorOfMaps[VectorOfMaps.size()-1].begin(); it != VectorOfMaps[VectorOfMaps.size()-1].end(); ++it )
         {
             std::cout << " " << it->first << ":" << it->second;
             std::cout << std::endl;
         }
+        
         
 //        //iterate through the entire map
 //        std::map<char,char>::iterator it = getMostCurrentMap().begin();
@@ -106,11 +107,11 @@ bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
         return false;
     }
     
-//    bool inconsistent = CheckForInconsistency(plaintext, ciphertext);
-//    if (inconsistent == false)
-//    {
-//        return false;
-//    }
+    bool inconsistent = CheckForInconsistency(plaintext, ciphertext);
+    if (inconsistent == false)
+    {
+        return false;
+    }
 
     map<char,char> newMap = getMostCurrentMap();
     for (int i = 0; i < ciphertext.size(); i++)
@@ -128,12 +129,12 @@ bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
     
     VectorOfMaps.push_back(newMap);
     
-    return false;  // This compiles, but may not be correct
+    return true;  // This compiles, but may not be correct
 }
 
 bool TranslatorImpl::popMapping()
 {
-    
+    MostCurrentMap = getMostCurrentMap();
     return false;  // This compiles, but may not be correct
 }
 
