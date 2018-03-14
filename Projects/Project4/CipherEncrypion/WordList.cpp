@@ -82,6 +82,7 @@ bool WordListImpl::InputValidation(string readLine)
 bool WordListImpl::loadWordList(string filename)
 {
     //CALL RESET TO DO
+    m_WLIHash.reset();
     ifstream ifs(filename);    // infile is a name of our choosing
     if (ifs)		        // Did opening the file fail?
     {
@@ -159,18 +160,13 @@ bool WordListImpl::contains(string word) const
                 if (tolower(wordInVector[i]) != tolower(word[i]))
                 {
                     flag = false;
+                    break;
                 }
             }
             if (flag == true)
             {
-                return true;
+                return true; // you found the word
             }
-            
-//            //check if the
-//            if (*it == word)
-//            {
-//                return true;
-//            }
         }
     }
     return false; //right bucket wrong word
