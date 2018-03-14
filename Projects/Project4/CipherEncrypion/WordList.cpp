@@ -23,6 +23,14 @@ private:
 
 string WordListImpl::createPattern (string readLine) const
 {
+    string temp ="";
+    //make everything lower case
+    for (int i = 0; i <readLine.size(); i ++)
+    {
+        temp += tolower(readLine[i]);
+    }
+    
+    readLine = temp;
     
     //look @ the word & determine a word pattern from it
     char patternLetter = 'a';
@@ -35,12 +43,10 @@ string WordListImpl::createPattern (string readLine) const
     //iterate through everything in readLine
     for (int currRPindex = 0; currRPindex < returnPattern.size(); currRPindex++)
     {
-        cerr << "leter we are on is: " << currRPindex << endl;
         bool flag = true;
         //loop through the entire pattern
         for (int previousRPindex = 0; previousRPindex < currRPindex; previousRPindex++)
         {
-            cerr << "comparing " << returnPattern[previousRPindex] << " and " << returnPattern [currRPindex] << endl;
             //if we haven't seen it before
             if (readLine[previousRPindex] == readLine[currRPindex])
             {
@@ -75,42 +81,43 @@ bool WordListImpl::InputValidation(string readLine)
 }
 bool WordListImpl::loadWordList(string filename)
 {
-    string pattern;
-    ifstream infile(filename);    // infile is a name of our choosing
-    if (infile)		        // Did opening the file fail?
+    ifstream ifs(filename);    // infile is a name of our choosing
+    if (ifs)		        // Did opening the file fail?
     {
-        cerr << "you opened word list" << endl;
-
-        //create a new hash
-        //m_WLIHash = new MyHash<string, vector<string>>::MyHash();
         string readLine;
-        while (getline(infile,readLine))
+        while (getline(ifs,readLine))
         {
+            cerr << endl;
+            cerr << "we're on " << readLine << " ";
             //make sure that this is is valid
             if (InputValidation (readLine) == true)
             {
-                string temp ="";
-                //make everything lower case
-                for (int i = 0; i <readLine.size(); i ++)
+                //check to see if you've seen that word in wordlist before
+                if (contains(readLine) == false)
                 {
-                    temp += tolower(readLine[i]);
-                }
-                
-                readLine = temp;
-                
-                //check if the word is already in the list
-                if (m_WLIHash.find(createPattern (readLine)) == nullptr)
-                {
-                     vector<string> v;
-                     v.push_back(readLine);
-                     m_WLIHash.associate(pattern, v);
-                }
-                else
-                {
+                    cerr << "this is a new word " << endl;
+                    //check if the word is new, not already in the list
+                    string pattern = createPattern(readLine);
+
+                    if (m_WLIHash.find(createPattern (readLine)) == nullptr)
+                    {
+                        vector<string> v;
+                        v.push_back(readLine);
+                        cout << v[0];
+                        m_WLIHash.associate(pattern, v);
+                        cerr << "haven't seen " << readLine << " yet" << endl;
+                    }
                     //if it already exists
-                    vector<string> * vPointer = m_WLIHash.find(createPattern(readLine));
-                    //add the word to that vector (updating the value)
-                    vPointer->push_back (readLine);
+                    else
+                    {
+                        vector<string> * vPointer = m_WLIHash.find(createPattern(readLine));
+                        //add the word to that vector (updating the value)
+                        vPointer->push_back (readLine);
+                        m_WLIHash.associate(pattern, *vPointer);
+                        cerr << "we have seen " << readLine << " already BROOOO" << endl;
+                        
+                    }
+
                 }
             }
         }
@@ -122,7 +129,8 @@ bool WordListImpl::loadWordList(string filename)
 bool WordListImpl::contains(string word) const
 {
     //patternize the word
-    string pattern = createPattern(word);
+    string pattern = createPattern(word);//(word);
+    cerr << "the pattern for " << word << " is " << pattern << endl;
     //check if it's in a bucket of the hash table
     const std::vector<string>* PossibleWords = m_WLIHash.find(pattern);
     
@@ -131,6 +139,17 @@ bool WordListImpl::contains(string word) const
         return false;
     }
 
+//    //iterate through that bucket to check if it's in the value of something
+//    for(std::vector<string>::const_iterator it = PossibleWords->begin(); it != PossibleWords->end(); ++it)
+//    {
+//        //check if the
+//        if (*it == word)
+//        {
+//            return true;
+//        }
+//    }
+    
+    
     else
     {
         //iterate through that bucket to check if it's in the value of something
@@ -143,7 +162,7 @@ bool WordListImpl::contains(string word) const
             }
         }
     }
-    return false; //right bucket wrong word
+    return true; //right bucket wrong word
 }
 
 bool FindCandidateValidation (string cipherWord, string currTranslation)
