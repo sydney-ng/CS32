@@ -1,22 +1,34 @@
 #include "provided.h"
 #include <string>
+#include <unordered_map>
+#include <iostream>
 using namespace std;
 
 class TranslatorImpl
 {
 public:
+    TranslatorImpl();
     bool pushMapping(string ciphertext, string plaintext);
     bool popMapping();
     string getTranslation(const string& ciphertext) const;
 private:
     bool InputValidationPushMapping (string ciphertext, string plaintext);
-    struct Association
-    {
-        char key;
-        char value;
-    };
-    
+    std::unordered_map<char,char> mymap;
 };
+
+TranslatorImpl::TranslatorImpl()
+{
+    char alpha = 'a';
+    for (int i = 0; i < 26; i ++)
+    {
+        mymap.insert({alpha, '?'});
+        alpha++;
+    }
+    
+//    for ( auto it = mymap.begin(); it != mymap.end(); ++it )
+//        std::cout << " " << it->first << ":" << it->second;
+//    std::cout << std::endl;
+}
 
 bool TranslatorImpl::InputValidationPushMapping (string ciphertext, string plaintext)
 {
@@ -68,6 +80,16 @@ bool TranslatorImpl::popMapping()
 
 string TranslatorImpl::getTranslation(const string& ciphertext) const
 {
+    //make a string called temp
+    
+    //for each letter in cipher text
+        //if it maps to a plaintext letter, add that letter to temp
+    
+        //else if it maps to nothing, add a ? to temp
+    
+        //else if it's not a letter, add that character to temp (apostrophe??)
+    //return temp
+    
     return ""; // This compiles, but may not be correct
 }
 
