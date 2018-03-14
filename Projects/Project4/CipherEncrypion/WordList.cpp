@@ -14,13 +14,16 @@ public:
     bool contains(string word) const;
     vector<string> findCandidates(string cipherWord, string currTranslation) const;
 private:
-    MyHash <string, std::vector<string>> * m_WLIHash;
+    MyHash <string, std::vector<string>> m_WLIHash;
     string createPattern (string readLine) const;
     bool InputValidation (string readLine);
+    bool FindCandidateValidation (string cipherWord, string currTranslation);
+    
 };
 
 string WordListImpl::createPattern (string readLine) const
 {
+    
     //look @ the word & determine a word pattern from it
     char patternLetter = 'a';
     string returnPattern;
@@ -32,12 +35,14 @@ string WordListImpl::createPattern (string readLine) const
     //iterate through everything in readLine
     for (int currRPindex = 0; currRPindex < returnPattern.size(); currRPindex++)
     {
+        cerr << "leter we are on is: " << currRPindex << endl;
         bool flag = true;
         //loop through the entire pattern
         for (int previousRPindex = 0; previousRPindex < currRPindex; previousRPindex++)
         {
+            cerr << "comparing " << returnPattern[previousRPindex] << " and " << returnPattern [currRPindex] << endl;
             //if we haven't seen it before
-            if (returnPattern[previousRPindex] == returnPattern[currRPindex])
+            if (readLine[previousRPindex] == readLine[currRPindex])
             {
                 returnPattern [currRPindex] = returnPattern[previousRPindex];
                 flag = false;
@@ -70,45 +75,56 @@ bool WordListImpl::InputValidation(string readLine)
 }
 bool WordListImpl::loadWordList(string filename)
 {
-    cerr << "in loadWordlist" << endl;
-    string a = "baby";
-    string b = createPattern(a);
-    return true;
-//    string pattern;
-//    vector<string> answer;
-//    ifstream infile(filename);    // infile is a name of our choosing
-//    if (infile)		        // Did opening the file fail?
-//    {
-//        cerr << "you opened word list" << endl;
-//
-//        //create a new hash
-//        m_WLIHash = new MyHash<string, vector<string>>::MyHash();
-//        string readLine;
-//        while (getline(infile,readLine))
-//        {
-//            //create the pattern
-//            if (InputValidation (readLine) == true)
-//            {
-//                pattern = createPattern (readLine);
-//                if (contains(pattern) == false)
-//                {
-//                    //findCandidates(string cipherWord, <#string currTranslation#>)
-//                    m_WLIHash->associate(pattern, answer);
-//                }
-//            }
-//        }
-//        return true; //means you were able to open the file
-//    }
-//    return false;  //unable to open file
+    string pattern;
+    ifstream infile(filename);    // infile is a name of our choosing
+    if (infile)		        // Did opening the file fail?
+    {
+        cerr << "you opened word list" << endl;
+
+        //create a new hash
+        //m_WLIHash = new MyHash<string, vector<string>>::MyHash();
+        string readLine;
+        while (getline(infile,readLine))
+        {
+            //make sure that this is is valid
+            if (InputValidation (readLine) == true)
+            {
+                string temp ="";
+                //make everything lower case
+                for (int i = 0; i <readLine.size(); i ++)
+                {
+                    temp += tolower(readLine[i]);
+                }
+                
+                readLine = temp;
+                
+                //check if the word is already in the list
+                if (m_WLIHash.find(createPattern (readLine)) == nullptr)
+                {
+                     vector<string> v;
+                     v.push_back(readLine);
+                     m_WLIHash.associate(pattern, v);
+                }
+                else
+                {
+                    //if it already exists
+                    vector<string> * vPointer = m_WLIHash.find(createPattern(readLine));
+                    //add the word to that vector (updating the value)
+                    vPointer->push_back (readLine);
+                }
+            }
+        }
+        return true; //means you were able to open the file
+    }
+    return false;  //unable to open file
 }
 
 bool WordListImpl::contains(string word) const
 {
-
     //patternize the word
     string pattern = createPattern(word);
     //check if it's in a bucket of the hash table
-    vector<string> * PossibleWords = m_WLIHash->find(pattern);
+    const std::vector<string>* PossibleWords = m_WLIHash.find(pattern);
     
     if (PossibleWords == nullptr)
     {
@@ -118,7 +134,7 @@ bool WordListImpl::contains(string word) const
     else
     {
         //iterate through that bucket to check if it's in the value of something
-        for(std::vector<string>::iterator it = PossibleWords->begin(); it != PossibleWords->end(); ++it)
+        for(std::vector<string>::const_iterator it = PossibleWords->begin(); it != PossibleWords->end(); ++it)
         {
             //check if the
             if (*it == word)
@@ -127,15 +143,84 @@ bool WordListImpl::contains(string word) const
             }
         }
     }
-    return false; //right bucket num, but not there :(
+    return false; //right bucket wrong word
+}
+
+bool FindCandidateValidation (string cipherWord, string currTranslation)
+{
+ 
+    if (cipherWord.size() != currTranslation.size())
+    {
+        return false;
+    }
+    //make sure that every letter is alphabetical
+    for (int i = 0; i < cipherWord.size(); i++)
+    {
+        if (isalpha(cipherWord[i]) == false && cipherWord[i] != '\'')
+        {
+            return false;
+        }
+    }
+    
+    for (int j = 0; j < currTranslation.size(); j++)
+    {
+        if (isalpha(currTranslation[j]) == false && currTranslation[j] != '\'' && currTranslation[j] != '?')
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 vector<string> WordListImpl::findCandidates(string cipherWord, string currTranslation) const
 {
-    //check parameters for cipherWord & currTranslation
+    //TO DO: FIX check parameters for cipherWord & currTranslation
+    //FindCandidateValidation (cipherWord, currTranslation);
+
+    //MAKE EVERYTHING LOWERCASE ->FINISHTHIS
+    vector<string> FinalVector;
+    //create a pattern for cipherWord;
+    string CipherWordPattern = createPattern(cipherWord);
+    const vector<string>*  cwMatchesVector = m_WLIHash.find(CipherWordPattern);
+    
+    for(std::vector<string>::const_iterator it = cwMatchesVector->begin(); it != cwMatchesVector->end(); ++it)
+    {
+        bool flag = true;
+        string checkWord = *it;
+        for (int i = 0; i < currTranslation.size(); i++)
+        {
+            //if currTranslation [i] is a letter, it must match
+            if (isalpha(currTranslation[i]) == true)
+            {
+                //make sure that it's the same letter (upper or lower case)
+                if (islower(currTranslation[i]) != islower(checkWord[i]))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            //if currTranslation [i] is a ?, then checkWord[i] must be a letter
+            else if (currTranslation[i] == '?' && isalpha(checkWord[i]) == false)
+            {
+                flag = false;
+                break;
+            }
+            //if currTranslation [i] is a ', then checkWord[i] must be a '
+            else if (currTranslation[i] == '\'' && currTranslation[i] != '\'')
+            {
+                flag = false;
+                break;
+            }
+        }
+        if (flag == true)
+        {
+            FinalVector.push_back(checkWord);
+        }
+    }
+    //m_WLIHash->find(const std::basic_string<char> &key)
     //user pattern to get bucket, look at what's in the bucket
         //if all the conditions are met, then return the vector
-    return vector<string>();  // This compiles, but may not be correct
+    return FinalVector;  // This compiles, but may not be correct
 }
 
 //***** hash functions for string, int, and char *****

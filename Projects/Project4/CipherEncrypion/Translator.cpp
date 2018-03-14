@@ -10,6 +10,12 @@ public:
     string getTranslation(const string& ciphertext) const;
 private:
     bool InputValidationPushMapping (string ciphertext, string plaintext);
+    struct Association
+    {
+        char key;
+        char value;
+    };
+    
 };
 
 bool TranslatorImpl::InputValidationPushMapping (string ciphertext, string plaintext)
@@ -37,6 +43,13 @@ bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
     if (InputValidationPushMapping (ciphertext,plaintext) == false)
     {
         return false;
+    }
+    
+    //TranslatorMap tm;
+    
+    for (int i = 0; i < ciphertext.size(); i++)
+    {
+        
     }
     //check if there's already that table in the hash (most updated copy)
         //return false
