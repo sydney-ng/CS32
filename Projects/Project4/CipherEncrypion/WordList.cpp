@@ -17,7 +17,7 @@ private:
     MyHash <string, std::vector<string>> m_WLIHash;
     string createPattern (string readLine) const;
     bool InputValidation (string readLine);
-    bool FindCandidateValidation (string cipherWord, string currTranslation);
+    bool FindCandidateValidation (const string& cipherWord, const string& currTranslation);
     
 };
 
@@ -87,7 +87,7 @@ bool WordListImpl::loadWordList(string filename)
         string readLine;
         while (getline(ifs,readLine))
         {
-            cerr << endl;
+            //cerr << endl;
             cerr << "we're on " << readLine << " ";
             //make sure that this is is valid
             if (InputValidation (readLine) == true)
@@ -95,17 +95,17 @@ bool WordListImpl::loadWordList(string filename)
                 //check to see if you've seen that word in wordlist before
                 if (contains(readLine) == false)
                 {
-                    cerr << "this is a new word " << endl;
+//                    cerr << "this is a new word " << endl;
                     //check if the word is new, not already in the list
                     string pattern = createPattern(readLine);
+                    cerr << "it's pattern is : " << pattern << endl;
 
-                    if (m_WLIHash.find(createPattern (readLine)) == nullptr)
+                    if (m_WLIHash.find(pattern) == nullptr)
                     {
                         vector<string> v;
                         v.push_back(readLine);
-                        cout << v[0];
                         m_WLIHash.associate(pattern, v);
-                        cerr << "haven't seen " << readLine << " yet" << endl;
+//                        cerr << "haven't seen " << readLine << " yet" << endl;
                     }
                     //if it already exists
                     else
@@ -114,13 +114,24 @@ bool WordListImpl::loadWordList(string filename)
                         //add the word to that vector (updating the value)
                         vPointer->push_back (readLine);
                         m_WLIHash.associate(pattern, *vPointer);
-                        cerr << "we have seen " << readLine << " already BROOOO" << endl;
+//                        cerr << "we have seen " << readLine << " already BROOOO" << endl;
                         
                     }
 
                 }
             }
         }
+        string patt = createPattern("afpal");
+        vector<string> * vPointer = m_WLIHash.find(createPattern (patt));
+        if (vPointer == nullptr)
+        {
+            cerr << "no results";
+        }
+        else
+        {
+            cerr << vPointer->size();
+        }
+        
         return true; //means you were able to open the file
     }
     return false;  //unable to open file
@@ -130,7 +141,7 @@ bool WordListImpl::contains(string word) const
 {
     //patternize the word
     string pattern = createPattern(word);//(word);
-    cerr << "the pattern for " << word << " is " << pattern << endl;
+//    cerr << "the pattern for " << word << " is " << pattern << endl;
     //check if it's in a bucket of the hash table
     const std::vector<string>* PossibleWords = m_WLIHash.find(pattern);
     
@@ -138,23 +149,13 @@ bool WordListImpl::contains(string word) const
     {
         return false;
     }
-
-//    //iterate through that bucket to check if it's in the value of something
-//    for(std::vector<string>::const_iterator it = PossibleWords->begin(); it != PossibleWords->end(); ++it)
-//    {
-//        //check if the
-//        if (*it == word)
-//        {
-//            return true;
-//        }
-//    }
-    
     
     else
     {
         //iterate through that bucket to check if it's in the value of something
         for(std::vector<string>::const_iterator it = PossibleWords->begin(); it != PossibleWords->end(); ++it)
         {
+            string word2 = *it;
             //check if the
             if (*it == word)
             {
@@ -162,10 +163,10 @@ bool WordListImpl::contains(string word) const
             }
         }
     }
-    return true; //right bucket wrong word
+    return false; //right bucket wrong word
 }
 
-bool FindCandidateValidation (string cipherWord, string currTranslation)
+bool FindCandidateValidation (const string& cipherWord, const string& currTranslation)
 {
  
     if (cipherWord.size() != currTranslation.size())
@@ -194,13 +195,28 @@ bool FindCandidateValidation (string cipherWord, string currTranslation)
 vector<string> WordListImpl::findCandidates(string cipherWord, string currTranslation) const
 {
     //TO DO: FIX check parameters for cipherWord & currTranslation
-    //FindCandidateValidation (cipherWord, currTranslation);
+    //if (FindCandidateValidation (cipherWord, currTranslation));
+    //{return FinalVector; }
 
     //MAKE EVERYTHING LOWERCASE ->FINISHTHIS
     vector<string> FinalVector;
     //create a pattern for cipherWord;
     string CipherWordPattern = createPattern(cipherWord);
     const vector<string>*  cwMatchesVector = m_WLIHash.find(CipherWordPattern);
+    
+    if (cwMatchesVector == nullptr)
+    {
+        return FinalVector;
+    }
+    
+    else
+    {
+        cerr << "size of vec is : " << cwMatchesVector->size() << endl;
+    }
+    for(std::vector<string>::const_iterator it = cwMatchesVector->begin(); it != cwMatchesVector->end(); ++it)
+    {
+        cerr << it->data();
+    }
     
     for(std::vector<string>::const_iterator it = cwMatchesVector->begin(); it != cwMatchesVector->end(); ++it)
     {

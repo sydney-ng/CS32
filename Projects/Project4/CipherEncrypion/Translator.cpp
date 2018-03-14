@@ -66,6 +66,8 @@ bool TranslatorImpl::InputValidationPushMapping (string ciphertext, string plain
     return true;
 }
 
+//ciphertext => dhl
+//plaintext = erd
 bool TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)
 {
     for (int i =0; i < plaintext.size(); i++)
@@ -73,8 +75,20 @@ bool TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)
         
         for (auto it = VectorOfMaps[VectorOfMaps.size()-1].begin(); it != VectorOfMaps[VectorOfMaps.size()-1].end(); ++it )
         {
-            std::cout << " " << it->first << ":" << it->second;
-            std::cout << std::endl;
+//            std::cout << " " << it->first << ":" << it->second;
+//            std::cout << std::endl;
+//
+            if (it->second == plaintext[i])
+            {
+                if (isalpha(it->second))
+                {
+                    if (it->second != plaintext[i])
+                    {
+                        return false;
+                    }
+                }
+            }
+            
         }
         
         

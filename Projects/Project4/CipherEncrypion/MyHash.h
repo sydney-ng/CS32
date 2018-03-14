@@ -2,6 +2,9 @@
 //
 //// Skeleton for the MyHash class template.  You must implement the first seven
 //// member functions; we have implemented the eighth.
+////REMOVE:
+//#include <iostream>
+//using namespace std;
 //
 //template<typename KeyType, typename ValueType>
 //class MyHash
@@ -42,7 +45,7 @@
 //        //int m_IncreaseFactor;
 //        int m_HashSize;
 //        int m_NumAssociations;
-//        int m_MaxLoadFator;
+//        double m_MaxLoadFator;
 //    
 //    //private functions
 //    void PossiblyResize();
@@ -58,15 +61,16 @@
 //MyHash<KeyType, ValueType>::MyHash(double maxLoadFactor)
 //{
 //    //m_IncreaseFactor = 1;
-//    if (maxLoadFactor > 2)
-//    {
-//        m_MaxLoadFator = 2;
-//    }
-//    else
-//    {
-//        m_MaxLoadFator = 0.5;
-//
-//    }
+////    if (maxLoadFactor > 2)
+////    {
+////        m_MaxLoadFator = 2.0;
+////    }
+////    else
+////    {
+////        m_MaxLoadFator = 0.5;
+////    }
+//    m_MaxLoadFator = maxLoadFactor >2 ? 2.0 : 0.5;
+//    
 //    m_HashTable = new Node * [100];
 //    for (int i = 0; i < 100; i ++)
 //    {
@@ -110,12 +114,18 @@
 //template<typename KeyType, typename ValueType>
 //void MyHash<KeyType, ValueType>::PossiblyResize()
 //{
+////    cerr << "before resize, the size of the hash is: " << m_HashSize << endl;
+////    cerr << "before resize, the load factor is: " << getLoadFactor() << endl;
+////    cerr << "before resize, the MAX load factor is: " << getLoadFactor() << endl;
+//
 //    if (getLoadFactor() >= m_MaxLoadFator)
 //    {
 //        //m_IncreaseFactor++;
 //        m_HashSize *=2;
 //        GenerateAHashTable();
 //    }
+//    //cerr << "after resize, the size of the hash is: " << m_HashSize << endl;
+//
 //}
 //
 //template<typename KeyType, typename ValueType>
@@ -127,17 +137,27 @@
 //template<typename KeyType, typename ValueType>
 //void MyHash<KeyType, ValueType>::reset()
 //{
+//    //go to the bucket
 //    for (int i = 0; i < m_HashSize; i++)
 //    {
+//        //delete everything in that linked list
 //        Node* current = m_HashTable[i];
-//        while (current->nextEntry != nullptr)
+//        if (current != nullptr)
 //        {
-//            Node * deleteMe = current;
-//            current = deleteMe->nextEntry;
-//            delete deleteMe;
+//            while (current->nextEntry != nullptr)
+//            {
+//                cerr << "current: " << current << endl;
+//                Node * deleteMe = current;
+//                current = deleteMe->nextEntry;
+//                delete deleteMe;
+//            }
+//            cerr << "current @ end: " << current << endl;
+//
 //        }
-//        delete m_HashTable[i];
+////        delete current;
 //    }
+//    m_HashSize = 100;
+//    m_NumAssociations = 0; 
 //}
 //
 ////returns # of buckets being used
@@ -150,7 +170,9 @@
 //template<typename KeyType, typename ValueType>
 //double MyHash<KeyType, ValueType>::getLoadFactor() const
 //{
-//    double LF = 1 + (m_NumAssociations/(m_HashSize/2));
+//    double HashSize = m_HashSize * 1.0;
+//    double LF = (m_NumAssociations/HashSize);
+//    //cerr << "LF IS : " << LF << endl;
 //    return LF;
 //}
 //
@@ -203,6 +225,10 @@
 //        Node * iterateNode = m_HashTable[bucketNum];
 //        while (iterateNode->nextEntry!= nullptr)
 //        {
+//            if (iterateNode->value == value)
+//            {
+//                return;
+//            }
 //            iterateNode = iterateNode->nextEntry;
 //        }
 //        //you have made it to the end, make the next entry that node
@@ -221,6 +247,7 @@
 //        {
 //            iterateNode->value = value;
 //        }
+//        iterateNode = iterateNode->nextEntry;
 //    }
 //}
 //template<typename KeyType, typename ValueType>
@@ -253,6 +280,7 @@
 //    }
 //    return true;
 //}
+
 
 #ifndef MYHASH_INCLUDED
 #define MYHASH_INCLUDED
