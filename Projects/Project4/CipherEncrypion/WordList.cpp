@@ -81,6 +81,7 @@ bool WordListImpl::InputValidation(string readLine)
 }
 bool WordListImpl::loadWordList(string filename)
 {
+    //CALL RESET TO DO
     ifstream ifs(filename);    // infile is a name of our choosing
     if (ifs)		        // Did opening the file fail?
     {
@@ -123,15 +124,10 @@ bool WordListImpl::loadWordList(string filename)
         }
         string patt = createPattern("afpal");
         vector<string> * vPointer = m_WLIHash.find(createPattern (patt));
-        if (vPointer == nullptr)
+        for(std::vector<string>::const_iterator it = vPointer->begin(); it != vPointer->end(); ++it)
         {
-            cerr << "no results";
+            cerr << it->data() << endl;
         }
-        else
-        {
-            cerr << vPointer->size();
-        }
-        
         return true; //means you were able to open the file
     }
     return false;  //unable to open file
@@ -139,6 +135,7 @@ bool WordListImpl::loadWordList(string filename)
 
 bool WordListImpl::contains(string word) const
 {
+    cerr << "checking contains for : " << word << endl;
     //patternize the word
     string pattern = createPattern(word);//(word);
 //    cerr << "the pattern for " << word << " is " << pattern << endl;
@@ -155,12 +152,25 @@ bool WordListImpl::contains(string word) const
         //iterate through that bucket to check if it's in the value of something
         for(std::vector<string>::const_iterator it = PossibleWords->begin(); it != PossibleWords->end(); ++it)
         {
-            string word2 = *it;
-            //check if the
-            if (*it == word)
+            string wordInVector = *it;
+            bool flag = true;
+            for (int i = 0; i < it->size(); i ++)
+            {
+                if (tolower(wordInVector[i]) != tolower(word[i]))
+                {
+                    flag = false;
+                }
+            }
+            if (flag == true)
             {
                 return true;
             }
+            
+//            //check if the
+//            if (*it == word)
+//            {
+//                return true;
+//            }
         }
     }
     return false; //right bucket wrong word
@@ -213,10 +223,10 @@ vector<string> WordListImpl::findCandidates(string cipherWord, string currTransl
     {
         cerr << "size of vec is : " << cwMatchesVector->size() << endl;
     }
-    for(std::vector<string>::const_iterator it = cwMatchesVector->begin(); it != cwMatchesVector->end(); ++it)
-    {
-        cerr << it->data();
-    }
+//    for(std::vector<string>::const_iterator it = cwMatchesVector->begin(); it != cwMatchesVector->end(); ++it)
+//    {
+//        cerr << it->data();
+//    }
     
     for(std::vector<string>::const_iterator it = cwMatchesVector->begin(); it != cwMatchesVector->end(); ++it)
     {
@@ -225,10 +235,10 @@ vector<string> WordListImpl::findCandidates(string cipherWord, string currTransl
         for (int i = 0; i < currTranslation.size(); i++)
         {
             //if currTranslation [i] is a letter, it must match
-            if (isalpha(currTranslation[i]) == true)
+            if (isalpha(tolower(currTranslation[i])) == true)
             {
                 //make sure that it's the same letter (upper or lower case)
-                if (islower(currTranslation[i]) != islower(checkWord[i]))
+                if (tolower(currTranslation[i]) != tolower(checkWord[i]))
                 {
                     flag = false;
                     break;
