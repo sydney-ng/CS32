@@ -1,7 +1,9 @@
 #include "provided.h"
 #include <string>
-#include <unordered_map>
+#include <map>
 #include <iostream>
+#include <stdio.h>
+#include <ctype.h>
 using namespace std;
 
 class TranslatorImpl
@@ -12,12 +14,25 @@ public:
     bool popMapping();
     string getTranslation(const string& ciphertext) const;
 private:
+    std::map<char,char> MostCurrentMap;
+    vector<map<char,char>> VectorOfMaps;
+    
+    std::map<char,char> getMostCurrentMap();
+    bool CheckForInconsistency(string i, string ciphertext);
     bool InputValidationPushMapping (string ciphertext, string plaintext);
-    std::unordered_map<char,char> mymap;
+
+
 };
+
+std::map<char,char> TranslatorImpl::getMostCurrentMap()
+{
+    std::map<char,char> v = VectorOfMaps[VectorOfMaps.size()-1];
+    return v;
+}
 
 TranslatorImpl::TranslatorImpl()
 {
+    std::map<char,char> mymap;
     char alpha = 'a';
     for (int i = 0; i < 26; i ++)
     {
@@ -28,6 +43,8 @@ TranslatorImpl::TranslatorImpl()
 //    for ( auto it = mymap.begin(); it != mymap.end(); ++it )
 //        std::cout << " " << it->first << ":" << it->second;
 //    std::cout << std::endl;
+    
+    VectorOfMaps.push_back(mymap);
 }
 
 bool TranslatorImpl::InputValidationPushMapping (string ciphertext, string plaintext)
@@ -49,32 +66,74 @@ bool TranslatorImpl::InputValidationPushMapping (string ciphertext, string plain
     return true;
 }
 
+bool TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)
+{
+    for (int i =0; i < plaintext.size(); i++)
+    {
+        
+        for (auto it = getMostCurrentMap().begin(); it != getMostCurrentMap().end(); ++it )
+        {
+            std::cout << " " << it->first << ":" << it->second;
+            std::cout << std::endl;
+        }
+        
+//        //iterate through the entire map
+//        std::map<char,char>::iterator it = getMostCurrentMap().begin();
+//        while (it != getMostCurrentMap().end())
+//        {
+//            cerr << it->first << " " << it->second << endl;
+////            //if something's 'second' is equal to plaintext
+////            if (it->second == plaintext[i])
+////            {
+////                //make sure the it's 'first' is equal to cipher text
+////                //this will make sure that it maps to the correct thing
+////                if (it->first != ciphertext[i])
+////                {
+////                    return false;
+////                }
+////            }
+//            it++;
+//        }
+    }
+    return true;
+}
+
 bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
 {
-    //input validation
+    //input validation -> checks for non-letter or not same length
     if (InputValidationPushMapping (ciphertext,plaintext) == false)
     {
         return false;
     }
     
-    //TranslatorMap tm;
-    
+//    bool inconsistent = CheckForInconsistency(plaintext, ciphertext);
+//    if (inconsistent == false)
+//    {
+//        return false;
+//    }
+
+    map<char,char> newMap = getMostCurrentMap();
     for (int i = 0; i < ciphertext.size(); i++)
     {
+        //TO-DO: CONVERT THIS TO LOWER LATER
         
+        std::map<char, char>::iterator it = newMap.find(ciphertext[i]);
+        //iterate through the map
+        if (it != newMap.end())
+        {
+            //link that char -> char
+            it->second = plaintext[i];
+        }
     }
-    //check if there's already that table in the hash (most updated copy)
-        //return false
     
-    //else, it's valide
-        //create a new map, combined with the old features
-        //create the new associations (using hash)
-    //return true
+    VectorOfMaps.push_back(newMap);
+    
     return false;  // This compiles, but may not be correct
 }
 
 bool TranslatorImpl::popMapping()
 {
+    
     return false;  // This compiles, but may not be correct
 }
 
