@@ -136,7 +136,7 @@ bool WordListImpl::loadWordList(string filename)
 
 bool WordListImpl::contains(string word) const
 {
-    cerr << "checking contains for : " << word << endl;
+    //cerr << "checking contains for : " << word << endl;
     //patternize the word
     string pattern = createPattern(word);//(word);
     //    cerr << "the pattern for " << word << " is " << pattern << endl;
