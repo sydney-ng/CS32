@@ -15,17 +15,24 @@ public:
     string getTranslation(const string& ciphertext) const;
 private:
     std::map<char,char> MostCurrentMap;
+    std::map<char,char> OGMap;
     vector<map<char,char>> VectorOfMaps;
-    std::map<char,char> getMostCurrentMap();
+    std::map<char,char> getMostCurrentMap() const;
     bool CheckForInconsistency(string i, string ciphertext);
     bool InputValidationPushMapping (string ciphertext, string plaintext);
-
+    int m_numTimesPopped;
+    int m_numTimesPushed;
 
 };
 
-std::map<char,char> TranslatorImpl::getMostCurrentMap()
+std::map<char,char> TranslatorImpl::getMostCurrentMap() const
 {
-    std::map<char,char> v = VectorOfMaps[VectorOfMaps.size()-1];
+    std::map<char,char> v;
+    if (VectorOfMaps.size() > 0)
+    {
+        v = VectorOfMaps[VectorOfMaps.size()-1];
+
+    }
     return v;
 }
 
@@ -38,12 +45,15 @@ TranslatorImpl::TranslatorImpl()
         mymap.insert({alpha, '?'});
         alpha++;
     }
-    
+    m_numTimesPopped = 0;
+    m_numTimesPushed = 0;
 //    for ( auto it = mymap.begin(); it != mymap.end(); ++it )
 //        std::cout << " " << it->first << ":" << it->second;
 //    std::cout << std::endl;
     
     VectorOfMaps.push_back(mymap);
+    MostCurrentMap = mymap;
+    OGMap = mymap;
 }
 
 bool TranslatorImpl::InputValidationPushMapping (string ciphertext, string plaintext)
@@ -75,10 +85,10 @@ bool TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)
         for (auto it = VectorOfMaps[VectorOfMaps.size()-1].begin(); it != VectorOfMaps[VectorOfMaps.size()-1].end(); ++it )
         {
             //if second is erd
-            if (it->second == plaintext[i])
+            if (tolower(it->second) == tolower(plaintext[i]))
             {
                 //make sure that it's the cipher text letter that is mapping to it
-                if (it-> first != ciphertext[i])
+                if (tolower(it-> first) != tolower(ciphertext[i]))
                 {
                     return false;
                 }
@@ -108,7 +118,7 @@ bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
     {
         //TO-DO: CONVERT THIS TO LOWER LATER
         
-        std::map<char, char>::iterator it = newMap.find(ciphertext[i]);
+        std::map<char, char>::iterator it = newMap.find(tolower(ciphertext[i]));
         //iterate through the map
         if (it != newMap.end())
         {
@@ -117,6 +127,8 @@ bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
         }
     }
     
+    m_numTimesPushed++;
+    MostCurrentMap = newMap;
     VectorOfMaps.push_back(newMap);
     
     return true;  // This compiles, but may not be correct
@@ -124,22 +136,38 @@ bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
 
 bool TranslatorImpl::popMapping()
 {
-    MostCurrentMap = getMostCurrentMap();
-    return false;  // This compiles, but may not be correct
+    if (m_numTimesPushed == m_numTimesPopped)
+    {
+        return false;
+    }
+    if (VectorOfMaps.empty() == false)
+    {
+        VectorOfMaps.pop_back();
+        MostCurrentMap = VectorOfMaps.back();
+        //if there's only 1 object, you have to make current map equal to the first valeu
+    }
+    
+    else if (VectorOfMaps.empty() == true)
+    {
+        MostCurrentMap = OGMap;
+    }
+    m_numTimesPopped++;
+    return true;
 }
 
 string TranslatorImpl::getTranslation(const string& ciphertext) const
 {
     //make a string called temp
     string temp = "";
-    
+    //cerr << "cipher text: " << ciphertext << endl;
     //for each letter in cipher text
     for (int i = 0; i < ciphertext.size(); i++)
     {
+        //cerr << "at letter : " << ciphertext[i] << endl;
         //if it maps to a plaintext letter, add that letter to temp
         if (isalpha (ciphertext[i]) == true)
         {
-            std::map<char, char>::const_iterator iterator = MostCurrentMap.find(ciphertext[i]);
+            std::map<char, char>::const_iterator iterator = MostCurrentMap.find(tolower(ciphertext[i]));
             //iterate through the map
             if (iterator != MostCurrentMap.end())
             {
@@ -150,7 +178,7 @@ string TranslatorImpl::getTranslation(const string& ciphertext) const
                     temp += iterator->second;
                 }
                 //else if it maps to nothing, add a ? to temp
-                else if (iterator->second == '?')
+                else if (iterator-> second== '?')
                 {
                     temp += iterator->second;
                 }
@@ -164,7 +192,7 @@ string TranslatorImpl::getTranslation(const string& ciphertext) const
         }
 
     }
-    return "temp"; // This compiles, but may not be correct
+    return temp; // This compiles, but may not be correct
 }
 
 //******************** Translator functions ************************************
