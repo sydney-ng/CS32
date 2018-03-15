@@ -16,7 +16,6 @@ public:
 private:
     std::map<char,char> MostCurrentMap;
     vector<map<char,char>> VectorOfMaps;
-    
     std::map<char,char> getMostCurrentMap();
     bool CheckForInconsistency(string i, string ciphertext);
     bool InputValidationPushMapping (string ciphertext, string plaintext);
@@ -75,40 +74,17 @@ bool TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)
         
         for (auto it = VectorOfMaps[VectorOfMaps.size()-1].begin(); it != VectorOfMaps[VectorOfMaps.size()-1].end(); ++it )
         {
-//            std::cout << " " << it->first << ":" << it->second;
-//            std::cout << std::endl;
-//
+            //if second is erd
             if (it->second == plaintext[i])
             {
-                if (isalpha(it->second))
+                //make sure that it's the cipher text letter that is mapping to it
+                if (it-> first != ciphertext[i])
                 {
-                    if (it->second != plaintext[i])
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
             
         }
-        
-        
-//        //iterate through the entire map
-//        std::map<char,char>::iterator it = getMostCurrentMap().begin();
-//        while (it != getMostCurrentMap().end())
-//        {
-//            cerr << it->first << " " << it->second << endl;
-////            //if something's 'second' is equal to plaintext
-////            if (it->second == plaintext[i])
-////            {
-////                //make sure the it's 'first' is equal to cipher text
-////                //this will make sure that it maps to the correct thing
-////                if (it->first != ciphertext[i])
-////                {
-////                    return false;
-////                }
-////            }
-//            it++;
-//        }
     }
     return true;
 }
@@ -155,16 +131,40 @@ bool TranslatorImpl::popMapping()
 string TranslatorImpl::getTranslation(const string& ciphertext) const
 {
     //make a string called temp
+    string temp = "";
     
     //for each letter in cipher text
+    for (int i = 0; i < ciphertext.size(); i++)
+    {
         //if it maps to a plaintext letter, add that letter to temp
-    
-        //else if it maps to nothing, add a ? to temp
-    
+        if (isalpha (ciphertext[i]) == true)
+        {
+            std::map<char, char>::const_iterator iterator = MostCurrentMap.find(ciphertext[i]);
+            //iterate through the map
+            if (iterator != MostCurrentMap.end())
+            {
+                //iterator is now a pointer to that element (with first + second)
+                //if the second one is a letter too
+                if (isalpha(iterator->second))
+                {
+                    temp += iterator->second;
+                }
+                //else if it maps to nothing, add a ? to temp
+                else if (iterator->second == '?')
+                {
+                    temp += iterator->second;
+                }
+            }
+            
+        }
         //else if it's not a letter, add that character to temp (apostrophe??)
-    //return temp
-    
-    return ""; // This compiles, but may not be correct
+        else
+        {
+            temp+= ciphertext[i];
+        }
+
+    }
+    return "temp"; // This compiles, but may not be correct
 }
 
 //******************** Translator functions ************************************
