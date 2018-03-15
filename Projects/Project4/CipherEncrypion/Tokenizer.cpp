@@ -52,7 +52,15 @@ vector<string> TokenizerImpl::tokenize(const std::string& s) const
             temp += s[i];
         }
     }
+    if (temp != "")
+    {
+        completeWordsVector.push_back(temp);
+    }
     cerr << "the final vector is: " << endl;
+    for (int i = 0; i < completeWordsVector.size(); i ++)
+    {
+        cerr << completeWordsVector[i] << endl;
+    }
     
     return completeWordsVector;  // This compiles, but may not be correct
 }

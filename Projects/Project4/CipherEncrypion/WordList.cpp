@@ -90,7 +90,7 @@ bool WordListImpl::loadWordList(string filename)
         while (getline(ifs,readLine))
         {
             //cerr << endl;
-            cerr << "we're on " << readLine << " ";
+            //cerr << "we're on " << readLine << " ";
             //make sure that this is is valid
             if (InputValidation (readLine) == true)
             {
@@ -100,7 +100,7 @@ bool WordListImpl::loadWordList(string filename)
                     //                    cerr << "this is a new word " << endl;
                     //check if the word is new, not already in the list
                     string pattern = createPattern(readLine);
-                    cerr << "it's pattern is : " << pattern << endl;
+                    //cerr << "it's pattern is : " << pattern << endl;
                     
                     if (m_WLIHash.find(pattern) == nullptr)
                     {

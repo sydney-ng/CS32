@@ -18,9 +18,9 @@ using namespace std;
 // YET READY TO TEST
 
 const bool shouldTestMyHash = false;
-const bool shouldTestTokenizer = false;
+const bool shouldTestTokenizer = true;
 const bool shouldTestWordList = false;
-const bool shouldTestTranslator = true;
+const bool shouldTestTranslator = false;
 const bool shouldTestDecrypter = false;
 
 // **************************************************************
@@ -45,6 +45,9 @@ int main()
 //    Translator t;
 //    t.pushMapping("abc", "abc");
 //    t.pushMapping("def", "dbf");
+    
+    Decrypter * D = new Decrypter();
+    D->crack("expel;efgjha;ace");
     
     if (shouldTestMyHash    ) { testMyHash();     cout << "Passed MyHash tests" << endl; }
     if (shouldTestTokenizer ) { testTokenizer();  cout << "Passed Tokenizer tests" << endl; }
@@ -99,7 +102,6 @@ void testMyHash()
         m.associate(x, "Carey");
         x += 1789;
     }
-    int xa = m.getNumItems();
     //assert(m.getNumItems() == 1003);
     double lf = m.getLoadFactor();
     assert(lf >= 0.5/2  &&  lf <= 0.5);
@@ -114,6 +116,11 @@ void testTokenizer()
 {
     Tokenizer t(".#");
     vector<string> v = t.tokenize("this.is##.#a#SILLY test#..");
+    for (int i = 0; i < v.size(); i++)
+    {
+        cerr << "vector at position " << i << " is " << v[i] << endl;
+    }
+    cerr << "v size is : " << v.size() << endl;
     const char* expected[4] = { "this", "is", "a", "SILLY test" };
     assert(v.size() == 4  && equal(v.begin(), v.end(), expected));
 }
