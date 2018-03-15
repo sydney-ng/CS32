@@ -164,6 +164,13 @@ bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
 
 bool TranslatorImpl::popMapping()
 {
+    cerr << "before popMapping the current map is: " << endl;
+    for ( auto it = MostCurrentMap.begin(); it != MostCurrentMap.end(); ++it )
+    {
+        std::cout << " " << it->first << ":" << it->second;
+        std::cout << std::endl;
+    }
+    
     if (m_numTimesPushed == m_numTimesPopped)
     {
         return false;
@@ -180,6 +187,13 @@ bool TranslatorImpl::popMapping()
         MostCurrentMap = OGMap;
     }
     m_numTimesPopped++;
+    
+    cerr << "after popMapping the current map is: " << endl;
+    for ( auto it = MostCurrentMap.begin(); it != MostCurrentMap.end(); ++it )
+    {
+        std::cout << " " << it->first << ":" << it->second;
+        std::cout << std::endl;
+    }
     return true;
 }
 

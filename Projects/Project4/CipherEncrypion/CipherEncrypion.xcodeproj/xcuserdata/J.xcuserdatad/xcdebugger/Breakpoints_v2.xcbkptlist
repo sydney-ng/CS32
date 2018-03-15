@@ -1088,63 +1088,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "TranslatorImpl::pushMapping(string ciphertext, string plaintext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "TranslatorImpl::popMapping()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "TranslatorImpl::popMapping()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
+            timestampString = "542848616.434304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "TranslatorImpl::getTranslation(const string&amp; ciphertext)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1156,11 +1108,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
+            timestampString = "542848616.434304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "TranslatorImpl::getTranslation(const string&amp; ciphertext)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1172,23 +1124,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "TranslatorImpl::getTranslation(const string&amp; ciphertext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
+            timestampString = "542848616.434304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "219"
@@ -1204,11 +1140,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
+            timestampString = "542848616.434304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "TranslatorImpl::getTranslation(const string&amp; ciphertext)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1220,11 +1156,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
+            timestampString = "542848616.434304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "TranslatorImpl::getTranslation(const string&amp; ciphertext)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542848616.434304"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "TranslatorImpl::getTranslation(const string&amp; ciphertext)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1344,47 +1296,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "TranslatorImpl::pushMapping(string ciphertext, string plaintext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542796307.831809"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "TranslatorImpl::pushMapping(string ciphertext, string plaintext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Decrypter.cpp"
-            timestampString = "542825591.862396"
+            timestampString = "542832246.581427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "DecrypterImpl::DecrypterImpl()"
             landmarkType = "7">
             <Locations>
@@ -1523,22 +1443,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tokenizer.cpp"
-            timestampString = "542811984.389297"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "TokenizerImpl::tokenize(const std::string&amp; s)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Tokenizer.cpp"
             timestampString = "542812171.071159"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -1551,39 +1455,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542813399.490117"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "WordListImpl::findCandidates(string cipherWord, string currTranslation)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542813430.346439"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "WordListImpl::findCandidates(string cipherWord, string currTranslation)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WordList.cpp"
@@ -1599,15 +1471,63 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Decrypter.cpp"
+            timestampString = "542832246.581427"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "DecrypterImpl::ChooseWordToCrack()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "main.cpp"
+            timestampString = "542829095.0839339"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "testDecrypter()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Decrypter.cpp"
-            timestampString = "542826344.632183"
+            timestampString = "542834501.228601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "DecrypterImpl::crack(const string&amp; ciphertext)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Decrypter.cpp"
+            timestampString = "542834501.228601"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "DecrypterImpl::CrackHelperFunction(string ciphertext, vector&lt;string&gt;&amp; answer)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1619,12 +1539,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Decrypter.cpp"
-            timestampString = "542825728.536973"
+            timestampString = "542848417.851624"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "DecrypterImpl::ChooseWordToCrack()"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
+            landmarkName = "DecrypterImpl::CrackHelperFunction(string ciphertext, vector&lt;string&gt;&amp; answer)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1635,12 +1555,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Decrypter.cpp"
-            timestampString = "542826344.632183"
+            timestampString = "542834501.228601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "DecrypterImpl::ChooseWordToCrack()"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "DecrypterImpl::CrackHelperFunction(string ciphertext, vector&lt;string&gt;&amp; answer)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Decrypter.cpp"
+            timestampString = "542834501.228601"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "DecrypterImpl::CrackHelperFunction(string ciphertext, vector&lt;string&gt;&amp; answer)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1651,12 +1587,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Decrypter.cpp"
-            timestampString = "542826344.632183"
+            timestampString = "542834501.228601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "DecrypterImpl::ChooseWordToCrack()"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "DecrypterImpl::CrackHelperFunction(string ciphertext, vector&lt;string&gt;&amp; answer)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1667,12 +1603,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Decrypter.cpp"
-            timestampString = "542826356.096772"
+            timestampString = "542834760.923489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "DecrypterImpl::ChooseWordToCrack()"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
+            landmarkName = "DecrypterImpl::CrackHelperFunction(string ciphertext, vector&lt;string&gt;&amp; answer)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1683,12 +1619,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Decrypter.cpp"
-            timestampString = "542826438.2622809"
+            timestampString = "542836267.844705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "DecrypterImpl::ChooseWordToCrack()"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "DecrypterImpl::CrackHelperFunction(string ciphertext, vector&lt;string&gt;&amp; answer)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542848614.3563401"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "TranslatorImpl::popMapping()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Decrypter.cpp"
+            timestampString = "542848634.530075"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
+            landmarkName = "DecrypterImpl::CrackHelperFunction(string ciphertext, vector&lt;string&gt;&amp; answer)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542848800.534934"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "TranslatorImpl::popMapping()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

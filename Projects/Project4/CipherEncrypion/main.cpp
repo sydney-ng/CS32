@@ -18,10 +18,10 @@ using namespace std;
 // YET READY TO TEST
 
 const bool shouldTestMyHash = false;
-const bool shouldTestTokenizer = true;
+const bool shouldTestTokenizer = false;
 const bool shouldTestWordList = false;
 const bool shouldTestTranslator = false;
-const bool shouldTestDecrypter = false;
+const bool shouldTestDecrypter = true;
 
 // **************************************************************
 
@@ -46,8 +46,8 @@ int main()
 //    t.pushMapping("abc", "abc");
 //    t.pushMapping("def", "dbf");
     
-    Decrypter * D = new Decrypter();
-    D->crack("expel;efgjha;ace");
+//    Decrypter * D = new Decrypter();
+//    D->crack("expel;xmases");
     
     if (shouldTestMyHash    ) { testMyHash();     cout << "Passed MyHash tests" << endl; }
     if (shouldTestTokenizer ) { testTokenizer();  cout << "Passed Tokenizer tests" << endl; }
@@ -187,6 +187,7 @@ void testDecrypter()
         "purple PEOPLE eater!!",
         "purple PEOPLE ether!!"
     };
+    int x = v.size();
     assert(v.size() == 4  &&  equal(v.begin(), v.end(), expected));
     assert(d.crack("smxsdg SGOSDG gfvgy!!").empty());
     remove(FILENAME);

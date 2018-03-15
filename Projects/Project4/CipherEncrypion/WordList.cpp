@@ -123,12 +123,12 @@ bool WordListImpl::loadWordList(string filename)
                 }
             }
         }
-        string patt = createPattern("afpal");
-        vector<string> * vPointer = m_WLIHash.find(createPattern (patt));
-        for(std::vector<string>::const_iterator it = vPointer->begin(); it != vPointer->end(); ++it)
-        {
-            cerr << it->data() << endl;
-        }
+//        string patt = createPattern("afpal");
+//        vector<string> * vPointer = m_WLIHash.find(createPattern (patt));
+//        for(std::vector<string>::const_iterator it = vPointer->begin(); it != vPointer->end(); ++it)
+//        {
+//            cerr << it->data() << endl;
+//        }
         return true; //means you were able to open the file
     }
     return false;  //unable to open file
@@ -217,7 +217,7 @@ vector<string> WordListImpl::findCandidates(string cipherWord, string currTransl
     
     else
     {
-        cerr << "size of vec is : " << cwMatchesVector->size() << endl;
+        //cerr << "size of vec is : " << cwMatchesVector->size() << endl;
     }
     //    for(std::vector<string>::const_iterator it = cwMatchesVector->begin(); it != cwMatchesVector->end(); ++it)
     //    {
