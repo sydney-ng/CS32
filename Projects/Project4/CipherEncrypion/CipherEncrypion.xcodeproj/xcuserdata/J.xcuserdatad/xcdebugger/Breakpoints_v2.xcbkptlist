@@ -9,28 +9,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542754459.0143059"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "WordListImpl::loadWordList(string filename)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542711151.784987"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122">
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "CopyEntriesOver(Node ** oldHash)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,11 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262">
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "UpdateEntry(const KeyType&amp; key, const ValueType&amp; value, int bucketNum)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -102,57 +90,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542711151.784987"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::PossiblyResize()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542710674.8655"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "117"
-                  endingLineNumber = "117"
-                  offsetFromSymbolStart = "163">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::PossiblyResize()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542710674.8680429"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "117"
-                  endingLineNumber = "117"
-                  offsetFromSymbolStart = "163">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyHash.h"
-            timestampString = "542711151.784987"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124">
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "CopyEntriesOver(Node ** oldHash)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -193,138 +137,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "542757102.684733"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "testWordList()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "542757102.684733"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "testWordList()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "542756390.876435"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "testWordList()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "542756390.876435"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "testWordList()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542754459.0143059"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "WordListImpl::loadWordList(string filename)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542711151.784987"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::reset()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542709254.738459"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "131"
-                  endingLineNumber = "131"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::reset()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542709254.74034"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "131"
-                  endingLineNumber = "131"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyHash.h"
-            timestampString = "542712953.275923"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237">
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "AddNewEntry(const KeyType&amp; key, const ValueType&amp; value, int bucketNum)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -366,11 +186,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263">
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "UpdateEntry(const KeyType&amp; key, const ValueType&amp; value, int bucketNum)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -412,11 +234,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217">
+            startingLineNumber = "219"
+            endingLineNumber = "219"
+            landmarkName = "find(const KeyType&amp; key)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -458,11 +282,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222">
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "getBucketNumber(const KeyType &amp;key)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -504,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219">
+            startingLineNumber = "221"
+            endingLineNumber = "221">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -550,11 +376,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235">
+            startingLineNumber = "237"
+            endingLineNumber = "237"
+            landmarkName = "AddNewEntry(const KeyType&amp; key, const ValueType&amp; value, int bucketNum)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -596,11 +424,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542711151.784987"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80">
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "MyHash(double maxLoadFactor)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -642,11 +472,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542711151.784987"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121">
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "CopyEntriesOver(Node ** oldHash)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -688,11 +520,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260">
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "UpdateEntry(const KeyType&amp; key, const ValueType&amp; value, int bucketNum)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -734,57 +568,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542711151.784987"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::~MyHash()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542711014.8616869"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::~MyHash()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542711014.862764"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyHash.h"
-            timestampString = "542711151.784987"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123">
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "CopyEntriesOver(Node ** oldHash)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -826,11 +616,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261">
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "UpdateEntry(const KeyType&amp; key, const ValueType&amp; value, int bucketNum)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -872,11 +664,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236">
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "AddNewEntry(const KeyType&amp; key, const ValueType&amp; value, int bucketNum)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -918,11 +712,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176">
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "reset()"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -964,11 +760,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177">
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "reset()"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -1010,11 +808,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269">
+            startingLineNumber = "271"
+            endingLineNumber = "271"
+            landmarkName = "UpdateEntry(const KeyType&amp; key, const ValueType&amp; value, int bucketNum)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -1056,11 +856,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyHash.h"
-            timestampString = "542712953.275923"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243">
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "AddNewEntry(const KeyType&amp; key, const ValueType&amp; value, int bucketNum)"
+            landmarkType = "9">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -1101,198 +903,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "542752168.90307"
+            filePath = "Translator.cpp"
+            timestampString = "542788980.867028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "testMyHash()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "542752168.90307"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "testMyHash()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyHash.h"
-            timestampString = "542713038.023115"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::~MyHash()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542758244.64011"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "303"
-                  endingLineNumber = "303"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::~MyHash()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542758244.641611"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "303"
-                  endingLineNumber = "303"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::~MyHash()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542758244.6430039"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "303"
-                  endingLineNumber = "303"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::~MyHash()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542758244.644312"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "303"
-                  endingLineNumber = "303"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyHash.h"
-            timestampString = "542713087.843308"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::~MyHash()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542758244.648155"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "303"
-                  endingLineNumber = "303"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::~MyHash()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542758244.649515"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "303"
-                  endingLineNumber = "303"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::~MyHash()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542758244.650864"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "303"
-                  endingLineNumber = "303"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyHash&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::~MyHash()"
-                  moduleName = "CipherEncrypion"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
-                  timestampString = "542758244.651993"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "303"
-                  endingLineNumber = "303"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542758080.398335"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "WordListImpl::loadWordList(string filename)"
-            landmarkType = "7">
+            startingLineNumber = "107"
+            endingLineNumber = "107">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1302,13 +918,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
+            timestampString = "542788980.867028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
-            landmarkName = "TranslatorImpl::pushMapping(string ciphertext, string plaintext)"
-            landmarkType = "7">
+            startingLineNumber = "98"
+            endingLineNumber = "98">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1318,13 +932,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
+            timestampString = "542788980.867028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "TranslatorImpl::pushMapping(string ciphertext, string plaintext)"
-            landmarkType = "7">
+            startingLineNumber = "45"
+            endingLineNumber = "45">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1334,13 +946,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
+            timestampString = "542788980.867028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
+            startingLineNumber = "36"
+            endingLineNumber = "36">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1350,13 +960,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542751772.16629"
+            timestampString = "542788980.867028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "TranslatorImpl::TranslatorImpl()"
-            landmarkType = "7">
+            startingLineNumber = "132"
+            endingLineNumber = "132">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1366,29 +974,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
+            timestampString = "542788980.867028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
+            endingLineNumber = "99">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1398,13 +988,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
+            timestampString = "542788980.867028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
+            startingLineNumber = "85"
+            endingLineNumber = "85">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1414,13 +1002,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
+            timestampString = "542788980.867028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
+            startingLineNumber = "86"
+            endingLineNumber = "86">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1429,14 +1015,44 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
+            filePath = "MyHash.h"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
+            startingLineNumber = "190"
+            endingLineNumber = "190">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::find(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) const"
+                  moduleName = "CipherEncrypion"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
+                  timestampString = "542760470.16573"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyHash&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::find(int const&amp;) const"
+                  moduleName = "CipherEncrypion"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
+                  timestampString = "542760470.166859"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "81">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1445,14 +1061,44 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
+            filePath = "MyHash.h"
+            timestampString = "542787357.2555979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
+            startingLineNumber = "191"
+            endingLineNumber = "191">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::find(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) const"
+                  moduleName = "CipherEncrypion"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
+                  timestampString = "542760470.169675"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "207"
+                  endingLineNumber = "207"
+                  offsetFromSymbolStart = "1400">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyHash&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::find(int const&amp;) const"
+                  moduleName = "CipherEncrypion"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
+                  timestampString = "542760470.171066"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "207"
+                  endingLineNumber = "207"
+                  offsetFromSymbolStart = "100">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1461,252 +1107,44 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542751772.16629"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "TranslatorImpl::getMostCurrentMap()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "TranslatorImpl::pushMapping(string ciphertext, string plaintext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
+            filePath = "MyHash.h"
+            timestampString = "542761220.24756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
             endingLineNumber = "76"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "TranslatorImpl::pushMapping(string ciphertext, string plaintext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Translator.cpp"
-            timestampString = "542753430.602932"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "TranslatorImpl:: CheckForInconsistency(string plaintext, string ciphertext)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542758080.398335"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "WordListImpl::loadWordList(string filename)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "542757211.887193"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "testWordList()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.cpp"
-            timestampString = "542757216.012054"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "testWordList()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542758220.6280071"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
-            landmarkName = "WordListImpl::findCandidates(string cipherWord, string currTranslation)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542758080.398335"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "WordListImpl::loadWordList(string filename)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542758080.398335"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "WordListImpl::loadWordList(string filename)"
+            landmarkName = "deleteNodes(Node * node)"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "WordListImpl::loadWordList(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;)"
+                  symbolName = "MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::deleteNodes(MyHash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; &gt;::Node*)"
                   moduleName = "CipherEncrypion"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/WordList.cpp"
-                  timestampString = "542757910.63564"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
+                  timestampString = "542760538.806633"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108"
-                  offsetFromSymbolStart = "2949">
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "40">
                </Location>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "WordListImpl::loadWordList(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;)"
+                  symbolName = "MyHash&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::deleteNodes(MyHash&lt;int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;::Node*)"
                   moduleName = "CipherEncrypion"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/WordList.cpp"
-                  timestampString = "542757910.636784"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/MyHash.h"
+                  timestampString = "542760538.8079"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108"
-                  offsetFromSymbolStart = "2954">
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "40">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1717,44 +1155,254 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542758080.398335"
+            filePath = "Translator.cpp"
+            timestampString = "542788980.867028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "WordListImpl::loadWordList(string filename)"
-            landmarkType = "7">
+            startingLineNumber = "93"
+            endingLineNumber = "93">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788980.867028"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "178"
+            endingLineNumber = "178">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "195"
+            endingLineNumber = "195">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "190"
+            endingLineNumber = "190">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "main.cpp"
+            timestampString = "542792557.071876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "testMyHash()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788980.867028"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788980.867028"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788980.867028"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141">
             <Locations>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "WordListImpl::loadWordList(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;)"
+                  symbolName = "TranslatorImpl::~TranslatorImpl()"
                   moduleName = "CipherEncrypion"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/WordList.cpp"
-                  timestampString = "542757894.794925"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/Translator.cpp"
+                  timestampString = "542792862.237958"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "3858">
+                  startingLineNumber = "208"
+                  endingLineNumber = "208"
+                  offsetFromSymbolStart = "16">
                </Location>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "WordListImpl::loadWordList(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;)"
+                  symbolName = "TranslatorImpl::~TranslatorImpl()"
                   moduleName = "CipherEncrypion"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/WordList.cpp"
-                  timestampString = "542757894.796016"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/Translator.cpp"
+                  timestampString = "542792862.239599"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "3863">
+                  startingLineNumber = "208"
+                  endingLineNumber = "208"
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1765,14 +1413,90 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542758080.398335"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "WordListImpl::loadWordList(string filename)"
-            landmarkType = "7">
+            startingLineNumber = "152"
+            endingLineNumber = "152">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranslatorImpl::~TranslatorImpl()"
+                  moduleName = "CipherEncrypion"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/Translator.cpp"
+                  timestampString = "542792862.249964"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "208"
+                  endingLineNumber = "208"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranslatorImpl::~TranslatorImpl()"
+                  moduleName = "CipherEncrypion"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/Translator.cpp"
+                  timestampString = "542792862.2523021"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "208"
+                  endingLineNumber = "208"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Translator.cpp"
+            timestampString = "542788991.745513"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranslatorImpl::~TranslatorImpl()"
+                  moduleName = "CipherEncrypion"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/Translator.cpp"
+                  timestampString = "542792862.2564189"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "208"
+                  endingLineNumber = "208"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranslatorImpl::~TranslatorImpl()"
+                  moduleName = "CipherEncrypion"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/Translator.cpp"
+                  timestampString = "542792862.25828"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "208"
+                  endingLineNumber = "208"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1781,14 +1505,30 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542758127.353548"
+            filePath = "main.cpp"
+            timestampString = "542792557.071876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "WordListImpl::loadWordList(string filename)"
-            landmarkType = "7">
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "testMyHash()"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "main.cpp"
+            timestampString = "542792557.071876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "testMyHash()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1797,30 +1537,62 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542758135.812477"
+            filePath = "main.cpp"
+            timestampString = "542792557.071876"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "WordListImpl::loadWordList(string filename)"
-            landmarkType = "7">
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "testMyHash()"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testMyHash()"
+                  moduleName = "CipherEncrypion"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/main.cpp"
+                  timestampString = "542792862.262971"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "821">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testMyHash()"
+                  moduleName = "CipherEncrypion"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/main.cpp"
+                  timestampString = "542792862.266104"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "2305">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WordList.cpp"
-            timestampString = "542758220.6280071"
+            filePath = "main.cpp"
+            timestampString = "542792725.238544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "WordListImpl::contains(string word)"
-            landmarkType = "7">
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "testWordList()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

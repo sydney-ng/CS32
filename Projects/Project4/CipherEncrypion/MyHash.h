@@ -65,8 +65,8 @@ private:
     void CopyEntriesOver(Node ** oldHash);
     unsigned int getBucketNumber(const KeyType &key) const;
     bool CheckIfExists(const KeyType& key);
-    void AddNewEntry(const KeyType& key, const ValueType& value, int bucketNum);
-    void UpdateEntry(const KeyType& key, const ValueType& value, int bucketNum);
+    void AddNewEntry(const KeyType& key, const ValueType& value, unsigned int bucketNum);
+    void UpdateEntry(const KeyType& key, const ValueType& value, unsigned int bucketNum);
     void deleteNodes(Node * node)
     {
         if (node == nullptr)
@@ -228,7 +228,7 @@ unsigned int MyHash<KeyType, ValueType>:: getBucketNumber(const KeyType &key) co
 }
 
 template<typename KeyType, typename ValueType>
-void MyHash<KeyType, ValueType>::AddNewEntry(const KeyType& key, const ValueType& value, int bucketNum)
+void MyHash<KeyType, ValueType>::AddNewEntry(const KeyType& key, const ValueType& value, unsigned int bucketNum)
 {
     Node * newNode = new Node();
     newNode->key = key;
@@ -259,7 +259,7 @@ void MyHash<KeyType, ValueType>::AddNewEntry(const KeyType& key, const ValueType
 }
 
 template<typename KeyType, typename ValueType>
-void MyHash<KeyType, ValueType>::UpdateEntry(const KeyType& key, const ValueType& value, int bucketNum)
+void MyHash<KeyType, ValueType>::UpdateEntry(const KeyType& key, const ValueType& value, unsigned int bucketNum)
 {
     Node * iterateNode = m_HashTable[bucketNum];
     while (iterateNode != nullptr)
@@ -275,7 +275,7 @@ template<typename KeyType, typename ValueType>
 void MyHash<KeyType, ValueType>::associate(const KeyType& key, const ValueType& value)
 {
     //depending on the number, add it to the hash table
-    int bucketNum = getBucketNumber(key);
+    unsigned int bucketNum = getBucketNumber(key);
     
     //if it's not there
     if (CheckIfExists(key) == false)

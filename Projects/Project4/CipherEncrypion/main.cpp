@@ -33,9 +33,11 @@ void testWordList();
 void testTranslator();
 void testDecrypter();
 bool createWordListFile();
+void testTranslatorFromSpec1();
 
 int main()
 {
+    //testTranslatorFromSpec1();
 //    WordList * wlP = new WordList();
 //    wlP->loadWordList("/Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/wordlist.txt");
 //    cerr << "it has apes is: " << wlP->contains("apes");
@@ -49,6 +51,25 @@ int main()
     if (shouldTestWordList  ) { testWordList();   cout << "Passed WordList tests" << endl; }
     if (shouldTestTranslator) { testTranslator(); cout << "Passed Translator tests" << endl; }
     if (shouldTestDecrypter ) { testDecrypter();  cout << "Passed Decrypter tests" << endl; }
+}
+
+void testTranslatorFromSpec1()
+{
+    Translator t;
+    // Submit the first collection of mappings
+    t.pushMapping("DHL", "ERD"); // DàE, HàR, LàD
+    string secret = "Hdqlx!";
+    cout << t.getTranslation(secret) << endl; // writes Re?d?!
+    // Submit a second collection of mappings
+    t.pushMapping("QX", "AY"); // QàA, XàY
+    cout << t.getTranslation(secret) << endl; // writes Ready!
+    // Pop the most recently pushed collection
+    t.popMapping();
+    cout << t.getTranslation(secret) << endl; // writes Re?d?!
+    // Pop again
+    t.popMapping();
+    cerr << "should write nothing " << endl;
+    cout << t.getTranslation(secret) << endl; // writes ?????!
 }
 
 void testMyHash()
@@ -99,29 +120,26 @@ void testTokenizer()
 
 void testWordList()
 {
-//    if ( ! createWordListFile())
-//    {
-//        cout << "Cannot complete WordList test" << endl;
-//        exit(1);
-//    }
+    if ( ! createWordListFile())
+    {
+        cout << "Cannot complete WordList test" << endl;
+        exit(1);
+    }
     WordList wl;
-    assert(wl.loadWordList("/Users/J/Desktop/CS32/Projects/Project4/CipherEncrypion/wordlist.txt"));
-    assert(wl.contains("animals"));
-    assert(wl.contains("zoo"));
+    assert(wl.loadWordList(FILENAME));
     assert(wl.contains("expel"));
-    assert(wl.contains("excel"));
     assert(!wl.contains("extol"));
     vector<string> v = wl.findCandidates("wpxWv", "?x???");
     const char* expected[] = { "excel", "expel" };
     assert(v.size() == 2);
-//    for (auto& w : v)
-//        transform(w.begin(), w.end(), w.begin(), [](char c) { return tolower(c); });
-//    assert(equal(v.begin(), v.end(), expected) || equal(v.rbegin(), v.rend(), expected));
-//    v = wl.findCandidates("wpxwv", "?????");
-//    assert(v.size() == 4);
-//    v = wl.findCandidates("wpxwv", "?s??y");
-//    assert(v.size() == 0);
-//    remove(FILENAME);
+    for (auto& w : v)
+        transform(w.begin(), w.end(), w.begin(), [](char c) { return tolower(c); });
+    assert(equal(v.begin(), v.end(), expected) || equal(v.rbegin(), v.rend(), expected));
+    v = wl.findCandidates("wpxwv", "?????");
+    assert(v.size() == 4);
+    v = wl.findCandidates("wpxwv", "?s??y");
+    assert(v.size() == 0);
+    remove(FILENAME);
 }
 
 void testTranslator()
