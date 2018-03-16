@@ -18,13 +18,15 @@ private:
     Tokenizer * m_TokenizerP;
     vector<string> allCipherTextWords;
     vector<string> seenWords;
+    vector<string> CandidateVector;
     
     string ChooseWordToCrack();
     bool testTranslation();
     bool AtLeastOneWordTranslated (string possibleTranslation);
     string CrackHelperFunction(string ciphertext_message, vector<string>& output);
     int numFullyTranslated();
-    void StepSix();
+    int StepSix(string crackWord, vector<string> CandidateVector, string ciphertext, vector<string>& answer);
+    void removeCrackwordFromCandidates(string ciphertext);
 
 };
 
@@ -74,7 +76,7 @@ string DecrypterImpl::ChooseWordToCrack()
         //if it wasn't in seen words
         if (flag == true)
         {
-            cerr << "let's use " << allCipherTextWords [a] << endl;
+            //cerr << "let's use " << allCipherTextWords [a] << endl;
             toChooseWord = allCipherTextWords[a];
         }
     }
@@ -119,7 +121,7 @@ string DecrypterImpl::ChooseWordToCrack()
             {
                 currMaxQuestionmarks = questionmarkCounter;
                 toChooseWord = allCipherTextWords[i];
-                cerr << "let's use " << allCipherTextWords [i] << endl;
+                //cerr << "let's use " << allCipherTextWords [i] << endl;
 
             }
             //if its more than the number of ? in the chooseword, set this equal to choose word
@@ -168,14 +170,13 @@ int DecrypterImpl::numFullyTranslated()
 
 bool DecrypterImpl::testTranslation()
 {
-    
     //use most updated map to translate ciphertext -> plaintext message
     for (int i = 0; i < allCipherTextWords.size(); i++)
     {
         string x = allCipherTextWords[i];
-        cerr << "cipher text is : " << x << endl;
+        //cerr << "cipher text is : " << x << endl;
         string translated = m_TranslatorP->getTranslation(allCipherTextWords[i]);
-        cerr << "cipher text translated is: " << translated << endl;
+        //cerr << "cipher text translated is: " << translated << endl;
         //STEP 6C: check if translated is a complete word
         bool flag = true;
         for (int k = 0; k < translated.size(); k++)
@@ -213,13 +214,106 @@ vector<string> DecrypterImpl::crack(const string& ciphertext)
     return AnswerVector;
 }
 
-void DecrypterImpl::StepSix();
+int DecrypterImpl::StepSix(string crackWord, vector<string> CandidateVector, string ciphertext, vector<string>& answer){
+    //for each candidate
+    
+    for (int i =0; i < CandidateVector.size(); i ++)
+    {
+        //STEP 6A: creating a temporary mapping
+        //try to create a mapping for crackword + that possibility
+        bool createdCharTranslation = m_TranslatorP->pushMapping(crackWord, CandidateVector[i]);
+        if (createdCharTranslation == false)
+        {
+            //get rid of that mapping, will automatically move to the next word in vector
+            m_TranslatorP->popMapping();
+            //i dont think you need this? StepSix(crackWord, CandidateVector, ciphertext, answer);
+        }
+        //you were able to push & make the association, you now have a partial mapping
+        else
+        {
+            //STEP 6B: try to translate the entire cipher text using this
+            //                string possibleTranslation = m_TranslatorP->getTranslation(crackWord);
+            //put allcipher words to see how many are matches
+            bool noDiscrepancies = testTranslation ();
+            
+            //if no words were translated
+            if (noDiscrepancies == false)
+            {
+                //pop map & it will automatically continue with step six
+                m_TranslatorP->popMapping();
+                bool popBool = m_TranslatorP->popMapping();
+                if (popBool == false)
+                {
+                    return 2;
+                }
+                //i dont think you need this? StepSix(crackWord, CandidateVector, ciphertext, answer);
+            }
+            //else, there were no discrepancies for any fully translated words
+            else
+            {
+                string CorrectTranslation = m_TranslatorP->getTranslation(ciphertext);
+                cerr << "our current translation is: " << CorrectTranslation <<endl;
+                cerr << "we have fully translated " << numFullyTranslated() << " words " << endl;
+                //if this is a full, correct solution
+                if (numFullyTranslated() == allCipherTextWords.size())
+                {
+                    //put cipher text through get translation & add it to the vector
+                    string CorrectTranslation = m_TranslatorP->getTranslation(ciphertext);
+                    cerr << CorrectTranslation << " is a valid solution " << endl;
+                    answer.push_back(CorrectTranslation);
+                    bool popBool = m_TranslatorP->popMapping();
+                    if (popBool == false)
+                    {
+                        return 2;
+                    }
+                    delete m_TranslatorP;
+                    m_TranslatorP = new Translator();
+                    //remove crackword from Candidate Vector
+                    StepSix(crackWord, CandidateVector, ciphertext, answer);
+                }
+                
+                //this is not a full,correct solution, keep trying!
+                else
+                {
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+//void DecrypterImpl::removeCrackwordFromCandidates(string CorrectTranslation)
+//{
+//    //copy everything over from CandidateVector to a new vector
+//    vector<string> newVec;
+//    for (int i = 0; i < CandidateVector.size(); i++)
+//    {
+//        string x = CandidateVector[i];
+//        if (CandidateVector[i] != CorrectTranslation)
+//        {
+//            newVec.push_back(CandidateVector[i]);
+//        }
+//        else{
+//            cerr << "found ciphertext" <<endl;
+//        }
+//    }
+//    
+//    int newVecSize = newVec.size();
+//    int candidateVecSize = CandidateVector.size();
+//    //copy everything back to CandidateVector
+//    CandidateVector.clear();
+//    for (int i =0; i < newVec.size(); i ++)
+//    {
+//        CandidateVector.push_back(newVec[i]);
+//    }
+//}
 
 string DecrypterImpl::CrackHelperFunction(string ciphertext, vector<string>& answer)
 {
     //STEP 2A: tokenize
     allCipherTextWords = m_TokenizerP->tokenize(ciphertext);
-    cerr << "allciphertextwords size is in choosewordtocrack: " << allCipherTextWords.size();
+    //cerr << "allciphertextwords size is in choosewordtocrack: " << allCipherTextWords.size();
 
         for (int i =0; i < allCipherTextWords.size(); i ++)
         {
@@ -227,17 +321,17 @@ string DecrypterImpl::CrackHelperFunction(string ciphertext, vector<string>& ans
         }
     //STEP 2B: choose word to crack
     string crackWord = ChooseWordToCrack();
-    cerr << "crackword is: " <<  crackWord << endl;
-    if (crackWord.size () < 1)
+    if (crackWord == "")
     {
         return "";
     }
+    cerr << "crackword is: " <<  crackWord << endl;
     
     //STEP 3: get translation for that word
     string CrackWordTranslation = m_TranslatorP->getTranslation(crackWord);
     
     //STEP 4: getCandidates, a vec of strings of all possibilities
-    vector<string> CandidateVector = m_WL->findCandidates(crackWord, CrackWordTranslation);
+    CandidateVector = m_WL->findCandidates(crackWord, CrackWordTranslation);
     
 //    for (int i =0; i < CandidateVector.size(); i ++)
 //    {
@@ -247,61 +341,26 @@ string DecrypterImpl::CrackHelperFunction(string ciphertext, vector<string>& ans
     //STEP 5: pop map & restart if it's empty
     if (CandidateVector.empty() == true)
     {
-        m_TranslatorP->popMapping();
+        
+        bool popBool = m_TranslatorP->popMapping();
+        if (popBool == false)
+        {
+            return "";
+        }
         return CrackHelperFunction(ciphertext, answer);
     }
     
     //STEP 6: there are results, create a mapping for each
     else
     {
-        //for each candidate
-        for (int i =0; i < CandidateVector.size(); i ++)
+        int stepSixResult = StepSix(crackWord, CandidateVector, ciphertext, answer);
+        if ( stepSixResult == 1)
         {
-            //STEP 6A: creating a temporary mapping
-            //try to create a mapping for crackword + that possibility
-            bool createdCharTranslation = m_TranslatorP->pushMapping(crackWord, CandidateVector[i]);
-            if (createdCharTranslation == false)
-            {
-                //get rid of that mapping, will automatically move to the next word in vector
-                m_TranslatorP->popMapping();
-            }
-            //you were able to push & make the association
-            else
-            {
-                //STEP 6B: try to translate the entire cipher text using this
-//                string possibleTranslation = m_TranslatorP->getTranslation(crackWord);
-                //put allcipher words to see how many are matches
-                bool noDiscrepancies = testTranslation ();
-                
-                //if no words were translated
-                if (noDiscrepancies == false)
-                {
-                    //pop map & it will automatically continue with step six
-                    m_TranslatorP->popMapping();
-                }
-                //else, there were no discrepancies for any fully translated words
-                else
-                {
-                    string CorrectTranslation = m_TranslatorP->getTranslation(ciphertext);
-                    cerr << "our current translation is: " << CorrectTranslation <<endl;
-                    cerr << "we have fully translated " << numFullyTranslated() << " words " << endl;
-                    //if this is a full, correct solution
-                    if (numFullyTranslated() == allCipherTextWords.size())
-                    {
-                        //put cipher text through get translation & add it to the vector
-                        string CorrectTranslation = m_TranslatorP->getTranslation(ciphertext);
-                        cerr << CorrectTranslation << " is a valid solution " << endl;
-                        answer.push_back(CorrectTranslation);
-                        m_TranslatorP->popMapping();
-                    }
-                    
-                    //this is not a full,correct solution, keep trying!
-                    else
-                    {
-                        return CrackHelperFunction(ciphertext, answer);
-                    }
-                }
-            }
+            return CrackHelperFunction(ciphertext, answer);
+        }
+        if (stepSixResult == 2)
+        {
+            return ""; 
         }
     }
     
@@ -310,7 +369,7 @@ string DecrypterImpl::CrackHelperFunction(string ciphertext, vector<string>& ans
     Translator * new_translatorPointer = new Translator();
     delete m_TranslatorP;
     m_TranslatorP = new_translatorPointer;
-    return "";
+    return CrackHelperFunction(ciphertext, answer);
 }
 
 //******************** Decrypter functions ************************************

@@ -141,7 +141,7 @@ bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
         return false;
     }
     
-    map<char,char> newMap = getMostCurrentMap();
+    map<char,char> newMap = MostCurrentMap;
     for (int i = 0; i < ciphertext.size(); i++)
     {
         //TO-DO: CONVERT THIS TO LOWER LATER
@@ -164,13 +164,13 @@ bool TranslatorImpl::pushMapping(string ciphertext, string plaintext)
 
 bool TranslatorImpl::popMapping()
 {
-    cerr << "before popMapping the current map is: " << endl;
-    for ( auto it = MostCurrentMap.begin(); it != MostCurrentMap.end(); ++it )
-    {
-        std::cout << " " << it->first << ":" << it->second;
-        std::cout << std::endl;
-    }
-    
+//    cerr << "before popMapping the current map is: " << endl;
+//    for ( auto it = MostCurrentMap.begin(); it != MostCurrentMap.end(); ++it )
+//    {
+//        std::cout << " " << it->first << ":" << it->second;
+//        std::cout << std::endl;
+//    }
+
     if (m_numTimesPushed == m_numTimesPopped)
     {
         return false;
@@ -188,12 +188,12 @@ bool TranslatorImpl::popMapping()
     }
     m_numTimesPopped++;
     
-    cerr << "after popMapping the current map is: " << endl;
-    for ( auto it = MostCurrentMap.begin(); it != MostCurrentMap.end(); ++it )
-    {
-        std::cout << " " << it->first << ":" << it->second;
-        std::cout << std::endl;
-    }
+//    cerr << "after popMapping the current map is: " << endl;
+//    for ( auto it = MostCurrentMap.begin(); it != MostCurrentMap.end(); ++it )
+//    {
+//        std::cout << " " << it->first << ":" << it->second;
+//        std::cout << std::endl;
+//    }
     return true;
 }
 
