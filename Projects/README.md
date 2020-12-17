@@ -1,5 +1,5 @@
 # Projects
-Description of the following homeworks:
+Description of the following Projects:
 
 ## Project 1:
 In this project, we work with constructors, which are special member fucntions that initialize instances of a class. Destructors do the opposite and will de-initialize 
